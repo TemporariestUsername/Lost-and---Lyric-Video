@@ -30,12 +30,16 @@ def verse_a(t, T, lines):
     img = look.her_presence(img, t, T, cx=1180, floor=960, s=650, rim=0.3 + 0.9 * warm,
                             light=(1180 + 170, 960 - 0.60 * 650), behind=hs)
     img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.25)
-    cur = [n for n in lines if T.lines[n]["start"] - 0.3 <= t < T.lines[n]["end"] + 2.6]
-    for n in cur[-2:]:
-        img = look.her_words(img, t, T, [n], 150, 470 + 150 * (n % 2), size=80,
-                             color=C["plum_ink"], max_w=820)
+    # camera: a slow push across the verse, deepening as she gets lost in him
+    sec = T.section_at(t)
+    u = clamp01((t - sec["start"]) / (sec["end"] - sec["start"]))
+    zoom = 1.0 + 0.05 * smooth(u) + 0.05 * smooth(ramp(t, flood, flood + 6))
+    img = fx.shift(img, 14 * math.sin(t * 0.13) - (zoom - 1) * 260,
+                   8 * math.sin(t * 0.11) + (zoom - 1) * 120, 0, zoom)
+    for n, y in look.stacked_lines(t, T, lines, anchor=640, size=72, max_w=760):
+        img = look.her_words(img, t, T, [n], 150, y, size=72, color=C["plum_deep"], max_w=760)
     return img, dict(exposure=0.95, lift=0.10, sat=0.8, bloom=0.55, hal=0.55, thresh=1.0,
-                     diffusion=0.35, grain=0.045, trail=0.62,
+                     diffusion=0.28, grain=0.045, trail=0.62,
                      ghosts=((1.2, -160, 0, -5, 0.22), (2.4, 150, -10, 4, 0.14)))
 
 
@@ -110,9 +114,11 @@ class Compositor:
         self.T = T
         self.exp = fx.Exposure()
 
-    def frame(self, t):
-        sec = self.T.section_at(t)
-        fn, lines = SCENES[sec["name"]]
+    def frame(self, t, scene=None):
+        """Render time t. `scene` forces a section's scene (used for the
+        warm-up frames before a section whose neighbour isn't built yet)."""
+        name = scene or self.T.section_at(t)["name"]
+        fn, lines = SCENES[name]
         img, p = fn(t, self.T, [n for n in lines if n in self.T.lines])
         img = fx.dust(img, t, self.T, strength=0.8 if p["exposure"] < 1.3 else 0.5)
         img = self.exp.apply(img, t, trail=p["trail"], ghosts=p["ghosts"])

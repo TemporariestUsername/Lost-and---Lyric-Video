@@ -1,4 +1,4 @@
 __pycache__/
-render/frames/
-render/*.mp4
 *.log
+render/*
+!render/*_contact.jpg

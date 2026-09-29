@@ -6,6 +6,7 @@ overexposure, flicker, scratches and film burns; time is tally marks and
 the exposure echo. The one hard-focus object in the film is the bullet.
 """
 import math
+from functools import lru_cache
 
 import cv2
 import numpy as np
@@ -18,7 +19,7 @@ from fx import F32, hexc
 # ---------------------------------------------------------------- palette
 C = {
     "haze": hexc("#E6E1EE"), "haze_hi": hexc("#F7F3F6"), "haze_lo": hexc("#B9B1C9"),
-    "plum": hexc("#2B2233"), "plum_ink": hexc("#3A3048"), "night": hexc("#140F19"),
+    "plum": hexc("#2B2233"), "plum_ink": hexc("#3A3048"), "plum_deep": hexc("#221A2C"), "night": hexc("#140F19"),
     "amber": hexc("#FF9A4A"), "amber_hot": hexc("#FFC58A"), "rose": hexc("#F2765E"),
     "graphite": hexc("#4A4652"), "clinic": hexc("#DDE3E6"), "body": hexc("#F3ECEE"),
     "shade": hexc("#9D92AE"),
@@ -215,6 +216,7 @@ def hair_curtain(cx, top, s, t, seed=0, n=4000, part=1.0, n_locks=38, steps=48):
     return m, m * band
 
 
+@lru_cache(maxsize=8)
 def face_hint(cx, top, s):
     """Pale face with the faintest shadows for eyes and mouth: a suggestion."""
     hcy = top + 0.12 * s
@@ -225,6 +227,23 @@ def face_hint(cx, top, s):
     return fx.blur(face, 4), fx.blur(eyes, 3), fx.blur(mouth, 3)
 
 
+@lru_cache(maxsize=24)
+def _hair_cached(cx, top, s, tq, seed, n, n_locks, steps):
+    return hair_curtain(cx, top, s, tq, seed=seed, n=n, n_locks=n_locks, steps=steps)
+
+
+def hair_at(cx, top, s, t, seed=0, n=4000, n_locks=38, steps=48, step=0.2):
+    """Hair moves slowly: build it every `step` seconds and crossfade
+    between neighbouring states, which reads as smooth, soft motion."""
+    k = math.floor(t / step)
+    f = (t - k * step) / step
+    args = (float(cx), float(top), float(s))
+    a0 = _hair_cached(*args, round(k * step, 3), seed, n, n_locks, steps)
+    a1 = _hair_cached(*args, round((k + 1) * step, 3), seed, n, n_locks, steps)
+    return a0[0] * (1 - f) + a1[0] * f, a0[1] * (1 - f) + a1[1] * f
+
+
+@lru_cache(maxsize=8)
 def body_density(cx, floor, s):
     """Shoulders and folded legs as a heavily blurred density, never a shape."""
     b, _h, _f = figure_masks(cx, floor, s)
@@ -247,7 +266,7 @@ def her_presence(img, t, T, cx=1150, floor=930, s=640, ghosts=True, rim=1.0,
         vt = vtop(floor, s)
         for k, (dx, rot, a) in enumerate(((-215, -10, 0.30), (210, 9, 0.24))):
             wob = math.sin(t * 0.5 + dx) * 18
-            hk, _ = hair_curtain(cx, top, s, t, seed=seed + 11 + k, n=900, n_locks=40, steps=32)
+            hk, _ = hair_at(cx, top, s, t, seed=seed + 11 + k, n=900, n_locks=40, steps=32, step=0.4)
             g = fx.blur(fx.shift(hk, dx + wob, -12, rot), 6) * vt
             gd = fx.blur(fx.shift(dens, dx + wob, -12, rot), 10) * vt
             aa = a * (0.8 + 0.4 * kick) * fade
@@ -259,7 +278,7 @@ def her_presence(img, t, T, cx=1150, floor=930, s=640, ghosts=True, rim=1.0,
     if face:
         fc, ey, mo = face_hint(cx, top, s)
         img = fx.over(img, C["body"], fc * 0.55 * fade)
-    hk, sheen = hair_curtain(cx, top, s, t, seed=seed)
+    hk, sheen = hair_at(cx, top, s, t, seed=seed)
     img = fx.over(img, hair_col, fx.blur(hk, 5) * 0.45 * brk * fade)      # volume
     img = fx.over(img, hair_col, hk * 0.8 * brk * fade)                   # strands
     img = fx.over(img, C["haze_lo"], fx.blur(sheen, 6) * 0.16 * fade)   # sheen
@@ -392,6 +411,16 @@ def her_absence(img, t, T, cx=1150, floor=960, s=640, facing=-1, dark=False,
 
 
 # ================================================================ room
+_QUILT = {}
+
+
+def _quilt_mask(corner_x, floor_y, draw):
+    key = (corner_x, floor_y)
+    if key not in _QUILT:
+        _QUILT[key] = fx.blur(fx.skia_alpha(draw), 7)
+    return _QUILT[key]
+
+
 def padded_room(t, base=None, corner_x=1330, floor_y=760, seam=0.06):
     base = C["haze"] if base is None else base
     img = np.empty((H, W, 3), F32)
@@ -413,7 +442,7 @@ def padded_room(t, base=None, corner_x=1330, floor_y=760, seam=0.06):
             c.drawLine(corner_x, y + 10, W, y - 20, p)
         c.drawLine(corner_x, 0, corner_x, floor_y, p)
         c.drawLine(0, floor_y, W, floor_y + 20, p)
-    q = fx.blur(fx.skia_alpha(quilt), 7)
+    q = _quilt_mask(corner_x, floor_y, quilt)
     img = img * (1 - (q * seam * 1.6)[..., None])
     fg = fx.fog(t, seed=2)
     img = img + (fg * 0.035)[..., None]
@@ -447,6 +476,9 @@ def tally(img, t, T, x0=1440, y0=190, color=None, alpha=0.55, blur=1.3, count=No
 
 
 # ================================================================ type
+TEXT_LOG = None  # set to a list to record (t, word, onset, x0, y0, x1, y1) for QA
+
+
 def word_list(T, lines):
     out = []
     for n in lines:
@@ -455,6 +487,38 @@ def word_list(T, lines):
             d["disp"] = w["text"].replace('"', "")
             d["line_end"] = T.lines[n]["end"]
             out.append(d)
+    return out
+
+
+def line_rows(T, n, size, max_w):
+    """How many rows her_words will wrap line n into."""
+    f = font("her", size)
+    sp = size * 0.26
+    rows, cw = 1, 0.0
+    for w in T.lines[n]["words"]:
+        if w["backing"]:
+            continue
+        ww = f.measureText(w["text"].replace('"', ""))
+        if cw and cw + sp + ww > max_w:
+            rows, cw = rows + 1, ww
+        else:
+            cw += (sp if cw else 0) + ww
+    return rows
+
+
+def stacked_lines(t, T, lines, anchor, size, max_w, lead=1.18, gap=0.55, window=2.6):
+    """Place the visible lines so the newest sits on `anchor` (its last row)
+    and older lines ease upward out of its way as it arrives.
+    Returns [(line, first_row_baseline_y)]."""
+    vis = [n for n in lines if T.lines[n]["start"] - 0.35 <= t < T.lines[n]["end"] + window][-2:]
+    out = []
+    for i, n in enumerate(vis):
+        rows = line_rows(T, n, size, max_w)
+        y = anchor - (rows - 1) * size * lead
+        for m in vis[i + 1:]:
+            e = ease_out(ramp(t, T.lines[m]["start"] - 0.35, T.lines[m]["start"] + 0.15), 2)
+            y -= e * (line_rows(T, m, size, max_w) * size * lead + gap * size)
+        out.append((n, y))
     return out
 
 
@@ -493,6 +557,9 @@ def her_words(img, t, T, lines, x, y, size=78, color=None, hot=False, align="lef
                 sig = (1 - a_in) * 10 + out * 14
                 dy = -out * 36
                 put(sig, (w["disp"], xx, yy + dy, a))
+                if TEXT_LOG is not None and a > 0.5:
+                    TEXT_LOG.append((t, w["disp"], w["start"], xx, yy + dy - size * 0.8,
+                                     xx + ww, yy + dy + size * 0.25))
                 for k, sgn in ((1, 1), (2, -1)):                            # ghosts
                     age = t - w["start"] - 0.12 * k
                     if age > 0:

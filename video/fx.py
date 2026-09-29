@@ -56,14 +56,35 @@ def skia_alpha(draw, w=W, h=H):
     return surf.makeImageSnapshot().toarray()[..., 3].astype(F32) / 255.0
 
 
+def _bbox(alpha, eps=1e-3):
+    """Row/column slice covering where alpha is non-negligible (or None)."""
+    rows = np.flatnonzero(alpha.max(axis=1) > eps)
+    if not len(rows):
+        return None
+    cols = np.flatnonzero(alpha[rows[0]:rows[-1] + 1].max(axis=0) > eps)
+    return slice(rows[0], rows[-1] + 1), slice(cols[0], cols[-1] + 1)
+
+
 def over(base, color, alpha):
-    """Composite a flat colour through an alpha mask."""
-    a = alpha[..., None]
-    return base * (1 - a) + color * a
+    """Composite a flat colour through an alpha mask (only where it covers)."""
+    bb = _bbox(alpha)
+    if bb is None:
+        return base
+    out = base.copy()
+    ys, xs = bb
+    a = alpha[ys, xs][..., None]
+    out[ys, xs] = base[ys, xs] + (color - base[ys, xs]) * a
+    return out
 
 
 def add(base, color, alpha):
-    return base + color * alpha[..., None]
+    bb = _bbox(alpha)
+    if bb is None:
+        return base
+    out = base.copy()
+    ys, xs = bb
+    out[ys, xs] = base[ys, xs] + color * alpha[ys, xs][..., None]
+    return out
 
 
 # ---------------------------------------------------------------- fields
@@ -101,16 +122,25 @@ def _yy_xx():
 
 
 def radial(cx, cy, r, power=2.0):
-    yy, xx = _yy_xx()
+    """Radial falloff, computed only inside its radius."""
+    out = np.zeros((H, W), F32)
+    y0, y1 = max(0, int(cy - r)), min(H, int(cy + r) + 1)
+    x0, x1 = max(0, int(cx - r)), min(W, int(cx + r) + 1)
+    if y0 >= y1 or x0 >= x1:
+        return out
+    yy, xx = np.mgrid[y0:y1, x0:x1].astype(F32)
     d = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2) / r
-    return np.clip(1 - d, 0, 1) ** power
+    out[y0:y1, x0:x1] = np.clip(1 - d, 0, 1) ** power
+    return out
 
 
+@lru_cache(maxsize=32)
 def vgrad(y0, y1):
     yy, _ = _yy_xx()
     return np.clip((yy - y0) / (y1 - y0), 0, 1)
 
 
+@lru_cache(maxsize=32)
 def hgrad(x0, x1):
     _, xx = _yy_xx()
     return np.clip((xx - x0) / (x1 - x0), 0, 1)
@@ -183,10 +213,15 @@ def grain(img, t, amount=0.05, seed=9):
     return np.clip(img + (n * amount * wgt)[..., None], 0, 1)
 
 
-def vignette(img, strength=0.35, color="#3A3246"):
+@lru_cache(maxsize=8)
+def _vig_mask(strength):
     m = 1 - radial(W / 2, H / 2, W * 0.78, power=1.0)
-    m = np.clip(m * 1.4, 0, 1) ** 1.6 * strength
-    return img * (1 - m[..., None]) + hexc(color) * m[..., None] * 0.5
+    return (np.clip(m * 1.4, 0, 1) ** 1.6 * strength)[..., None]
+
+
+def vignette(img, strength=0.35, color="#3A3246"):
+    m = _vig_mask(strength)
+    return img * (1 - m) + hexc(color) * m * 0.5
 
 
 def chroma_edges(img, px=3):
