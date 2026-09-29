@@ -98,6 +98,9 @@ figcaption { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baselin
 figcaption .k { color: var(--paper); background: var(--ink); padding: 3px 7px 2px; }
 figcaption .tc { color: var(--ink-2); }
 figcaption .lyr { font: italic 1.1rem/1.3 var(--display); flex-basis: 100%; }
+.render video { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; background: #000;
+  border: 1px solid var(--rule); }
+figcaption .note { flex-basis: 100%; font-size: 0.9rem; color: var(--ink-2); }
 
 /* Section list */
 .secs { display: grid; border-top: 1.5px solid var(--ink); }
@@ -137,6 +140,11 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <p class="lede">Revision 2 of the beat-mapped plan, rebuilt around the track art: a long exposure of a memory rather than a diagram of the story. The analysis and timing are unchanged. Three new style frames are rendered with the new engine. Nothing further gets built until you approve.</p>
     <dl class="facts">{{FACTS}}</dl>
   </header>
+
+  <section aria-labelledby="h-built">
+    <div class="col"><span class="eyebrow">Built so far</span><h2 id="h-built">Rendered sections</h2></div>
+    <div class="frames">{{RENDERS}}</div>
+  </section>
 
   <section aria-labelledby="h-tl">
     <div class="col"><span class="eyebrow">Analysis</span><h2 id="h-tl">The track, bar by bar</h2></div>

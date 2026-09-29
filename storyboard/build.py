@@ -14,7 +14,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 OUT = ROOT / "analysis" / "out"
 sys.path.insert(0, str(HERE))
-from spec import SECTIONS, STYLE_FRAMES, WORLDS  # noqa: E402
+from spec import RENDERS, SECTIONS, STYLE_FRAMES, WORLDS  # noqa: E402
 
 
 def tc(t):
@@ -115,6 +115,19 @@ def main():
     <span class="lyr">{esc(f['lyric'])}</span></figcaption>
 </figure>""" for f in frame_meta)
 
+    renders_html = ""
+    for slug, name, note in RENDERS:
+        sec = next(x for x in secs if x["name"] == name)
+        renders_html += f"""
+<figure class="render" id="render-{slug}">
+  <video controls playsinline preload="metadata" poster="renders/{slug}_poster.jpg" width="1280" height="720">
+    <source src="renders/{slug}.mp4" type="video/mp4">
+  </video>
+  <figcaption><b>{esc(name)}</b>
+    <span class="tc">{tc(sec['start'])} \u2192 {tc(sec['end'])} \u00b7 bars {sec['bar']}\u2013{sec['bar_end']}</span>
+    <span class="note">{esc(note)} <a href="renders/{slug}_contact.jpg">Contact sheet</a></span></figcaption>
+</figure>"""
+
     facts_html = "".join(f"<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>" for k, v in facts)
     worlds_html = "".join(
         f'<li><span class="chip" data-world="{k}">{esc(n)}</span> {esc(d)}</li>'
@@ -125,6 +138,7 @@ def main():
     page = (page.replace("{{FACTS}}", facts_html)
                 .replace("{{WORLDS}}", worlds_html)
                 .replace("{{FRAMES}}", frames_html)
+                .replace("{{RENDERS}}", renders_html)
                 .replace("{{SECTIONS}}", "".join(rows))
                 .replace("{{PINS}}", esc(pin_list))
                 .replace("{{DATA}}", json.dumps(data, separators=(",", ":"))))

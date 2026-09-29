@@ -2,3 +2,4 @@ __pycache__/
 *.log
 render/*
 !render/*_contact.jpg
+storyboard/renders/*.mp4

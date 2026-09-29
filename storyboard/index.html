@@ -98,6 +98,9 @@ figcaption { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baselin
 figcaption .k { color: var(--paper); background: var(--ink); padding: 3px 7px 2px; }
 figcaption .tc { color: var(--ink-2); }
 figcaption .lyr { font: italic 1.1rem/1.3 var(--display); flex-basis: 100%; }
+.render video { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; background: #000;
+  border: 1px solid var(--rule); }
+figcaption .note { flex-basis: 100%; font-size: 0.9rem; color: var(--ink-2); }
 
 /* Section list */
 .secs { display: grid; border-top: 1.5px solid var(--ink); }
@@ -137,6 +140,19 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <p class="lede">Revision 2 of the beat-mapped plan, rebuilt around the track art: a long exposure of a memory rather than a diagram of the story. The analysis and timing are unchanged. Three new style frames are rendered with the new engine. Nothing further gets built until you approve.</p>
     <dl class="facts"><div><dt>Length</dt><dd>8:13 (493.6 s)</dd></div><div><dt>Pulse</dt><dd>70.2 BPM kick</dd></div><div><dt>Grid</dt><dd>140 BPM eighths, drifting 136→142</dd></div><div><dt>Bars</dt><dd>149 × ~3.4 s</dd></div><div><dt>Lyrics</dt><dd>616 / 630 words timed</dd></div><div><dt>Output</dt><dd>1920×1080 · 30 fps</dd></div></dl>
   </header>
+
+  <section aria-labelledby="h-built">
+    <div class="col"><span class="eyebrow">Built so far</span><h2 id="h-built">Rendered sections</h2></div>
+    <div class="frames">
+<figure class="render" id="render-verse_a">
+  <video controls playsinline preload="metadata" poster="renders/verse_a_poster.jpg" width="1280" height="720">
+    <source src="renders/verse_a.mp4" type="video/mp4">
+  </video>
+  <figcaption><b>Verse A: Through eyes</b>
+    <span class="tc">0:16.9 → 0:55.2 · bars 5–14</span>
+    <span class="note">First built section. Web copy at 720p; the 1080p master passed QA and ffprobe. <a href="renders/verse_a_contact.jpg">Contact sheet</a></span></figcaption>
+</figure></div>
+  </section>
 
   <section aria-labelledby="h-tl">
     <div class="col"><span class="eyebrow">Analysis</span><h2 id="h-tl">The track, bar by bar</h2></div>

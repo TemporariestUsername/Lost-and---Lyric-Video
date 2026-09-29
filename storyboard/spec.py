@@ -197,3 +197,9 @@ STYLE_FRAMES = [
     ("B_stab_the_charts", "White Coats I", "Scribble scribble, stab stab the charts.", 125.9),
     ("C_cut_away", "The Cutting", "They cut away his trusting.", 368.3),
 ]
+
+# Sections built so far: (slug, section name, note shown under the player)
+RENDERS = [
+    ("verse_a", "Verse A: Through eyes",
+     "First built section. Web copy at 720p; the 1080p master passed QA and ffprobe."),
+]
