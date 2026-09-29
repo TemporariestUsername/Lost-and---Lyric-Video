@@ -1,7 +1,7 @@
 """Storyboard spec: one entry per section in analysis/out/grid.json.
 
 Direction: a long exposure of a memory. Nothing is drawn literally.
-She is a veil of hair and a pale gap, caught in several exposures at once.
+She is never shown: the film is her memory, and real photographs surface and drift through the haze.
 He is never shown: he is warm light leaking in from outside the frame.
 The white coats are overexposure, flicker, scratches and film burns.
 Time is tally marks (one per bar) and the exposure echo.
@@ -32,10 +32,12 @@ SECTIONS = {
     "Verse A: Through eyes": dict(
         world="her",
         visual="Lavender haze and a padded corner you feel more than see. "
-               "She is a veil of long hair around a pale gap where a face "
-               "would be, caught in three exposures at once. From “a "
-               "voice came to her” warmth gathers behind her shoulder. "
-               "On “lost inside him” it floods through her hair.",
+               "She is never shown; this is her memory. Real photographs "
+               "surface on downbeats and drift through the haze at different "
+               "depths: an overcast shore, a curtain, rain on glass, fog "
+               "lamps. From \u201ca voice came to her\u201d the memories turn "
+               "to night: a figure in a doorway, a car window, streetlights. "
+               "On \u201clost inside him\u201d his warmth colours them.",
         type="Her voice, dark ink in the haze. Each word focus-pulls in and "
              "sheds two ghost exposures that drift apart and linger.",
         sync="Ghost exposures swell on kicks; the warm light rises across "
@@ -201,5 +203,5 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("verse_a", "Verse A: Through eyes",
-     "First built section. Web copy at 720p; the 1080p master passed QA and ffprobe."),
+     "Rebuilt with drifting memory photographs (real CC0/public-domain photos). Web copy at 720p; the 1080p master passed QA and ffprobe."),
 ]

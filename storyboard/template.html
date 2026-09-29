@@ -160,7 +160,7 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <div class="col"><span class="eyebrow">Story</span><h2 id="h-story">Agains</h2></div>
     <div class="story">
       <p>The story is still there: the girl in the white room, the man sent to find her, the three things he offers her, the run, the cutting, the years. But it's told the way a memory feels from inside, not shown as events.</p>
-      <p>She is never fully drawn. She's a veil of hair and a pale gap where a face would be, caught in several exposures at once: the self she couldn't learn. He is never drawn at all. He's warmth leaking in from outside the frame, glowing through her hair. His three virtues are three shafts of that light, and the cutting shutters them one by one. The white coats aren't people. They're the overexposure itself, the fluorescent flicker, the scratches and the burns in the film.</p>
+      <p>She is never drawn. The film is her memory: real photographs, faded and soft, surface on the beat and drift through the haze at different depths, the way memories come and go. Early on they're daylight and home: a shore, a curtain, rain on a window. When he arrives they turn to night: a figure in a doorway, a car window, streetlights in fog. He is never drawn either; he's warmth leaking in from outside the frame, and as she gets lost inside him it colours the memories. His three virtues are three shafts of that light, and the cutting shutters them one by one. The white coats aren't people. They're the overexposure itself, the fluorescent flicker, the scratches and the burns in the film.</p>
       <p>Time is literal in only one place: a tally mark scratched into the wall on every bar, 149 by the end. It's also in the image itself. An exposure echo keeps earlier moments ghosted into the present, so the film gets more layered as it goes, and the reprise of the first verse is seen through all of it. In a film where everything is soft, the bullet is the only thing ever in sharp focus.</p>
       <p class="note">This grew from your Mage: The Ascension premise, with the mood taken from the track art. No character is depicted in detail, the institute has no emblem, and nothing is drawn from the game.</p>
     </div>
@@ -218,7 +218,7 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
         <ol class="steps">
           <li>Build scene by scene, one module per section, all driven by the timing files.</li>
           <li>For each scene, render a contact sheet (one frame per second, stamped with timecode and bar) and run automatic checks: every word visible within one frame of its onset, text inside title-safe, no text colliding. Fix and re-sheet until clean.</li>
-          <li>Speed up the renderer first. It takes about 3 s a frame now, so I'll render the fog and glow layers at lower resolution and cache the hair. Then render 1920×1080 at 30 fps in parallel chunks, each with a warm-up so the exposure echo is continuous across the joins, as H.264 CRF 17 with the original audio as AAC 320k.</li>
+          <li>Speed up the renderer first. It takes about 1.2 s a frame now. Then render 1920×1080 at 30 fps in parallel chunks, each with a warm-up so the exposure echo is continuous across the joins, as H.264 CRF 17 with the original audio as AAC 320k.</li>
           <li>Verify with ffprobe: stream specs, frame count against duration, audio and video lengths within one frame, and sync spot-checks at three lyric onsets.</li>
         </ol>
       </div>

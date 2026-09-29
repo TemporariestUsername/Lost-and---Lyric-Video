@@ -1,0 +1,386 @@
+{
+ "curtain_bedroom": {
+  "file": "curtain_bedroom.jpg",
+  "theme": "room",
+  "query": "bedroom window morning light",
+  "title": "Bedroom Clean",
+  "creator": "Burst",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/bedroom-clean-OE0F9BHXJQ",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   640
+  ]
+ },
+ "lake_overcast": {
+  "file": "lake_overcast.jpg",
+  "theme": "sea",
+  "query": "beach shore overcast",
+  "title": "Lake Michigan",
+  "creator": "contemplative imaging",
+  "license": "pdm",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://www.flickr.com/photos/91218927@N00/55408667500",
+  "provider": "flickr",
+  "size": [
+   1024,
+   768
+  ]
+ },
+ "coast_grey": {
+  "file": "coast_grey.jpg",
+  "theme": "sea",
+  "query": "beach shore overcast",
+  "title": "Coastal Landscape",
+  "creator": "JJ Skys the Limit",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/coastal-landscape-8JSG8ODQNZ",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   539
+  ]
+ },
+ "curtain_window": {
+  "file": "curtain_window.jpg",
+  "theme": "window",
+  "query": "curtain window sunlight",
+  "title": "Book, bottle cell phone standing",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3294494/free-photo-image-curtain-display-banister-cc0",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   680
+  ]
+ },
+ "rain_window": {
+  "file": "rain_window.jpg",
+  "theme": "rain",
+  "query": "rain on window night",
+  "title": "Rainy window",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3302908/free-photo-image-rain-background-japan-architecture",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   683
+  ]
+ },
+ "rain_glass_lights": {
+  "file": "rain_glass_lights.jpg",
+  "theme": "rain",
+  "query": "rain on window night",
+  "title": "It's raining hard outside, a view through a glass window, night, photo closeup, neotokyo lighting",
+  "creator": "chris-hayes",
+  "license": "pdm",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "source": "https://www.flickr.com/photos/162244249@N03/52305440974",
+  "provider": "flickr",
+  "size": [
+   1024,
+   1024
+  ]
+ },
+ "fog_lamps": {
+  "file": "fog_lamps.jpg",
+  "theme": "night",
+  "query": "streetlight fog",
+  "title": "Nebel im vorletzten Winter",
+  "creator": "mkniebes",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/76696276@N00/53587054569",
+  "provider": "flickr",
+  "size": [
+   1024,
+   1024
+  ]
+ },
+ "fog_park": {
+  "file": "fog_park.jpg",
+  "theme": "night",
+  "query": "streetlight fog",
+  "title": "Fog",
+  "creator": "Viktor Ruck\u00fd",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/188113766@N03/52983063307",
+  "provider": "flickr",
+  "size": [
+   1024,
+   576
+  ]
+ },
+ "doorway_figure": {
+  "file": "doorway_figure.jpg",
+  "theme": "doorway",
+  "query": "doorway light silhouette",
+  "title": "Backstage Shadows",
+  "creator": "exit78",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/28826830@N00/54696358374",
+  "provider": "flickr",
+  "size": [
+   1024,
+   683
+  ]
+ },
+ "car_window_night": {
+  "file": "car_window_night.jpg",
+  "theme": "night",
+  "query": "streetlight fog",
+  "title": "",
+  "creator": "The Man-Machine",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/127283891@N07/55119388763",
+  "provider": "flickr",
+  "size": [
+   1024,
+   683
+  ]
+ },
+ "dusk_drive": {
+  "file": "dusk_drive.jpg",
+  "theme": "road",
+  "query": "road at night car lights",
+  "title": "Car Driving",
+  "creator": "Caio Resende",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/car-driving-B5SGRP8EU7",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   638
+  ]
+ },
+ "dark_street": {
+  "file": "dark_street.jpg",
+  "theme": "road",
+  "query": "empty road night",
+  "title": "Dark Street",
+  "creator": "Sergei Gussev",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/dark-street-CYFGA8QTFV",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   544
+  ]
+ },
+ "highway_trails": {
+  "file": "highway_trails.jpg",
+  "theme": "road",
+  "query": "road at night car lights",
+  "title": "Highway Road",
+  "creator": "Negative Space",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/highway-road-RG8KA41GN8",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   640
+  ]
+ },
+ "tunnel_lights": {
+  "file": "tunnel_lights.jpg",
+  "theme": "tunnel",
+  "query": "road tunnel",
+  "title": "road tunnel",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3338707/free-photo-image-cc0-creative-commons",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   683
+  ]
+ },
+ "tunnel_dark": {
+  "file": "tunnel_dark.jpg",
+  "theme": "tunnel",
+  "query": "tunnel lights night",
+  "title": "Tunnel. Free public domain CC0",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/5927443/tunnel-free-public-domain-cc0-photo",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   670
+  ]
+ },
+ "light_trails": {
+  "file": "light_trails.jpg",
+  "theme": "tunnel",
+  "query": "tunnel lights night",
+  "title": "Red white car light trails",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3301044/free-photo-image-asphalt-cc0-creative-commons",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   652
+  ]
+ },
+ "no_vacancy": {
+  "file": "no_vacancy.jpg",
+  "theme": "motel",
+  "query": "motel sign night",
+  "title": "Neon 'no vacancy' sign lit",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3303539/free-photo-image-alphabet-cc0-creative-commons",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   573
+  ]
+ },
+ "open_sign": {
+  "file": "open_sign.jpg",
+  "theme": "diner",
+  "query": "neon diner",
+  "title": "Open neon sign white red",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3298974/free-photo-image-architecture-building-cc0",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   683
+  ]
+ },
+ "parking_rain": {
+  "file": "parking_rain.jpg",
+  "theme": "night",
+  "query": "parking lot night",
+  "title": "Empty parking lot rain night",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/4021535/photo-image-background-light-lines",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   683
+  ]
+ },
+ "parking_lamp": {
+  "file": "parking_lamp.jpg",
+  "theme": "night",
+  "query": "parking lot night",
+  "title": "empty parking lot street light",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3300747/free-photo-image-dark-brick-wall-background-window-guard",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   671
+  ]
+ },
+ "gas_station": {
+  "file": "gas_station.jpg",
+  "theme": "night",
+  "query": "gas station night",
+  "title": "Dark Night",
+  "creator": "Maarten van den Heuvel",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/dark-night-18TACRGUW6",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   638
+  ]
+ },
+ "corridor": {
+  "file": "corridor.jpg",
+  "theme": "corridor",
+  "query": "institution hallway",
+  "title": "X105C CORRIDOR",
+  "creator": "dankeck",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/140641142@N05/52758446379",
+  "provider": "flickr",
+  "size": [
+   1024,
+   576
+  ]
+ },
+ "facade_windows": {
+  "file": "facade_windows.jpg",
+  "theme": "window",
+  "query": "curtain window sunlight",
+  "title": "Windows Panes",
+  "creator": "Dmitri Popov",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/windows-panes-TA8Y1AJENQ",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   639
+  ]
+ },
+ "streets_night": {
+  "file": "streets_night.jpg",
+  "theme": "road",
+  "query": "empty road night",
+  "title": "Free streets night image",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/5907746/photo-image-public-domain-posters-free",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   619
+  ]
+ }
+}

@@ -9,37 +9,49 @@ import numpy as np
 
 import fx
 import look
+import memories as mem
 from engine import H, W, clamp01, ramp, smooth
 from look import C
 
 
 # ---------------------------------------------------------------- scenes
+_MEM = {}
+
+
+def memories_for(T, name, scenes, **kw):
+    if name not in _MEM:
+        sec = next(x for x in T.sections if x["name"] == name)
+        _MEM[name] = mem.schedule(T, scenes, sec["start"], sec["end"], **kw)
+    return _MEM[name]
+
+
 def verse_a(t, T, lines):
-    """Her room: lavender haze; she sits in three exposures; he is the warm
-    light that floods in as she gets lost inside him."""
-    img = look.padded_room(t)
-    img = look.tally(img, t, T)
-    # warmth grows from "a voice came to her" and floods on "lost inside him"
-    voice = T.lines[5]["start"]
-    flood = T.lines[7]["start"]
+    """Her room, but she is never shown: memories surface and drift through
+    the haze, and his warmth creeps in until it colours them."""
+    name = "Verse A: Through eyes"
+    sec = next(x for x in T.sections if x["name"] == name)
+    voice, flood = T.lines[5]["start"], T.lines[7]["start"]
     warm = 0.25 * smooth(ramp(t, voice, voice + 6)) + 0.9 * smooth(ramp(t, flood, flood + 2.6))
-    # him: warmth just behind her shoulder (her hair occludes it), and a
-    # leak from beyond the frame
-    hs = lambda im: fx.hotspot(im, t, 1180 + 150, 960 - 0.58 * 650, 340,
-                               strength=0.04 + 0.15 * warm)
-    img = look.her_presence(img, t, T, cx=1180, floor=960, s=650, rim=0.3 + 0.9 * warm,
-                            light=(1180 + 170, 960 - 0.60 * 650), behind=hs)
-    img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.25)
-    # camera: a slow push across the verse, deepening as she gets lost in him
-    sec = T.section_at(t)
+    dx, dy, dr = mem.drift(t)
     u = clamp01((t - sec["start"]) / (sec["end"] - sec["start"]))
-    zoom = 1.0 + 0.05 * smooth(u) + 0.05 * smooth(ramp(t, flood, flood + 6))
-    img = fx.shift(img, 14 * math.sin(t * 0.13) - (zoom - 1) * 260,
-                   8 * math.sin(t * 0.11) + (zoom - 1) * 120, 0, zoom)
+    zoom = 1.02 + 0.04 * smooth(u) + 0.04 * smooth(ramp(t, flood, flood + 6))
+
+    img = look.padded_room(t, base=C["haze"] * 0.95)
+    img = look.tally(img, t, T)
+    img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, zoom)            # far wall, slow
+    # before -> the room -> his voice arriving -> lost inside him
+    scenes = ["curtain_bedroom", "lake_overcast", "curtain_window", "rain_window",
+              "fog_lamps", "doorway_figure", "car_window_night", "rain_glass_lights",
+              "dusk_drive"]
+    for m in memories_for(T, name, scenes, every=2, life=11.0, seed=3, keep_left=900):
+        img = m.draw(img, t, warm=warm, offset=(dx, dy))
+    img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.3)
     for n, y in look.stacked_lines(t, T, lines, anchor=640, size=72, max_w=760):
-        img = look.her_words(img, t, T, [n], 150, y, size=72, color=C["plum_deep"], max_w=760)
-    return img, dict(exposure=0.95, lift=0.10, sat=0.8, bloom=0.55, hal=0.55, thresh=1.0,
-                     diffusion=0.28, grain=0.045, trail=0.62,
+        drift_x = 5.0 * max(0.0, t - T.lines[n]["start"])                # words drift as they age
+        img = look.her_words(img, t, T, [n], 150 + dx * 0.3 + drift_x, y + dy * 0.3,
+                             size=72, color=C["plum_deep"], max_w=760)
+    return img, dict(exposure=0.9, lift=0.08, sat=0.85, bloom=0.5, hal=0.55, thresh=1.0,
+                     diffusion=0.14, grain=0.045, trail=0.62,
                      ghosts=((1.2, -160, 0, -5, 0.22), (2.4, 150, -10, 4, 0.14)))
 
 

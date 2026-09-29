@@ -3,3 +3,4 @@ __pycache__/
 render/*
 !render/*_contact.jpg
 storyboard/renders/*.mp4
+assets/photos/candidates/
