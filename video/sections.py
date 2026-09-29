@@ -45,8 +45,10 @@ def cached(key, fn):
     return _CACHE[key]
 
 
-def flashes(t, times, decay=9.0):
-    return max((math.exp(-decay * (t - s)) for s in times if t >= s), default=0.0)
+def flashes(t, times, decay=9.0, attack=0.07):
+    """Soft flashes: a short attack (no single-frame jump), then decay."""
+    return max((min(1.0, (t - s) / attack) * math.exp(-decay * max(0.0, t - s - attack))
+                for s in times if t >= s), default=0.0)
 
 
 # ---------------------------------------------------------------- worlds
@@ -99,8 +101,8 @@ POST = {
                       diffusion=0.3, grain=0.06, trail=0.5, shadow="#7A8290",
                       ghosts=((0.8, -60, 0, 0, 0.14), (1.6, 60, 0, 0, 0.08))),
     "run": dict(exposure=1.1, lift=0.06, sat=1.0, bloom=0.95, hal=0.9, thresh=0.55,
-                diffusion=0.18, grain=0.06, trail=0.72, shadow="#2E2436",
-                ghosts=((0.5, -90, 0, 0, 0.22), (1.0, -180, 0, 0, 0.12))),
+                diffusion=0.18, grain=0.06, trail=0.55, shadow="#2E2436",
+                ghosts=((0.6, -110, 0, 0, 0.10), (1.2, -220, 0, 0, 0.05))),
     "bleach": dict(exposure=1.0, lift=0.1, sat=0.7, bloom=0.4, hal=0.4, thresh=1.05,
                    diffusion=0.2, grain=0.045, trail=0.66,
                    ghosts=((1.4, -120, 0, -3, 0.12), (2.8, 110, 0, 3, 0.08))),
@@ -139,14 +141,17 @@ def title(img, t, t_in, t_out, x=150, y=600, size=210, color=None, dark=False):
     if t < t_in or a_out <= 0:
         return img
     layers = {}
-    xx = x
+    age = max(0.0, t - t_in)
+    track = size * (0.01 + 0.07 * ease_out(clamp01(age / 12), 2))   # spacing slowly opens
+    xx = x + 5.0 * age                                               # and the word drifts
+    y = y - 2.0 * age
     for i, ch in enumerate(txt):
         cs = t_in + i * 0.32
         u = ease_out(ramp(t, cs, cs + 1.4), 2)
         if u > 0.002:
             sig = round((1 - u) * 14 + (1 - a_out) * 10)
             layers.setdefault(sig, []).append((ch, xx, y + (1 - u) * 30, u * a_out))
-        xx += f.measureText(ch)
+        xx += f.measureText(ch) + track
     for sig, ops in layers.items():
         def draw(c, ops=ops):
             for ch, px, py, a in ops:
@@ -201,8 +206,8 @@ def there_comes_a_once(t, T, lines):
         img = img * (1 - pull * 0.6) + fx.blur(img, 10) * pull * 0.6
     img = kin(T, name, lines, ONCE_SHOTS).draw(img, t, cam=(dx * 0.35, dy * 0.35),
                                               kick=T.pulse_env(t, 7.0))
-    img = img + np.float32(0.9) * fl                     # each 'once' flashes to white
-    return img, post("her", exposure=0.9 + 0.25 * fl)
+    img = img + np.float32(0.45) * fl                    # each 'once' flashes toward white
+    return img, post("her", exposure=0.9 + 0.12 * fl)
 
 
 REFRAIN_SHOTS = {20: dict(style="stack", hero=1), 21: dict(style="stack", hero=4),
@@ -352,7 +357,7 @@ def break_threads(t, T, lines):
     return img, post("night")
 
 
-GUN_SHOTS = {58: dict(style="track", hero=2), 59: dict(style="stack", hero=10),
+GUN_SHOTS = {58: dict(style="track", hero=2), 59: dict(style="track", hero=10),
              60: dict(style="stack", hero=4, voice="coats"), 61: dict(style="hero", hero=2),
              62: dict(style="stack", hero=1), 63: dict(style="stack", hero=1),
              64: dict(style="depth", hero=1)}

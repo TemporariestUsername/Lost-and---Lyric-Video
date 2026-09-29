@@ -227,9 +227,10 @@ def _lifetime(T, n, lines, hold=2.2):
     idx = lines.index(n)
     nxt = T.lines[lines[idx + 1]]["start"] if idx + 1 < len(lines) else None
     end = T.lines[n]["end"] + hold
+    last_seen = max(w["start"] for w in T.lines[n]["words"] if not w["backing"]) + 0.25
     if nxt is not None:                              # already leaving as the next arrives,
-        end = min(end, max(nxt - 0.35, T.lines[n]["end"] - 0.1))   # but not before it's sung
-    return start, end
+        end = min(end, max(nxt - 0.35, T.lines[n]["end"] - 0.1, last_seen))  # but not before
+    return start, end                                # every word has been sung and seen
 
 
 def _char_x(f, txt, tracking, size):
@@ -279,6 +280,37 @@ class Kinetic:
                     o["y"] += 55 if n % 2 else -55
             self.plan[n] = dict(placed=placed, style=style, voice=v,
                                 life=_lifetime(T, n, self.lines, hold))
+        self._separate()
+
+    @staticmethod
+    def _yspan(p):
+        ws = [o for o in p["placed"] if o["role"] in ("word", "hero", "backing")]
+        return (min(o["y"] - o["size"] * 0.85 for o in ws), max(o["y"] + o["size"] * 0.3 for o in ws))
+
+    def _separate(self, gap=36, top=150, bottom=960):
+        """If a line is still on screen when the next arrives, move the
+        newcomer vertically clear of it (whichever way needs less travel)."""
+        for a_n, b_n in zip(self.lines, self.lines[1:]):
+            a, b = self.plan[a_n], self.plan[b_n]
+            # only when the outgoing line is still fully readable as the newcomer's
+            # first word appears (b's life starts 0.15 s before its first word)
+            # (typed coats lines are readable the instant they land, so for them
+            # any overlap with the outgoing line's life counts)
+            lead = 0.0 if b["voice"] == "coats" else 0.15
+            if "him" in (a["voice"], b["voice"]) or a["life"][1] <= b["life"][0] + lead:
+                continue
+            a0, a1 = self._yspan(a)
+            b0, b1 = self._yspan(b)
+            if b1 <= a0 - gap or b0 >= a1 + gap:
+                continue
+            down = a1 + gap - b0
+            up = a0 - gap - b1
+            options = [s for s in (down, up) if top <= b0 + s and b1 + s <= bottom]
+            if not options:
+                continue
+            shift = min(options, key=abs)
+            for o in b["placed"]:
+                o["y"] += shift
 
     def active(self, t):
         return [n for n in self.lines
@@ -383,7 +415,7 @@ class Kinetic:
                     x0 = cx + (o["x"] + drift_x - cx) * push + cam[0] * z
                     y0 = cy + (o["y"] - cy) * push + cam[1] * z
                     wpx = (f.measureText(txt) + track * o["size"] * len(txt)) * push
-                    TEXT_LOG.append((t, w["disp"], w["start"], x0, y0 - o["size"] * 0.8 * push,
+                    TEXT_LOG.append((t, _clean(w["text"]), w["start"], x0, y0 - o["size"] * 0.8 * push,
                                      x0 + wpx, y0 + o["size"] * 0.25 * push))
 
         def mask(ops):
