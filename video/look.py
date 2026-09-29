@@ -101,55 +101,115 @@ def figure_masks(cx, floor, s, sway=0.0):
     return fx.skia_alpha(body), fx.skia_alpha(hair), fx.skia_alpha(face)
 
 
-def hair_curtain(cx, top, s, t, seed=0, n=700, part=1.0):
-    """Long hair as procedural strands grouped in locks. Strands start over
-    the scalp, slide round the skull, keep clear of the face, then fall.
-    Returns a density mask in 0..1."""
+SS = 2  # hair supersampling factor
+
+
+def _soft(x):
+    x = min(1.0, max(0.0, x))
+    return x * x * (3 - 2 * x)
+
+
+def _lock_paths(cx, top, s, t, seed, n_locks, steps):
+    """Simulate lock centrelines with soft forces: gravity, a skull the hair
+    slides over, a face gap it parts around, and a slow sway."""
     r = np.random.default_rng(seed)
     hcx, hcy = cx, top + 0.12 * s
-    rx, ry = 0.088 * s, 0.115 * s
-    surf = skia.Surface(W, H)
-    c = surf.getCanvas()
-    c.clear(skia.ColorTRANSPARENT)
+    rx, ry = 0.090 * s, 0.117 * s
     sway = math.sin(t * 0.45 + seed) * 0.010 * s
-    locks = [dict(th=r.uniform(-175, -5), curl=r.normal(0, 0.0016) * s, ph=r.uniform(0, 6.28),
-                  L=r.uniform(0.55, 0.95) * s, hang=r.uniform(0.10, 0.30)) for _ in range(46)]
-    for i in range(n):
-        lk = locks[i % len(locks)]
-        th = math.radians(lk["th"] + r.normal(0, 7))
+    locks = []
+    for i in range(n_locks):
+        th = math.radians(-172 + 164 * (i + r.uniform(0.2, 0.8)) / n_locks)
         side = -1 if math.degrees(th) < -90 else 1
-        rad = r.uniform(0.85, 1.0)
-        x, y = hcx + math.cos(th) * rx * rad, hcy + math.sin(th) * ry * rad
-        vx, vy = side * 0.55, 0.55
-        L = lk["L"] * r.uniform(0.85, 1.08)
-        steps = 40
+        x, y = hcx + math.cos(th) * rx, hcy + math.sin(th) * ry
+        vx, vy = side * 0.5 + math.cos(th) * 0.3, 0.45
+        L = r.uniform(0.58, 1.02) * s
+        hang = r.uniform(0.11, 0.26) * s
+        ph, curl = r.uniform(0, 6.28), r.normal(0, 1.3)
         step = L / steps
         pts = [(x, y)]
         for k in range(steps):
-            vy += 0.20
-            vx *= 0.86
-            vx += math.sin(k * 0.45 + lk["ph"]) * 0.07 + lk["curl"] / s * 20
-            if y > hcy + 0.35 * s:            # below the shoulders, hang straighter
-                vx += (hcx + side * lk["hang"] * s - x) / s * 0.35
-            vx += sway / s * 4 * (k / steps)
+            u = k / steps
+            vy += 0.16
+            vx *= 0.88
+            vx += math.sin(u * 6 + ph) * 0.05 * curl * (0.3 + u) + sway / s * 3 * u
+            ex, ey = (x - hcx) / rx, (y - hcy) / ry
+            e = math.hypot(ex, ey) + 1e-6
+            push = _soft((1.10 - e) / 0.12)              # soft skull
+            vx += ex / e * push * 0.9
+            vy += ey / e * push * 0.9 * (ey < 0)
+            dxf = abs(x - hcx)
+            if y > hcy - 0.03 * s and y < hcy + 0.34 * s:  # part around the face
+                vx += side * _soft((0.085 * s - dxf) / (0.03 * s)) * 0.6
+            if y > hcy + 0.30 * s:                        # settle over shoulders
+                vx += (hcx + side * hang - x) / s * 0.9
             sp = math.hypot(vx, vy) + 1e-6
             x, y = x + vx / sp * step, y + vy / sp * step
-            # slide around the skull (push out of the head ellipse)
-            ex, ey = (x - hcx) / rx, (y - hcy) / ry
-            e = math.hypot(ex, ey)
-            if e < 1.02:
-                x, y = hcx + ex / (e + 1e-6) * rx * 1.02, hcy + ey / (e + 1e-6) * ry * 1.02
-            # keep the face clear: a soft column below the brow
-            if hcy - 0.02 * s < y < hcy + 0.30 * s and abs(x - hcx) < 0.07 * s * part:
-                x = hcx + side * 0.07 * s * part
             pts.append((x, y))
-        w = r.uniform(0.7, 2.2)
-        a = r.uniform(0.05, 0.18)
-        c.drawPath(smooth_path(pts), skia.Paint(
-            AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=w,
-            StrokeCap=skia.Paint.kRound_Cap, Color4f=skia.Color4f(1, 1, 1, a)))
-    m = surf.makeImageSnapshot().toarray()[..., 3].astype(F32) / 255
-    return np.clip(m * 2.0, 0, 1)
+        pts = np.array(pts)
+        # a lock-level wave that grows toward the tips
+        uu = np.linspace(0, 1, len(pts))
+        amp = r.uniform(0.008, 0.028) * s
+        fr = r.uniform(1.6, 3.2)
+        pts[:, 0] += amp * np.sin(uu * fr * 6.283 + ph + t * 0.35) * uu ** 1.1
+        locks.append((pts, side, th))
+    return locks
+
+
+def hair_curtain(cx, top, s, t, seed=0, n=4000, part=1.0, n_locks=38, steps=48):
+    """Long hair: thousands of fine, tapering strands clumped into locks,
+    drawn supersampled over the head region. Returns (density, sheen)."""
+    r = np.random.default_rng(seed + 1000)
+    locks = _lock_paths(cx, top, s, t, seed, n_locks, steps)
+    x0, y0 = int(cx - 0.55 * s), int(top - 0.06 * s)
+    x1, y1 = int(cx + 0.55 * s), int(top + 1.12 * s)
+    bw, bh = x1 - x0, y1 - y0
+    surf = skia.Surface(bw * SS, bh * SS)
+    c = surf.getCanvas()
+    c.clear(skia.ColorTRANSPARENT)
+    c.scale(SS, SS)
+    c.translate(-x0, -y0)
+    u = np.linspace(0, 1, steps + 1)[:, None]
+    chunks = ((0, 14, 1.0, 1.0), (14, 28, 0.95, 0.9), (28, 40, 0.7, 0.75), (40, steps + 1, 0.3, 0.55))
+    paint = skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style,
+                       StrokeCap=skia.Paint.kRound_Cap, StrokeJoin=skia.Paint.kRound_Join)
+    for i in range(n):
+        base, side, th = locks[i % len(locks)]
+        # tangent spread at the root, clumping toward the tips, a few flyaways
+        tang = np.array([-math.sin(th), math.cos(th)])
+        root = tang * r.normal(0, 0.030 * s)
+        fly = r.random() < 0.05
+        tip = r.normal(0, 0.006 * s, 2) * (6.0 if fly else 1.0)
+        pts = base + root * (1 - u) ** 1.2 + tip * u ** 1.3
+        pts = pts + np.column_stack([np.sin(u[:, 0] * r.uniform(4, 9) + r.uniform(0, 6.28)),
+                                     np.zeros(len(u))]) * r.uniform(0, 0.004 * s) * u
+        cut = int(len(pts) * r.uniform(0.75, 1.0))           # uneven ends
+        w = r.uniform(0.35, 0.9)
+        a = r.uniform(0.05, 0.12)
+        for i0, i1, am, wm in chunks:
+            i1 = min(i1, cut)
+            if i1 - i0 < 2:
+                continue
+            path = skia.Path()
+            path.moveTo(*pts[i0])
+            for q in range(i0 + 1, i1):
+                mx, my = (pts[q - 1] + pts[q]) / 2
+                path.quadTo(*pts[q - 1], mx, my)
+            path.lineTo(*pts[i1 - 1])
+            paint.setStrokeWidth(w * wm)
+            paint.setColor4f(skia.Color4f(1, 1, 1, a * am))
+            c.drawPath(path, paint)
+    arr = surf.makeImageSnapshot().toarray()[..., 3].astype(F32) / 255
+    small = cv2.resize(arr, (bw, bh), interpolation=cv2.INTER_AREA)
+    m = np.zeros((H, W), F32)
+    sx0, sy0, sx1, sy1 = max(0, x0), max(0, y0), min(W, x1), min(H, y1)
+    m[sy0:sy1, sx0:sx1] = small[sy0 - y0:sy1 - y0, sx0 - x0:sx1 - x0]
+    m = 1 - np.exp(-m * 3.4)                                   # optical density
+    # anisotropic sheen: a soft band where hair curves over the crown
+    hcy = top + 0.12 * s
+    yy, xx = fx._yy_xx()
+    d = np.sqrt(((xx - cx) / (0.10 * s)) ** 2 + ((yy - (hcy - 0.01 * s)) / (0.125 * s)) ** 2)
+    band = np.exp(-((d - 0.78) / 0.16) ** 2) * (yy < hcy + 0.05 * s)
+    return m, m * band
 
 
 def face_hint(cx, top, s):
@@ -184,7 +244,7 @@ def her_presence(img, t, T, cx=1150, floor=930, s=640, ghosts=True, rim=1.0,
         vt = vtop(floor, s)
         for k, (dx, rot, a) in enumerate(((-215, -10, 0.30), (210, 9, 0.24))):
             wob = math.sin(t * 0.5 + dx) * 18
-            hk = hair_curtain(cx, top, s, t, seed=seed + 11 + k, n=320)
+            hk, _ = hair_curtain(cx, top, s, t, seed=seed + 11 + k, n=900, n_locks=40, steps=32)
             g = fx.blur(fx.shift(hk, dx + wob, -12, rot), 6) * vt
             gd = fx.blur(fx.shift(dens, dx + wob, -12, rot), 10) * vt
             aa = a * (0.8 + 0.4 * kick) * fade
@@ -196,13 +256,15 @@ def her_presence(img, t, T, cx=1150, floor=930, s=640, ghosts=True, rim=1.0,
     if face:
         fc, ey, mo = face_hint(cx, top, s)
         img = fx.over(img, C["body"], fc * 0.55 * fade)
-    hk = hair_curtain(cx, top, s, t, seed=seed)
-    img = fx.over(img, hair_col, fx.blur(hk, 1.0) * 0.9 * brk * fade)
+    hk, sheen = hair_curtain(cx, top, s, t, seed=seed)
+    img = fx.over(img, hair_col, fx.blur(hk, 5) * 0.45 * brk * fade)      # volume
+    img = fx.over(img, hair_col, hk * 0.8 * brk * fade)                   # strands
+    img = fx.over(img, C["haze_lo"], fx.blur(sheen, 6) * 0.16 * fade)   # sheen
     if rim > 0:
         lx, ly = light if light else (cx + 0.2 * s * rim_side, top + 0.3 * s)
-        near = fx.radial(lx, ly, 0.45 * s, 1.3)
-        lit = hk * near
-        glow = fx.blur(lit, 2.0) * 0.9 + fx.blur(lit, 14) * 0.5
+        near = fx.radial(lx, ly, 0.38 * s, 1.5)
+        lit = hk * (1 - hk) * 4 * near          # light passes through the thin parts
+        glow = fx.blur(lit, 1.2) * 0.9 + fx.blur(lit, 7) * 0.25
         img = img + C["amber"] * (glow * rim * fade)[..., None]
     return img
 
