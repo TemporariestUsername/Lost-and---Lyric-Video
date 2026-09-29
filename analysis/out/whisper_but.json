@@ -1,0 +1,40 @@
+{
+ "model": "medium.en",
+ "clip": [
+  311.0,
+  321.0
+ ],
+ "prompt": "Forever and ever and ever. But\u2026 But forever... always comes to an end,",
+ "segments": [
+  {
+   "start": 311.0,
+   "end": 312.42,
+   "text": "and ever."
+  },
+  {
+   "start": 319.58,
+   "end": 320.98,
+   "text": "But..."
+  }
+ ],
+ "words": [
+  {
+   "start": 311.0,
+   "end": 311.7,
+   "word": "and",
+   "p": 0.024
+  },
+  {
+   "start": 311.7,
+   "end": 312.42,
+   "word": "ever.",
+   "p": 0.085
+  },
+  {
+   "start": 319.58,
+   "end": 320.98,
+   "word": "But...",
+   "p": 0.408
+  }
+ ]
+}

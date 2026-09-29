@@ -1,0 +1,17 @@
+{
+  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR.",
+  "lines": {
+    "1": [
+      16.92,
+      20.3
+    ],
+    "2": [
+      20.45,
+      24.02
+    ],
+    "78": [
+      318.0,
+      319.4
+    ]
+  }
+}

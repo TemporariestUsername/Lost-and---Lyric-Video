@@ -1,0 +1,4045 @@
+{
+ "model": "medium.en",
+ "clip": null,
+ "prompt": null,
+ "segments": [
+  {
+   "start": 16.919999999999995,
+   "end": 27.46,
+   "text": "3 years that weren't hers and were Left in rooms she couldn't leave"
+  },
+  {
+   "start": 27.46,
+   "end": 30.86,
+   "text": "Learning self she couldn't learn"
+  },
+  {
+   "start": 30.86,
+   "end": 33.1,
+   "text": "And a voice came to her"
+  },
+  {
+   "start": 33.1,
+   "end": 35.28,
+   "text": "Sweet, so sweet"
+  },
+  {
+   "start": 35.28,
+   "end": 39.76,
+   "text": "A hand as ever as it was once"
+  },
+  {
+   "start": 39.76,
+   "end": 42.96,
+   "text": "Good, so good"
+  },
+  {
+   "start": 43.96,
+   "end": 46.96,
+   "text": "She got lost inside him"
+  },
+  {
+   "start": 46.96,
+   "end": 50.52,
+   "text": "Lost and lost inside him"
+  },
+  {
+   "start": 50.52,
+   "end": 54.04,
+   "text": "Like she swore she never would"
+  },
+  {
+   "start": 55.2,
+   "end": 61.64,
+   "text": "But there comes a once, once She said no, once"
+  },
+  {
+   "start": 61.64,
+   "end": 67.28,
+   "text": "And she lost him for a lifetime There comes a once, once"
+  },
+  {
+   "start": 67.28,
+   "end": 73.28,
+   "text": "She said yes, once And she lost him forever"
+  },
+  {
+   "start": 73.28,
+   "end": 78.03999999999999,
+   "text": "Lost and lost, lost to her Lost to the world"
+  },
+  {
+   "start": 78.47,
+   "end": 86.53,
+   "text": "Forever and ever Stay lost now, girl"
+  },
+  {
+   "start": 86.53,
+   "end": 92.49,
+   "text": "Forever, forever Throw away everything he found"
+  },
+  {
+   "start": 92.49,
+   "end": 97.75,
+   "text": "So he never got lost inside you Again, again"
+  },
+  {
+   "start": 97.75,
+   "end": 99.69,
+   "text": "Forever again"
+  },
+  {
+   "start": 102.49,
+   "end": 106.35,
+   "text": "Forever again, never again"
+  },
+  {
+   "start": 116.47,
+   "end": 123.05,
+   "text": "The white coat said, we found a girl who is very lost"
+  },
+  {
+   "start": 123.05,
+   "end": 130.23,
+   "text": "Scribble, scribble, stab, stab the charts Keep her safe in a nice white room"
+  },
+  {
+   "start": 130.23,
+   "end": 137.79,
+   "text": "Scribble, scribble, stab, stab the charts We'll find out how lost she really is"
+  },
+  {
+   "start": 137.79,
+   "end": 144.63,
+   "text": "With time, with time, with time, we can find anything"
+  },
+  {
+   "start": 144.63,
+   "end": 151.81,
+   "text": "With time, with time, even a girl who is very hard to find"
+  },
+  {
+   "start": 151.81,
+   "end": 158.85,
+   "text": "It brought a man, a man who could find someone hard to find"
+  },
+  {
+   "start": 158.85,
+   "end": 164.09,
+   "text": "And in the end, he found, oh he found"
+  },
+  {
+   "start": 164.09,
+   "end": 168.99,
+   "text": "Something very hard to find in her"
+  },
+  {
+   "start": 171.09,
+   "end": 176.19,
+   "text": "And in the end she found, oh she found"
+  },
+  {
+   "start": 176.19,
+   "end": 181.55,
+   "text": "Her forever and ever in him"
+  },
+  {
+   "start": 184.09,
+   "end": 185.73,
+   "text": "I can help you find protecting"
+  },
+  {
+   "start": 187.09,
+   "end": 188.85,
+   "text": "Trusting and believing"
+  },
+  {
+   "start": 191.09,
+   "end": 192.09,
+   "text": "Even if they're"
+  },
+  {
+   "start": 194.09,
+   "end": 195.57,
+   "text": "It's very hard to find."
+  },
+  {
+   "start": 224.09,
+   "end": 229.23,
+   "text": "This girl is too hard to find"
+  },
+  {
+   "start": 231.04999999999998,
+   "end": 235.91,
+   "text": "Scribble, scribble, stab, stab the charts"
+  },
+  {
+   "start": 237.09,
+   "end": 240.37,
+   "text": "With time, with time"
+  },
+  {
+   "start": 240.37,
+   "end": 244.23,
+   "text": "We found she isn't worth the time"
+  },
+  {
+   "start": 244.23,
+   "end": 247.19,
+   "text": "With time, with time"
+  },
+  {
+   "start": 247.19,
+   "end": 251.25,
+   "text": "This girl who is very hard to find"
+  },
+  {
+   "start": 252.73000000000002,
+   "end": 256.03,
+   "text": "And with time, and with time"
+  },
+  {
+   "start": 256.03,
+   "end": 260.29,
+   "text": "The white coats brought the man a gun and a bullet"
+  },
+  {
+   "start": 260.29,
+   "end": 264.37,
+   "text": "And said, go and find that girl"
+  },
+  {
+   "start": 264.37,
+   "end": 267.79,
+   "text": "And he did, he did"
+  },
+  {
+   "start": 267.79,
+   "end": 272.61,
+   "text": "He found her, he found her"
+  },
+  {
+   "start": 273.81,
+   "end": 275.99,
+   "text": "I won't lose you"
+  },
+  {
+   "start": 275.99,
+   "end": 279.69,
+   "text": "Together, we'll find you the time"
+  },
+  {
+   "start": 283.79,
+   "end": 291.25,
+   "text": "And they ran, ran, ran, ran, forever and ever"
+  },
+  {
+   "start": 291.25,
+   "end": 295.11,
+   "text": "Through every tunnel, every motel"
+  },
+  {
+   "start": 295.11,
+   "end": 298.65,
+   "text": "Lost in diners, lost in alleys"
+  },
+  {
+   "start": 298.65,
+   "end": 301.87,
+   "text": "Lost in each other and found"
+  },
+  {
+   "start": 301.87,
+   "end": 307.19,
+   "text": "Found, lost and found, found and lost"
+  },
+  {
+   "start": 307.87,
+   "end": 313.11,
+   "text": "Forever and ever and ever"
+  },
+  {
+   "start": 319.87,
+   "end": 324.27,
+   "text": "But forever always comes to an end"
+  },
+  {
+   "start": 324.87,
+   "end": 327.41,
+   "text": "When the coats come round the bend"
+  },
+  {
+   "start": 332.45,
+   "end": 337.15,
+   "text": "And the code says, hmm, this man is too lost."
+  },
+  {
+   "start": 337.17,
+   "end": 340.07,
+   "text": "Scribble, scribble, stab, stab the child."
+  },
+  {
+   "start": 340.13,
+   "end": 343.63,
+   "text": "We'll have to cut out something hard to find."
+  },
+  {
+   "start": 343.99,
+   "end": 347.07,
+   "text": "Scribble, scribble, stab, stab the child."
+  },
+  {
+   "start": 347.13,
+   "end": 351.27,
+   "text": "With time, with time, we'll see how lost this girl can be."
+  },
+  {
+   "start": 351.93,
+   "end": 357.73,
+   "text": "With time, with time, we'll make her a girl who can find anything."
+  },
+  {
+   "start": 357.73,
+   "end": 361.49,
+   "text": "Except something hard to find"
+  },
+  {
+   "start": 363.99,
+   "end": 367.35,
+   "text": "They cut away his protecting"
+  },
+  {
+   "start": 367.35,
+   "end": 370.75,
+   "text": "They cut away his trusting"
+  },
+  {
+   "start": 370.75,
+   "end": 374.05,
+   "text": "They cut away his believing"
+  },
+  {
+   "start": 374.05,
+   "end": 377.31,
+   "text": "But left him the gun and the bullet"
+  },
+  {
+   "start": 377.31,
+   "end": 379.67,
+   "text": "They took her arms to hug"
+  },
+  {
+   "start": 379.67,
+   "end": 381.41,
+   "text": "They took her legs to run"
+  },
+  {
+   "start": 381.41,
+   "end": 384.91,
+   "text": "Her eyes to see and ears to hear"
+  },
+  {
+   "start": 384.91,
+   "end": 390.89,
+   "text": "But left her the years and years and years alone with time, with time"
+  },
+  {
+   "start": 390.89,
+   "end": 396.63,
+   "text": "And all her agains and agains and agains of him and her"
+  },
+  {
+   "start": 396.63,
+   "end": 398.81,
+   "text": "Stay lost now girl"
+  },
+  {
+   "start": 398.81,
+   "end": 401.25,
+   "text": "Forever, forever"
+  },
+  {
+   "start": 401.91,
+   "end": 405.61,
+   "text": "Throw away everything he could find"
+  },
+  {
+   "start": 405.61,
+   "end": 408.93,
+   "text": "So he never got lost inside you"
+  },
+  {
+   "start": 408.93,
+   "end": 412.11,
+   "text": "Again, again, forever again"
+  },
+  {
+   "start": 413.81,
+   "end": 417.57,
+   "text": "Forever again, never again"
+  },
+  {
+   "start": 417.57,
+   "end": 421.33,
+   "text": "Through eyes that were hers and hers"
+  },
+  {
+   "start": 421.33,
+   "end": 425.07,
+   "text": "Through years that weren't hers and were"
+  },
+  {
+   "start": 425.07,
+   "end": 428.27,
+   "text": "Left in rooms she couldn't leave"
+  },
+  {
+   "start": 428.27,
+   "end": 431.41,
+   "text": "Learning the self she couldn't learn"
+  },
+  {
+   "start": 431.41,
+   "end": 434.11,
+   "text": "And the voice came to her"
+  },
+  {
+   "start": 434.11,
+   "end": 435.77,
+   "text": "Sweet, so sweet"
+  },
+  {
+   "start": 435.77,
+   "end": 439.07,
+   "text": "Her hand as ever as it was once"
+  },
+  {
+   "start": 439.07,
+   "end": 441.01,
+   "text": "Good, so good"
+  },
+  {
+   "start": 441.01,
+   "end": 448.05,
+   "text": "She got lost inside him, lost and lost inside him"
+  },
+  {
+   "start": 448.05,
+   "end": 452.07,
+   "text": "Like she swore she never would"
+  },
+  {
+   "start": 485.65000000000003,
+   "end": 487.05,
+   "text": "You"
+  }
+ ],
+ "words": [
+  {
+   "start": 16.92,
+   "end": 18.08,
+   "word": "3",
+   "p": 0.015
+  },
+  {
+   "start": 18.08,
+   "end": 18.66,
+   "word": "years",
+   "p": 0.455
+  },
+  {
+   "start": 18.66,
+   "end": 22.2,
+   "word": "that",
+   "p": 0.357
+  },
+  {
+   "start": 22.2,
+   "end": 22.62,
+   "word": "weren't",
+   "p": 0.86
+  },
+  {
+   "start": 22.62,
+   "end": 23.1,
+   "word": "hers",
+   "p": 0.946
+  },
+  {
+   "start": 23.1,
+   "end": 23.38,
+   "word": "and",
+   "p": 0.408
+  },
+  {
+   "start": 23.38,
+   "end": 24.02,
+   "word": "were",
+   "p": 0.446
+  },
+  {
+   "start": 24.02,
+   "end": 25.02,
+   "word": "Left",
+   "p": 0.508
+  },
+  {
+   "start": 25.02,
+   "end": 25.34,
+   "word": "in",
+   "p": 0.979
+  },
+  {
+   "start": 25.34,
+   "end": 25.66,
+   "word": "rooms",
+   "p": 0.755
+  },
+  {
+   "start": 25.66,
+   "end": 26.12,
+   "word": "she",
+   "p": 0.952
+  },
+  {
+   "start": 26.12,
+   "end": 26.76,
+   "word": "couldn't",
+   "p": 0.995
+  },
+  {
+   "start": 26.76,
+   "end": 27.46,
+   "word": "leave",
+   "p": 0.995
+  },
+  {
+   "start": 27.46,
+   "end": 28.36,
+   "word": "Learning",
+   "p": 0.126
+  },
+  {
+   "start": 28.36,
+   "end": 29.04,
+   "word": "self",
+   "p": 0.406
+  },
+  {
+   "start": 29.04,
+   "end": 29.64,
+   "word": "she",
+   "p": 0.67
+  },
+  {
+   "start": 29.64,
+   "end": 30.34,
+   "word": "couldn't",
+   "p": 0.978
+  },
+  {
+   "start": 30.34,
+   "end": 30.86,
+   "word": "learn",
+   "p": 0.921
+  },
+  {
+   "start": 30.86,
+   "end": 31.36,
+   "word": "And",
+   "p": 0.459
+  },
+  {
+   "start": 31.36,
+   "end": 31.56,
+   "word": "a",
+   "p": 0.919
+  },
+  {
+   "start": 31.56,
+   "end": 31.82,
+   "word": "voice",
+   "p": 0.998
+  },
+  {
+   "start": 31.82,
+   "end": 32.22,
+   "word": "came",
+   "p": 0.996
+  },
+  {
+   "start": 32.22,
+   "end": 32.72,
+   "word": "to",
+   "p": 0.998
+  },
+  {
+   "start": 32.72,
+   "end": 33.1,
+   "word": "her",
+   "p": 0.995
+  },
+  {
+   "start": 33.1,
+   "end": 33.72,
+   "word": "Sweet,",
+   "p": 0.026
+  },
+  {
+   "start": 34.2,
+   "end": 34.54,
+   "word": "so",
+   "p": 0.971
+  },
+  {
+   "start": 34.54,
+   "end": 35.28,
+   "word": "sweet",
+   "p": 0.991
+  },
+  {
+   "start": 35.28,
+   "end": 35.96,
+   "word": "A",
+   "p": 0.896
+  },
+  {
+   "start": 35.96,
+   "end": 36.44,
+   "word": "hand",
+   "p": 0.998
+  },
+  {
+   "start": 36.44,
+   "end": 36.88,
+   "word": "as",
+   "p": 0.951
+  },
+  {
+   "start": 36.88,
+   "end": 37.32,
+   "word": "ever",
+   "p": 0.997
+  },
+  {
+   "start": 37.32,
+   "end": 37.94,
+   "word": "as",
+   "p": 0.896
+  },
+  {
+   "start": 37.94,
+   "end": 38.36,
+   "word": "it",
+   "p": 0.997
+  },
+  {
+   "start": 38.36,
+   "end": 38.9,
+   "word": "was",
+   "p": 0.993
+  },
+  {
+   "start": 38.9,
+   "end": 39.76,
+   "word": "once",
+   "p": 0.687
+  },
+  {
+   "start": 39.76,
+   "end": 40.72,
+   "word": "Good,",
+   "p": 0.885
+  },
+  {
+   "start": 41.28,
+   "end": 41.6,
+   "word": "so",
+   "p": 0.991
+  },
+  {
+   "start": 41.6,
+   "end": 42.96,
+   "word": "good",
+   "p": 0.998
+  },
+  {
+   "start": 43.7,
+   "end": 44.24,
+   "word": "She",
+   "p": 0.954
+  },
+  {
+   "start": 44.24,
+   "end": 44.68,
+   "word": "got",
+   "p": 0.998
+  },
+  {
+   "start": 44.68,
+   "end": 45.22,
+   "word": "lost",
+   "p": 0.997
+  },
+  {
+   "start": 45.22,
+   "end": 46.04,
+   "word": "inside",
+   "p": 0.998
+  },
+  {
+   "start": 46.04,
+   "end": 46.96,
+   "word": "him",
+   "p": 0.991
+  },
+  {
+   "start": 46.96,
+   "end": 47.68,
+   "word": "Lost",
+   "p": 0.966
+  },
+  {
+   "start": 47.68,
+   "end": 48.1,
+   "word": "and",
+   "p": 0.985
+  },
+  {
+   "start": 48.1,
+   "end": 48.62,
+   "word": "lost",
+   "p": 0.998
+  },
+  {
+   "start": 48.62,
+   "end": 49.48,
+   "word": "inside",
+   "p": 0.991
+  },
+  {
+   "start": 49.48,
+   "end": 50.52,
+   "word": "him",
+   "p": 0.998
+  },
+  {
+   "start": 50.52,
+   "end": 51.1,
+   "word": "Like",
+   "p": 0.989
+  },
+  {
+   "start": 51.1,
+   "end": 51.44,
+   "word": "she",
+   "p": 0.998
+  },
+  {
+   "start": 51.44,
+   "end": 51.96,
+   "word": "swore",
+   "p": 0.999
+  },
+  {
+   "start": 51.96,
+   "end": 52.54,
+   "word": "she",
+   "p": 0.984
+  },
+  {
+   "start": 52.54,
+   "end": 53.08,
+   "word": "never",
+   "p": 0.992
+  },
+  {
+   "start": 53.08,
+   "end": 54.04,
+   "word": "would",
+   "p": 0.999
+  },
+  {
+   "start": 55.2,
+   "end": 56.14,
+   "word": "But",
+   "p": 0.621
+  },
+  {
+   "start": 56.14,
+   "end": 56.44,
+   "word": "there",
+   "p": 0.645
+  },
+  {
+   "start": 56.44,
+   "end": 56.88,
+   "word": "comes",
+   "p": 0.984
+  },
+  {
+   "start": 56.88,
+   "end": 57.14,
+   "word": "a",
+   "p": 0.602
+  },
+  {
+   "start": 57.14,
+   "end": 57.58,
+   "word": "once,",
+   "p": 0.644
+  },
+  {
+   "start": 58.68,
+   "end": 58.68,
+   "word": "once",
+   "p": 0.346
+  },
+  {
+   "start": 58.68,
+   "end": 59.18,
+   "word": "She",
+   "p": 0.636
+  },
+  {
+   "start": 59.18,
+   "end": 59.6,
+   "word": "said",
+   "p": 0.986
+  },
+  {
+   "start": 59.6,
+   "end": 60.18,
+   "word": "no,",
+   "p": 0.636
+  },
+  {
+   "start": 61.1,
+   "end": 61.64,
+   "word": "once",
+   "p": 0.897
+  },
+  {
+   "start": 61.64,
+   "end": 61.88,
+   "word": "And",
+   "p": 0.928
+  },
+  {
+   "start": 61.88,
+   "end": 62.12,
+   "word": "she",
+   "p": 0.996
+  },
+  {
+   "start": 62.12,
+   "end": 62.56,
+   "word": "lost",
+   "p": 0.999
+  },
+  {
+   "start": 62.56,
+   "end": 63.04,
+   "word": "him",
+   "p": 0.994
+  },
+  {
+   "start": 63.04,
+   "end": 63.66,
+   "word": "for",
+   "p": 0.992
+  },
+  {
+   "start": 63.66,
+   "end": 64.08,
+   "word": "a",
+   "p": 0.993
+  },
+  {
+   "start": 64.08,
+   "end": 64.7,
+   "word": "lifetime",
+   "p": 0.988
+  },
+  {
+   "start": 64.7,
+   "end": 65.22,
+   "word": "There",
+   "p": 0.883
+  },
+  {
+   "start": 65.22,
+   "end": 65.66,
+   "word": "comes",
+   "p": 0.996
+  },
+  {
+   "start": 65.66,
+   "end": 65.96,
+   "word": "a",
+   "p": 0.993
+  },
+  {
+   "start": 65.96,
+   "end": 66.34,
+   "word": "once,",
+   "p": 0.998
+  },
+  {
+   "start": 66.4,
+   "end": 67.28,
+   "word": "once",
+   "p": 0.999
+  },
+  {
+   "start": 67.28,
+   "end": 67.96,
+   "word": "She",
+   "p": 0.985
+  },
+  {
+   "start": 67.96,
+   "end": 68.4,
+   "word": "said",
+   "p": 0.996
+  },
+  {
+   "start": 68.4,
+   "end": 69.12,
+   "word": "yes,",
+   "p": 0.98
+  },
+  {
+   "start": 69.12,
+   "end": 70.0,
+   "word": "once",
+   "p": 0.999
+  },
+  {
+   "start": 70.0,
+   "end": 70.64,
+   "word": "And",
+   "p": 0.991
+  },
+  {
+   "start": 70.64,
+   "end": 70.92,
+   "word": "she",
+   "p": 0.998
+  },
+  {
+   "start": 70.92,
+   "end": 71.46,
+   "word": "lost",
+   "p": 0.999
+  },
+  {
+   "start": 71.46,
+   "end": 72.2,
+   "word": "him",
+   "p": 0.999
+  },
+  {
+   "start": 72.2,
+   "end": 73.28,
+   "word": "forever",
+   "p": 0.981
+  },
+  {
+   "start": 73.28,
+   "end": 74.1,
+   "word": "Lost",
+   "p": 0.943
+  },
+  {
+   "start": 74.1,
+   "end": 74.46,
+   "word": "and",
+   "p": 0.863
+  },
+  {
+   "start": 74.46,
+   "end": 75.12,
+   "word": "lost,",
+   "p": 0.998
+  },
+  {
+   "start": 75.38,
+   "end": 75.78,
+   "word": "lost",
+   "p": 0.984
+  },
+  {
+   "start": 75.78,
+   "end": 76.18,
+   "word": "to",
+   "p": 0.992
+  },
+  {
+   "start": 76.18,
+   "end": 76.6,
+   "word": "her",
+   "p": 0.995
+  },
+  {
+   "start": 76.6,
+   "end": 77.06,
+   "word": "Lost",
+   "p": 0.759
+  },
+  {
+   "start": 77.06,
+   "end": 77.52,
+   "word": "to",
+   "p": 0.987
+  },
+  {
+   "start": 77.52,
+   "end": 78.0,
+   "word": "the",
+   "p": 0.996
+  },
+  {
+   "start": 78.0,
+   "end": 78.47,
+   "word": "world",
+   "p": 0.997
+  },
+  {
+   "start": 78.47,
+   "end": 80.23,
+   "word": "Forever",
+   "p": 0.838
+  },
+  {
+   "start": 80.23,
+   "end": 83.09,
+   "word": "and",
+   "p": 0.631
+  },
+  {
+   "start": 83.09,
+   "end": 84.15,
+   "word": "ever",
+   "p": 0.99
+  },
+  {
+   "start": 84.15,
+   "end": 84.91,
+   "word": "Stay",
+   "p": 0.749
+  },
+  {
+   "start": 84.91,
+   "end": 85.45,
+   "word": "lost",
+   "p": 0.969
+  },
+  {
+   "start": 85.45,
+   "end": 85.93,
+   "word": "now,",
+   "p": 0.934
+  },
+  {
+   "start": 86.07,
+   "end": 86.53,
+   "word": "girl",
+   "p": 0.991
+  },
+  {
+   "start": 86.53,
+   "end": 88.75,
+   "word": "Forever,",
+   "p": 0.86
+  },
+  {
+   "start": 88.75,
+   "end": 89.29,
+   "word": "forever",
+   "p": 0.752
+  },
+  {
+   "start": 89.29,
+   "end": 89.75,
+   "word": "Throw",
+   "p": 0.958
+  },
+  {
+   "start": 89.75,
+   "end": 90.35,
+   "word": "away",
+   "p": 0.991
+  },
+  {
+   "start": 90.35,
+   "end": 91.29,
+   "word": "everything",
+   "p": 0.995
+  },
+  {
+   "start": 91.29,
+   "end": 91.93,
+   "word": "he",
+   "p": 0.918
+  },
+  {
+   "start": 91.93,
+   "end": 92.49,
+   "word": "found",
+   "p": 0.974
+  },
+  {
+   "start": 92.49,
+   "end": 93.57,
+   "word": "So",
+   "p": 0.941
+  },
+  {
+   "start": 93.57,
+   "end": 93.77,
+   "word": "he",
+   "p": 0.926
+  },
+  {
+   "start": 93.77,
+   "end": 94.19,
+   "word": "never",
+   "p": 0.998
+  },
+  {
+   "start": 94.19,
+   "end": 94.61,
+   "word": "got",
+   "p": 0.998
+  },
+  {
+   "start": 94.61,
+   "end": 95.03,
+   "word": "lost",
+   "p": 0.998
+  },
+  {
+   "start": 95.03,
+   "end": 95.59,
+   "word": "inside",
+   "p": 0.993
+  },
+  {
+   "start": 95.59,
+   "end": 96.23,
+   "word": "you",
+   "p": 0.999
+  },
+  {
+   "start": 96.23,
+   "end": 96.79,
+   "word": "Again,",
+   "p": 0.802
+  },
+  {
+   "start": 96.79,
+   "end": 97.75,
+   "word": "again",
+   "p": 0.933
+  },
+  {
+   "start": 97.75,
+   "end": 98.47,
+   "word": "Forever",
+   "p": 0.937
+  },
+  {
+   "start": 98.47,
+   "end": 99.69,
+   "word": "again",
+   "p": 0.95
+  },
+  {
+   "start": 102.49,
+   "end": 103.69,
+   "word": "Forever",
+   "p": 0.981
+  },
+  {
+   "start": 103.69,
+   "end": 104.65,
+   "word": "again,",
+   "p": 0.999
+  },
+  {
+   "start": 105.17,
+   "end": 105.47,
+   "word": "never",
+   "p": 0.929
+  },
+  {
+   "start": 105.47,
+   "end": 106.35,
+   "word": "again",
+   "p": 1.0
+  },
+  {
+   "start": 116.47,
+   "end": 117.27,
+   "word": "The",
+   "p": 0.247
+  },
+  {
+   "start": 117.27,
+   "end": 117.63,
+   "word": "white",
+   "p": 0.822
+  },
+  {
+   "start": 117.63,
+   "end": 118.07,
+   "word": "coat",
+   "p": 0.841
+  },
+  {
+   "start": 118.07,
+   "end": 118.69,
+   "word": "said,",
+   "p": 0.875
+  },
+  {
+   "start": 119.63,
+   "end": 120.35,
+   "word": "we",
+   "p": 0.411
+  },
+  {
+   "start": 120.35,
+   "end": 120.65,
+   "word": "found",
+   "p": 0.959
+  },
+  {
+   "start": 120.65,
+   "end": 120.89,
+   "word": "a",
+   "p": 0.984
+  },
+  {
+   "start": 120.89,
+   "end": 121.23,
+   "word": "girl",
+   "p": 0.997
+  },
+  {
+   "start": 121.23,
+   "end": 121.53,
+   "word": "who",
+   "p": 0.975
+  },
+  {
+   "start": 121.53,
+   "end": 121.73,
+   "word": "is",
+   "p": 0.849
+  },
+  {
+   "start": 121.73,
+   "end": 122.19,
+   "word": "very",
+   "p": 0.997
+  },
+  {
+   "start": 122.19,
+   "end": 123.05,
+   "word": "lost",
+   "p": 0.997
+  },
+  {
+   "start": 123.05,
+   "end": 124.11,
+   "word": "Scribble,",
+   "p": 0.67
+  },
+  {
+   "start": 124.31,
+   "end": 124.91,
+   "word": "scribble,",
+   "p": 0.994
+  },
+  {
+   "start": 125.19,
+   "end": 125.33,
+   "word": "stab,",
+   "p": 0.984
+  },
+  {
+   "start": 125.67,
+   "end": 125.73,
+   "word": "stab",
+   "p": 0.999
+  },
+  {
+   "start": 125.73,
+   "end": 126.15,
+   "word": "the",
+   "p": 0.865
+  },
+  {
+   "start": 126.15,
+   "end": 126.91,
+   "word": "charts",
+   "p": 0.998
+  },
+  {
+   "start": 126.91,
+   "end": 127.67,
+   "word": "Keep",
+   "p": 0.847
+  },
+  {
+   "start": 127.67,
+   "end": 127.97,
+   "word": "her",
+   "p": 0.99
+  },
+  {
+   "start": 127.97,
+   "end": 128.25,
+   "word": "safe",
+   "p": 0.998
+  },
+  {
+   "start": 128.25,
+   "end": 128.63,
+   "word": "in",
+   "p": 0.991
+  },
+  {
+   "start": 128.63,
+   "end": 128.91,
+   "word": "a",
+   "p": 0.981
+  },
+  {
+   "start": 128.91,
+   "end": 129.21,
+   "word": "nice",
+   "p": 0.997
+  },
+  {
+   "start": 129.21,
+   "end": 129.59,
+   "word": "white",
+   "p": 0.909
+  },
+  {
+   "start": 129.59,
+   "end": 130.23,
+   "word": "room",
+   "p": 0.998
+  },
+  {
+   "start": 130.23,
+   "end": 131.09,
+   "word": "Scribble,",
+   "p": 0.982
+  },
+  {
+   "start": 131.41,
+   "end": 131.89,
+   "word": "scribble,",
+   "p": 0.998
+  },
+  {
+   "start": 132.23,
+   "end": 132.41,
+   "word": "stab,",
+   "p": 0.999
+  },
+  {
+   "start": 132.81,
+   "end": 132.81,
+   "word": "stab",
+   "p": 1.0
+  },
+  {
+   "start": 132.81,
+   "end": 133.23,
+   "word": "the",
+   "p": 0.995
+  },
+  {
+   "start": 133.23,
+   "end": 133.95,
+   "word": "charts",
+   "p": 0.999
+  },
+  {
+   "start": 133.95,
+   "end": 134.55,
+   "word": "We'll",
+   "p": 0.961
+  },
+  {
+   "start": 134.55,
+   "end": 134.89,
+   "word": "find",
+   "p": 0.998
+  },
+  {
+   "start": 134.89,
+   "end": 135.39,
+   "word": "out",
+   "p": 0.997
+  },
+  {
+   "start": 135.39,
+   "end": 135.73,
+   "word": "how",
+   "p": 0.995
+  },
+  {
+   "start": 135.73,
+   "end": 136.15,
+   "word": "lost",
+   "p": 0.994
+  },
+  {
+   "start": 136.15,
+   "end": 136.55,
+   "word": "she",
+   "p": 0.997
+  },
+  {
+   "start": 136.55,
+   "end": 137.05,
+   "word": "really",
+   "p": 0.997
+  },
+  {
+   "start": 137.05,
+   "end": 137.79,
+   "word": "is",
+   "p": 0.999
+  },
+  {
+   "start": 137.79,
+   "end": 138.29,
+   "word": "With",
+   "p": 0.918
+  },
+  {
+   "start": 138.29,
+   "end": 139.01,
+   "word": "time,",
+   "p": 0.986
+  },
+  {
+   "start": 139.59,
+   "end": 140.03,
+   "word": "with",
+   "p": 0.869
+  },
+  {
+   "start": 140.03,
+   "end": 140.97,
+   "word": "time,",
+   "p": 0.999
+  },
+  {
+   "start": 141.35,
+   "end": 141.77,
+   "word": "with",
+   "p": 0.956
+  },
+  {
+   "start": 141.77,
+   "end": 142.31,
+   "word": "time,",
+   "p": 1.0
+  },
+  {
+   "start": 142.47,
+   "end": 142.53,
+   "word": "we",
+   "p": 0.849
+  },
+  {
+   "start": 142.53,
+   "end": 142.85,
+   "word": "can",
+   "p": 0.995
+  },
+  {
+   "start": 142.85,
+   "end": 143.53,
+   "word": "find",
+   "p": 0.524
+  },
+  {
+   "start": 143.53,
+   "end": 144.63,
+   "word": "anything",
+   "p": 0.983
+  },
+  {
+   "start": 144.63,
+   "end": 145.25,
+   "word": "With",
+   "p": 0.663
+  },
+  {
+   "start": 145.25,
+   "end": 145.95,
+   "word": "time,",
+   "p": 0.997
+  },
+  {
+   "start": 146.63,
+   "end": 146.99,
+   "word": "with",
+   "p": 0.98
+  },
+  {
+   "start": 146.99,
+   "end": 147.87,
+   "word": "time,",
+   "p": 1.0
+  },
+  {
+   "start": 147.87,
+   "end": 148.57,
+   "word": "even",
+   "p": 0.923
+  },
+  {
+   "start": 148.57,
+   "end": 148.95,
+   "word": "a",
+   "p": 0.995
+  },
+  {
+   "start": 148.95,
+   "end": 149.25,
+   "word": "girl",
+   "p": 0.999
+  },
+  {
+   "start": 149.25,
+   "end": 149.53,
+   "word": "who",
+   "p": 0.983
+  },
+  {
+   "start": 149.53,
+   "end": 149.73,
+   "word": "is",
+   "p": 0.931
+  },
+  {
+   "start": 149.73,
+   "end": 150.23,
+   "word": "very",
+   "p": 0.996
+  },
+  {
+   "start": 150.23,
+   "end": 150.93,
+   "word": "hard",
+   "p": 0.998
+  },
+  {
+   "start": 150.93,
+   "end": 151.19,
+   "word": "to",
+   "p": 0.998
+  },
+  {
+   "start": 151.19,
+   "end": 151.81,
+   "word": "find",
+   "p": 0.999
+  },
+  {
+   "start": 151.81,
+   "end": 152.27,
+   "word": "It",
+   "p": 0.565
+  },
+  {
+   "start": 152.27,
+   "end": 152.57,
+   "word": "brought",
+   "p": 0.998
+  },
+  {
+   "start": 152.57,
+   "end": 152.85,
+   "word": "a",
+   "p": 0.997
+  },
+  {
+   "start": 152.85,
+   "end": 153.39,
+   "word": "man,",
+   "p": 0.999
+  },
+  {
+   "start": 154.45,
+   "end": 154.65,
+   "word": "a",
+   "p": 0.976
+  },
+  {
+   "start": 154.65,
+   "end": 155.29,
+   "word": "man",
+   "p": 1.0
+  },
+  {
+   "start": 155.29,
+   "end": 155.57,
+   "word": "who",
+   "p": 0.91
+  },
+  {
+   "start": 155.57,
+   "end": 155.81,
+   "word": "could",
+   "p": 0.958
+  },
+  {
+   "start": 155.81,
+   "end": 156.25,
+   "word": "find",
+   "p": 0.998
+  },
+  {
+   "start": 156.25,
+   "end": 157.07,
+   "word": "someone",
+   "p": 0.917
+  },
+  {
+   "start": 157.07,
+   "end": 157.81,
+   "word": "hard",
+   "p": 0.985
+  },
+  {
+   "start": 157.81,
+   "end": 158.15,
+   "word": "to",
+   "p": 0.999
+  },
+  {
+   "start": 158.15,
+   "end": 158.85,
+   "word": "find",
+   "p": 0.999
+  },
+  {
+   "start": 158.85,
+   "end": 159.29,
+   "word": "And",
+   "p": 0.897
+  },
+  {
+   "start": 159.29,
+   "end": 159.51,
+   "word": "in",
+   "p": 0.988
+  },
+  {
+   "start": 159.51,
+   "end": 159.81,
+   "word": "the",
+   "p": 0.999
+  },
+  {
+   "start": 159.81,
+   "end": 160.51,
+   "word": "end,",
+   "p": 1.0
+  },
+  {
+   "start": 160.93,
+   "end": 161.25,
+   "word": "he",
+   "p": 0.992
+  },
+  {
+   "start": 161.25,
+   "end": 162.03,
+   "word": "found,",
+   "p": 0.999
+  },
+  {
+   "start": 162.73,
+   "end": 162.93,
+   "word": "oh",
+   "p": 0.955
+  },
+  {
+   "start": 162.93,
+   "end": 163.19,
+   "word": "he",
+   "p": 0.807
+  },
+  {
+   "start": 163.19,
+   "end": 164.09,
+   "word": "found",
+   "p": 1.0
+  },
+  {
+   "start": 164.09,
+   "end": 165.01,
+   "word": "Something",
+   "p": 0.769
+  },
+  {
+   "start": 165.01,
+   "end": 165.75,
+   "word": "very",
+   "p": 0.978
+  },
+  {
+   "start": 165.75,
+   "end": 166.53,
+   "word": "hard",
+   "p": 0.988
+  },
+  {
+   "start": 166.53,
+   "end": 166.83,
+   "word": "to",
+   "p": 0.988
+  },
+  {
+   "start": 166.83,
+   "end": 167.47,
+   "word": "find",
+   "p": 0.995
+  },
+  {
+   "start": 167.47,
+   "end": 168.27,
+   "word": "in",
+   "p": 0.506
+  },
+  {
+   "start": 168.27,
+   "end": 168.99,
+   "word": "her",
+   "p": 0.979
+  },
+  {
+   "start": 170.65,
+   "end": 171.35,
+   "word": "And",
+   "p": 0.736
+  },
+  {
+   "start": 171.35,
+   "end": 171.75,
+   "word": "in",
+   "p": 0.986
+  },
+  {
+   "start": 171.75,
+   "end": 172.21,
+   "word": "the",
+   "p": 0.999
+  },
+  {
+   "start": 172.21,
+   "end": 172.91,
+   "word": "end",
+   "p": 0.999
+  },
+  {
+   "start": 172.91,
+   "end": 173.31,
+   "word": "she",
+   "p": 0.678
+  },
+  {
+   "start": 173.31,
+   "end": 174.39,
+   "word": "found,",
+   "p": 0.997
+  },
+  {
+   "start": 174.57,
+   "end": 174.99,
+   "word": "oh",
+   "p": 0.806
+  },
+  {
+   "start": 174.99,
+   "end": 175.31,
+   "word": "she",
+   "p": 0.9
+  },
+  {
+   "start": 175.31,
+   "end": 176.19,
+   "word": "found",
+   "p": 0.999
+  },
+  {
+   "start": 176.19,
+   "end": 176.77,
+   "word": "Her",
+   "p": 0.588
+  },
+  {
+   "start": 176.77,
+   "end": 177.71,
+   "word": "forever",
+   "p": 0.982
+  },
+  {
+   "start": 177.71,
+   "end": 178.91,
+   "word": "and",
+   "p": 0.8
+  },
+  {
+   "start": 178.91,
+   "end": 179.69,
+   "word": "ever",
+   "p": 0.999
+  },
+  {
+   "start": 179.69,
+   "end": 180.65,
+   "word": "in",
+   "p": 0.915
+  },
+  {
+   "start": 180.65,
+   "end": 181.55,
+   "word": "him",
+   "p": 0.878
+  },
+  {
+   "start": 183.43,
+   "end": 184.13,
+   "word": "I",
+   "p": 0.843
+  },
+  {
+   "start": 184.13,
+   "end": 184.33,
+   "word": "can",
+   "p": 0.996
+  },
+  {
+   "start": 184.33,
+   "end": 184.53,
+   "word": "help",
+   "p": 0.998
+  },
+  {
+   "start": 184.53,
+   "end": 184.73,
+   "word": "you",
+   "p": 0.999
+  },
+  {
+   "start": 184.73,
+   "end": 185.03,
+   "word": "find",
+   "p": 0.996
+  },
+  {
+   "start": 185.03,
+   "end": 185.73,
+   "word": "protecting",
+   "p": 0.968
+  },
+  {
+   "start": 187.09,
+   "end": 188.05,
+   "word": "Trusting",
+   "p": 0.661
+  },
+  {
+   "start": 188.05,
+   "end": 188.27,
+   "word": "and",
+   "p": 0.978
+  },
+  {
+   "start": 188.27,
+   "end": 188.85,
+   "word": "believing",
+   "p": 0.987
+  },
+  {
+   "start": 190.63,
+   "end": 191.33,
+   "word": "Even",
+   "p": 0.957
+  },
+  {
+   "start": 191.33,
+   "end": 191.59,
+   "word": "if",
+   "p": 0.997
+  },
+  {
+   "start": 191.59,
+   "end": 192.29,
+   "word": "they're",
+   "p": 0.946
+  },
+  {
+   "start": 194.09,
+   "end": 194.09,
+   "word": "It's",
+   "p": 0.472
+  },
+  {
+   "start": 194.09,
+   "end": 194.33,
+   "word": "very",
+   "p": 0.974
+  },
+  {
+   "start": 194.33,
+   "end": 194.69,
+   "word": "hard",
+   "p": 0.991
+  },
+  {
+   "start": 194.69,
+   "end": 194.99,
+   "word": "to",
+   "p": 0.998
+  },
+  {
+   "start": 194.99,
+   "end": 195.57,
+   "word": "find.",
+   "p": 0.999
+  },
+  {
+   "start": 224.09,
+   "end": 224.35,
+   "word": "This",
+   "p": 0.466
+  },
+  {
+   "start": 224.35,
+   "end": 224.87,
+   "word": "girl",
+   "p": 0.971
+  },
+  {
+   "start": 224.87,
+   "end": 226.27,
+   "word": "is",
+   "p": 0.652
+  },
+  {
+   "start": 226.27,
+   "end": 226.65,
+   "word": "too",
+   "p": 0.955
+  },
+  {
+   "start": 226.65,
+   "end": 227.65,
+   "word": "hard",
+   "p": 0.92
+  },
+  {
+   "start": 227.65,
+   "end": 228.39,
+   "word": "to",
+   "p": 0.903
+  },
+  {
+   "start": 228.39,
+   "end": 229.23,
+   "word": "find",
+   "p": 0.996
+  },
+  {
+   "start": 231.05,
+   "end": 232.17,
+   "word": "Scribble,",
+   "p": 0.687
+  },
+  {
+   "start": 232.17,
+   "end": 233.29,
+   "word": "scribble,",
+   "p": 0.99
+  },
+  {
+   "start": 233.65,
+   "end": 233.95,
+   "word": "stab,",
+   "p": 0.983
+  },
+  {
+   "start": 234.75,
+   "end": 234.75,
+   "word": "stab",
+   "p": 0.999
+  },
+  {
+   "start": 234.75,
+   "end": 235.21,
+   "word": "the",
+   "p": 0.98
+  },
+  {
+   "start": 235.21,
+   "end": 235.91,
+   "word": "charts",
+   "p": 0.984
+  },
+  {
+   "start": 237.09,
+   "end": 237.81,
+   "word": "With",
+   "p": 0.91
+  },
+  {
+   "start": 237.81,
+   "end": 238.49,
+   "word": "time,",
+   "p": 0.986
+  },
+  {
+   "start": 238.91,
+   "end": 239.53,
+   "word": "with",
+   "p": 0.97
+  },
+  {
+   "start": 239.53,
+   "end": 240.37,
+   "word": "time",
+   "p": 1.0
+  },
+  {
+   "start": 240.37,
+   "end": 240.85,
+   "word": "We",
+   "p": 0.6
+  },
+  {
+   "start": 240.85,
+   "end": 241.35,
+   "word": "found",
+   "p": 0.944
+  },
+  {
+   "start": 241.35,
+   "end": 241.93,
+   "word": "she",
+   "p": 0.982
+  },
+  {
+   "start": 241.93,
+   "end": 242.81,
+   "word": "isn't",
+   "p": 0.995
+  },
+  {
+   "start": 242.81,
+   "end": 243.29,
+   "word": "worth",
+   "p": 0.998
+  },
+  {
+   "start": 243.29,
+   "end": 243.83,
+   "word": "the",
+   "p": 0.995
+  },
+  {
+   "start": 243.83,
+   "end": 244.23,
+   "word": "time",
+   "p": 0.998
+  },
+  {
+   "start": 244.23,
+   "end": 244.67,
+   "word": "With",
+   "p": 0.871
+  },
+  {
+   "start": 244.67,
+   "end": 245.27,
+   "word": "time,",
+   "p": 0.999
+  },
+  {
+   "start": 245.89,
+   "end": 246.29,
+   "word": "with",
+   "p": 0.996
+  },
+  {
+   "start": 246.29,
+   "end": 247.19,
+   "word": "time",
+   "p": 1.0
+  },
+  {
+   "start": 247.19,
+   "end": 248.05,
+   "word": "This",
+   "p": 0.988
+  },
+  {
+   "start": 248.05,
+   "end": 248.49,
+   "word": "girl",
+   "p": 0.999
+  },
+  {
+   "start": 248.49,
+   "end": 248.79,
+   "word": "who",
+   "p": 0.868
+  },
+  {
+   "start": 248.79,
+   "end": 248.97,
+   "word": "is",
+   "p": 0.689
+  },
+  {
+   "start": 248.97,
+   "end": 249.47,
+   "word": "very",
+   "p": 0.996
+  },
+  {
+   "start": 249.47,
+   "end": 250.09,
+   "word": "hard",
+   "p": 0.999
+  },
+  {
+   "start": 250.09,
+   "end": 250.39,
+   "word": "to",
+   "p": 0.999
+  },
+  {
+   "start": 250.39,
+   "end": 251.25,
+   "word": "find",
+   "p": 1.0
+  },
+  {
+   "start": 252.73,
+   "end": 253.59,
+   "word": "And",
+   "p": 0.638
+  },
+  {
+   "start": 253.59,
+   "end": 253.79,
+   "word": "with",
+   "p": 0.821
+  },
+  {
+   "start": 253.79,
+   "end": 254.35,
+   "word": "time,",
+   "p": 0.994
+  },
+  {
+   "start": 254.81,
+   "end": 255.29,
+   "word": "and",
+   "p": 0.849
+  },
+  {
+   "start": 255.29,
+   "end": 255.57,
+   "word": "with",
+   "p": 0.999
+  },
+  {
+   "start": 255.57,
+   "end": 256.03,
+   "word": "time",
+   "p": 0.999
+  },
+  {
+   "start": 256.03,
+   "end": 257.39,
+   "word": "The",
+   "p": 0.647
+  },
+  {
+   "start": 257.39,
+   "end": 257.69,
+   "word": "white",
+   "p": 0.854
+  },
+  {
+   "start": 257.69,
+   "end": 258.11,
+   "word": "coats",
+   "p": 0.945
+  },
+  {
+   "start": 258.11,
+   "end": 258.45,
+   "word": "brought",
+   "p": 0.983
+  },
+  {
+   "start": 258.45,
+   "end": 258.69,
+   "word": "the",
+   "p": 0.98
+  },
+  {
+   "start": 258.69,
+   "end": 258.91,
+   "word": "man",
+   "p": 0.992
+  },
+  {
+   "start": 258.91,
+   "end": 259.19,
+   "word": "a",
+   "p": 0.994
+  },
+  {
+   "start": 259.19,
+   "end": 259.47,
+   "word": "gun",
+   "p": 0.996
+  },
+  {
+   "start": 259.47,
+   "end": 259.79,
+   "word": "and",
+   "p": 0.911
+  },
+  {
+   "start": 259.79,
+   "end": 260.03,
+   "word": "a",
+   "p": 0.971
+  },
+  {
+   "start": 260.03,
+   "end": 260.29,
+   "word": "bullet",
+   "p": 0.999
+  },
+  {
+   "start": 260.29,
+   "end": 260.67,
+   "word": "And",
+   "p": 0.311
+  },
+  {
+   "start": 260.67,
+   "end": 261.03,
+   "word": "said,",
+   "p": 0.994
+  },
+  {
+   "start": 261.71,
+   "end": 261.89,
+   "word": "go",
+   "p": 0.336
+  },
+  {
+   "start": 261.89,
+   "end": 262.19,
+   "word": "and",
+   "p": 0.994
+  },
+  {
+   "start": 262.19,
+   "end": 262.85,
+   "word": "find",
+   "p": 0.999
+  },
+  {
+   "start": 262.85,
+   "end": 263.85,
+   "word": "that",
+   "p": 0.89
+  },
+  {
+   "start": 263.85,
+   "end": 264.37,
+   "word": "girl",
+   "p": 0.998
+  },
+  {
+   "start": 264.37,
+   "end": 265.49,
+   "word": "And",
+   "p": 0.971
+  },
+  {
+   "start": 265.49,
+   "end": 265.71,
+   "word": "he",
+   "p": 0.99
+  },
+  {
+   "start": 265.71,
+   "end": 266.05,
+   "word": "did,",
+   "p": 0.999
+  },
+  {
+   "start": 266.73,
+   "end": 267.31,
+   "word": "he",
+   "p": 0.994
+  },
+  {
+   "start": 267.31,
+   "end": 267.79,
+   "word": "did",
+   "p": 0.999
+  },
+  {
+   "start": 267.79,
+   "end": 268.99,
+   "word": "He",
+   "p": 0.59
+  },
+  {
+   "start": 268.99,
+   "end": 269.45,
+   "word": "found",
+   "p": 0.999
+  },
+  {
+   "start": 269.45,
+   "end": 270.27,
+   "word": "her,",
+   "p": 0.999
+  },
+  {
+   "start": 270.31,
+   "end": 271.53,
+   "word": "he",
+   "p": 0.986
+  },
+  {
+   "start": 271.53,
+   "end": 271.97,
+   "word": "found",
+   "p": 1.0
+  },
+  {
+   "start": 271.97,
+   "end": 272.61,
+   "word": "her",
+   "p": 1.0
+  },
+  {
+   "start": 273.81,
+   "end": 274.67,
+   "word": "I",
+   "p": 0.952
+  },
+  {
+   "start": 274.67,
+   "end": 274.93,
+   "word": "won't",
+   "p": 0.99
+  },
+  {
+   "start": 274.93,
+   "end": 275.19,
+   "word": "lose",
+   "p": 0.985
+  },
+  {
+   "start": 275.19,
+   "end": 275.99,
+   "word": "you",
+   "p": 0.999
+  },
+  {
+   "start": 275.99,
+   "end": 277.49,
+   "word": "Together,",
+   "p": 0.421
+  },
+  {
+   "start": 278.37,
+   "end": 278.63,
+   "word": "we'll",
+   "p": 0.973
+  },
+  {
+   "start": 278.63,
+   "end": 278.85,
+   "word": "find",
+   "p": 0.999
+  },
+  {
+   "start": 278.85,
+   "end": 279.05,
+   "word": "you",
+   "p": 0.998
+  },
+  {
+   "start": 279.05,
+   "end": 279.21,
+   "word": "the",
+   "p": 0.973
+  },
+  {
+   "start": 279.21,
+   "end": 279.69,
+   "word": "time",
+   "p": 0.999
+  },
+  {
+   "start": 283.79,
+   "end": 284.93,
+   "word": "And",
+   "p": 0.769
+  },
+  {
+   "start": 284.93,
+   "end": 285.25,
+   "word": "they",
+   "p": 0.988
+  },
+  {
+   "start": 285.25,
+   "end": 286.31,
+   "word": "ran,",
+   "p": 0.979
+  },
+  {
+   "start": 286.37,
+   "end": 286.97,
+   "word": "ran,",
+   "p": 0.946
+  },
+  {
+   "start": 287.29,
+   "end": 287.73,
+   "word": "ran,",
+   "p": 0.997
+  },
+  {
+   "start": 288.57,
+   "end": 288.57,
+   "word": "ran,",
+   "p": 0.997
+  },
+  {
+   "start": 289.15,
+   "end": 289.15,
+   "word": "forever",
+   "p": 0.809
+  },
+  {
+   "start": 289.15,
+   "end": 290.49,
+   "word": "and",
+   "p": 0.774
+  },
+  {
+   "start": 290.49,
+   "end": 291.25,
+   "word": "ever",
+   "p": 1.0
+  },
+  {
+   "start": 291.25,
+   "end": 292.61,
+   "word": "Through",
+   "p": 0.748
+  },
+  {
+   "start": 292.61,
+   "end": 293.13,
+   "word": "every",
+   "p": 0.997
+  },
+  {
+   "start": 293.13,
+   "end": 293.45,
+   "word": "tunnel,",
+   "p": 0.998
+  },
+  {
+   "start": 293.87,
+   "end": 294.29,
+   "word": "every",
+   "p": 0.992
+  },
+  {
+   "start": 294.29,
+   "end": 295.11,
+   "word": "motel",
+   "p": 0.992
+  },
+  {
+   "start": 295.11,
+   "end": 295.73,
+   "word": "Lost",
+   "p": 0.911
+  },
+  {
+   "start": 295.73,
+   "end": 296.35,
+   "word": "in",
+   "p": 0.998
+  },
+  {
+   "start": 296.35,
+   "end": 296.99,
+   "word": "diners,",
+   "p": 0.99
+  },
+  {
+   "start": 297.23,
+   "end": 297.45,
+   "word": "lost",
+   "p": 0.969
+  },
+  {
+   "start": 297.45,
+   "end": 297.99,
+   "word": "in",
+   "p": 0.999
+  },
+  {
+   "start": 297.99,
+   "end": 298.65,
+   "word": "alleys",
+   "p": 0.996
+  },
+  {
+   "start": 298.65,
+   "end": 299.09,
+   "word": "Lost",
+   "p": 0.906
+  },
+  {
+   "start": 299.09,
+   "end": 299.57,
+   "word": "in",
+   "p": 0.999
+  },
+  {
+   "start": 299.57,
+   "end": 299.95,
+   "word": "each",
+   "p": 1.0
+  },
+  {
+   "start": 299.95,
+   "end": 300.51,
+   "word": "other",
+   "p": 0.981
+  },
+  {
+   "start": 300.51,
+   "end": 301.21,
+   "word": "and",
+   "p": 0.485
+  },
+  {
+   "start": 301.21,
+   "end": 301.87,
+   "word": "found",
+   "p": 0.997
+  },
+  {
+   "start": 301.87,
+   "end": 302.91,
+   "word": "Found,",
+   "p": 0.476
+  },
+  {
+   "start": 303.81,
+   "end": 304.25,
+   "word": "lost",
+   "p": 0.983
+  },
+  {
+   "start": 304.25,
+   "end": 304.77,
+   "word": "and",
+   "p": 0.89
+  },
+  {
+   "start": 304.77,
+   "end": 305.39,
+   "word": "found,",
+   "p": 0.998
+  },
+  {
+   "start": 305.75,
+   "end": 305.97,
+   "word": "found",
+   "p": 0.983
+  },
+  {
+   "start": 305.97,
+   "end": 306.47,
+   "word": "and",
+   "p": 0.997
+  },
+  {
+   "start": 306.47,
+   "end": 307.19,
+   "word": "lost",
+   "p": 0.999
+  },
+  {
+   "start": 307.87,
+   "end": 308.71,
+   "word": "Forever",
+   "p": 0.508
+  },
+  {
+   "start": 308.71,
+   "end": 309.95,
+   "word": "and",
+   "p": 0.737
+  },
+  {
+   "start": 309.95,
+   "end": 310.73,
+   "word": "ever",
+   "p": 0.999
+  },
+  {
+   "start": 310.73,
+   "end": 311.63,
+   "word": "and",
+   "p": 0.841
+  },
+  {
+   "start": 311.63,
+   "end": 313.11,
+   "word": "ever",
+   "p": 0.999
+  },
+  {
+   "start": 319.65,
+   "end": 320.27,
+   "word": "But",
+   "p": 0.872
+  },
+  {
+   "start": 320.27,
+   "end": 321.51,
+   "word": "forever",
+   "p": 0.504
+  },
+  {
+   "start": 321.51,
+   "end": 322.01,
+   "word": "always",
+   "p": 0.998
+  },
+  {
+   "start": 322.01,
+   "end": 322.43,
+   "word": "comes",
+   "p": 0.994
+  },
+  {
+   "start": 322.43,
+   "end": 323.05,
+   "word": "to",
+   "p": 0.999
+  },
+  {
+   "start": 323.05,
+   "end": 323.73,
+   "word": "an",
+   "p": 0.991
+  },
+  {
+   "start": 323.73,
+   "end": 324.27,
+   "word": "end",
+   "p": 1.0
+  },
+  {
+   "start": 324.39,
+   "end": 325.01,
+   "word": "When",
+   "p": 0.79
+  },
+  {
+   "start": 325.01,
+   "end": 325.33,
+   "word": "the",
+   "p": 0.99
+  },
+  {
+   "start": 325.33,
+   "end": 325.63,
+   "word": "coats",
+   "p": 0.869
+  },
+  {
+   "start": 325.63,
+   "end": 326.25,
+   "word": "come",
+   "p": 0.999
+  },
+  {
+   "start": 326.25,
+   "end": 326.59,
+   "word": "round",
+   "p": 0.655
+  },
+  {
+   "start": 326.59,
+   "end": 327.03,
+   "word": "the",
+   "p": 0.97
+  },
+  {
+   "start": 327.03,
+   "end": 327.41,
+   "word": "bend",
+   "p": 0.993
+  },
+  {
+   "start": 332.45,
+   "end": 333.09,
+   "word": "And",
+   "p": 0.61
+  },
+  {
+   "start": 333.09,
+   "end": 333.41,
+   "word": "the",
+   "p": 0.966
+  },
+  {
+   "start": 333.41,
+   "end": 333.55,
+   "word": "code",
+   "p": 0.724
+  },
+  {
+   "start": 333.55,
+   "end": 334.17,
+   "word": "says,",
+   "p": 0.676
+  },
+  {
+   "start": 334.45,
+   "end": 334.77,
+   "word": "hmm,",
+   "p": 0.438
+  },
+  {
+   "start": 335.07,
+   "end": 335.31,
+   "word": "this",
+   "p": 0.981
+  },
+  {
+   "start": 335.31,
+   "end": 335.89,
+   "word": "man",
+   "p": 0.989
+  },
+  {
+   "start": 335.89,
+   "end": 336.07,
+   "word": "is",
+   "p": 0.254
+  },
+  {
+   "start": 336.07,
+   "end": 336.37,
+   "word": "too",
+   "p": 0.93
+  },
+  {
+   "start": 336.37,
+   "end": 337.15,
+   "word": "lost.",
+   "p": 0.91
+  },
+  {
+   "start": 337.17,
+   "end": 337.81,
+   "word": "Scribble,",
+   "p": 0.847
+  },
+  {
+   "start": 338.13,
+   "end": 338.65,
+   "word": "scribble,",
+   "p": 0.998
+  },
+  {
+   "start": 338.91,
+   "end": 339.05,
+   "word": "stab,",
+   "p": 0.96
+  },
+  {
+   "start": 339.39,
+   "end": 339.61,
+   "word": "stab",
+   "p": 0.999
+  },
+  {
+   "start": 339.61,
+   "end": 339.93,
+   "word": "the",
+   "p": 0.743
+  },
+  {
+   "start": 339.93,
+   "end": 340.07,
+   "word": "child.",
+   "p": 0.993
+  },
+  {
+   "start": 340.13,
+   "end": 340.33,
+   "word": "We'll",
+   "p": 0.977
+  },
+  {
+   "start": 340.33,
+   "end": 340.53,
+   "word": "have",
+   "p": 0.999
+  },
+  {
+   "start": 340.53,
+   "end": 340.73,
+   "word": "to",
+   "p": 0.996
+  },
+  {
+   "start": 340.73,
+   "end": 340.99,
+   "word": "cut",
+   "p": 0.998
+  },
+  {
+   "start": 340.99,
+   "end": 341.39,
+   "word": "out",
+   "p": 0.991
+  },
+  {
+   "start": 341.39,
+   "end": 341.93,
+   "word": "something",
+   "p": 0.961
+  },
+  {
+   "start": 341.93,
+   "end": 342.63,
+   "word": "hard",
+   "p": 0.996
+  },
+  {
+   "start": 342.63,
+   "end": 343.13,
+   "word": "to",
+   "p": 0.998
+  },
+  {
+   "start": 343.13,
+   "end": 343.63,
+   "word": "find.",
+   "p": 0.999
+  },
+  {
+   "start": 343.99,
+   "end": 344.63,
+   "word": "Scribble,",
+   "p": 0.994
+  },
+  {
+   "start": 344.95,
+   "end": 345.35,
+   "word": "scribble,",
+   "p": 0.999
+  },
+  {
+   "start": 345.69,
+   "end": 345.85,
+   "word": "stab,",
+   "p": 0.999
+  },
+  {
+   "start": 346.17,
+   "end": 346.29,
+   "word": "stab",
+   "p": 0.999
+  },
+  {
+   "start": 346.29,
+   "end": 346.69,
+   "word": "the",
+   "p": 0.961
+  },
+  {
+   "start": 346.69,
+   "end": 347.07,
+   "word": "child.",
+   "p": 1.0
+  },
+  {
+   "start": 347.13,
+   "end": 347.35,
+   "word": "With",
+   "p": 0.979
+  },
+  {
+   "start": 347.35,
+   "end": 347.69,
+   "word": "time,",
+   "p": 0.996
+  },
+  {
+   "start": 347.89,
+   "end": 348.15,
+   "word": "with",
+   "p": 0.415
+  },
+  {
+   "start": 348.15,
+   "end": 348.53,
+   "word": "time,",
+   "p": 1.0
+  },
+  {
+   "start": 348.57,
+   "end": 348.73,
+   "word": "we'll",
+   "p": 0.99
+  },
+  {
+   "start": 348.73,
+   "end": 348.97,
+   "word": "see",
+   "p": 0.998
+  },
+  {
+   "start": 348.97,
+   "end": 349.21,
+   "word": "how",
+   "p": 0.997
+  },
+  {
+   "start": 349.21,
+   "end": 349.51,
+   "word": "lost",
+   "p": 0.991
+  },
+  {
+   "start": 349.51,
+   "end": 349.93,
+   "word": "this",
+   "p": 0.998
+  },
+  {
+   "start": 349.93,
+   "end": 350.35,
+   "word": "girl",
+   "p": 0.997
+  },
+  {
+   "start": 350.35,
+   "end": 350.71,
+   "word": "can",
+   "p": 0.996
+  },
+  {
+   "start": 350.71,
+   "end": 351.27,
+   "word": "be.",
+   "p": 1.0
+  },
+  {
+   "start": 351.93,
+   "end": 352.35,
+   "word": "With",
+   "p": 0.994
+  },
+  {
+   "start": 352.35,
+   "end": 352.81,
+   "word": "time,",
+   "p": 1.0
+  },
+  {
+   "start": 353.07,
+   "end": 353.23,
+   "word": "with",
+   "p": 0.997
+  },
+  {
+   "start": 353.23,
+   "end": 353.55,
+   "word": "time,",
+   "p": 1.0
+  },
+  {
+   "start": 353.65,
+   "end": 354.07,
+   "word": "we'll",
+   "p": 0.997
+  },
+  {
+   "start": 354.07,
+   "end": 354.43,
+   "word": "make",
+   "p": 0.998
+  },
+  {
+   "start": 354.43,
+   "end": 354.83,
+   "word": "her",
+   "p": 0.994
+  },
+  {
+   "start": 354.83,
+   "end": 355.15,
+   "word": "a",
+   "p": 0.996
+  },
+  {
+   "start": 355.15,
+   "end": 355.51,
+   "word": "girl",
+   "p": 0.999
+  },
+  {
+   "start": 355.51,
+   "end": 355.75,
+   "word": "who",
+   "p": 0.985
+  },
+  {
+   "start": 355.75,
+   "end": 355.93,
+   "word": "can",
+   "p": 0.997
+  },
+  {
+   "start": 355.93,
+   "end": 356.39,
+   "word": "find",
+   "p": 0.997
+  },
+  {
+   "start": 356.39,
+   "end": 357.73,
+   "word": "anything.",
+   "p": 0.966
+  },
+  {
+   "start": 357.73,
+   "end": 359.15,
+   "word": "Except",
+   "p": 0.448
+  },
+  {
+   "start": 359.15,
+   "end": 359.91,
+   "word": "something",
+   "p": 0.823
+  },
+  {
+   "start": 359.91,
+   "end": 360.41,
+   "word": "hard",
+   "p": 0.736
+  },
+  {
+   "start": 360.41,
+   "end": 360.79,
+   "word": "to",
+   "p": 0.854
+  },
+  {
+   "start": 360.79,
+   "end": 361.49,
+   "word": "find",
+   "p": 0.988
+  },
+  {
+   "start": 363.99,
+   "end": 364.81,
+   "word": "They",
+   "p": 0.554
+  },
+  {
+   "start": 364.81,
+   "end": 365.11,
+   "word": "cut",
+   "p": 0.984
+  },
+  {
+   "start": 365.11,
+   "end": 365.61,
+   "word": "away",
+   "p": 0.984
+  },
+  {
+   "start": 365.61,
+   "end": 366.21,
+   "word": "his",
+   "p": 0.944
+  },
+  {
+   "start": 366.21,
+   "end": 367.35,
+   "word": "protecting",
+   "p": 0.97
+  },
+  {
+   "start": 367.35,
+   "end": 368.15,
+   "word": "They",
+   "p": 0.855
+  },
+  {
+   "start": 368.15,
+   "end": 368.49,
+   "word": "cut",
+   "p": 0.997
+  },
+  {
+   "start": 368.49,
+   "end": 369.03,
+   "word": "away",
+   "p": 0.997
+  },
+  {
+   "start": 369.03,
+   "end": 369.99,
+   "word": "his",
+   "p": 0.97
+  },
+  {
+   "start": 369.99,
+   "end": 370.75,
+   "word": "trusting",
+   "p": 0.972
+  },
+  {
+   "start": 370.75,
+   "end": 371.55,
+   "word": "They",
+   "p": 0.968
+  },
+  {
+   "start": 371.55,
+   "end": 371.91,
+   "word": "cut",
+   "p": 0.996
+  },
+  {
+   "start": 371.91,
+   "end": 372.33,
+   "word": "away",
+   "p": 0.997
+  },
+  {
+   "start": 372.33,
+   "end": 372.99,
+   "word": "his",
+   "p": 0.995
+  },
+  {
+   "start": 372.99,
+   "end": 374.05,
+   "word": "believing",
+   "p": 1.0
+  },
+  {
+   "start": 374.05,
+   "end": 374.51,
+   "word": "But",
+   "p": 0.927
+  },
+  {
+   "start": 374.51,
+   "end": 374.77,
+   "word": "left",
+   "p": 0.994
+  },
+  {
+   "start": 374.77,
+   "end": 375.01,
+   "word": "him",
+   "p": 0.961
+  },
+  {
+   "start": 375.01,
+   "end": 375.23,
+   "word": "the",
+   "p": 0.723
+  },
+  {
+   "start": 375.23,
+   "end": 375.65,
+   "word": "gun",
+   "p": 0.998
+  },
+  {
+   "start": 375.65,
+   "end": 376.71,
+   "word": "and",
+   "p": 0.803
+  },
+  {
+   "start": 376.71,
+   "end": 376.91,
+   "word": "the",
+   "p": 0.963
+  },
+  {
+   "start": 376.91,
+   "end": 377.31,
+   "word": "bullet",
+   "p": 0.996
+  },
+  {
+   "start": 377.31,
+   "end": 378.31,
+   "word": "They",
+   "p": 0.965
+  },
+  {
+   "start": 378.31,
+   "end": 378.55,
+   "word": "took",
+   "p": 0.998
+  },
+  {
+   "start": 378.55,
+   "end": 378.81,
+   "word": "her",
+   "p": 0.992
+  },
+  {
+   "start": 378.81,
+   "end": 379.11,
+   "word": "arms",
+   "p": 0.995
+  },
+  {
+   "start": 379.11,
+   "end": 379.45,
+   "word": "to",
+   "p": 0.996
+  },
+  {
+   "start": 379.45,
+   "end": 379.67,
+   "word": "hug",
+   "p": 0.998
+  },
+  {
+   "start": 379.67,
+   "end": 380.07,
+   "word": "They",
+   "p": 0.836
+  },
+  {
+   "start": 380.07,
+   "end": 380.27,
+   "word": "took",
+   "p": 0.998
+  },
+  {
+   "start": 380.27,
+   "end": 380.49,
+   "word": "her",
+   "p": 0.997
+  },
+  {
+   "start": 380.49,
+   "end": 380.77,
+   "word": "legs",
+   "p": 0.998
+  },
+  {
+   "start": 380.77,
+   "end": 381.11,
+   "word": "to",
+   "p": 0.998
+  },
+  {
+   "start": 381.11,
+   "end": 381.41,
+   "word": "run",
+   "p": 1.0
+  },
+  {
+   "start": 381.41,
+   "end": 381.79,
+   "word": "Her",
+   "p": 0.826
+  },
+  {
+   "start": 381.79,
+   "end": 382.35,
+   "word": "eyes",
+   "p": 0.999
+  },
+  {
+   "start": 382.35,
+   "end": 382.77,
+   "word": "to",
+   "p": 0.993
+  },
+  {
+   "start": 382.77,
+   "end": 383.11,
+   "word": "see",
+   "p": 0.996
+  },
+  {
+   "start": 383.11,
+   "end": 383.47,
+   "word": "and",
+   "p": 0.62
+  },
+  {
+   "start": 383.47,
+   "end": 384.01,
+   "word": "ears",
+   "p": 0.701
+  },
+  {
+   "start": 384.01,
+   "end": 384.53,
+   "word": "to",
+   "p": 0.998
+  },
+  {
+   "start": 384.53,
+   "end": 384.91,
+   "word": "hear",
+   "p": 0.996
+  },
+  {
+   "start": 384.91,
+   "end": 385.53,
+   "word": "But",
+   "p": 0.635
+  },
+  {
+   "start": 385.53,
+   "end": 385.79,
+   "word": "left",
+   "p": 0.777
+  },
+  {
+   "start": 385.79,
+   "end": 385.97,
+   "word": "her",
+   "p": 0.946
+  },
+  {
+   "start": 385.97,
+   "end": 386.25,
+   "word": "the",
+   "p": 0.931
+  },
+  {
+   "start": 386.25,
+   "end": 386.71,
+   "word": "years",
+   "p": 0.99
+  },
+  {
+   "start": 386.71,
+   "end": 387.01,
+   "word": "and",
+   "p": 0.625
+  },
+  {
+   "start": 387.01,
+   "end": 387.57,
+   "word": "years",
+   "p": 0.995
+  },
+  {
+   "start": 387.57,
+   "end": 387.89,
+   "word": "and",
+   "p": 0.93
+  },
+  {
+   "start": 387.89,
+   "end": 388.43,
+   "word": "years",
+   "p": 0.998
+  },
+  {
+   "start": 388.43,
+   "end": 389.03,
+   "word": "alone",
+   "p": 0.771
+  },
+  {
+   "start": 389.03,
+   "end": 389.53,
+   "word": "with",
+   "p": 0.748
+  },
+  {
+   "start": 389.53,
+   "end": 389.91,
+   "word": "time,",
+   "p": 0.994
+  },
+  {
+   "start": 390.07,
+   "end": 390.37,
+   "word": "with",
+   "p": 0.97
+  },
+  {
+   "start": 390.37,
+   "end": 390.89,
+   "word": "time",
+   "p": 0.999
+  },
+  {
+   "start": 390.89,
+   "end": 391.49,
+   "word": "And",
+   "p": 0.718
+  },
+  {
+   "start": 391.49,
+   "end": 391.83,
+   "word": "all",
+   "p": 0.995
+  },
+  {
+   "start": 391.83,
+   "end": 392.13,
+   "word": "her",
+   "p": 0.958
+  },
+  {
+   "start": 392.13,
+   "end": 392.85,
+   "word": "agains",
+   "p": 0.841
+  },
+  {
+   "start": 392.85,
+   "end": 392.97,
+   "word": "and",
+   "p": 0.966
+  },
+  {
+   "start": 392.97,
+   "end": 393.67,
+   "word": "agains",
+   "p": 0.991
+  },
+  {
+   "start": 393.67,
+   "end": 393.83,
+   "word": "and",
+   "p": 0.99
+  },
+  {
+   "start": 393.83,
+   "end": 394.49,
+   "word": "agains",
+   "p": 0.989
+  },
+  {
+   "start": 394.49,
+   "end": 394.65,
+   "word": "of",
+   "p": 0.96
+  },
+  {
+   "start": 394.65,
+   "end": 395.27,
+   "word": "him",
+   "p": 0.995
+  },
+  {
+   "start": 395.27,
+   "end": 396.23,
+   "word": "and",
+   "p": 0.605
+  },
+  {
+   "start": 396.23,
+   "end": 396.63,
+   "word": "her",
+   "p": 0.987
+  },
+  {
+   "start": 396.63,
+   "end": 397.19,
+   "word": "Stay",
+   "p": 0.902
+  },
+  {
+   "start": 397.19,
+   "end": 397.71,
+   "word": "lost",
+   "p": 0.895
+  },
+  {
+   "start": 397.71,
+   "end": 398.13,
+   "word": "now",
+   "p": 0.929
+  },
+  {
+   "start": 398.13,
+   "end": 398.81,
+   "word": "girl",
+   "p": 0.737
+  },
+  {
+   "start": 398.81,
+   "end": 399.47,
+   "word": "Forever,",
+   "p": 0.622
+  },
+  {
+   "start": 400.11,
+   "end": 401.25,
+   "word": "forever",
+   "p": 0.986
+  },
+  {
+   "start": 401.71,
+   "end": 402.23,
+   "word": "Throw",
+   "p": 0.807
+  },
+  {
+   "start": 402.23,
+   "end": 402.85,
+   "word": "away",
+   "p": 0.99
+  },
+  {
+   "start": 402.85,
+   "end": 404.01,
+   "word": "everything",
+   "p": 0.988
+  },
+  {
+   "start": 404.01,
+   "end": 404.49,
+   "word": "he",
+   "p": 0.988
+  },
+  {
+   "start": 404.49,
+   "end": 404.77,
+   "word": "could",
+   "p": 0.998
+  },
+  {
+   "start": 404.77,
+   "end": 405.61,
+   "word": "find",
+   "p": 0.999
+  },
+  {
+   "start": 405.61,
+   "end": 406.21,
+   "word": "So",
+   "p": 0.956
+  },
+  {
+   "start": 406.21,
+   "end": 406.41,
+   "word": "he",
+   "p": 0.956
+  },
+  {
+   "start": 406.41,
+   "end": 406.89,
+   "word": "never",
+   "p": 0.998
+  },
+  {
+   "start": 406.89,
+   "end": 407.41,
+   "word": "got",
+   "p": 0.998
+  },
+  {
+   "start": 407.41,
+   "end": 407.83,
+   "word": "lost",
+   "p": 0.997
+  },
+  {
+   "start": 407.83,
+   "end": 408.37,
+   "word": "inside",
+   "p": 0.994
+  },
+  {
+   "start": 408.37,
+   "end": 408.93,
+   "word": "you",
+   "p": 0.996
+  },
+  {
+   "start": 408.93,
+   "end": 409.45,
+   "word": "Again,",
+   "p": 0.661
+  },
+  {
+   "start": 409.93,
+   "end": 410.49,
+   "word": "again,",
+   "p": 0.987
+  },
+  {
+   "start": 410.49,
+   "end": 411.19,
+   "word": "forever",
+   "p": 0.98
+  },
+  {
+   "start": 411.19,
+   "end": 412.11,
+   "word": "again",
+   "p": 0.928
+  },
+  {
+   "start": 413.81,
+   "end": 414.69,
+   "word": "Forever",
+   "p": 0.019
+  },
+  {
+   "start": 414.69,
+   "end": 415.57,
+   "word": "again,",
+   "p": 0.7
+  },
+  {
+   "start": 415.81,
+   "end": 416.23,
+   "word": "never",
+   "p": 0.925
+  },
+  {
+   "start": 416.23,
+   "end": 417.57,
+   "word": "again",
+   "p": 0.999
+  },
+  {
+   "start": 417.57,
+   "end": 419.07,
+   "word": "Through",
+   "p": 0.58
+  },
+  {
+   "start": 419.07,
+   "end": 419.67,
+   "word": "eyes",
+   "p": 0.97
+  },
+  {
+   "start": 419.67,
+   "end": 419.99,
+   "word": "that",
+   "p": 0.984
+  },
+  {
+   "start": 419.99,
+   "end": 420.15,
+   "word": "were",
+   "p": 0.974
+  },
+  {
+   "start": 420.15,
+   "end": 420.59,
+   "word": "hers",
+   "p": 0.996
+  },
+  {
+   "start": 420.59,
+   "end": 420.89,
+   "word": "and",
+   "p": 0.985
+  },
+  {
+   "start": 420.89,
+   "end": 421.33,
+   "word": "hers",
+   "p": 0.353
+  },
+  {
+   "start": 421.33,
+   "end": 422.53,
+   "word": "Through",
+   "p": 0.898
+  },
+  {
+   "start": 422.53,
+   "end": 423.09,
+   "word": "years",
+   "p": 0.982
+  },
+  {
+   "start": 423.09,
+   "end": 423.41,
+   "word": "that",
+   "p": 0.993
+  },
+  {
+   "start": 423.41,
+   "end": 423.79,
+   "word": "weren't",
+   "p": 0.995
+  },
+  {
+   "start": 423.79,
+   "end": 424.19,
+   "word": "hers",
+   "p": 0.996
+  },
+  {
+   "start": 424.19,
+   "end": 424.49,
+   "word": "and",
+   "p": 0.98
+  },
+  {
+   "start": 424.49,
+   "end": 425.07,
+   "word": "were",
+   "p": 0.862
+  },
+  {
+   "start": 425.07,
+   "end": 425.77,
+   "word": "Left",
+   "p": 0.989
+  },
+  {
+   "start": 425.77,
+   "end": 426.21,
+   "word": "in",
+   "p": 0.993
+  },
+  {
+   "start": 426.21,
+   "end": 426.47,
+   "word": "rooms",
+   "p": 0.798
+  },
+  {
+   "start": 426.47,
+   "end": 426.91,
+   "word": "she",
+   "p": 0.985
+  },
+  {
+   "start": 426.91,
+   "end": 427.57,
+   "word": "couldn't",
+   "p": 0.998
+  },
+  {
+   "start": 427.57,
+   "end": 428.27,
+   "word": "leave",
+   "p": 0.994
+  },
+  {
+   "start": 428.27,
+   "end": 429.27,
+   "word": "Learning",
+   "p": 0.971
+  },
+  {
+   "start": 429.27,
+   "end": 429.57,
+   "word": "the",
+   "p": 0.898
+  },
+  {
+   "start": 429.57,
+   "end": 429.85,
+   "word": "self",
+   "p": 0.984
+  },
+  {
+   "start": 429.85,
+   "end": 430.29,
+   "word": "she",
+   "p": 0.957
+  },
+  {
+   "start": 430.29,
+   "end": 431.01,
+   "word": "couldn't",
+   "p": 0.999
+  },
+  {
+   "start": 431.01,
+   "end": 431.41,
+   "word": "learn",
+   "p": 0.996
+  },
+  {
+   "start": 431.41,
+   "end": 431.75,
+   "word": "And",
+   "p": 0.788
+  },
+  {
+   "start": 431.75,
+   "end": 431.97,
+   "word": "the",
+   "p": 0.773
+  },
+  {
+   "start": 431.97,
+   "end": 432.49,
+   "word": "voice",
+   "p": 0.993
+  },
+  {
+   "start": 432.49,
+   "end": 433.29,
+   "word": "came",
+   "p": 0.891
+  },
+  {
+   "start": 433.29,
+   "end": 433.67,
+   "word": "to",
+   "p": 0.999
+  },
+  {
+   "start": 433.67,
+   "end": 434.11,
+   "word": "her",
+   "p": 0.991
+  },
+  {
+   "start": 434.11,
+   "end": 434.61,
+   "word": "Sweet,",
+   "p": 0.294
+  },
+  {
+   "start": 435.01,
+   "end": 435.21,
+   "word": "so",
+   "p": 0.988
+  },
+  {
+   "start": 435.21,
+   "end": 435.77,
+   "word": "sweet",
+   "p": 0.997
+  },
+  {
+   "start": 435.77,
+   "end": 436.05,
+   "word": "Her",
+   "p": 0.679
+  },
+  {
+   "start": 436.05,
+   "end": 436.27,
+   "word": "hand",
+   "p": 0.985
+  },
+  {
+   "start": 436.27,
+   "end": 436.51,
+   "word": "as",
+   "p": 0.528
+  },
+  {
+   "start": 436.51,
+   "end": 436.93,
+   "word": "ever",
+   "p": 0.997
+  },
+  {
+   "start": 436.93,
+   "end": 437.49,
+   "word": "as",
+   "p": 0.871
+  },
+  {
+   "start": 437.49,
+   "end": 437.91,
+   "word": "it",
+   "p": 0.997
+  },
+  {
+   "start": 437.91,
+   "end": 438.27,
+   "word": "was",
+   "p": 0.989
+  },
+  {
+   "start": 438.27,
+   "end": 439.07,
+   "word": "once",
+   "p": 0.984
+  },
+  {
+   "start": 439.07,
+   "end": 439.71,
+   "word": "Good,",
+   "p": 0.968
+  },
+  {
+   "start": 440.17,
+   "end": 440.35,
+   "word": "so",
+   "p": 0.997
+  },
+  {
+   "start": 440.35,
+   "end": 441.01,
+   "word": "good",
+   "p": 0.999
+  },
+  {
+   "start": 441.01,
+   "end": 441.75,
+   "word": "She",
+   "p": 0.784
+  },
+  {
+   "start": 441.75,
+   "end": 442.15,
+   "word": "got",
+   "p": 0.997
+  },
+  {
+   "start": 442.15,
+   "end": 442.81,
+   "word": "lost",
+   "p": 0.994
+  },
+  {
+   "start": 442.81,
+   "end": 443.65,
+   "word": "inside",
+   "p": 0.991
+  },
+  {
+   "start": 443.65,
+   "end": 444.47,
+   "word": "him,",
+   "p": 0.931
+  },
+  {
+   "start": 444.55,
+   "end": 445.13,
+   "word": "lost",
+   "p": 0.71
+  },
+  {
+   "start": 445.13,
+   "end": 445.55,
+   "word": "and",
+   "p": 0.981
+  },
+  {
+   "start": 445.55,
+   "end": 446.11,
+   "word": "lost",
+   "p": 0.996
+  },
+  {
+   "start": 446.11,
+   "end": 447.03,
+   "word": "inside",
+   "p": 0.997
+  },
+  {
+   "start": 447.03,
+   "end": 448.05,
+   "word": "him",
+   "p": 0.999
+  },
+  {
+   "start": 448.05,
+   "end": 448.59,
+   "word": "Like",
+   "p": 0.782
+  },
+  {
+   "start": 448.59,
+   "end": 448.91,
+   "word": "she",
+   "p": 0.998
+  },
+  {
+   "start": 448.91,
+   "end": 449.45,
+   "word": "swore",
+   "p": 0.999
+  },
+  {
+   "start": 449.45,
+   "end": 450.83,
+   "word": "she",
+   "p": 0.748
+  },
+  {
+   "start": 450.83,
+   "end": 451.37,
+   "word": "never",
+   "p": 0.987
+  },
+  {
+   "start": 451.37,
+   "end": 452.07,
+   "word": "would",
+   "p": 0.999
+  },
+  {
+   "start": 485.65,
+   "end": 487.05,
+   "word": "You",
+   "p": 0.127
+  }
+ ]
+}

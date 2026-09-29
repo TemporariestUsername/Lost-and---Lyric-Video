@@ -1,0 +1,89 @@
+{
+ "model": "medium.en",
+ "clip": [
+  8.0,
+  28.0
+ ],
+ "prompt": "Through eyes that were hers and weren't Through years that weren't hers and were Left in rooms she couldn't leave",
+ "segments": [
+  {
+   "start": 23.239999999999988,
+   "end": 27.98,
+   "text": "Left in rooms she couldn't leave Left in rooms she couldn't leave"
+  }
+ ],
+ "words": [
+  {
+   "start": 23.24,
+   "end": 24.28,
+   "word": "Left",
+   "p": 0.002
+  },
+  {
+   "start": 24.28,
+   "end": 25.32,
+   "word": "in",
+   "p": 0.9
+  },
+  {
+   "start": 25.32,
+   "end": 25.64,
+   "word": "rooms",
+   "p": 0.755
+  },
+  {
+   "start": 25.64,
+   "end": 26.08,
+   "word": "she",
+   "p": 0.936
+  },
+  {
+   "start": 26.08,
+   "end": 26.6,
+   "word": "couldn't",
+   "p": 0.987
+  },
+  {
+   "start": 26.6,
+   "end": 27.54,
+   "word": "leave",
+   "p": 0.986
+  },
+  {
+   "start": 27.54,
+   "end": 27.98,
+   "word": "Left",
+   "p": 0.502
+  },
+  {
+   "start": 27.98,
+   "end": 27.98,
+   "word": "in",
+   "p": 0.574
+  },
+  {
+   "start": 27.98,
+   "end": 27.98,
+   "word": "rooms",
+   "p": 0.045
+  },
+  {
+   "start": 27.98,
+   "end": 27.98,
+   "word": "she",
+   "p": 0.869
+  },
+  {
+   "start": 27.98,
+   "end": 27.98,
+   "word": "couldn't",
+   "p": 0.899
+  },
+  {
+   "start": 27.98,
+   "end": 27.98,
+   "word": "leave",
+   "p": 0.115
+  }
+ ]
+}

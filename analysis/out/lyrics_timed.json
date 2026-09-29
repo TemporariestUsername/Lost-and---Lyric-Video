@@ -1,0 +1,5574 @@
+{
+ "sources": [
+  "whisper_full.json",
+  "whisper_coats2.json",
+  "whisper_but.json"
+ ],
+ "lines": [
+  {
+   "line": 1,
+   "text": "Through eyes that were hers and weren't",
+   "stanza": 0,
+   "start": 16.92,
+   "end": 20.3,
+   "support": 1.0,
+   "pinned": true,
+   "words": [
+    {
+     "text": "Through",
+     "start": 16.92,
+     "end": 17.567,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "eyes",
+     "start": 17.567,
+     "end": 17.999,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "that",
+     "start": 17.999,
+     "end": 18.43,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "were",
+     "start": 18.43,
+     "end": 18.862,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hers",
+     "start": 18.862,
+     "end": 19.293,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 19.293,
+     "end": 19.653,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "weren't",
+     "start": 19.653,
+     "end": 20.3,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 2,
+   "text": "Through years that weren't hers and were",
+   "stanza": 0,
+   "start": 20.45,
+   "end": 24.02,
+   "support": 1.0,
+   "pinned": true,
+   "words": [
+    {
+     "text": "Through",
+     "start": 20.45,
+     "end": 21.119,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "years",
+     "start": 21.119,
+     "end": 21.64,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "that",
+     "start": 21.64,
+     "end": 22.086,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "weren't",
+     "start": 22.086,
+     "end": 22.756,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hers",
+     "start": 22.756,
+     "end": 23.202,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 23.202,
+     "end": 23.574,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "were",
+     "start": 23.574,
+     "end": 24.02,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 3,
+   "text": "Left in rooms she couldn't leave",
+   "stanza": 0,
+   "start": 24.02,
+   "end": 27.46,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Left",
+     "start": 24.02,
+     "end": 25.02,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 25.02,
+     "end": 25.34,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "rooms",
+     "start": 25.34,
+     "end": 25.66,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 25.66,
+     "end": 26.12,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "couldn't",
+     "start": 26.12,
+     "end": 26.76,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "leave",
+     "start": 26.76,
+     "end": 27.46,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 4,
+   "text": "Learning a self she couldn't learn",
+   "stanza": 0,
+   "start": 27.46,
+   "end": 30.86,
+   "support": 0.83,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Learning",
+     "start": 27.46,
+     "end": 28.36,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 28.36,
+     "end": 28.36,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "self",
+     "start": 28.36,
+     "end": 29.04,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 29.04,
+     "end": 29.64,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "couldn't",
+     "start": 29.64,
+     "end": 30.34,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "learn",
+     "start": 30.34,
+     "end": 30.86,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 5,
+   "text": "And a voice came to her (sweet, so sweet)",
+   "stanza": 0,
+   "start": 30.86,
+   "end": 35.28,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 30.86,
+     "end": 31.36,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 31.36,
+     "end": 31.56,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "voice",
+     "start": 31.56,
+     "end": 31.82,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "came",
+     "start": 31.82,
+     "end": 32.22,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 32.22,
+     "end": 32.72,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her",
+     "start": 32.72,
+     "end": 33.1,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "sweet,",
+     "start": 33.1,
+     "end": 33.72,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "so",
+     "start": 34.2,
+     "end": 34.54,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "sweet",
+     "start": 34.54,
+     "end": 35.28,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 6,
+   "text": "A hand, as ever as it was once (good, so good)",
+   "stanza": 0,
+   "start": 35.28,
+   "end": 42.96,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "A",
+     "start": 35.28,
+     "end": 35.96,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hand,",
+     "start": 35.96,
+     "end": 36.44,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "as",
+     "start": 36.44,
+     "end": 36.88,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ever",
+     "start": 36.88,
+     "end": 37.32,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "as",
+     "start": 37.32,
+     "end": 37.94,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "it",
+     "start": 37.94,
+     "end": 38.36,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "was",
+     "start": 38.36,
+     "end": 38.9,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "once",
+     "start": 38.9,
+     "end": 39.76,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "good,",
+     "start": 39.76,
+     "end": 40.72,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "so",
+     "start": 41.28,
+     "end": 41.6,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "good",
+     "start": 41.6,
+     "end": 42.96,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 7,
+   "text": "She got lost inside him",
+   "stanza": 0,
+   "start": 43.7,
+   "end": 46.96,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "She",
+     "start": 43.7,
+     "end": 44.24,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "got",
+     "start": 44.24,
+     "end": 44.68,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 44.68,
+     "end": 45.22,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "inside",
+     "start": 45.22,
+     "end": 46.04,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "him",
+     "start": 46.04,
+     "end": 46.96,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 8,
+   "text": "Lost and lost inside him",
+   "stanza": 0,
+   "start": 46.96,
+   "end": 50.52,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Lost",
+     "start": 46.96,
+     "end": 47.68,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 47.68,
+     "end": 48.1,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 48.1,
+     "end": 48.62,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "inside",
+     "start": 48.62,
+     "end": 49.48,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "him",
+     "start": 49.48,
+     "end": 50.52,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 9,
+   "text": "Like she swore she never would.",
+   "stanza": 0,
+   "start": 50.52,
+   "end": 54.04,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Like",
+     "start": 50.52,
+     "end": 51.1,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 51.1,
+     "end": 51.44,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "swore",
+     "start": 51.44,
+     "end": 51.96,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 51.96,
+     "end": 52.54,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "never",
+     "start": 52.54,
+     "end": 53.08,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "would.",
+     "start": 53.08,
+     "end": 54.04,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 11,
+   "text": "But there comes a once... once...",
+   "stanza": 1,
+   "start": 55.2,
+   "end": 58.68,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "But",
+     "start": 55.2,
+     "end": 56.14,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "there",
+     "start": 56.14,
+     "end": 56.44,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "comes",
+     "start": 56.44,
+     "end": 56.88,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 56.88,
+     "end": 57.14,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "once...",
+     "start": 57.14,
+     "end": 57.58,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "once...",
+     "start": 58.68,
+     "end": 58.68,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 12,
+   "text": "She said \"no\" (once...). And she lost him for a lifetime.",
+   "stanza": 1,
+   "start": 58.68,
+   "end": 64.7,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "She",
+     "start": 58.68,
+     "end": 59.18,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "said",
+     "start": 59.18,
+     "end": 59.6,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "\"no\"",
+     "start": 59.6,
+     "end": 60.18,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "once...",
+     "start": 61.1,
+     "end": 61.64,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "And",
+     "start": 61.64,
+     "end": 61.88,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 61.88,
+     "end": 62.12,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 62.12,
+     "end": 62.56,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "him",
+     "start": 62.56,
+     "end": 63.04,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "for",
+     "start": 63.04,
+     "end": 63.66,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 63.66,
+     "end": 64.08,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lifetime.",
+     "start": 64.08,
+     "end": 64.7,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 13,
+   "text": "There comes a once... once...",
+   "stanza": 1,
+   "start": 64.7,
+   "end": 67.28,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "There",
+     "start": 64.7,
+     "end": 65.22,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "comes",
+     "start": 65.22,
+     "end": 65.66,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 65.66,
+     "end": 65.96,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "once...",
+     "start": 65.96,
+     "end": 66.34,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "once...",
+     "start": 66.4,
+     "end": 67.28,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 14,
+   "text": "She said \"yes\" (once...).  And she lost him forever.",
+   "stanza": 1,
+   "start": 67.28,
+   "end": 73.28,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "She",
+     "start": 67.28,
+     "end": 67.96,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "said",
+     "start": 67.96,
+     "end": 68.4,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "\"yes\"",
+     "start": 68.4,
+     "end": 69.12,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "once...",
+     "start": 69.12,
+     "end": 70.0,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "And",
+     "start": 70.0,
+     "end": 70.64,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 70.64,
+     "end": 70.92,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 70.92,
+     "end": 71.46,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "him",
+     "start": 71.46,
+     "end": 72.2,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "forever.",
+     "start": 72.2,
+     "end": 73.28,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 15,
+   "text": "Lost and lost.",
+   "stanza": 1,
+   "start": 73.28,
+   "end": 75.12,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Lost",
+     "start": 73.28,
+     "end": 74.1,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 74.1,
+     "end": 74.46,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost.",
+     "start": 74.46,
+     "end": 75.12,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 16,
+   "text": "Lost to her.",
+   "stanza": 1,
+   "start": 75.38,
+   "end": 76.6,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Lost",
+     "start": 75.38,
+     "end": 75.78,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 75.78,
+     "end": 76.18,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her.",
+     "start": 76.18,
+     "end": 76.6,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 17,
+   "text": "Lost to the world.",
+   "stanza": 1,
+   "start": 76.6,
+   "end": 78.47,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Lost",
+     "start": 76.6,
+     "end": 77.06,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 77.06,
+     "end": 77.52,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 77.52,
+     "end": 78.0,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "world.",
+     "start": 78.0,
+     "end": 78.47,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 18,
+   "text": "Forever and ever.",
+   "stanza": 1,
+   "start": 78.47,
+   "end": 84.15,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Forever",
+     "start": 78.47,
+     "end": 80.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 80.23,
+     "end": 83.09,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ever.",
+     "start": 83.09,
+     "end": 84.15,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 20,
+   "text": "Stay lost now girl (forever, forever)",
+   "stanza": 2,
+   "start": 84.15,
+   "end": 89.29,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Stay",
+     "start": 84.15,
+     "end": 84.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 84.91,
+     "end": 85.45,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "now",
+     "start": 85.45,
+     "end": 85.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 86.07,
+     "end": 86.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "forever,",
+     "start": 86.53,
+     "end": 88.75,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "forever",
+     "start": 88.75,
+     "end": 89.29,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 21,
+   "text": "Throw away everything he found",
+   "stanza": 2,
+   "start": 89.29,
+   "end": 92.49,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Throw",
+     "start": 89.29,
+     "end": 89.75,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "away",
+     "start": 89.75,
+     "end": 90.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "everything",
+     "start": 90.35,
+     "end": 91.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "he",
+     "start": 91.29,
+     "end": 91.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found",
+     "start": 91.93,
+     "end": 92.49,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 22,
+   "text": "So he never got lost inside you. (again, again)",
+   "stanza": 2,
+   "start": 92.49,
+   "end": 97.75,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "So",
+     "start": 92.49,
+     "end": 93.57,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "he",
+     "start": 93.57,
+     "end": 93.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "never",
+     "start": 93.77,
+     "end": 94.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "got",
+     "start": 94.19,
+     "end": 94.61,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 94.61,
+     "end": 95.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "inside",
+     "start": 95.03,
+     "end": 95.59,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "you.",
+     "start": 95.59,
+     "end": 96.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "again,",
+     "start": 96.23,
+     "end": 96.79,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "again",
+     "start": 96.79,
+     "end": 97.75,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 23,
+   "text": "Forever again, forever again.",
+   "stanza": 2,
+   "start": 97.75,
+   "end": 104.65,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Forever",
+     "start": 97.75,
+     "end": 98.47,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "again,",
+     "start": 98.47,
+     "end": 99.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "forever",
+     "start": 102.49,
+     "end": 103.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "again.",
+     "start": 103.69,
+     "end": 104.65,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 24,
+   "text": "Never again...",
+   "stanza": 2,
+   "start": 105.17,
+   "end": 106.35,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Never",
+     "start": 105.17,
+     "end": 105.47,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "again...",
+     "start": 105.47,
+     "end": 106.35,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 26,
+   "text": "The white coats said:",
+   "stanza": 3,
+   "start": 116.47,
+   "end": 118.69,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "The",
+     "start": 116.47,
+     "end": 117.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "white",
+     "start": 117.27,
+     "end": 117.63,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "coats",
+     "start": 117.63,
+     "end": 118.07,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "said:",
+     "start": 118.07,
+     "end": 118.69,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 27,
+   "text": "We've found a girl who is very lost.",
+   "stanza": 3,
+   "start": 118.69,
+   "end": 123.05,
+   "support": 0.88,
+   "pinned": false,
+   "words": [
+    {
+     "text": "We've",
+     "start": 118.69,
+     "end": 119.52,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "found",
+     "start": 120.35,
+     "end": 120.65,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 120.65,
+     "end": 120.89,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 120.89,
+     "end": 121.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "who",
+     "start": 121.23,
+     "end": 121.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "is",
+     "start": 121.53,
+     "end": 121.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "very",
+     "start": 121.73,
+     "end": 122.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost.",
+     "start": 122.19,
+     "end": 123.05,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 28,
+   "text": "Scribble scribble, stab stab the charts.",
+   "stanza": 3,
+   "start": 123.05,
+   "end": 126.91,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Scribble",
+     "start": 123.05,
+     "end": 124.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "scribble,",
+     "start": 124.31,
+     "end": 124.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 125.19,
+     "end": 125.33,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 125.67,
+     "end": 125.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 125.73,
+     "end": 126.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "charts.",
+     "start": 126.15,
+     "end": 126.91,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 29,
+   "text": "Keep her safe in a nice white room.",
+   "stanza": 3,
+   "start": 126.91,
+   "end": 130.23,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Keep",
+     "start": 126.91,
+     "end": 127.67,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her",
+     "start": 127.67,
+     "end": 127.97,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "safe",
+     "start": 127.97,
+     "end": 128.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 128.25,
+     "end": 128.63,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 128.63,
+     "end": 128.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "nice",
+     "start": 128.91,
+     "end": 129.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "white",
+     "start": 129.21,
+     "end": 129.59,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "room.",
+     "start": 129.59,
+     "end": 130.23,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 30,
+   "text": "Scribble scribble, stab stab the charts.",
+   "stanza": 3,
+   "start": 130.23,
+   "end": 133.95,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Scribble",
+     "start": 130.23,
+     "end": 131.09,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "scribble,",
+     "start": 131.41,
+     "end": 131.89,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 132.23,
+     "end": 132.41,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 132.81,
+     "end": 132.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 132.81,
+     "end": 133.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "charts.",
+     "start": 133.23,
+     "end": 133.95,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 31,
+   "text": "We\u2019ll find out HOW lost she really is.",
+   "stanza": 3,
+   "start": 133.95,
+   "end": 137.79,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "We\u2019ll",
+     "start": 133.95,
+     "end": 134.55,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 134.55,
+     "end": 134.89,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "out",
+     "start": 134.89,
+     "end": 135.39,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "HOW",
+     "start": 135.39,
+     "end": 135.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 135.73,
+     "end": 136.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 136.15,
+     "end": 136.55,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "really",
+     "start": 136.55,
+     "end": 137.05,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "is.",
+     "start": 137.05,
+     "end": 137.79,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 32,
+   "text": "With time, with time...",
+   "stanza": 3,
+   "start": 137.79,
+   "end": 140.97,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "With",
+     "start": 137.79,
+     "end": 138.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 138.29,
+     "end": 139.01,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 139.59,
+     "end": 140.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time...",
+     "start": 140.03,
+     "end": 140.97,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 33,
+   "text": "With time we can find anything.",
+   "stanza": 3,
+   "start": 141.35,
+   "end": 144.63,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "With",
+     "start": 141.35,
+     "end": 141.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time",
+     "start": 141.77,
+     "end": 142.31,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "we",
+     "start": 142.47,
+     "end": 142.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "can",
+     "start": 142.53,
+     "end": 142.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 142.85,
+     "end": 143.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "anything.",
+     "start": 143.53,
+     "end": 144.63,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 34,
+   "text": "With time, with time...",
+   "stanza": 3,
+   "start": 144.63,
+   "end": 147.87,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "With",
+     "start": 144.63,
+     "end": 145.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 145.25,
+     "end": 145.95,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 146.63,
+     "end": 146.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time...",
+     "start": 146.99,
+     "end": 147.87,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 35,
+   "text": "Even a girl who is very hard to find.",
+   "stanza": 3,
+   "start": 147.87,
+   "end": 151.81,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Even",
+     "start": 147.87,
+     "end": 148.57,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 148.57,
+     "end": 148.95,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 148.95,
+     "end": 149.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "who",
+     "start": 149.25,
+     "end": 149.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "is",
+     "start": 149.53,
+     "end": 149.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "very",
+     "start": 149.73,
+     "end": 150.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hard",
+     "start": 150.23,
+     "end": 150.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 150.93,
+     "end": 151.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find.",
+     "start": 151.19,
+     "end": 151.81,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 37,
+   "text": "They brought a man.",
+   "stanza": 4,
+   "start": 151.81,
+   "end": 153.39,
+   "support": 0.75,
+   "pinned": false,
+   "words": [
+    {
+     "text": "They",
+     "start": 151.81,
+     "end": 152.04,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "brought",
+     "start": 152.27,
+     "end": 152.57,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 152.57,
+     "end": 152.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "man.",
+     "start": 152.85,
+     "end": 153.39,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 38,
+   "text": "A man who could find someone hard to find.",
+   "stanza": 4,
+   "start": 154.45,
+   "end": 158.85,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "A",
+     "start": 154.45,
+     "end": 154.65,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "man",
+     "start": 154.65,
+     "end": 155.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "who",
+     "start": 155.29,
+     "end": 155.57,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "could",
+     "start": 155.57,
+     "end": 155.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 155.81,
+     "end": 156.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "someone",
+     "start": 156.25,
+     "end": 157.07,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hard",
+     "start": 157.07,
+     "end": 157.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 157.81,
+     "end": 158.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find.",
+     "start": 158.15,
+     "end": 158.85,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 39,
+   "text": "And in the end, he found, oh he found...",
+   "stanza": 4,
+   "start": 158.85,
+   "end": 164.09,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 158.85,
+     "end": 159.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 159.29,
+     "end": 159.51,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 159.51,
+     "end": 159.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "end,",
+     "start": 159.81,
+     "end": 160.51,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "he",
+     "start": 160.93,
+     "end": 161.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found,",
+     "start": 161.25,
+     "end": 162.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "oh",
+     "start": 162.73,
+     "end": 162.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "he",
+     "start": 162.93,
+     "end": 163.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found...",
+     "start": 163.19,
+     "end": 164.09,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 40,
+   "text": "...something VERY hard to find (in her).",
+   "stanza": 4,
+   "start": 164.09,
+   "end": 168.99,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "...something",
+     "start": 164.09,
+     "end": 165.01,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "VERY",
+     "start": 165.01,
+     "end": 165.75,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hard",
+     "start": 165.75,
+     "end": 166.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 166.53,
+     "end": 166.83,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 166.83,
+     "end": 167.47,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 167.47,
+     "end": 168.27,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "her",
+     "start": 168.27,
+     "end": 168.99,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 41,
+   "text": "And in the end, she found, oh she found...",
+   "stanza": 4,
+   "start": 170.65,
+   "end": 176.19,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 170.65,
+     "end": 171.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 171.35,
+     "end": 171.75,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 171.75,
+     "end": 172.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "end,",
+     "start": 172.21,
+     "end": 172.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 172.91,
+     "end": 173.31,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found,",
+     "start": 173.31,
+     "end": 174.39,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "oh",
+     "start": 174.57,
+     "end": 174.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 174.99,
+     "end": 175.31,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found...",
+     "start": 175.31,
+     "end": 176.19,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 42,
+   "text": "Her forever. And ever... (in him).",
+   "stanza": 4,
+   "start": 176.19,
+   "end": 181.55,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Her",
+     "start": 176.19,
+     "end": 176.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "forever.",
+     "start": 176.77,
+     "end": 177.71,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "And",
+     "start": 177.71,
+     "end": 178.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ever...",
+     "start": 178.91,
+     "end": 179.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 179.69,
+     "end": 180.65,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "him",
+     "start": 180.65,
+     "end": 181.55,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 44,
+   "text": "\"I can help you find protecting, trusting and believing",
+   "stanza": 5,
+   "start": 183.43,
+   "end": 188.85,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "\"I",
+     "start": 183.43,
+     "end": 184.13,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "can",
+     "start": 184.13,
+     "end": 184.33,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "help",
+     "start": 184.33,
+     "end": 184.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "you",
+     "start": 184.53,
+     "end": 184.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 184.73,
+     "end": 185.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "protecting,",
+     "start": 185.03,
+     "end": 185.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "trusting",
+     "start": 187.09,
+     "end": 188.05,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 188.05,
+     "end": 188.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "believing",
+     "start": 188.27,
+     "end": 188.85,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 45,
+   "text": "Even if they're very hard to find.\"",
+   "stanza": 5,
+   "start": 190.63,
+   "end": 195.57,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Even",
+     "start": 190.63,
+     "end": 191.33,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "if",
+     "start": 191.33,
+     "end": 191.59,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "they're",
+     "start": 191.59,
+     "end": 192.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "very",
+     "start": 194.09,
+     "end": 194.33,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hard",
+     "start": 194.33,
+     "end": 194.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 194.69,
+     "end": 194.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find.\"",
+     "start": 194.99,
+     "end": 195.57,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 47,
+   "text": "But with time, with time,",
+   "stanza": 6,
+   "start": 208.42,
+   "end": 212.26,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "But",
+     "start": 208.42,
+     "end": 209.46,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 209.46,
+     "end": 209.76,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 209.76,
+     "end": 210.48,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 210.96,
+     "end": 211.42,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 211.42,
+     "end": 212.26,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 48,
+   "text": "the white coats said:",
+   "stanza": 6,
+   "start": 213.12,
+   "end": 214.74,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "the",
+     "start": 213.12,
+     "end": 213.32,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "white",
+     "start": 213.32,
+     "end": 213.62,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "coats",
+     "start": 213.62,
+     "end": 214.02,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "said:",
+     "start": 214.02,
+     "end": 214.74,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 49,
+   "text": "Hmm... this girl is too lost.",
+   "stanza": 6,
+   "start": 214.74,
+   "end": 217.14,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Hmm...",
+     "start": 214.74,
+     "end": 215.3,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "this",
+     "start": 215.3,
+     "end": 215.44,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 215.44,
+     "end": 215.8,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "is",
+     "start": 215.8,
+     "end": 216.06,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "too",
+     "start": 216.06,
+     "end": 216.38,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost.",
+     "start": 216.38,
+     "end": 217.14,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 50,
+   "text": "Scribble scribble, stab stab the charts.",
+   "stanza": 6,
+   "start": 217.66,
+   "end": 222.26,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Scribble",
+     "start": 217.66,
+     "end": 218.06,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "scribble,",
+     "start": 218.06,
+     "end": 219.34,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 219.98,
+     "end": 220.34,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 220.34,
+     "end": 221.04,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 221.04,
+     "end": 221.56,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "charts.",
+     "start": 221.56,
+     "end": 222.26,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 51,
+   "text": "This girl is too hard to find.",
+   "stanza": 6,
+   "start": 224.09,
+   "end": 229.23,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "This",
+     "start": 224.09,
+     "end": 224.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 224.35,
+     "end": 224.87,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "is",
+     "start": 224.87,
+     "end": 226.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "too",
+     "start": 226.27,
+     "end": 226.65,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hard",
+     "start": 226.65,
+     "end": 227.65,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 227.65,
+     "end": 228.39,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find.",
+     "start": 228.39,
+     "end": 229.23,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 52,
+   "text": "Scribble scribble, stab stab the charts.",
+   "stanza": 6,
+   "start": 231.05,
+   "end": 235.91,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Scribble",
+     "start": 231.05,
+     "end": 232.17,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "scribble,",
+     "start": 232.17,
+     "end": 233.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 233.65,
+     "end": 233.95,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 234.75,
+     "end": 234.75,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 234.75,
+     "end": 235.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "charts.",
+     "start": 235.21,
+     "end": 235.91,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 53,
+   "text": "With time, with time...",
+   "stanza": 6,
+   "start": 237.09,
+   "end": 240.37,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "With",
+     "start": 237.09,
+     "end": 237.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 237.81,
+     "end": 238.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 238.91,
+     "end": 239.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time...",
+     "start": 239.53,
+     "end": 240.37,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 54,
+   "text": "We found she isn't worth the time.",
+   "stanza": 6,
+   "start": 240.37,
+   "end": 244.23,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "We",
+     "start": 240.37,
+     "end": 240.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found",
+     "start": 240.85,
+     "end": 241.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 241.35,
+     "end": 241.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "isn't",
+     "start": 241.93,
+     "end": 242.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "worth",
+     "start": 242.81,
+     "end": 243.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 243.29,
+     "end": 243.83,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time.",
+     "start": 243.83,
+     "end": 244.23,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 55,
+   "text": "With time, with time...",
+   "stanza": 6,
+   "start": 244.23,
+   "end": 247.19,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "With",
+     "start": 244.23,
+     "end": 244.67,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 244.67,
+     "end": 245.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 245.89,
+     "end": 246.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time...",
+     "start": 246.29,
+     "end": 247.19,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 56,
+   "text": "This girl who is very hard to find.",
+   "stanza": 6,
+   "start": 247.19,
+   "end": 251.25,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "This",
+     "start": 247.19,
+     "end": 248.05,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 248.05,
+     "end": 248.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "who",
+     "start": 248.49,
+     "end": 248.79,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "is",
+     "start": 248.79,
+     "end": 248.97,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "very",
+     "start": 248.97,
+     "end": 249.47,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hard",
+     "start": 249.47,
+     "end": 250.09,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 250.09,
+     "end": 250.39,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find.",
+     "start": 250.39,
+     "end": 251.25,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 58,
+   "text": "And with time, and with time,",
+   "stanza": 7,
+   "start": 252.73,
+   "end": 256.03,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 252.73,
+     "end": 253.59,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 253.59,
+     "end": 253.79,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 253.79,
+     "end": 254.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 254.81,
+     "end": 255.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 255.29,
+     "end": 255.57,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 255.57,
+     "end": 256.03,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 59,
+   "text": "The white coats brought the man a gun and a bullet",
+   "stanza": 7,
+   "start": 256.03,
+   "end": 260.29,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "The",
+     "start": 256.03,
+     "end": 257.39,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "white",
+     "start": 257.39,
+     "end": 257.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "coats",
+     "start": 257.69,
+     "end": 258.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "brought",
+     "start": 258.11,
+     "end": 258.45,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 258.45,
+     "end": 258.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "man",
+     "start": 258.69,
+     "end": 258.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 258.91,
+     "end": 259.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "gun",
+     "start": 259.19,
+     "end": 259.47,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 259.47,
+     "end": 259.79,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 259.79,
+     "end": 260.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "bullet",
+     "start": 260.03,
+     "end": 260.29,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 60,
+   "text": "And said \"go and find that girl.\"",
+   "stanza": 7,
+   "start": 260.29,
+   "end": 264.37,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 260.29,
+     "end": 260.67,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "said",
+     "start": 260.67,
+     "end": 261.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "\"go",
+     "start": 261.71,
+     "end": 261.89,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 261.89,
+     "end": 262.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 262.19,
+     "end": 262.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "that",
+     "start": 262.85,
+     "end": 263.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl.\"",
+     "start": 263.85,
+     "end": 264.37,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 61,
+   "text": "And he did,",
+   "stanza": 7,
+   "start": 264.37,
+   "end": 266.05,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 264.37,
+     "end": 265.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "he",
+     "start": 265.49,
+     "end": 265.71,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "did,",
+     "start": 265.71,
+     "end": 266.05,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 62,
+   "text": "he did...",
+   "stanza": 7,
+   "start": 266.73,
+   "end": 267.79,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "he",
+     "start": 266.73,
+     "end": 267.31,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "did...",
+     "start": 267.31,
+     "end": 267.79,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 63,
+   "text": "He found her,",
+   "stanza": 7,
+   "start": 267.79,
+   "end": 270.27,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "He",
+     "start": 267.79,
+     "end": 268.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found",
+     "start": 268.99,
+     "end": 269.45,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her,",
+     "start": 269.45,
+     "end": 270.27,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 64,
+   "text": "he found her...",
+   "stanza": 7,
+   "start": 270.31,
+   "end": 272.61,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "he",
+     "start": 270.31,
+     "end": 271.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found",
+     "start": 271.53,
+     "end": 271.97,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her...",
+     "start": 271.97,
+     "end": 272.61,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 66,
+   "text": "\"I won't lose you.",
+   "stanza": 8,
+   "start": 273.81,
+   "end": 275.99,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "\"I",
+     "start": 273.81,
+     "end": 274.67,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "won't",
+     "start": 274.67,
+     "end": 274.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lose",
+     "start": 274.93,
+     "end": 275.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "you.",
+     "start": 275.19,
+     "end": 275.99,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 67,
+   "text": "Together, we'll find you the time.\"",
+   "stanza": 8,
+   "start": 275.99,
+   "end": 279.69,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Together,",
+     "start": 275.99,
+     "end": 277.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "we'll",
+     "start": 278.37,
+     "end": 278.63,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 278.63,
+     "end": 278.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "you",
+     "start": 278.85,
+     "end": 279.05,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 279.05,
+     "end": 279.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time.\"",
+     "start": 279.21,
+     "end": 279.69,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 69,
+   "text": "And they ran... ran... ran...",
+   "stanza": 9,
+   "start": 283.79,
+   "end": 288.57,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 283.79,
+     "end": 284.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "they",
+     "start": 284.93,
+     "end": 285.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ran...",
+     "start": 286.37,
+     "end": 286.97,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ran...",
+     "start": 287.29,
+     "end": 287.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ran...",
+     "start": 288.57,
+     "end": 288.57,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 70,
+   "text": "Forever and ever.",
+   "stanza": 9,
+   "start": 289.15,
+   "end": 291.25,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Forever",
+     "start": 289.15,
+     "end": 289.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 289.15,
+     "end": 290.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ever.",
+     "start": 290.49,
+     "end": 291.25,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 71,
+   "text": "Through every tunnel, every motel.",
+   "stanza": 9,
+   "start": 291.25,
+   "end": 295.11,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Through",
+     "start": 291.25,
+     "end": 292.61,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "every",
+     "start": 292.61,
+     "end": 293.13,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "tunnel,",
+     "start": 293.13,
+     "end": 293.45,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "every",
+     "start": 293.87,
+     "end": 294.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "motel.",
+     "start": 294.29,
+     "end": 295.11,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 72,
+   "text": "Lost in diners, lost in alleys...",
+   "stanza": 9,
+   "start": 295.11,
+   "end": 298.65,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Lost",
+     "start": 295.11,
+     "end": 295.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 295.73,
+     "end": 296.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "diners,",
+     "start": 296.35,
+     "end": 296.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 297.23,
+     "end": 297.45,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 297.45,
+     "end": 297.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "alleys...",
+     "start": 297.99,
+     "end": 298.65,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 73,
+   "text": "Lost in each other.",
+   "stanza": 9,
+   "start": 298.65,
+   "end": 300.51,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Lost",
+     "start": 298.65,
+     "end": 299.09,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 299.09,
+     "end": 299.57,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "each",
+     "start": 299.57,
+     "end": 299.95,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "other.",
+     "start": 299.95,
+     "end": 300.51,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 74,
+   "text": "And found. (And found...)",
+   "stanza": 9,
+   "start": 300.51,
+   "end": 302.91,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 300.51,
+     "end": 301.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found.",
+     "start": 301.21,
+     "end": 301.87,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "And",
+     "start": 301.87,
+     "end": 301.87,
+     "matched": false,
+     "backing": true
+    },
+    {
+     "text": "found...",
+     "start": 301.87,
+     "end": 302.91,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 75,
+   "text": "Lost and found, found and lost...",
+   "stanza": 9,
+   "start": 303.81,
+   "end": 307.19,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Lost",
+     "start": 303.81,
+     "end": 304.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 304.25,
+     "end": 304.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found,",
+     "start": 304.77,
+     "end": 305.39,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "found",
+     "start": 305.75,
+     "end": 305.97,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 305.97,
+     "end": 306.47,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost...",
+     "start": 306.47,
+     "end": 307.19,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 76,
+   "text": "Forever and ever and ever.",
+   "stanza": 9,
+   "start": 307.87,
+   "end": 312.42,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Forever",
+     "start": 307.87,
+     "end": 308.71,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 308.71,
+     "end": 309.95,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ever",
+     "start": 309.95,
+     "end": 310.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 311.0,
+     "end": 311.7,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ever.",
+     "start": 311.7,
+     "end": 312.42,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 78,
+   "text": "But\u2026",
+   "stanza": 10,
+   "start": 318.0,
+   "end": 319.4,
+   "support": 1.0,
+   "pinned": true,
+   "words": [
+    {
+     "text": "But\u2026",
+     "start": 318.0,
+     "end": 319.4,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 80,
+   "text": "But forever... always comes to an end,",
+   "stanza": 11,
+   "start": 319.58,
+   "end": 324.27,
+   "support": 0.86,
+   "pinned": false,
+   "words": [
+    {
+     "text": "But",
+     "start": 319.58,
+     "end": 320.98,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "forever...",
+     "start": 320.98,
+     "end": 321.245,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "always",
+     "start": 321.51,
+     "end": 322.01,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "comes",
+     "start": 322.01,
+     "end": 322.43,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 322.43,
+     "end": 323.05,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "an",
+     "start": 323.05,
+     "end": 323.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "end,",
+     "start": 323.73,
+     "end": 324.27,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 81,
+   "text": "when the coats... come round the bend.",
+   "stanza": 11,
+   "start": 324.39,
+   "end": 327.41,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "when",
+     "start": 324.39,
+     "end": 325.01,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 325.01,
+     "end": 325.33,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "coats...",
+     "start": 325.33,
+     "end": 325.63,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "come",
+     "start": 325.63,
+     "end": 326.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "round",
+     "start": 326.25,
+     "end": 326.59,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 326.59,
+     "end": 327.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "bend.",
+     "start": 327.03,
+     "end": 327.41,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 83,
+   "text": "And the coats said:",
+   "stanza": 12,
+   "start": 332.45,
+   "end": 334.104,
+   "support": 0.5,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 332.45,
+     "end": 333.09,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 333.09,
+     "end": 333.41,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "coats",
+     "start": 333.41,
+     "end": 333.757,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "said:",
+     "start": 333.757,
+     "end": 334.104,
+     "matched": false,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 84,
+   "text": "Hmm... this man is too lost.",
+   "stanza": 12,
+   "start": 334.45,
+   "end": 337.15,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Hmm...",
+     "start": 334.45,
+     "end": 334.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "this",
+     "start": 335.07,
+     "end": 335.31,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "man",
+     "start": 335.31,
+     "end": 335.89,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "is",
+     "start": 335.89,
+     "end": 336.07,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "too",
+     "start": 336.07,
+     "end": 336.37,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost.",
+     "start": 336.37,
+     "end": 337.15,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 85,
+   "text": "Scribble scribble, stab stab the charts.",
+   "stanza": 12,
+   "start": 337.17,
+   "end": 340.03,
+   "support": 0.83,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Scribble",
+     "start": 337.17,
+     "end": 337.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "scribble,",
+     "start": 338.13,
+     "end": 338.65,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 338.91,
+     "end": 339.05,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 339.39,
+     "end": 339.61,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 339.61,
+     "end": 339.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "charts.",
+     "start": 339.93,
+     "end": 340.03,
+     "matched": false,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 86,
+   "text": "We\u2019ll have to cut out his something hard to find.",
+   "stanza": 12,
+   "start": 340.13,
+   "end": 343.63,
+   "support": 0.9,
+   "pinned": false,
+   "words": [
+    {
+     "text": "We\u2019ll",
+     "start": 340.13,
+     "end": 340.33,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "have",
+     "start": 340.33,
+     "end": 340.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 340.53,
+     "end": 340.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "cut",
+     "start": 340.73,
+     "end": 340.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "out",
+     "start": 340.99,
+     "end": 341.39,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "his",
+     "start": 341.39,
+     "end": 341.39,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "something",
+     "start": 341.39,
+     "end": 341.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hard",
+     "start": 341.93,
+     "end": 342.63,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 342.63,
+     "end": 343.13,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find.",
+     "start": 343.13,
+     "end": 343.63,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 87,
+   "text": "Scribble scribble, stab stab the charts.",
+   "stanza": 12,
+   "start": 343.99,
+   "end": 346.91,
+   "support": 0.83,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Scribble",
+     "start": 343.99,
+     "end": 344.63,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "scribble,",
+     "start": 344.95,
+     "end": 345.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 345.69,
+     "end": 345.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "stab",
+     "start": 346.17,
+     "end": 346.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 346.29,
+     "end": 346.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "charts.",
+     "start": 346.69,
+     "end": 346.91,
+     "matched": false,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 88,
+   "text": "With time, with time",
+   "stanza": 12,
+   "start": 347.13,
+   "end": 348.53,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "With",
+     "start": 347.13,
+     "end": 347.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 347.35,
+     "end": 347.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 347.89,
+     "end": 348.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time",
+     "start": 348.15,
+     "end": 348.53,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 89,
+   "text": "We'll see how lost this girl can be.",
+   "stanza": 12,
+   "start": 348.57,
+   "end": 351.27,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "We'll",
+     "start": 348.57,
+     "end": 348.73,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "see",
+     "start": 348.73,
+     "end": 348.97,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "how",
+     "start": 348.97,
+     "end": 349.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 349.21,
+     "end": 349.51,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "this",
+     "start": 349.51,
+     "end": 349.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 349.93,
+     "end": 350.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "can",
+     "start": 350.35,
+     "end": 350.71,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "be.",
+     "start": 350.71,
+     "end": 351.27,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 90,
+   "text": "With time, with time",
+   "stanza": 12,
+   "start": 351.93,
+   "end": 353.55,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "With",
+     "start": 351.93,
+     "end": 352.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time,",
+     "start": 352.35,
+     "end": 352.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 353.07,
+     "end": 353.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time",
+     "start": 353.23,
+     "end": 353.55,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 91,
+   "text": "We'll make her a girl who can find ANYTHING.",
+   "stanza": 12,
+   "start": 353.65,
+   "end": 357.73,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "We'll",
+     "start": 353.65,
+     "end": 354.07,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "make",
+     "start": 354.07,
+     "end": 354.43,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her",
+     "start": 354.43,
+     "end": 354.83,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 354.83,
+     "end": 355.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 355.15,
+     "end": 355.51,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "who",
+     "start": 355.51,
+     "end": 355.75,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "can",
+     "start": 355.75,
+     "end": 355.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 355.93,
+     "end": 356.39,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ANYTHING.",
+     "start": 356.39,
+     "end": 357.73,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 92,
+   "text": "Except... something hard to find.",
+   "stanza": 12,
+   "start": 357.73,
+   "end": 361.49,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Except...",
+     "start": 357.73,
+     "end": 359.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "something",
+     "start": 359.15,
+     "end": 359.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hard",
+     "start": 359.91,
+     "end": 360.41,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 360.41,
+     "end": 360.79,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find.",
+     "start": 360.79,
+     "end": 361.49,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 94,
+   "text": "They cut away his protecting.",
+   "stanza": 13,
+   "start": 363.99,
+   "end": 367.35,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "They",
+     "start": 363.99,
+     "end": 364.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "cut",
+     "start": 364.81,
+     "end": 365.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "away",
+     "start": 365.11,
+     "end": 365.61,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "his",
+     "start": 365.61,
+     "end": 366.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "protecting.",
+     "start": 366.21,
+     "end": 367.35,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 95,
+   "text": "They cut away his trusting.",
+   "stanza": 13,
+   "start": 367.35,
+   "end": 370.75,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "They",
+     "start": 367.35,
+     "end": 368.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "cut",
+     "start": 368.15,
+     "end": 368.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "away",
+     "start": 368.49,
+     "end": 369.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "his",
+     "start": 369.03,
+     "end": 369.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "trusting.",
+     "start": 369.99,
+     "end": 370.75,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 96,
+   "text": "They cut away his believing.",
+   "stanza": 13,
+   "start": 370.75,
+   "end": 374.05,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "They",
+     "start": 370.75,
+     "end": 371.55,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "cut",
+     "start": 371.55,
+     "end": 371.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "away",
+     "start": 371.91,
+     "end": 372.33,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "his",
+     "start": 372.33,
+     "end": 372.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "believing.",
+     "start": 372.99,
+     "end": 374.05,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 97,
+   "text": "But left him the gun\u2026 and the bullet.",
+   "stanza": 13,
+   "start": 374.05,
+   "end": 377.31,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "But",
+     "start": 374.05,
+     "end": 374.51,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "left",
+     "start": 374.51,
+     "end": 374.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "him",
+     "start": 374.77,
+     "end": 375.01,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 375.01,
+     "end": 375.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "gun\u2026",
+     "start": 375.23,
+     "end": 375.65,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 375.65,
+     "end": 376.71,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 376.71,
+     "end": 376.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "bullet.",
+     "start": 376.91,
+     "end": 377.31,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 99,
+   "text": "They took her arms to hug,",
+   "stanza": 14,
+   "start": 377.31,
+   "end": 379.67,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "They",
+     "start": 377.31,
+     "end": 378.31,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "took",
+     "start": 378.31,
+     "end": 378.55,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her",
+     "start": 378.55,
+     "end": 378.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "arms",
+     "start": 378.81,
+     "end": 379.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 379.11,
+     "end": 379.45,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hug,",
+     "start": 379.45,
+     "end": 379.67,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 100,
+   "text": "They took her legs to run,",
+   "stanza": 14,
+   "start": 379.67,
+   "end": 381.41,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "They",
+     "start": 379.67,
+     "end": 380.07,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "took",
+     "start": 380.07,
+     "end": 380.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her",
+     "start": 380.27,
+     "end": 380.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "legs",
+     "start": 380.49,
+     "end": 380.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 380.77,
+     "end": 381.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "run,",
+     "start": 381.11,
+     "end": 381.41,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 101,
+   "text": "Her eyes to see and ears to hear...",
+   "stanza": 14,
+   "start": 381.41,
+   "end": 384.91,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Her",
+     "start": 381.41,
+     "end": 381.79,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "eyes",
+     "start": 381.79,
+     "end": 382.35,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 382.35,
+     "end": 382.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "see",
+     "start": 382.77,
+     "end": 383.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 383.11,
+     "end": 383.47,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ears",
+     "start": 383.47,
+     "end": 384.01,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 384.01,
+     "end": 384.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hear...",
+     "start": 384.53,
+     "end": 384.91,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 102,
+   "text": "But left her the years (and years and years)...",
+   "stanza": 14,
+   "start": 384.91,
+   "end": 388.43,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "But",
+     "start": 384.91,
+     "end": 385.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "left",
+     "start": 385.53,
+     "end": 385.79,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her",
+     "start": 385.79,
+     "end": 385.97,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "the",
+     "start": 385.97,
+     "end": 386.25,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "years",
+     "start": 386.25,
+     "end": 386.71,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 386.71,
+     "end": 387.01,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "years",
+     "start": 387.01,
+     "end": 387.57,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "and",
+     "start": 387.57,
+     "end": 387.89,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "years",
+     "start": 387.89,
+     "end": 388.43,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 103,
+   "text": "Alone, with time... with time...",
+   "stanza": 14,
+   "start": 388.43,
+   "end": 390.89,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Alone,",
+     "start": 388.43,
+     "end": 389.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 389.03,
+     "end": 389.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time...",
+     "start": 389.53,
+     "end": 389.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "with",
+     "start": 390.07,
+     "end": 390.37,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "time...",
+     "start": 390.37,
+     "end": 390.89,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 104,
+   "text": "And all her agains and agains and agains...",
+   "stanza": 14,
+   "start": 390.89,
+   "end": 394.49,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 390.89,
+     "end": 391.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "all",
+     "start": 391.49,
+     "end": 391.83,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her",
+     "start": 391.83,
+     "end": 392.13,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "agains",
+     "start": 392.13,
+     "end": 392.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 392.85,
+     "end": 392.97,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "agains",
+     "start": 392.97,
+     "end": 393.67,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 393.67,
+     "end": 393.83,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "agains...",
+     "start": 393.83,
+     "end": 394.49,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 105,
+   "text": "Of him...  and her...",
+   "stanza": 14,
+   "start": 394.49,
+   "end": 396.63,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Of",
+     "start": 394.49,
+     "end": 394.65,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "him...",
+     "start": 394.65,
+     "end": 395.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 395.27,
+     "end": 396.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her...",
+     "start": 396.23,
+     "end": 396.63,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 107,
+   "text": "Stay lost now girl (forever, forever)",
+   "stanza": 15,
+   "start": 396.63,
+   "end": 401.25,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Stay",
+     "start": 396.63,
+     "end": 397.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 397.19,
+     "end": 397.71,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "now",
+     "start": 397.71,
+     "end": 398.13,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "girl",
+     "start": 398.13,
+     "end": 398.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "forever,",
+     "start": 398.81,
+     "end": 399.47,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "forever",
+     "start": 400.11,
+     "end": 401.25,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 108,
+   "text": "Throw away everything he could find",
+   "stanza": 15,
+   "start": 401.71,
+   "end": 405.61,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Throw",
+     "start": 401.71,
+     "end": 402.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "away",
+     "start": 402.23,
+     "end": 402.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "everything",
+     "start": 402.85,
+     "end": 404.01,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "he",
+     "start": 404.01,
+     "end": 404.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "could",
+     "start": 404.49,
+     "end": 404.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "find",
+     "start": 404.77,
+     "end": 405.61,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 109,
+   "text": "So he never got lost inside you. (again, again)",
+   "stanza": 15,
+   "start": 405.61,
+   "end": 410.49,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "So",
+     "start": 405.61,
+     "end": 406.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "he",
+     "start": 406.21,
+     "end": 406.41,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "never",
+     "start": 406.41,
+     "end": 406.89,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "got",
+     "start": 406.89,
+     "end": 407.41,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 407.41,
+     "end": 407.83,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "inside",
+     "start": 407.83,
+     "end": 408.37,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "you.",
+     "start": 408.37,
+     "end": 408.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "again,",
+     "start": 408.93,
+     "end": 409.45,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "again",
+     "start": 409.93,
+     "end": 410.49,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 110,
+   "text": "Forever again, forever again.",
+   "stanza": 15,
+   "start": 410.49,
+   "end": 415.57,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Forever",
+     "start": 410.49,
+     "end": 411.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "again,",
+     "start": 411.19,
+     "end": 412.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "forever",
+     "start": 413.81,
+     "end": 414.69,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "again.",
+     "start": 414.69,
+     "end": 415.57,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 111,
+   "text": "Never again...",
+   "stanza": 15,
+   "start": 415.81,
+   "end": 417.57,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Never",
+     "start": 415.81,
+     "end": 416.23,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "again...",
+     "start": 416.23,
+     "end": 417.57,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 113,
+   "text": "Through eyes that were hers and weren't",
+   "stanza": 16,
+   "start": 417.57,
+   "end": 421.11,
+   "support": 0.86,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Through",
+     "start": 417.57,
+     "end": 419.07,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "eyes",
+     "start": 419.07,
+     "end": 419.67,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "that",
+     "start": 419.67,
+     "end": 419.99,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "were",
+     "start": 419.99,
+     "end": 420.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hers",
+     "start": 420.15,
+     "end": 420.59,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 420.59,
+     "end": 420.89,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "weren't",
+     "start": 420.89,
+     "end": 421.11,
+     "matched": false,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 114,
+   "text": "Through years that weren't hers and were",
+   "stanza": 16,
+   "start": 421.33,
+   "end": 425.07,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Through",
+     "start": 421.33,
+     "end": 422.53,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "years",
+     "start": 422.53,
+     "end": 423.09,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "that",
+     "start": 423.09,
+     "end": 423.41,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "weren't",
+     "start": 423.41,
+     "end": 423.79,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "hers",
+     "start": 423.79,
+     "end": 424.19,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 424.19,
+     "end": 424.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "were",
+     "start": 424.49,
+     "end": 425.07,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 115,
+   "text": "Left in rooms she couldn't leave",
+   "stanza": 16,
+   "start": 425.07,
+   "end": 428.27,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Left",
+     "start": 425.07,
+     "end": 425.77,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "in",
+     "start": 425.77,
+     "end": 426.21,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "rooms",
+     "start": 426.21,
+     "end": 426.47,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 426.47,
+     "end": 426.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "couldn't",
+     "start": 426.91,
+     "end": 427.57,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "leave",
+     "start": 427.57,
+     "end": 428.27,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 116,
+   "text": "Learning a self she couldn't learn",
+   "stanza": 16,
+   "start": 428.27,
+   "end": 431.41,
+   "support": 0.83,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Learning",
+     "start": 428.27,
+     "end": 429.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 429.27,
+     "end": 429.42,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "self",
+     "start": 429.57,
+     "end": 429.85,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 429.85,
+     "end": 430.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "couldn't",
+     "start": 430.29,
+     "end": 431.01,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "learn",
+     "start": 431.01,
+     "end": 431.41,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 117,
+   "text": "And a voice came to her (sweet, so sweet)",
+   "stanza": 16,
+   "start": 431.41,
+   "end": 435.77,
+   "support": 0.83,
+   "pinned": false,
+   "words": [
+    {
+     "text": "And",
+     "start": 431.41,
+     "end": 431.75,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "a",
+     "start": 431.75,
+     "end": 431.86,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "voice",
+     "start": 431.97,
+     "end": 432.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "came",
+     "start": 432.49,
+     "end": 433.29,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "to",
+     "start": 433.29,
+     "end": 433.67,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "her",
+     "start": 433.67,
+     "end": 434.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "sweet,",
+     "start": 434.11,
+     "end": 434.61,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "so",
+     "start": 435.01,
+     "end": 435.21,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "sweet",
+     "start": 435.21,
+     "end": 435.77,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 118,
+   "text": "A hand, as ever as it was once (good, so good)",
+   "stanza": 16,
+   "start": 435.77,
+   "end": 441.01,
+   "support": 0.88,
+   "pinned": false,
+   "words": [
+    {
+     "text": "A",
+     "start": 435.77,
+     "end": 435.91,
+     "matched": false,
+     "backing": false
+    },
+    {
+     "text": "hand,",
+     "start": 436.05,
+     "end": 436.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "as",
+     "start": 436.27,
+     "end": 436.51,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ever",
+     "start": 436.51,
+     "end": 436.93,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "as",
+     "start": 436.93,
+     "end": 437.49,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "it",
+     "start": 437.49,
+     "end": 437.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "was",
+     "start": 437.91,
+     "end": 438.27,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "once",
+     "start": 438.27,
+     "end": 439.07,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "good,",
+     "start": 439.07,
+     "end": 439.71,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "so",
+     "start": 440.17,
+     "end": 440.35,
+     "matched": true,
+     "backing": true
+    },
+    {
+     "text": "good",
+     "start": 440.35,
+     "end": 441.01,
+     "matched": true,
+     "backing": true
+    }
+   ]
+  },
+  {
+   "line": 119,
+   "text": "She got lost inside him",
+   "stanza": 16,
+   "start": 441.01,
+   "end": 444.47,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "She",
+     "start": 441.01,
+     "end": 441.75,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "got",
+     "start": 441.75,
+     "end": 442.15,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 442.15,
+     "end": 442.81,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "inside",
+     "start": 442.81,
+     "end": 443.65,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "him",
+     "start": 443.65,
+     "end": 444.47,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 120,
+   "text": "Lost and lost inside him",
+   "stanza": 16,
+   "start": 444.55,
+   "end": 448.05,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Lost",
+     "start": 444.55,
+     "end": 445.13,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "and",
+     "start": 445.13,
+     "end": 445.55,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "lost",
+     "start": 445.55,
+     "end": 446.11,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "inside",
+     "start": 446.11,
+     "end": 447.03,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "him",
+     "start": 447.03,
+     "end": 448.05,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  },
+  {
+   "line": 121,
+   "text": "Like she swore she never would.",
+   "stanza": 16,
+   "start": 448.05,
+   "end": 452.07,
+   "support": 1.0,
+   "pinned": false,
+   "words": [
+    {
+     "text": "Like",
+     "start": 448.05,
+     "end": 448.59,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 448.59,
+     "end": 448.91,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "swore",
+     "start": 448.91,
+     "end": 449.45,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "she",
+     "start": 449.45,
+     "end": 450.83,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "never",
+     "start": 450.83,
+     "end": 451.37,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "would.",
+     "start": 451.37,
+     "end": 452.07,
+     "matched": true,
+     "backing": false
+    }
+   ]
+  }
+ ]
+}

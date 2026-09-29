@@ -1,0 +1,190 @@
+{
+ "model": "medium.en",
+ "clip": [
+  196.0,
+  223.8
+ ],
+ "prompt": "But with time, with time, the white coats said: Hmm... this girl is too lost. Scribble scribble, stab stab the charts.",
+ "segments": [
+  {
+   "start": 208.42000000000002,
+   "end": 222.26,
+   "text": "But with time, with time, the white coats said Hmm... this girl is too lost. Scribble scribble, stab stab the charts."
+  },
+  {
+   "start": 222.26,
+   "end": 223.78,
+   "text": "But with time, the white coats said"
+  }
+ ],
+ "words": [
+  {
+   "start": 208.42,
+   "end": 209.46,
+   "word": "But",
+   "p": 0.264
+  },
+  {
+   "start": 209.46,
+   "end": 209.76,
+   "word": "with",
+   "p": 0.983
+  },
+  {
+   "start": 209.76,
+   "end": 210.48,
+   "word": "time,",
+   "p": 0.996
+  },
+  {
+   "start": 210.96,
+   "end": 211.42,
+   "word": "with",
+   "p": 0.897
+  },
+  {
+   "start": 211.42,
+   "end": 212.26,
+   "word": "time,",
+   "p": 0.999
+  },
+  {
+   "start": 213.12,
+   "end": 213.32,
+   "word": "the",
+   "p": 0.75
+  },
+  {
+   "start": 213.32,
+   "end": 213.62,
+   "word": "white",
+   "p": 0.967
+  },
+  {
+   "start": 213.62,
+   "end": 214.02,
+   "word": "coats",
+   "p": 0.047
+  },
+  {
+   "start": 214.02,
+   "end": 214.74,
+   "word": "said",
+   "p": 0.579
+  },
+  {
+   "start": 214.74,
+   "end": 215.3,
+   "word": "Hmm...",
+   "p": 0.031
+  },
+  {
+   "start": 215.3,
+   "end": 215.44,
+   "word": "this",
+   "p": 0.535
+  },
+  {
+   "start": 215.44,
+   "end": 215.8,
+   "word": "girl",
+   "p": 0.992
+  },
+  {
+   "start": 215.8,
+   "end": 216.06,
+   "word": "is",
+   "p": 0.991
+  },
+  {
+   "start": 216.06,
+   "end": 216.38,
+   "word": "too",
+   "p": 0.976
+  },
+  {
+   "start": 216.38,
+   "end": 217.14,
+   "word": "lost.",
+   "p": 0.997
+  },
+  {
+   "start": 217.66,
+   "end": 218.06,
+   "word": "Scribble",
+   "p": 0.943
+  },
+  {
+   "start": 218.06,
+   "end": 219.34,
+   "word": "scribble,",
+   "p": 0.566
+  },
+  {
+   "start": 219.98,
+   "end": 220.34,
+   "word": "stab",
+   "p": 0.848
+  },
+  {
+   "start": 220.34,
+   "end": 221.04,
+   "word": "stab",
+   "p": 0.898
+  },
+  {
+   "start": 221.04,
+   "end": 221.56,
+   "word": "the",
+   "p": 0.925
+  },
+  {
+   "start": 221.56,
+   "end": 222.26,
+   "word": "charts.",
+   "p": 0.974
+  },
+  {
+   "start": 222.26,
+   "end": 223.78,
+   "word": "But",
+   "p": 0.001
+  },
+  {
+   "start": 223.78,
+   "end": 223.78,
+   "word": "with",
+   "p": 0.004
+  },
+  {
+   "start": 223.78,
+   "end": 223.78,
+   "word": "time,",
+   "p": 0.006
+  },
+  {
+   "start": 223.78,
+   "end": 223.78,
+   "word": "the",
+   "p": 0.053
+  },
+  {
+   "start": 223.78,
+   "end": 223.78,
+   "word": "white",
+   "p": 0.0
+  },
+  {
+   "start": 223.78,
+   "end": 223.78,
+   "word": "coats",
+   "p": 0.0
+  },
+  {
+   "start": 223.78,
+   "end": 223.78,
+   "word": "said",
+   "p": 0.0
+  }
+ ]
+}
