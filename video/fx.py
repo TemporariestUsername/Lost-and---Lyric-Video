@@ -206,8 +206,8 @@ def tone(img, exposure=1.0, lift=0.06, shadow="#6B5F80", sat=0.85, white=1.0):
 
 def grain(img, t, amount=0.05, seed=9):
     r = np.random.default_rng(int(t * FPS) + seed * 1_000_003)
-    n = r.standard_normal((H // 2, W // 2)).astype(F32)
-    n = cv2.resize(n, (W, H), interpolation=cv2.INTER_LINEAR)
+    n = r.standard_normal((H, W)).astype(F32)
+    n = cv2.GaussianBlur(n, (0, 0), 0.7) * 1.9           # fine, round film grain
     L = lum(img)
     wgt = 0.35 + 4 * L * (1 - L)
     return np.clip(img + (n * amount * wgt)[..., None], 0, 1)

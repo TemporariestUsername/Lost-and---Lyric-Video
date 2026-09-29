@@ -14,39 +14,51 @@ from engine import H, ROOT, W
 from fx import F32
 
 PHOTOS = ROOT / "assets" / "photos" / "picks"
-PW = 720  # working width of a print; height follows the photo
+PW = 1280  # prints keep full resolution and are only ever scaled down
 
 
-@lru_cache(maxsize=64)
-def print_image(name, seed, border):
-    """A faded, soft print of a real photo: float RGB + alpha."""
+def _disc(img, radius):
+    """Lens-like defocus: a soft-edged disc kernel, not a Gaussian.
+    Highlights open into round bokeh instead of smearing."""
+    if radius < 0.8:
+        return img
+    r = int(math.ceil(radius)) + 1
+    yy, xx = np.mgrid[-r:r + 1, -r:r + 1].astype(F32)
+    k = np.clip(radius + 0.5 - np.sqrt(xx ** 2 + yy ** 2), 0, 1)
+    return cv2.filter2D(img, -1, k / k.sum(), borderType=cv2.BORDER_REFLECT)
+
+
+def _organic_mask(h, w, seed):
+    """Irregular dissolving edge: a soft rectangle eaten by low-frequency noise."""
+    r = np.random.default_rng(seed)
+    g = cv2.resize(r.random((6, 9)).astype(F32), (w, h), interpolation=cv2.INTER_CUBIC)
+    yy, xx = np.mgrid[0:h, 0:w].astype(F32)
+    d = np.minimum.reduce([xx, w - 1 - xx, yy, h - 1 - yy]) / (0.30 * min(w, h))
+    m = np.clip(d - 0.12 * (g - 0.5) * 2, 0, 1)
+    return cv2.GaussianBlur(m * m * (3 - 2 * m), (0, 0), 22)          # light falling off
+
+
+@lru_cache(maxsize=48)
+def print_image(name, seed, defocus):
+    """A memory print: full-resolution photo with an Orton-style glow
+    (bright wide bloom screened back in), lens defocus for depth, faded
+    colour, lifted blacks, and irregular dissolving edges."""
     r = np.random.default_rng(seed)
     img = cv2.cvtColor(cv2.imread(str(PHOTOS / f"{name}.jpg")), cv2.COLOR_BGR2RGB)
     ph = int(round(img.shape[0] * PW / img.shape[1]))
     img = cv2.resize(img, (PW, ph), interpolation=cv2.INTER_AREA).astype(F32) / 255
-    img = cv2.GaussianBlur(img, (0, 0), 1.6)                              # soft focus
+    img = _disc(img, 1.2 + defocus)                                        # optical softness
+    glow = cv2.GaussianBlur(np.clip(img * 1.25, 0, 1), (0, 0), 28)
+    img = 1 - (1 - img * 0.9) * (1 - glow * 0.55)                          # Orton: screen glow in
     L = img.mean(-1, keepdims=True)
-    img = L + (img - L) * 0.75                                            # faded colour
-    img = 0.07 + 0.9 * img                                                # lifted blacks
+    img = L + (img - L) * 0.72                                             # faded colour
+    img = 0.06 + 0.92 * img                                                # lifted blacks
     tint = np.array(r.choice([[1.04, 0.99, 0.93], [0.97, 1.0, 1.04], [1.03, 0.97, 0.98]]), F32)
     img = img * tint
     yy, xx = np.mgrid[0:ph, 0:PW].astype(F32)
-    v = 1 - 0.32 * (((xx / PW - 0.5) ** 2 + (yy / ph - 0.5) ** 2) * 2.2)
-    img = img * v[..., None]                                              # lens falloff
     leak = np.exp(-((xx - PW * r.uniform(0.7, 1.1)) / (PW * 0.25)) ** 2)[..., None]
-    img = img + np.array([0.30, 0.14, 0.05], F32) * leak * r.uniform(0.1, 0.5)
-    alpha = np.ones((ph, PW), F32)
-    if border:
-        b = 16
-        out = np.empty_like(img)
-        out[:] = np.array([0.92, 0.90, 0.87], F32)
-        out[b:-b, b:-b] = cv2.resize(img, (PW - 2 * b, ph - 2 * b))
-        img = out
-    else:
-        m = np.zeros((ph, PW), F32)
-        m[28:-28, 28:-28] = 1
-        alpha = cv2.GaussianBlur(m, (0, 0), 20)                            # dissolving edges
-    return np.clip(img, 0, 1.2), alpha
+    img = img + np.array([0.30, 0.14, 0.05], F32) * leak * r.uniform(0.1, 0.45)
+    return np.clip(img, 0, 1.2), _organic_mask(ph, PW, seed)
 
 
 @lru_cache(maxsize=None)
@@ -62,7 +74,6 @@ class Memory:
     def __init__(self, scene, t0, seed, life=10.0, zone=None, keep_left=None):
         r = np.random.default_rng(seed)
         self.scene, self.t0, self.life, self.seed = scene, t0, life, seed
-        self.border = r.random() < 0.4
         self.depth = r.uniform(0, 1)                         # 0 far, 1 near
         self.w = 820 + 560 * self.depth                      # nearer = bigger
         zx0, zx1, zy0, zy1 = zone or (0.2, 0.9, 0.15, 0.75)
@@ -76,7 +87,7 @@ class Memory:
             self.x0 = max(self.x0, keep_left + self.w / 2)
         self.rot0, self.omega = r.uniform(-7, 7), r.uniform(-0.6, 0.6)
         self.alpha = 0.62 + 0.28 * (1 - self.depth)
-        self.blur = 1 + 5 * self.depth ** 2                  # near prints out of focus
+        self.defocus = round(6 * self.depth ** 2)            # near prints out of focus
 
     def envelope(self, t):
         u = (t - self.t0) / self.life
@@ -84,22 +95,20 @@ class Memory:
             return 0.0
         return min(1.0, u / 0.18) ** 1.5 * min(1.0, (1 - u) / 0.35) ** 1.5
 
-    def draw(self, img, t, warm=0.0, offset=(0.0, 0.0)):
-        e = self.envelope(t)
-        if e <= 0.002:
-            return img
-        pic, a = print_image(self.scene, self.seed, self.border)
-        PH = pic.shape[0]
+    def _place(self, t, offset):
         dt = t - self.t0
         sc = self.w / PW * (1 + 0.012 * dt)                   # slowly nearing
         cx = self.x0 + self.vx * dt + 10 * math.sin(dt * 0.4 + self.seed) + offset[0] * (0.6 + self.depth)
         cy = self.y0 + self.vy * dt + 6 * math.sin(dt * 0.33 + self.seed * 2) + offset[1] * (0.6 + self.depth)
-        rot = self.rot0 + self.omega * dt
+        return sc, cx, cy, self.rot0 + self.omega * dt
+
+    def _layer(self, img, pic, a, t, offset, strength, warm):
+        PH = pic.shape[0]
+        sc, cx, cy, rot = self._place(t, offset)
         M = cv2.getRotationMatrix2D((PW / 2, PH / 2), rot, sc)
         M[0, 2] += cx - PW / 2
         M[1, 2] += cy - PH / 2
-        # warp only into the bounding box the print can occupy
-        half = 0.5 * math.hypot(PW, PH) * sc + self.blur * 3
+        half = 0.5 * math.hypot(PW, PH) * sc + 4
         x0, x1 = max(0, int(cx - half)), min(W, int(cx + half))
         y0, y1 = max(0, int(cy - half)), min(H, int(cy + half))
         if x0 >= x1 or y0 >= y1:
@@ -107,21 +116,25 @@ class Memory:
         M[0, 2] -= x0
         M[1, 2] -= y0
         bw, bh = x1 - x0, y1 - y0
-        p = cv2.warpAffine(pic, M, (bw, bh), flags=cv2.INTER_LINEAR, borderValue=0)
+        p = cv2.warpAffine(pic, M, (bw, bh), flags=cv2.INTER_AREA if sc < 1 else cv2.INTER_CUBIC,
+                           borderValue=0)
         m = cv2.warpAffine(a, M, (bw, bh), flags=cv2.INTER_LINEAR, borderValue=0)
-        if self.blur > 1.5:
-            p = cv2.GaussianBlur(p, (0, 0), self.blur)
-            m = cv2.GaussianBlur(m, (0, 0), self.blur)
         if warm > 0:
             p = p * (1 - 0.35 * warm) + np.array([1.0, 0.72, 0.45], F32) * p.mean(-1, keepdims=True) * 0.35 * warm * 1.3
-        k = (m * e * self.alpha)[..., None]
+        k = (m * strength)[..., None]
         out = img.copy()
         region = out[y0:y1, x0:x1]
-        # a faint soft shadow so pale prints still separate from the haze
-        sh = cv2.GaussianBlur(m, (0, 0), 18)[..., None] * e * 0.12
-        region = region * (1 - np.roll(np.roll(sh, 10, 0), 6, 1))
         out[y0:y1, x0:x1] = region * (1 - k) + p * k
         return out
+
+    def draw(self, img, t, warm=0.0, offset=(0.0, 0.0)):
+        e = self.envelope(t)
+        if e <= 0.002:
+            return img
+        pic, a = print_image(self.scene, self.seed, self.defocus)
+        # a faint trailing exposure, as if the print left light behind it
+        img = self._layer(img, pic, a, t - 0.9, offset, e * self.alpha * 0.28, warm)
+        return self._layer(img, pic, a, t, offset, e * self.alpha, warm)
 
 
 def schedule(T, scenes, start, end, every=2, life=11.0, seed=0, zone=None, lead=1.5,
