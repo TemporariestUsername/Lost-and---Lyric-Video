@@ -180,8 +180,8 @@ def intro(t, T, lines):
     return img, post("bleach", exposure=0.95)
 
 
-ONCE_SHOTS = {11: dict(style="hero", hero=4), 12: dict(style="depth", hero=2),
-              13: dict(style="hero", hero=3), 14: dict(style="depth", hero=2),
+ONCE_SHOTS = {11: dict(style="hero", hero=4), 12: dict(style="stack", hero=2),
+              13: dict(style="hero", hero=3), 14: dict(style="stack", hero=2),
               15: dict(style="stack", hero=0), 16: dict(style="track", hero=2),
               17: dict(style="stack", hero=3), 18: dict(style="hero", hero=0)}
 

@@ -204,4 +204,6 @@ STYLE_FRAMES = [
 RENDERS = [
     ("verse_a", "Verse A: Through eyes",
      "Kinetic typography (a designed shot per line, hero words, per-letter timing, camera through the type) over drifting memory photographs. Web copy at 720p; the 1080p master passed QA and ffprobe."),
+    ("there_comes_a_once", "There comes a once",
+     "Two timelines: the 'no' drifts left, the 'yes' drifts right; each 'once' flashes toward white; 'lost to the world' pulls focus until nothing is sharp. Web copy at 720p; the 1080p master passed QA and ffprobe."),
 ]
