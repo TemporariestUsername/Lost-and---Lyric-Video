@@ -181,9 +181,9 @@ def _lifetime(T, n, lines):
     idx = lines.index(n)
     nxt = T.lines[lines[idx + 1]]["start"] if idx + 1 < len(lines) else None
     end = T.lines[n]["end"] + 2.2
-    if nxt is not None:
-        end = min(end, nxt - 0.12)
-    return start, max(end, T.lines[n]["end"] + 0.25)
+    if nxt is not None:                              # already leaving as the next arrives,
+        end = min(end, max(nxt - 0.35, T.lines[n]["end"] - 0.1))   # but not before it's sung
+    return start, end
 
 
 def _char_x(f, txt, tracking, size):
@@ -203,6 +203,8 @@ class Kinetic:
         for n in self.lines:
             ov = (overrides or {}).get(n, {})
             placed, style = layout(T, n, ov.get("style"), ov.get("hero"), seed)
+            for o in placed:                        # alternate lines sit a little high / low
+                o["y"] += 55 if n % 2 else -55
             self.plan[n] = dict(placed=placed, style=style, life=_lifetime(T, n, self.lines))
 
     def draw(self, img, t, cam=(0.0, 0.0), kick=0.0):
@@ -220,8 +222,8 @@ class Kinetic:
             ex = smooth(ramp(t, e0, e0 + 0.55))             # exit progress
             age = t - a0
             # camera: slow push through the composition, kick nudge, exit fly-past
-            cx, cy = (BOX[0] + BOX[2]) / 2, (BOX[1] + BOX[3]) / 2
-            push = 1.0 + 0.035 * age + 0.012 * kick
+            cx, cy = BOX[0] + 120, (BOX[1] + BOX[3]) / 2  # push anchored near the left margin
+            push = 1.0 + 0.02 * min(age, 8) + 0.012 * kick
             fly = 1.0 + 0.45 * ex ** 1.4
             for o in p["placed"]:
                 w = o["word"]
