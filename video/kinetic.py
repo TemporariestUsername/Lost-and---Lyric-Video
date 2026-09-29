@@ -39,7 +39,7 @@ TRACK_MAX = 0.14             # widest letter-spacing a 'track' line opens to (em
 VOICES = {
     "her": ("her", "her_roman", False, 70, 190),
     "coats": ("coats", "coats_bold", True, 56, 150),
-    "him": ("him", "him_med", True, 34, 34),
+    "him": ("him", "him_med", True, 40, 40),
 }
 
 
@@ -400,7 +400,7 @@ class Kinetic:
                         sig = (1 - u) * 4 + ex * 6
                     if a > 0.004:
                         put(kind, sig, (ch, sx, sy, f, sc, a))
-                        if o["role"] in ("word", "hero") and ex < 0.5 and v != "him":
+                        if o["role"] in ("word", "hero") and ex < 0.5 and v == "her":
                             halo.append((ch, sx, sy, f, sc, a * 0.9))
                         g_age = t - cs
                         if v == "her" and o["role"] in ("word", "hero") and g_age > 0.1 and ex < 0.05:

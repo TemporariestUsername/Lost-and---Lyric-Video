@@ -22,15 +22,21 @@ def tc(t):
     return f"{int(m)}:{s:05.2f}"
 
 
-def main(video):
+def main(video, section=None):
+    """Two thumbnails per bar. With `section`, only that section of a longer
+    render (e.g. the full film), written to <video>_<section>_contact.jpg."""
     video = pathlib.Path(video)
     qa = json.loads(video.with_suffix(".qa.json").read_text())
     T = Timing()
+    v0 = qa["start"]
     start, end = qa["start"], qa["end"]
+    if section:
+        sec = next(s for s in T.sections if s["name"].startswith(section))
+        start, end = max(start, sec["start"]), min(end, sec["end"])
     bars = [b for b in T.bars if start <= b < end]
     times = sorted(set([start] + [b + d for b in bars for d in (0.05, (T.bars[list(T.bars).index(b) + 1] - b) / 2 if list(T.bars).index(b) + 1 < len(T.bars) else 1.7)]))
     times = [t for t in times if t < end - 1 / FPS]
-    ks = [round((t - start) * FPS) for t in times]
+    ks = [round((t - v0) * FPS) for t in times]
     sel = "+".join(f"eq(n\\,{k})" for k in ks)
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(video), "-vf",
                           f"select='{sel}',scale={TW}:{TH}", "-vsync", "0", "-f", "rawvideo",
@@ -50,10 +56,11 @@ def main(video):
         d.text((x, y + TH + 4), f"{tc(t)}  bar {bar}", fill=(220, 214, 230), font=f)
         if line:
             d.text((x, y + TH + 22), f"L{line['line']}: {line['text'][:44]}", fill=(160, 150, 175), font=f)
-    out = video.with_name(video.stem + "_contact.jpg")
+    tag = "" if not section else "_" + section.split(":")[0].lower().replace(" ", "_").replace(".", "")
+    out = video.with_name(video.stem + tag + "_contact.jpg")
     sheet.save(out, quality=88)
     print("wrote", out, f"({len(frames)} frames)")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)

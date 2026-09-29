@@ -34,7 +34,7 @@ def worker(args):
     from compose import Compositor
     T = Timing()
     comp = Compositor(T)
-    for k in range(k0 - int(WARMUP * FPS), k0, 2):          # warm-up, discarded
+    for k in range(max(0, k0 - int(WARMUP * FPS)), k0, 2):  # warm-up, discarded (never before 0:00)
         comp.frame(k / FPS, scene=scene)
     look.TEXT_LOG = []
     kinetic.TEXT_LOG = look.TEXT_LOG

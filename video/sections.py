@@ -97,8 +97,8 @@ POST = {
     "night": dict(exposure=1.05, lift=0.07, sat=0.9, bloom=0.8, hal=0.8, thresh=0.62,
                   diffusion=0.2, grain=0.055, trail=0.6, shadow="#3A2F45",
                   ghosts=((1.2, -140, 0, -4, 0.18), (2.4, 130, -8, 3, 0.11))),
-    "institute": dict(exposure=1.08, lift=0.04, sat=0.5, bloom=0.7, hal=0.7, thresh=1.1,
-                      diffusion=0.3, grain=0.06, trail=0.5, shadow="#7A8290",
+    "institute": dict(exposure=1.02, lift=0.04, sat=0.5, bloom=0.7, hal=0.7, thresh=1.1,
+                      diffusion=0.12, grain=0.06, trail=0.5, shadow="#7A8290",
                       ghosts=((0.8, -60, 0, 0, 0.14), (1.6, 60, 0, 0, 0.08))),
     "run": dict(exposure=1.1, lift=0.06, sat=1.0, bloom=0.95, hal=0.9, thresh=0.55,
                 diffusion=0.18, grain=0.06, trail=0.55, shadow="#2E2436",
@@ -206,8 +206,8 @@ def there_comes_a_once(t, T, lines):
         img = img * (1 - pull * 0.6) + fx.blur(img, 10) * pull * 0.6
     img = kin(T, name, lines, ONCE_SHOTS).draw(img, t, cam=(dx * 0.35, dy * 0.35),
                                               kick=T.pulse_env(t, 7.0))
-    img = img + np.float32(0.45) * fl                    # each 'once' flashes toward white
-    return img, post("her", exposure=0.9 + 0.12 * fl)
+    img = img * (1 - 0.4 * fl) + np.float32(0.93) * 0.4 * fl   # each 'once' flashes toward white
+    return img, post("her")
 
 
 REFRAIN_SHOTS = {20: dict(style="stack", hero=1), 21: dict(style="stack", hero=4),
@@ -382,7 +382,7 @@ def gun_and_bullet(t, T, lines):
     p = post("night")
     bt = word_at(T, 59, "bullet")
     if bt is not None and t >= bt:
-        p["bullet"] = (1480, 930)
+        p["bullet"] = (1470, 925, 1.9)
     return img, p
 
 
@@ -468,7 +468,7 @@ def cutting(t, T, lines):
     img = kin(T, name, lines, CUT_SHOTS, light=True).draw(
         img, t, kick=0.0 if deaf else T.pulse_env(t, 7.0), react=0.0 if deaf else 1.0)
     p = post("night", exposure=0.95)
-    p["bullet"] = (1480, 930)
+    p["bullet"] = (1470, 925, 1.9)
     return img, p
 
 
@@ -493,5 +493,5 @@ def outro(t, T, lines):
     img = img * (1 - white) + np.float32(1.0) * white
     p = post("bleach", exposure=0.95 + 0.1 * u)
     if t < s["end"] - 3.0:
-        p["bullet"] = (1480, 930)
+        p["bullet"] = (1470, 925, 1.9)
     return img, p
