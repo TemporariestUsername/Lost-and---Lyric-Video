@@ -203,5 +203,5 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("verse_a", "Verse A: Through eyes",
-     "Drifting memory photographs (real, contemporary, CC0/public domain) with ghostly optics: glow, lens defocus, light-falloff edges, film grain. Web copy at 720p; the 1080p master passed QA and ffprobe."),
+     "Kinetic typography (a designed shot per line, hero words, per-letter timing, camera through the type) over drifting memory photographs. Web copy at 720p; the 1080p master passed QA and ffprobe."),
 ]
