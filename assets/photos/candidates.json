@@ -2126,5 +2126,133 @@
    1400,
    1050
   ]
+ },
+ "373a2ccd-73e0-4e8c-bd07-b0d611b7ac6e": {
+  "file": "institute_373a2ccd.jpg",
+  "theme": "institute",
+  "query": "hospital hallway",
+  "title": "Doctors Hospital",
+  "creator": "Oles kanebckuu",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/doctors-hospital-5YUFL6LC0E",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   720
+  ]
+ },
+ "83b34dcc-df06-4d50-8e68-f8978276cf92": {
+  "file": "institute_83b34dcc.jpg",
+  "theme": "institute",
+  "query": "hospital hallway",
+  "title": "Royal Victoria Hospital Barrie Ontario Canada",
+  "creator": "antefixus21",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/21728045@N08/55046609955",
+  "provider": "flickr",
+  "size": [
+   1024,
+   768
+  ]
+ },
+ "bc5192be-de16-440d-8e99-b1f08f7c03ef": {
+  "file": "institute_bc5192be.jpg",
+  "theme": "institute",
+  "query": "hospital hallway",
+  "title": "surgeon stands hallway Banadir hospital",
+  "creator": "The African Union Mission in Somalia",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3373045/free-photo-image-africa-banaadir-hospital",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   681
+  ]
+ },
+ "1bb24b6b-bffd-4a40-ac2b-7dcaa4546644": {
+  "file": "institute_1bb24b6b.jpg",
+  "theme": "institute",
+  "query": "hospital hallway",
+  "title": "Two surgeons stand hallway Banadir",
+  "creator": "The African Union Mission in Somalia",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3373685/free-photo-image-apparel-cc0-clinic",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   681
+  ]
+ },
+ "12cd4057-5874-49de-aff4-d1025c588fba": {
+  "file": "institute_12cd4057.jpg",
+  "theme": "institute",
+  "query": "stairwell concrete",
+  "title": "Architecture Building",
+  "creator": "Justin Hamilton",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/architecture-building-I2CJK241EY",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   640
+  ]
+ },
+ "41398206-44c9-427d-bc39-ac19a85f5cfc": {
+  "file": "institute_41398206.jpg",
+  "theme": "institute",
+  "query": "stairwell concrete",
+  "title": "Hotel stairwell",
+  "creator": "dankeck",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/140641142@N05/52751945522",
+  "provider": "flickr",
+  "size": [
+   1024,
+   576
+  ]
+ },
+ "5ab08e1a-1546-4b0b-a4d3-8d4029d9d63d": {
+  "file": "institute_5ab08e1a.jpg",
+  "theme": "institute",
+  "query": "stairwell concrete",
+  "title": "Hotel stairwell",
+  "creator": "dankeck",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/140641142@N05/52752480896",
+  "provider": "flickr",
+  "size": [
+   1024,
+   576
+  ]
+ },
+ "3ece9ad4-b53f-447a-abab-18aa4c82dc9f": {
+  "file": "institute_3ece9ad4.jpg",
+  "theme": "institute",
+  "query": "stairwell concrete",
+  "title": "Looking gray rectangular stairwell inside",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3286777/free-photo-image-geometric-madrid-wall-texture",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   863
+  ]
  }
 }

@@ -703,11 +703,17 @@ def scratches(img, t, density, seed=6):
     return fx.over(img, C["graphite"], m * 0.55)
 
 
-def beams(img, t, T, cut_times, src=(1780, -160), targets=(600, 820, 1040), colors=None):
-    """His three virtues as shafts of warm light. Each is shuttered at its cut."""
+def beams(img, t, T, cut_times, src=(1780, -160), targets=(600, 820, 1040), colors=None,
+          open_times=None, strength=1.0):
+    """His three virtues as shafts of warm light. Each opens (pours down from
+    its source) at its open time and is shuttered at its cut."""
     colors = colors or [C["amber"], C["rose"], C["amber_hot"]]
+    open_times = open_times or [None] * len(targets)
     g = np.clip(0.55 + 0.45 * fx.fog(t, seed=31, period=5.0), 0.1, 1.2)
-    for k, (tx, ct, col) in enumerate(zip(targets, cut_times, colors)):
+    for k, (tx, ct, col, ot) in enumerate(zip(targets, cut_times, colors, open_times)):
+        pour = 1.0 if ot is None else ease_out(clamp01((t - ot) / 0.9), 2)
+        if pour <= 0.001:
+            continue
         age = t - ct if ct is not None else -1
         # blade closes over 0.5 s from the source end, then the light gutters out
         close = ease_out(clamp01(age / 0.5)) if age >= 0 else 0.0
@@ -725,8 +731,10 @@ def beams(img, t, T, cut_times, src=(1780, -160), targets=(600, 820, 1040), colo
         along = fx.vgrad(src[1], H)
         if close > 0:  # dark blade: everything past the cut point goes
             m = m * (1 - np.clip((close * 1.15 - along) / 0.08, 0, 1))
+        if pour < 1:   # light pours down from the source
+            m = m * np.clip((pour * 1.15 - along) / 0.1, 0, 1)
         m = m * (0.55 + 0.45 * along) * g
-        img = img + col * (m * 0.9 * gutter * flick)[..., None]
+        img = img + col * (m * 0.9 * gutter * flick * strength)[..., None]
     return img
 
 

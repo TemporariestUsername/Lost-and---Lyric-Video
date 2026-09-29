@@ -46,13 +46,15 @@ def memories_for(T, name, scenes, **kw):
     return _MEM[name]
 
 
-def verse_a(t, T, lines):
+def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, years=False):
     """Her room, but she is never shown: memories surface and drift through
-    the haze, and his warmth creeps in until it colours them."""
-    name = "Verse A: Through eyes"
+    the haze, and his warmth creeps in until it colours them. The reprise
+    (years=True) replays it overexposed, with many more of her agains."""
     sec = next(x for x in T.sections if x["name"] == name)
-    voice, flood = T.lines[5]["start"], T.lines[7]["start"]
+    voice, flood = T.lines[5 + offset]["start"], T.lines[7 + offset]["start"]
     warm = 0.25 * smooth(ramp(t, voice, voice + 6)) + 0.9 * smooth(ramp(t, flood, flood + 2.6))
+    if years:
+        warm *= 0.55                                                   # fainter now
     dx, dy, dr = mem.drift(t)
     u = clamp01((t - sec["start"]) / (sec["end"] - sec["start"]))
     zoom = 1.02 + 0.04 * smooth(u) + 0.04 * smooth(ramp(t, flood, flood + 6))
@@ -64,14 +66,24 @@ def verse_a(t, T, lines):
     scenes = ["curtain_bedroom", "lake_overcast", "curtain_window", "rain_window",
               "fog_lamps", "doorway_figure", "car_window_night", "rain_glass_lights",
               "dusk_drive"]
-    for m in memories_for(T, name, scenes, every=2, life=11.0, seed=3, keep_left=900):
+    for m in memories_for(T, name, scenes, every=2, life=11.0, seed=seed, keep_left=900):
         img = m.draw(img, t, warm=warm, offset=(dx, dy))
     img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.3)
-    img = kinetic_for(T, name, lines, VERSE_A_SHOTS).draw(
+    shots = {n + offset: v for n, v in VERSE_A_SHOTS.items()}
+    img = kinetic_for(T, name, lines, shots).draw(
         img, t, cam=(dx * 0.35, dy * 0.35), kick=T.pulse_env(t, 7.0))
-    return img, dict(exposure=0.9, lift=0.08, sat=0.85, bloom=0.5, hal=0.55, thresh=1.0,
-                     diffusion=0.14, grain=0.045, trail=0.62,
-                     ghosts=((1.2, -160, 0, -5, 0.16), (2.4, 150, -10, 4, 0.10)))
+    p = dict(exposure=0.9, lift=0.08, sat=0.85, bloom=0.5, hal=0.55, thresh=1.0,
+             diffusion=0.14, grain=0.045, trail=0.62,
+             ghosts=((1.2, -160, 0, -5, 0.16), (2.4, 150, -10, 4, 0.10)))
+    if years:
+        p.update(exposure=1.02, lift=0.12, sat=0.7, trail=0.7,
+                 ghosts=((1.0, -180, 0, -5, 0.22), (2.0, 170, -10, 4, 0.16),
+                         (3.4, -70, 14, 2, 0.12), (4.6, 90, -16, -3, 0.08)))
+    return img, p
+
+
+def verse_a(t, T, lines):
+    return verse_a_like(t, T, lines)
 
 
 def white_coats(t, T, lines):
@@ -132,10 +144,31 @@ def cutting(t, T, lines):
                      bullet=(1500, 930), ghosts=((1.2, -120, 0, -3, 0.2), (2.4, 120, 0, 3, 0.12)))
 
 
+import sections as S  # noqa: E402
+
 SCENES = {
+    "Intro": (S.intro, range(0)),
     "Verse A: Through eyes": (verse_a, range(1, 10)),
-    "White Coats I": (white_coats, range(26, 36)),
-    "The Cutting": (cutting, range(94, 106)),
+    "There comes a once": (S.there_comes_a_once, range(11, 19)),
+    "Refrain I: Stay lost now girl": (S.refrain("Refrain I: Stay lost now girl", True), range(20, 25)),
+    "Break I": (S.break_institute, range(0)),
+    "White Coats I": (S.coats("White Coats I", ["hospital_corridor", "cinderblock_plate", "stairwell_spiral", "corridor"], 61), range(26, 36)),
+    "They brought a man": (S.brought_a_man, range(37, 43)),
+    "Spoken I: I can help you find": (S.spoken("Spoken I: I can help you find"), range(44, 46)),
+    "Break II": (S.break_threads, range(0)),
+    "White Coats II": (S.coats("White Coats II", ["stairwell_cage", "cinderblock_hole", "facade_windows", "hospital_corridor"], 67), range(47, 57)),
+    "A gun and a bullet": (S.gun_and_bullet, range(58, 65)),
+    "Spoken II: I won't lose you": (S.spoken("Spoken II: I won't lose you",
+                                             reopen=lambda T, i: T.lines[66]["start"] + 0.9 * i),
+                                    range(66, 68)),
+    "The Run": (S.the_run, range(69, 77)),
+    "But...": (S.but, range(78, 82)),
+    "White Coats III": (S.coats("White Coats III", ["cinderblock_hole", "stairwell_spiral", "corridor", "stairwell_cage"], 71), range(83, 93)),
+    "The Cutting": (S.cutting, range(94, 106)),
+    "Refrain II: Stay lost now girl": (S.refrain("Refrain II: Stay lost now girl", False),
+                                       range(107, 112)),
+    "Verse A reprise": (S.reprise, range(113, 122)),
+    "Outro": (S.outro, range(0)),
 }
 
 

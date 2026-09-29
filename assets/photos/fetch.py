@@ -44,6 +44,9 @@ THEMES = {
     # contemporary additions (nothing retro)
     "hospital": ["hospital bed empty", "hospital room window", "fluorescent light ceiling"],
     "room": ["empty room window light", "sheer curtain sunlight", "bedroom window morning light"],
+    "institute": ["hospital hallway", "fluorescent lights ceiling", "empty waiting room chairs",
+                  "office corridor empty", "laboratory glassware", "hospital window blinds",
+                  "clean room laboratory", "stairwell concrete"],
     "night": ["parking lot night", "gas station night", "convenience store night",
               "bus window night", "car window night rain", "streetlight fog"],
 }

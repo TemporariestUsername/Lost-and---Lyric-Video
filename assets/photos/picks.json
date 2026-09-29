@@ -382,5 +382,85 @@
    1024,
    619
   ]
+ },
+ "hospital_corridor": {
+  "file": "hospital_corridor.jpg",
+  "theme": "institute",
+  "query": "hospital hallway",
+  "title": "Doctors Hospital",
+  "creator": "Oles kanebckuu",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/doctors-hospital-5YUFL6LC0E",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   720
+  ]
+ },
+ "stairwell_spiral": {
+  "file": "stairwell_spiral.jpg",
+  "theme": "institute",
+  "query": "stairwell concrete",
+  "title": "Looking gray rectangular stairwell inside",
+  "creator": null,
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.rawpixel.com/image/3286777/free-photo-image-geometric-madrid-wall-texture",
+  "provider": "rawpixel",
+  "size": [
+   1024,
+   863
+  ]
+ },
+ "stairwell_cage": {
+  "file": "stairwell_cage.jpg",
+  "theme": "institute",
+  "query": "stairwell concrete",
+  "title": "Architecture Building",
+  "creator": "Justin Hamilton",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://stocksnap.io/photo/architecture-building-I2CJK241EY",
+  "provider": "stocksnap",
+  "size": [
+   960,
+   640
+  ]
+ },
+ "cinderblock_plate": {
+  "file": "cinderblock_plate.jpg",
+  "theme": "institute",
+  "query": "stairwell concrete",
+  "title": "Hotel stairwell",
+  "creator": "dankeck",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/140641142@N05/52751945522",
+  "provider": "flickr",
+  "size": [
+   1024,
+   576
+  ]
+ },
+ "cinderblock_hole": {
+  "file": "cinderblock_hole.jpg",
+  "theme": "institute",
+  "query": "stairwell concrete",
+  "title": "Hotel stairwell",
+  "creator": "dankeck",
+  "license": "cc0",
+  "license_version": "1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://www.flickr.com/photos/140641142@N05/52752480896",
+  "provider": "flickr",
+  "size": [
+   1024,
+   576
+  ]
  }
 }

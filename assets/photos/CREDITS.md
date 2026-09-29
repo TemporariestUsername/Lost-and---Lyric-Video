@@ -27,3 +27,8 @@ found via Openverse; no attribution is legally required, but credit is given her
 - **corridor**: "X105C CORRIDOR" by dankeck (CC0), https://www.flickr.com/photos/140641142@N05/52758446379
 - **facade_windows**: "Windows Panes" by Dmitri Popov (CC0), https://stocksnap.io/photo/windows-panes-TA8Y1AJENQ
 - **streets_night**: "Free streets night image" by unknown (CC0), https://www.rawpixel.com/image/5907746/photo-image-public-domain-posters-free
+- **hospital_corridor**: "Doctors Hospital" by Oles kanebckuu (CC0), https://stocksnap.io/photo/doctors-hospital-5YUFL6LC0E
+- **stairwell_spiral**: "Looking gray rectangular stairwell inside" by unknown (CC0), https://www.rawpixel.com/image/3286777/free-photo-image-geometric-madrid-wall-texture
+- **stairwell_cage**: "Architecture Building" by Justin Hamilton (CC0), https://stocksnap.io/photo/architecture-building-I2CJK241EY
+- **cinderblock_plate**: "Hotel stairwell" by dankeck (CC0), https://www.flickr.com/photos/140641142@N05/52751945522
+- **cinderblock_hole**: "Hotel stairwell" by dankeck (CC0), https://www.flickr.com/photos/140641142@N05/52752480896
