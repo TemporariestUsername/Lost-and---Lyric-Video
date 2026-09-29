@@ -10,12 +10,33 @@ import numpy as np
 import fx
 import look
 import memories as mem
+import kinetic
 from engine import H, W, clamp01, ramp, smooth
 from look import C
 
 
 # ---------------------------------------------------------------- scenes
 _MEM = {}
+_KIN = {}
+
+# per-line shot design for Verse A: layout style and hero word index
+VERSE_A_SHOTS = {
+    1: dict(style="track", hero=1),     # eyes
+    2: dict(style="hero", hero=1),      # years
+    3: dict(style="stack", hero=2),     # rooms
+    4: dict(style="depth", hero=2),     # self
+    5: dict(style="hero", hero=2),      # voice
+    6: dict(style="stack", hero=1),     # hand
+    7: dict(style="stack", hero=2),     # lost
+    8: dict(style="depth", hero=0),     # lost (and lost)
+    9: dict(style="track", hero=4),     # never
+}
+
+
+def kinetic_for(T, name, lines, shots=None):
+    if name not in _KIN:
+        _KIN[name] = kinetic.Kinetic(T, lines, overrides=shots)
+    return _KIN[name]
 
 
 def memories_for(T, name, scenes, **kw):
@@ -46,13 +67,11 @@ def verse_a(t, T, lines):
     for m in memories_for(T, name, scenes, every=2, life=11.0, seed=3, keep_left=900):
         img = m.draw(img, t, warm=warm, offset=(dx, dy))
     img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.3)
-    for n, y in look.stacked_lines(t, T, lines, anchor=640, size=72, max_w=760):
-        drift_x = 5.0 * max(0.0, t - T.lines[n]["start"])                # words drift as they age
-        img = look.her_words(img, t, T, [n], 150 + dx * 0.3 + drift_x, y + dy * 0.3,
-                             size=72, color=C["plum_deep"], max_w=760)
+    img = kinetic_for(T, name, lines, VERSE_A_SHOTS).draw(
+        img, t, cam=(dx * 0.35, dy * 0.35), kick=T.pulse_env(t, 7.0))
     return img, dict(exposure=0.9, lift=0.08, sat=0.85, bloom=0.5, hal=0.55, thresh=1.0,
                      diffusion=0.14, grain=0.045, trail=0.62,
-                     ghosts=((1.2, -160, 0, -5, 0.22), (2.4, 150, -10, 4, 0.14)))
+                     ghosts=((1.2, -160, 0, -5, 0.16), (2.4, 150, -10, 4, 0.10)))
 
 
 def white_coats(t, T, lines):

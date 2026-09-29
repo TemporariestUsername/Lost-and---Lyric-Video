@@ -30,12 +30,14 @@ def worker(args):
     cv2.setNumThreads(1)
     import numpy as np
     import look
+    import kinetic
     from compose import Compositor
     T = Timing()
     comp = Compositor(T)
     for k in range(k0 - int(WARMUP * FPS), k0, 2):          # warm-up, discarded
         comp.frame(k / FPS, scene=scene)
     look.TEXT_LOG = []
+    kinetic.TEXT_LOG = look.TEXT_LOG
     ff = subprocess.Popen(
         ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
          "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium",
