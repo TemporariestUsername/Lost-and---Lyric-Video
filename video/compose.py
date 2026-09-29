@@ -23,13 +23,9 @@ def verse_a(t, T, lines):
     voice = T.lines[5]["start"]
     flood = T.lines[7]["start"]
     warm = 0.25 * smooth(ramp(t, voice, voice + 6)) + 0.9 * smooth(ramp(t, flood, flood + 2.6))
-    # him: warmth just behind her shoulder (her hair occludes it), and a
-    # leak from beyond the frame
-    hs = lambda im: fx.hotspot(im, t, 1180 + 150, 960 - 0.58 * 650, 340,
-                               strength=0.04 + 0.15 * warm)
-    img = look.her_presence(img, t, T, cx=1180, floor=960, s=650, rim=0.3 + 0.9 * warm,
-                            light=(1180 + 170, 960 - 0.60 * 650), behind=hs)
+    # she is an emptiness; his warmth leaks in and pours into it
     img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.25)
+    img = look.her_absence(img, t, T, cx=1180, floor=960, s=650, fill=warm)
     cur = [n for n in lines if T.lines[n]["start"] - 0.3 <= t < T.lines[n]["end"] + 2.6]
     for n in cur[-2:]:
         img = look.her_words(img, t, T, [n], 150, 470 + 150 * (n % 2), size=80,
@@ -44,8 +40,13 @@ def white_coats(t, T, lines):
     scratches, stabs are film burns, the chant is etched in the fog."""
     img = look.padded_room(t, base=C["clinic"], seam=0.03)
     img = look.tally(img, t, T, alpha=0.35, blur=2.5)
-    img = look.her_presence(img, t, T, cx=1010, floor=860, s=380, ghosts=True, rim=0.0,
-                            fade=0.6, hair_col=C["plum_ink"], body_col=C["haze_lo"])
+    # the coats can barely see her: she surfaces on flicker dips and burn flares
+    ws0 = [w for n in lines for w in T.lines[n]["words"]]
+    flare = max((math.exp(-3 * (t - w["start"])) for w in ws0
+                 if w["text"].lower().startswith("stab") and t >= w["start"]), default=0)
+    dip = 0.5 + 0.5 * math.sin(t * 2.1) ** 8
+    img = look.her_absence(img, t, T, cx=1010, floor=860, s=380, shed=0.6,
+                           edge=2.4 + 2.0 * dip + 2.5 * flare)
     ws = [w for n in lines for w in T.lines[n]["words"]]
     scrib = max((1 - clamp01((t - w["end"]) / 1.5)) for w in ws
                 if w["text"].lower().startswith("scribble") and t >= w["start"]) \
@@ -83,9 +84,9 @@ def cutting(t, T, lines):
     # the warmth behind her drains with each cut
     live = sum(1 - smooth(clamp01((t - ct - 0.4) / 1.2)) if t >= ct else 1.0 for ct in cuts) / 3
     back = lambda im: fx.hotspot(im, t, 880, 990 - 0.62 * 560, 330, strength=0.30 * live)
-    img = look.her_presence(img, t, T, cx=820, floor=990, s=560, ghosts=True, rim=0.5 * live,
-                            body_col=look.hexc("#1E1726"), hair_col=look.hexc("#0B080F"),
-                            light=(1000, 420), face=False, behind=back)
+    img = back(img)
+    img = look.her_absence(img, t, T, cx=820, floor=990, s=560, dark=True,
+                           edge=0.45 + 0.75 * live, fill=0.5 * live)
     img = look.tally(img, t, T, x0=1420, y0=150, color=look.hexc("#6E5F78"), alpha=0.35,
                      blur=2.0)
     cur = [n for n in lines if T.lines[n]["start"] - 0.3 <= t < T.lines[n]["end"] + 2.0]

@@ -22,256 +22,124 @@ C = {
     "amber": hexc("#FF9A4A"), "amber_hot": hexc("#FFC58A"), "rose": hexc("#F2765E"),
     "graphite": hexc("#4A4652"), "clinic": hexc("#DDE3E6"), "body": hexc("#F3ECEE"),
     "shade": hexc("#9D92AE"),
+    "void": hexc("#F8F5F8"), "void_dark": hexc("#07050A"),
+    "her_edge": hexc("#7D7294"), "her_glow": hexc("#FFFFFF") * 0.06,
+    "her_edge_dark": hexc("#C9BEE8"), "her_glow_dark": hexc("#B9A8F0") * 0.5,
     "hair": hexc("#2E2536"),
 }
 
 
-# ================================================================ her
-def figure_masks(cx, floor, s, sway=0.0):
-    """(body, hair, face) alpha masks for a girl sitting cross-legged,
-    hunched, hair falling forward. Kept soft and generic on purpose."""
+# ================================================================ her (absence)
+def girl_silhouette(cx, floor, s, facing=-1, breath=0.0, bow=0.0):
+    """Filled silhouette of a girl sitting on the floor in profile, knees
+    drawn up, arms around her shins, head bowed, hair down her back.
+    facing=-1 faces left. Returns a soft 0..1 mask."""
+    f = facing
+
     def P(x, y):
-        return cx + x * s, floor + y * s
+        return cx - f * x * s * -1 if False else cx + f * -x * s, floor + y * s
 
-    white = skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1))
-    hx = sway  # head sway
+    def draw(c):
+        white = skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1))
 
-    def body(c):
-        legs = skia.Path()                                                   # crossed legs
-        legs.moveTo(*P(-0.43, -0.05))
-        legs.cubicTo(*P(-0.45, -0.17), *P(-0.36, -0.22), *P(-0.26, -0.20))
-        legs.cubicTo(*P(-0.14, -0.19), *P(-0.06, -0.24), *P(0.04, -0.22))
-        legs.cubicTo(*P(0.16, -0.20), *P(0.30, -0.17), *P(0.37, -0.13))
-        legs.cubicTo(*P(0.44, -0.09), *P(0.42, -0.02), *P(0.30, -0.01))
-        legs.cubicTo(*P(0.10, 0.02), *P(-0.30, 0.02), *P(-0.43, -0.05))
-        c.drawPath(legs, white)
-        torso = skia.Path()                                                  # oversized shirt
-        torso.moveTo(*P(-0.05, -0.70))
-        torso.cubicTo(*P(-0.16, -0.70), *P(-0.21, -0.66), *P(-0.23, -0.55))
-        torso.cubicTo(*P(-0.25, -0.42), *P(-0.21, -0.30), *P(-0.18, -0.18))
-        torso.lineTo(*P(0.18, -0.18))
-        torso.cubicTo(*P(0.21, -0.30), *P(0.25, -0.42), *P(0.23, -0.55))
-        torso.cubicTo(*P(0.21, -0.66), *P(0.16, -0.70), *P(0.05, -0.70))
-        torso.close()
-        c.drawPath(torso, white)
-        c.drawRect(skia.Rect(*P(-0.035 + hx * 0.5, -0.78), *P(0.035 + hx * 0.5, -0.66)), white)
-        c.drawOval(skia.Rect(*P(-0.085 + hx, -1.0), *P(0.085 + hx, -0.76)), white)
-        arm = skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=0.075 * s,
-                         StrokeCap=skia.Paint.kRound_Cap, Color4f=skia.Color4f(1, 1, 1, 1))
-        for sx in (-1, 1):                                                   # arms to lap
-            a = skia.Path()
-            a.moveTo(*P(sx * 0.19, -0.62))
-            a.cubicTo(*P(sx * 0.27, -0.48), *P(sx * 0.25, -0.32), *P(sx * 0.07, -0.25))
-            c.drawPath(a, arm)
+        def limb(pts, w):
+            p = skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=w * s,
+                           StrokeCap=skia.Paint.kRound_Cap, StrokeJoin=skia.Paint.kRound_Join,
+                           Color4f=skia.Color4f(1, 1, 1, 1))
+            c.drawPath(smooth_path([P(*q) for q in pts]), p)
 
-    def hair(c):
-        h = skia.Path()                                                      # falls past shoulders
-        h.moveTo(*P(hx, -1.02))
-        h.cubicTo(*P(0.12 + hx, -1.02), *P(0.14, -0.86), *P(0.13, -0.74))
-        h.cubicTo(*P(0.14, -0.62), *P(0.17, -0.52), *P(0.15, -0.44))
-        h.lineTo(*P(0.11, -0.47)); h.lineTo(*P(0.09, -0.42)); h.lineTo(*P(0.065, -0.56))
-        h.cubicTo(*P(0.07, -0.70), *P(0.075 + hx, -0.80), *P(0.06 + hx, -0.86))
-        h.lineTo(*P(-0.06 + hx, -0.86))
-        h.cubicTo(*P(-0.075 + hx, -0.80), *P(-0.07, -0.70), *P(-0.065, -0.56))
-        h.lineTo(*P(-0.09, -0.40)); h.lineTo(*P(-0.12, -0.46)); h.lineTo(*P(-0.16, -0.43))
-        h.cubicTo(*P(-0.17, -0.55), *P(-0.14, -0.64), *P(-0.13, -0.74))
-        h.cubicTo(*P(-0.14, -0.86), *P(-0.12 + hx, -1.02), *P(hx, -1.02))
-        c.drawPath(h, white)
-        r = np.random.default_rng(12)
-        st = skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=1.3,
-                        Color4f=skia.Color4f(1, 1, 1, 0.7))
-        for _ in range(70):                                                  # loose strands
-            sx = r.choice([-1, 1])
-            x0 = r.uniform(0.07, 0.13) * sx + hx
-            y0 = r.uniform(-0.90, -0.78)
-            pts = [P(x0, y0)]
-            for k in range(1, 5):
-                pts.append(P(x0 + sx * r.uniform(0.0, 0.025) * k,
-                             y0 + k * r.uniform(0.08, 0.11)))
-            c.drawPath(smooth_path(pts), st)
-
-    def face(c):
-        c.drawOval(skia.Rect(*P(-0.058 + hx, -0.94), *P(0.058 + hx, -0.77)), white)
-        for x0, y0, rot in ((-0.075, -0.25, 20), (0.05, -0.23, -15)):          # open hands
+        def blob(x, y, rx, ry, rot=0.0):
             c.save()
-            c.translate(*P(x0, y0))
-            c.rotate(rot)
-            c.drawOval(skia.Rect(-0.045 * s, -0.022 * s, 0.045 * s, 0.022 * s), white)
+            c.translate(*P(x, y))
+            c.rotate(rot * -f)
+            c.drawOval(skia.Rect(-rx * s, -ry * s, rx * s, ry * s), white)
             c.restore()
-    return fx.skia_alpha(body), fx.skia_alpha(hair), fx.skia_alpha(face)
+
+        by = breath * 0.01
+        blob(0.11, -0.075, 0.15, 0.075)                                 # seat
+        blob(0.12, -0.34 + by, 0.13, 0.24, -28)                         # back, hunched
+        blob(0.03, -0.55 + by, 0.10, 0.075, -35)                        # shoulders
+        limb([(0.16, -0.08), (0.00, -0.30), (-0.19, -0.47)], 0.14)       # thigh
+        limb([(-0.19, -0.46), (-0.25, -0.26), (-0.29, -0.05)], 0.10)    # shin
+        blob(-0.32, -0.035, 0.08, 0.035)                                # foot
+        limb([(0.04, -0.55 + by), (-0.06, -0.42), (-0.21, -0.37)], 0.066)  # arm round the shins
+        hx, hy = -0.10 - bow * 0.02, -0.63 + bow * 0.02 + by            # head, resting on the knees
+        blob(hx, hy, 0.085, 0.10, 35 + bow * 10)
+        hair = skia.Path()                                              # hair down the back
+        pts = [(hx - 0.02, hy - 0.10), (hx + 0.08, hy - 0.11), (hx + 0.16, hy - 0.04),
+               (0.20, -0.46), (0.27, -0.30), (0.30, -0.19), (0.26, -0.23),
+               (0.22, -0.30), (0.16, -0.42), (hx + 0.10, hy + 0.06)]
+        c.drawPath(smooth_path([P(*q) for q in pts], closed=True), white)
+        limb([(hx - 0.07, hy - 0.02), (hx - 0.11, hy + 0.07), (hx - 0.12, hy + 0.14)], 0.03)  # a fall over the face
+    return fx.blur(fx.skia_alpha(draw), 1.5)
 
 
-SS = 2  # hair supersampling factor
+def her_absence(img, t, T, cx=1150, floor=960, s=640, facing=-1, dark=False,
+                fill=0.0, fill_col=None, edge=1.0, ghosts=True, fade=1.0, shed=1.0,
+                seed=0, react=True):
+    """Her as an emptiness: a hollow in the fog with a soft, broken outline
+    that breathes and sheds motes. `fill` pours warm light into the hollow."""
+    fill_col = C["amber"] if fill_col is None else fill_col
+    kick = T.pulse_env(t, 3.0) if react else 0.0
+    m = girl_silhouette(cx, floor, s, facing, breath=math.sin(t * 0.9), bow=math.sin(t * 0.21))
+    brk = np.clip(0.45 + 0.75 * fx.fog(t * 0.6, seed=seed + 50, period=5.0), 0, 1)
 
-
-def _soft(x):
-    x = min(1.0, max(0.0, x))
-    return x * x * (3 - 2 * x)
-
-
-def _lock_paths(cx, top, s, t, seed, n_locks, steps):
-    """Simulate lock centrelines with soft forces: gravity, a skull the hair
-    slides over, a face gap it parts around, and a slow sway."""
-    r = np.random.default_rng(seed)
-    hcx, hcy = cx, top + 0.12 * s
-    rx, ry = 0.090 * s, 0.117 * s
-    sway = math.sin(t * 0.45 + seed) * 0.010 * s
-    locks = []
-    for i in range(n_locks):
-        th = math.radians(-172 + 164 * (i + r.uniform(0.2, 0.8)) / n_locks)
-        side = -1 if math.degrees(th) < -90 else 1
-        x, y = hcx + math.cos(th) * rx, hcy + math.sin(th) * ry
-        vx, vy = side * 0.5 + math.cos(th) * 0.3, 0.45
-        L = r.uniform(0.58, 1.02) * s
-        hang = r.uniform(0.11, 0.26) * s
-        ph, curl = r.uniform(0, 6.28), r.normal(0, 1.3)
-        step = L / steps
-        pts = [(x, y)]
-        for k in range(steps):
-            u = k / steps
-            vy += 0.16
-            vx *= 0.88
-            vx += math.sin(u * 6 + ph) * 0.05 * curl * (0.3 + u) + sway / s * 3 * u
-            ex, ey = (x - hcx) / rx, (y - hcy) / ry
-            e = math.hypot(ex, ey) + 1e-6
-            push = _soft((1.10 - e) / 0.12)              # soft skull
-            vx += ex / e * push * 0.9
-            vy += ey / e * push * 0.9 * (ey < 0)
-            dxf = abs(x - hcx)
-            if y > hcy - 0.03 * s and y < hcy + 0.34 * s:  # part around the face
-                vx += side * _soft((0.085 * s - dxf) / (0.03 * s)) * 0.6
-            if y > hcy + 0.30 * s:                        # settle over shoulders
-                vx += (hcx + side * hang - x) / s * 0.9
-            sp = math.hypot(vx, vy) + 1e-6
-            x, y = x + vx / sp * step, y + vy / sp * step
-            pts.append((x, y))
-        pts = np.array(pts)
-        # a lock-level wave that grows toward the tips
-        uu = np.linspace(0, 1, len(pts))
-        amp = r.uniform(0.008, 0.028) * s
-        fr = r.uniform(1.6, 3.2)
-        pts[:, 0] += amp * np.sin(uu * fr * 6.283 + ph + t * 0.35) * uu ** 1.1
-        locks.append((pts, side, th))
-    return locks
-
-
-def hair_curtain(cx, top, s, t, seed=0, n=4000, part=1.0, n_locks=38, steps=48):
-    """Long hair: thousands of fine, tapering strands clumped into locks,
-    drawn supersampled over the head region. Returns (density, sheen)."""
-    r = np.random.default_rng(seed + 1000)
-    locks = _lock_paths(cx, top, s, t, seed, n_locks, steps)
-    x0, y0 = int(cx - 0.55 * s), int(top - 0.06 * s)
-    x1, y1 = int(cx + 0.55 * s), int(top + 1.12 * s)
-    bw, bh = x1 - x0, y1 - y0
-    surf = skia.Surface(bw * SS, bh * SS)
-    c = surf.getCanvas()
-    c.clear(skia.ColorTRANSPARENT)
-    c.scale(SS, SS)
-    c.translate(-x0, -y0)
-    u = np.linspace(0, 1, steps + 1)[:, None]
-    chunks = ((0, 14, 1.0, 1.0), (14, 28, 0.95, 0.9), (28, 40, 0.7, 0.75), (40, steps + 1, 0.3, 0.55))
-    paint = skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style,
-                       StrokeCap=skia.Paint.kRound_Cap, StrokeJoin=skia.Paint.kRound_Join)
-    for i in range(n):
-        base, side, th = locks[i % len(locks)]
-        # tangent spread at the root, clumping toward the tips, a few flyaways
-        tang = np.array([-math.sin(th), math.cos(th)])
-        root = tang * r.normal(0, 0.030 * s)
-        fly = r.random() < 0.05
-        tip = r.normal(0, 0.006 * s, 2) * (6.0 if fly else 1.0)
-        pts = base + root * (1 - u) ** 1.2 + tip * u ** 1.3
-        pts = pts + np.column_stack([np.sin(u[:, 0] * r.uniform(4, 9) + r.uniform(0, 6.28)),
-                                     np.zeros(len(u))]) * r.uniform(0, 0.004 * s) * u
-        cut = int(len(pts) * r.uniform(0.75, 1.0))           # uneven ends
-        w = r.uniform(0.35, 0.9)
-        a = r.uniform(0.05, 0.12)
-        for i0, i1, am, wm in chunks:
-            i1 = min(i1, cut)
-            if i1 - i0 < 2:
-                continue
-            path = skia.Path()
-            path.moveTo(*pts[i0])
-            for q in range(i0 + 1, i1):
-                mx, my = (pts[q - 1] + pts[q]) / 2
-                path.quadTo(*pts[q - 1], mx, my)
-            path.lineTo(*pts[i1 - 1])
-            paint.setStrokeWidth(w * wm)
-            paint.setColor4f(skia.Color4f(1, 1, 1, a * am))
-            c.drawPath(path, paint)
-    arr = surf.makeImageSnapshot().toarray()[..., 3].astype(F32) / 255
-    small = cv2.resize(arr, (bw, bh), interpolation=cv2.INTER_AREA)
-    m = np.zeros((H, W), F32)
-    sx0, sy0, sx1, sy1 = max(0, x0), max(0, y0), min(W, x1), min(H, y1)
-    m[sy0:sy1, sx0:sx1] = small[sy0 - y0:sy1 - y0, sx0 - x0:sx1 - x0]
-    m = 1 - np.exp(-m * 3.4)                                   # optical density
-    # anisotropic sheen: a soft band where hair curves over the crown
-    hcy = top + 0.12 * s
-    yy, xx = fx._yy_xx()
-    d = np.sqrt(((xx - cx) / (0.10 * s)) ** 2 + ((yy - (hcy - 0.01 * s)) / (0.125 * s)) ** 2)
-    band = np.exp(-((d - 0.78) / 0.16) ** 2) * (yy < hcy + 0.05 * s)
-    return m, m * band
-
-
-def face_hint(cx, top, s):
-    """Pale face with the faintest shadows for eyes and mouth: a suggestion."""
-    hcy = top + 0.12 * s
-    face = fx.radial(cx, hcy + 0.05 * s, 0.075 * s, 1.5)
-    eyes = (fx.radial(cx - 0.03 * s, hcy + 0.03 * s, 0.022 * s, 1.5)
-            + fx.radial(cx + 0.03 * s, hcy + 0.03 * s, 0.022 * s, 1.5))
-    mouth = fx.radial(cx, hcy + 0.115 * s, 0.018 * s, 1.5)
-    return fx.blur(face, 4), fx.blur(eyes, 3), fx.blur(mouth, 3)
-
-
-def body_density(cx, floor, s):
-    """Shoulders and folded legs as a heavily blurred density, never a shape."""
-    b, _h, _f = figure_masks(cx, floor, s)
-    return fx.blur(b, 0.05 * s)
-
-
-def her_presence(img, t, T, cx=1150, floor=930, s=640, ghosts=True, rim=1.0,
-                 fade=1.0, body_col=None, hair_col=None, rim_side=1, seed=0,
-                 light=None, face=True, behind=None):
-    """Her: hair curtain over a blurred body density, displaced ghost
-    exposures, and warm light (him) scattering through the hair near
-    `light` (x, y)."""
-    body_col = C["shade"] if body_col is None else body_col
-    hair_col = C["hair"] if hair_col is None else hair_col
-    top = floor - 1.02 * s
-    brk = np.clip(0.8 + 0.3 * fx.fog(t, seed=8, period=6.0), 0, 1)
-    dens = body_density(cx, floor, s)
+    # displaced copies of the outline: earlier selves, turned away
     if ghosts:
-        kick = T.pulse_env(t, 3.0)
-        vt = vtop(floor, s)
-        for k, (dx, rot, a) in enumerate(((-215, -10, 0.30), (210, 9, 0.24))):
-            wob = math.sin(t * 0.5 + dx) * 18
-            hk, _ = hair_curtain(cx, top, s, t, seed=seed + 11 + k, n=900, n_locks=40, steps=32)
-            g = fx.blur(fx.shift(hk, dx + wob, -12, rot), 6) * vt
-            gd = fx.blur(fx.shift(dens, dx + wob, -12, rot), 10) * vt
-            aa = a * (0.8 + 0.4 * kick) * fade
-            img = fx.over(img, body_col, gd * aa * 0.5)
-            img = fx.over(img, hair_col, g * aa)
-    if behind is not None:
-        img = behind(img)
-    img = fx.over(img, body_col, dens * 0.7 * brk * fade)
-    if face:
-        fc, ey, mo = face_hint(cx, top, s)
-        img = fx.over(img, C["body"], fc * 0.55 * fade)
-    hk, sheen = hair_curtain(cx, top, s, t, seed=seed)
-    img = fx.over(img, hair_col, fx.blur(hk, 5) * 0.45 * brk * fade)      # volume
-    img = fx.over(img, hair_col, hk * 0.8 * brk * fade)                   # strands
-    img = fx.over(img, C["haze_lo"], fx.blur(sheen, 6) * 0.16 * fade)   # sheen
-    if rim > 0:
-        lx, ly = light if light else (cx + 0.2 * s * rim_side, top + 0.3 * s)
-        near = fx.radial(lx, ly, 0.38 * s, 1.5)
-        lit = hk * (1 - hk) * 4 * near          # light passes through the thin parts
-        glow = fx.blur(lit, 1.2) * 0.9 + fx.blur(lit, 7) * 0.25
-        img = img + C["amber"] * (glow * rim * fade)[..., None]
+        for dx, dy, rot, a in ((-150, -6, -4, 0.35), (140, 4, 3, 0.25)):
+            wob = math.sin(t * 0.4 + dx) * 14
+            g = fx.shift(m, dx + wob, dy, rot)
+            ge = np.clip(fx.blur(g, 1.5) - fx.blur(g, 4.5), 0, None) * 3.0
+            col = C["her_edge_dark"] if dark else C["her_edge"]
+            img = fx.over(img, col, np.clip(ge * a * (0.7 + 0.4 * kick), 0, 1) * brk * fade)
+
+    # parts of her are simply not there
+    gone = np.clip(0.25 + 0.95 * fx.fog(t * 0.35, seed=seed + 80, period=7.0), 0, 1)
+    # the hollow: fog thins, what is behind bends slightly, like glass
+    inner = fx.blur(m, 16) * m * (0.4 + 0.6 * gone)
+    fg = fx.fog(t * 0.5, seed=seed + 60, period=6.0)
+    dx = cv2.Sobel(fg, cv2.CV_32F, 1, 0, ksize=5) * 0.9
+    dy = cv2.Sobel(fg, cv2.CV_32F, 0, 1, ksize=5) * 0.9
+    yy, xx = fx._yy_xx()
+    bent = cv2.remap(img, xx + dx * inner, yy + dy * inner, cv2.INTER_LINEAR,
+                     borderMode=cv2.BORDER_REPLICATE)
+    img = img * (1 - inner[..., None]) + bent * inner[..., None]
+    void = C["void_dark"] if dark else C["void"]
+    img = fx.over(img, void, inner * (0.28 if dark else 0.16) * fade)
+    if fill > 0:  # his warmth pours in as mist, not as a solid
+        breathe = 0.85 + 0.15 * math.sin(t * 1.1)
+        mist = np.clip(0.5 + 0.6 * fx.fog(t * 0.8, seed=seed + 90, period=4.0), 0, 1.2)
+        img = img + fill_col * (fx.blur(inner, 10) * mist * fill * 0.22 * breathe * fade)[..., None]
+
+    # the outline: a thin broken line inside a wide soft halo
+    thin = np.clip(fx.blur(m, 2.5) - fx.blur(m, 8), 0, None) * 2.6 * gone
+    halo = np.clip(fx.blur(m, 12) - fx.blur(m, 34), 0, None) * 2.0 * gone
+    line_col = C["her_edge_dark"] if dark else C["her_edge"]
+    glow_col = C["her_glow_dark"] if dark else C["her_glow"]
+    img = fx.over(img, line_col, np.clip(thin * brk * edge * (0.45 if dark else 0.85), 0, 1) * fade)
+    img = img + glow_col * (halo * (0.6 + 0.6 * kick) * edge * fade)[..., None]
+
+    # shedding: motes lifting off the contour
+    if shed > 0:
+        r = np.random.default_rng(seed + 70)
+        ys, xs = np.nonzero(thin[::6, ::6] > 0.25)
+        if len(xs):
+            k = min(90, len(xs))
+            pick = r.choice(len(xs), k, replace=False)
+            born = r.uniform(0, 6, k)
+
+            def motes(c):
+                for i, j in enumerate(pick):
+                    age = (t + born[i]) % 6.0
+                    x = xs[j] * 6 + r.normal(0, 1) + age * 9 * (1 if i % 2 else -1) * 0.4
+                    y = ys[j] * 6 - age * 16
+                    a = (1 - age / 6.0) * min(1, age * 2) * 0.8
+                    c.drawCircle(x, y, 1.2 + age * 0.35, skia.Paint(
+                        AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, a)))
+            mm = fx.blur(fx.skia_alpha(motes), 0.8)
+            img = img + glow_col * (mm * 1.2 * shed * fade)[..., None] if dark else \
+                fx.over(img, line_col, mm * 0.6 * shed * fade)
     return img
-
-
-def vtop(floor, s):
-    """Ghost exposures fade out below the shoulders."""
-    return 1 - fx.vgrad(floor - 0.62 * s, floor - 0.28 * s)
 
 
 # ================================================================ room
