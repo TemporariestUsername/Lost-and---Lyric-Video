@@ -202,6 +202,8 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("refrain_i", "Refrain I: Stay lost now girl",
+     "Forever against again: 'Forever' keeps stretching, 'again,' lands, the repeat trails small; then 'Never' against 'again...'. Web copy at 720p; the 1080p master passed QA and ffprobe."),
     ("verse_a_line6", "Verse A: Through eyes",
      "Revised line: 'A hand, as ever as it was once'. 'ever' and 'once' set against each other on a diagonal; 'ever' keeps opening, 'once' lands. The Verse A clip below still has the old version of this line.",
      (34.5, 44.5)),

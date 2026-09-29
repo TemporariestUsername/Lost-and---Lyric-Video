@@ -123,13 +123,22 @@ def layout(T, n, style=None, hero=None, seed=0, voice="her"):
         groups = [(list(range(0, ha)), "word"), ([ha], "A"), (list(range(ha + 1, hb)), "word"),
                   ([hb], "B"), (list(range(hb + 1, len(words))), "word")]
         heights = {"A": sa * 0.95, "B": sb * 0.95, "word": small * 1.15}
-        total = sum(heights[k] for g, k in groups if g)
+        # small rows that follow a hero get room for its descenders (g, y, p)
+        desc = {1: sa * 0.24, 3: sb * 0.24}
+        steps = []
+        for gi, (g, k) in enumerate(groups):
+            if g:
+                extra = desc.get(gi - 1, 0) if k == "word" and groups[gi - 1][0] else 0
+                steps.append(heights[k] + extra)
+        total = sum(steps)
         y = (y0 + y1) / 2 - total / 2
         a_w = font(kr, sa).measureText(words[ha]["disp"])
+        si = 0
         for g, k in groups:
             if not g:
                 continue
-            y += heights[k]
+            y += steps[si]
+            si += 1
             if k == "A":
                 out.append(dict(word=words[ha], x=x0, y=y, size=sa, key=kr, z=1.0,
                                 tracking=0.0, role="hero", stretch=True))

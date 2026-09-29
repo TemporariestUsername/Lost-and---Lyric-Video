@@ -211,11 +211,13 @@ def there_comes_a_once(t, T, lines):
 
 
 REFRAIN_SHOTS = {20: dict(style="stack", hero=1), 21: dict(style="stack", hero=4),
-                 22: dict(style="depth", hero=2), 23: dict(style="hero", hero=0),
-                 24: dict(style="stack", hero=0),
+                 22: dict(style="stack", hero=2),
+                 23: dict(hero=[0, 1]),                  # forever / again
+                 24: dict(hero=[0, 1]),                  # never / again
                  107: dict(style="stack", hero=1), 108: dict(style="stack", hero=5),
-                 109: dict(style="depth", hero=2), 110: dict(style="hero", hero=0),
-                 111: dict(style="stack", hero=0)}
+                 109: dict(style="stack", hero=2),
+                 110: dict(hero=[0, 1]),
+                 111: dict(hero=[0, 1])}
 
 
 def refrain(name, react):
