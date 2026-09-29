@@ -1,0 +1,293 @@
+<title>lost and — storyboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400;1,500&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=Inter:wght@300&display=swap">
+<style>
+/* Layout: one reading column like a case file; timeline and frames run wider. */
+:root {
+  --paper: #EEF0EC; --sheet: #F8F9F6; --ink: #1C2327; --ink-2: #56646A;
+  --rule: #C9D5D6; --grid: #DCE4E4; --red: #C21F35;
+  --w-void: #6B777C; --w-her: #5E4FC4; --w-institute: #C21F35;
+  --w-memory: #B8492F; --w-run: #A8660F;
+  --display: "EB Garamond", "Garamond", "Times New Roman", serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --him: "Inter", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0C111E; --sheet: #141A2B; --ink: #E8E4DA; --ink-2: #99A2B3;
+  --rule: #2A3350; --grid: #1B2238; --red: #F0475C;
+  --w-void: #A7AFBD; --w-her: #BDB2FF; --w-institute: #F0475C;
+  --w-memory: #F07E68; --w-run: #F2A541; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #0C111E; --sheet: #141A2B; --ink: #E8E4DA; --ink-2: #99A2B3;
+  --rule: #2A3350; --grid: #1B2238; --red: #F0475C;
+  --w-void: #A7AFBD; --w-her: #BDB2FF; --w-institute: #F0475C;
+  --w-memory: #F07E68; --w-run: #F2A541; color-scheme: dark; }
+
+body { background: var(--paper); color: var(--ink); font: 16px/1.6 var(--body); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 96px;
+  display: grid; gap: 64px; }
+.col { max-width: 720px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h2 { font: italic 400 2.1rem/1.1 var(--display); letter-spacing: -0.01em; }
+h3 { font: 600 1.05rem/1.3 var(--body); }
+p { margin: 0; }
+.eyebrow, dt, .tc, .bars, .meta, .k { font-family: var(--mono); font-size: 0.75rem;
+  letter-spacing: 0.08em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+.eyebrow { color: var(--ink-2); }
+section { display: grid; gap: 20px; }
+a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--w-her); outline-offset: 2px; }
+
+/* Masthead */
+.mast { display: grid; gap: 18px; border-bottom: 1.5px solid var(--ink); padding-bottom: 28px; }
+.mast .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+h1 { font: italic 400 clamp(3.4rem, 11vw, 7.5rem)/0.9 var(--display); letter-spacing: -0.02em; }
+.cursor { display: inline-block; width: 0.42em; height: 0.78em; background: var(--w-her);
+  vertical-align: -0.04em; margin-left: 0.08em; animation: blink 0.855s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+.lede { max-width: 62ch; color: var(--ink-2); font-size: 1.05rem; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px 24px;
+  margin: 8px 0 0; }
+.facts div { border-top: 1px solid var(--rule); padding-top: 8px; min-width: 0; }
+.facts dt { color: var(--ink-2); }
+.facts dd { margin: 2px 0 0; font: 0.95rem/1.35 var(--mono); font-variant-numeric: tabular-nums; }
+
+/* Timeline */
+.tl { background: var(--sheet); border: 1px solid var(--rule); padding: 16px; display: grid; gap: 10px; }
+.tl canvas { width: 100%; height: 210px; display: block; cursor: crosshair; }
+.tl .readout { font: 0.85rem/1.4 var(--mono); min-height: 2.8em; color: var(--ink-2); }
+.tl .readout b { color: var(--ink); font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; padding: 0; margin: 0;
+  font-size: 0.85rem; color: var(--ink-2); }
+
+.chip { display: inline-block; font: 600 0.68rem/1 var(--mono); letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 5px 7px 4px; border: 1.5px solid currentColor; }
+.chip[data-world="void"] { color: var(--w-void); }
+.chip[data-world="her"] { color: var(--w-her); }
+.chip[data-world="institute"] { color: var(--w-institute); }
+.chip[data-world="memory"] { color: var(--w-memory); }
+.chip[data-world="run"] { color: var(--w-run); }
+
+/* Treatment */
+.story { display: grid; gap: 14px; }
+.story p { max-width: 64ch; }
+.note { font-size: 0.9rem; color: var(--ink-2); border-left: 2px solid var(--rule); padding-left: 14px; }
+.worlds { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.worlds li { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.voices { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.voice { border-top: 1.5px solid var(--ink); padding-top: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.voice .sample { min-height: 3.2rem; display: flex; align-items: center; overflow-wrap: anywhere; }
+.s-her { font: italic 400 1.9rem/1.1 var(--display); color: var(--w-her); }
+.s-coats { font: 400 1.05rem/1.3 var(--mono); text-transform: uppercase; }
+.s-coats em { font-style: normal; font-weight: 600; color: var(--red); }
+.s-him { font: 300 0.95rem/1.5 var(--him); text-transform: uppercase; letter-spacing: 0.22em; }
+.voice p { font-size: 0.92rem; color: var(--ink-2); }
+
+/* Frames */
+.frames { display: grid; gap: 36px; }
+figure { margin: 0; display: grid; gap: 10px; }
+figure img { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; border: 1px solid var(--rule);
+  background: var(--sheet); }
+figcaption { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; }
+figcaption .k { color: var(--paper); background: var(--ink); padding: 3px 7px 2px; }
+figcaption .tc { color: var(--ink-2); }
+figcaption .lyr { font: italic 1.1rem/1.3 var(--display); flex-basis: 100%; }
+
+/* Section list */
+.secs { display: grid; border-top: 1.5px solid var(--ink); }
+.sec { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding: 22px 0;
+  border-bottom: 1px solid var(--rule); scroll-margin-top: 16px; }
+.sec .when { display: grid; gap: 4px; align-content: start; }
+.sec .bars { font-weight: 600; font-size: 0.8rem; }
+.sec .tc, .sec .meta { color: var(--ink-2); }
+.sec .body { display: grid; gap: 10px; min-width: 0; }
+.sec header { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.fref { font: 0.8rem var(--mono); margin-left: auto; }
+.sec .lyr { font: italic 1.25rem/1.3 var(--display); color: var(--ink-2); }
+.sec dl { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 6px 14px; margin: 0; }
+.sec dt { color: var(--ink-2); padding-top: 3px; }
+.sec dd { margin: 0; max-width: 68ch; }
+.sec.hl { background: linear-gradient(90deg, var(--grid), transparent 70%); }
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 36px; }
+ol.steps, ul.plain { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; }
+ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
+.ask { background: var(--sheet); border: 1.5px solid var(--ink); padding: 22px; display: grid; gap: 12px; }
+
+@media (max-width: 640px) {
+  .sec { grid-template-columns: 1fr; gap: 10px; }
+  .sec .when { grid-auto-flow: column; justify-content: start; gap: 14px; }
+  .sec dl { grid-template-columns: 1fr; gap: 2px; }
+  .sec dd { margin-bottom: 8px; }
+  .tl canvas { height: 180px; }
+}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="top"><span class="eyebrow">Lyric video · storyboard for approval</span>
+      <span class="eyebrow">Drawn in code · skia + ffmpeg</span></div>
+    <h1>lost and<span class="cursor" aria-hidden="true"></span></h1>
+    <p class="lede">A beat-mapped plan for the full-length video, built from the track analysis. Every section, bar number and timecode below comes from the audio. Three style frames are rendered with the actual engine. Nothing further gets built until you approve.</p>
+    <dl class="facts">{{FACTS}}</dl>
+  </header>
+
+  <section aria-labelledby="h-tl">
+    <div class="col"><span class="eyebrow">Analysis</span><h2 id="h-tl">The track, bar by bar</h2></div>
+    <div class="tl">
+      <canvas id="tl" role="img" aria-label="Timeline of the song: loudness curve, 149 bars, 19 sections coloured by visual world, lyric line positions and style frame markers."></canvas>
+      <div class="readout" id="readout">Hover or tap the timeline to read a moment.</div>
+      <ul class="legend">{{WORLDS}}</ul>
+    </div>
+    <p class="note col">librosa tracks this song at about 140 BPM, but that is eighth-note resolution. The kick lands on every other tracked beat, so the video's pulse is the kick at about 70 BPM, and each sung line is one four-pulse bar of about 3.4 s. The tempo drifts up about 4% after 3:00, so the grid follows the audio rather than a fixed click.</p>
+  </section>
+
+  <section aria-labelledby="h-story">
+    <div class="col"><span class="eyebrow">Story</span><h2 id="h-story">The Finder</h2></div>
+    <div class="story">
+      <p>A psychic girl is held in an institute's white room. Her gift is getting lost: she drifts out of herself, and the white coats who chart her can't find where she goes. So they bring in a man whose gift is finding people. He finds her, and he finds something in her that he wasn't sent for. He offers her three things he can help her find: protecting, trusting, believing. On screen these become three threads of light between them.</p>
+      <p>The institute decides she isn't worth the time. It hands him a gun and a single bullet and sends him to find her. He finds her and doesn't shoot. They run through tunnels, motels, diners and alleys until the coats come round the bend. The coats cut his three threads and leave him the gun and the bullet. They take her senses one by one and leave her the years.</p>
+      <p>The song opens and closes on the same verse, so the video is a loop. We start in the white room and end there years later, with her replaying the agains. Whether his voice at the end is a memory or a return stays open.</p>
+      <p class="note">This grew from your Mage: The Ascension premise, with the agent and the psychic girl taken for experimentation. The characters, the institute and its circle-and-crosshair mark are all original designs, with no game iconography.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-look">
+    <div class="col"><span class="eyebrow">Look</span><h2 id="h-look">Clinical ink, sodium light</h2></div>
+    <div class="two">
+      <div class="story">
+        <p>Everything is drawn as line. Institute scenes are overlit paper with a graph grid, black ink and one red pen. Memory scenes invert to night navy, where he is a single warm contour and she is light made of points. The run is the only place colour gets warm and saturated. There is film grain throughout, and bloom only on light sources.</p>
+        <p>This follows the track's dark-synthpop split: cold, clinical textures against breathy, reverb-lit vocals, with nursery-rhyme chants in between.</p>
+      </div>
+      <ul class="worlds">{{WORLDS}}</ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-type">
+    <div class="col"><span class="eyebrow">Typography</span><h2 id="h-type">Three voices, three typefaces</h2></div>
+    <div class="voices">
+      <div class="voice"><span class="eyebrow">Her · sung lead</span>
+        <div class="sample s-her">She got lost inside him</div>
+        <p>EB Garamond Italic. Each word blooms out of blur on its sung onset, then drifts up and dissolves after the line. Parenthesised backing vocals are small ghost echoes.</p></div>
+      <div class="voice"><span class="eyebrow">White coats · chant</span>
+        <div class="sample s-coats">Scribble scribble, <em>stab stab</em> the charts</div>
+        <p>IBM Plex Mono caps, typed letter by letter into form fields. The block cursor blinks on the eighth notes, and "stab" is set in red bold.</p></div>
+      <div class="voice"><span class="eyebrow">Him · spoken</span>
+        <div class="sample s-him">I won't lose you</div>
+        <p>Inter Light caps with wide tracking and no motion. Words simply appear on time, like a subtitle for a dry close-mic voice.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-frames">
+    <div class="col"><span class="eyebrow">Style frames · rendered by the engine</span><h2 id="h-frames">Three moments</h2></div>
+    <div class="frames">{{FRAMES}}</div>
+  </section>
+
+  <section aria-labelledby="h-board">
+    <div class="col"><span class="eyebrow">Storyboard</span><h2 id="h-board">Section by section</h2></div>
+    <div class="secs">{{SECTIONS}}</div>
+  </section>
+
+  <section aria-labelledby="h-next">
+    <div class="col"><span class="eyebrow">Open items</span><h2 id="h-next">Before and after approval</h2></div>
+    <div class="two">
+      <div class="story">
+        <h3>Please check by ear</h3>
+        <ul class="plain">
+          <li>Whisper merged lyric lines 1 and 2. I split them at the bar line (0:16.9 and 0:20.5).</li>
+          <li>The lone "But…" (line 78) wasn't transcribed even on a targeted re-run. It is pinned to 5:18.0.</li>
+          <li>All the other gaps were recovered by clip re-runs prompted with your lyrics. Pinned: {{PINS}}.</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>After you approve</h3>
+        <ol class="steps">
+          <li>Build scene by scene, one module per section, all driven by the timing files.</li>
+          <li>For each scene, render a contact sheet (one frame per second, stamped with timecode and bar) and run automatic checks: every word visible within one frame of its onset, text inside title-safe, no text colliding. Fix and re-sheet until clean.</li>
+          <li>Render 1920×1080 at 30 fps in parallel chunks, H.264 CRF 17. Concatenate and mux the original audio as AAC 320k.</li>
+          <li>Verify with ffprobe: stream specs, frame count against duration, audio and video lengths within one frame, and sync spot-checks at three lyric onsets.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="ask">
+      <h3>What I need from you</h3>
+      <ul class="plain">
+        <li>Approve the story, look and typography, or tell me what to change.</li>
+        <li>The ending keeps the gun and bullet on screen but never fired. Do you want it that open?</li>
+        <li>16:9 at 1080p30 only, or a 9:16 vertical cut as well?</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script>
+const D = {{DATA}};
+(function () {
+  const cv = document.getElementById('tl'), ro = document.getElementById('readout');
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const fmt = t => { const m = Math.floor(t / 60), s = t - m * 60; return m + ':' + s.toFixed(1).padStart(4, '0'); };
+  let hover = null;
+  function draw() {
+    const dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+    cv.width = w * dpr; cv.height = h * dpr;
+    const c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
+    const ink = css('--ink'), ink2 = css('--ink-2'), rule = css('--rule'), grid = css('--grid');
+    const X = t => (t / D.duration) * w;
+    const bandH = 14, top = bandH + 10, axis = h - 18, lyrY = axis - 12;
+    // world bands
+    for (const s of D.sections) { c.fillStyle = css('--w-' + s.world); c.globalAlpha = 0.9;
+      c.fillRect(X(s.start), 0, Math.max(1, X(s.end) - X(s.start) - 1), bandH); }
+    c.globalAlpha = 1;
+    // bar grid
+    D.bars.forEach((b, i) => { c.fillStyle = i % 4 === 0 ? rule : grid;
+      c.fillRect(Math.round(X(b)), top, 1, lyrY - top - 6); });
+    // loudness area (-34..-12 dB)
+    const Y = v => top + (1 - (Math.min(-12, Math.max(-34, v)) + 34) / 22) * (lyrY - top - 10);
+    c.beginPath(); c.moveTo(0, lyrY - 6);
+    D.loud.forEach((v, i) => c.lineTo(X(i * D.loud_t), Y(v)));
+    c.lineTo(w, lyrY - 6); c.closePath(); c.fillStyle = ink; c.globalAlpha = 0.12; c.fill();
+    c.globalAlpha = 1; c.beginPath();
+    D.loud.forEach((v, i) => i ? c.lineTo(X(i * D.loud_t), Y(v)) : c.moveTo(0, Y(v)));
+    c.strokeStyle = ink; c.lineWidth = 1.2; c.stroke();
+    // lyric lines
+    for (const L of D.lines) { c.fillStyle = L.pin ? css('--red') : ink2;
+      c.fillRect(X(L.s), lyrY - 3, Math.max(1.5, X(L.e) - X(L.s) - 1), 4); }
+    // style frames
+    c.font = '600 11px ' + css('--mono');
+    for (const f of D.frames) { const x = X(f.t); c.fillStyle = ink;
+      c.fillRect(x - 0.5, top, 1.5, lyrY - top - 6);
+      c.fillRect(x - 8, top, 16, 16); c.fillStyle = css('--paper'); c.textAlign = 'center';
+      c.fillText(f.key, x, top + 12); }
+    // axis
+    c.fillStyle = ink2; c.font = '11px ' + css('--mono'); c.textAlign = 'center';
+    const step = w < 520 ? 120 : 60;
+    for (let t = 0; t <= D.duration; t += step) c.fillText(fmt(t).replace('.0', ''), Math.min(w - 16, Math.max(16, X(t))), h - 3);
+    if (hover !== null) { c.fillStyle = ink; c.fillRect(X(hover) - 0.5, 0, 1, axis); }
+  }
+  function read(t) {
+    hover = t; draw();
+    const s = D.sections.find(s => t >= s.start && t < s.end) || D.sections[D.sections.length - 1];
+    let bar = 0; while (bar + 1 < D.bars.length && D.bars[bar + 1] <= t) bar++;
+    const L = D.lines.find(L => t >= L.s - 0.2 && t <= L.e + 0.2);
+    ro.innerHTML = '<b>' + fmt(t) + '</b> · bar ' + bar + ' · ' + s.name.replace(/</g, '&lt;') +
+      (L ? '<br>line ' + L.n + ': ' + L.x.replace(/</g, '&lt;') + (L.pin ? ' (pinned, check by ear)' : '') : '<br>&nbsp;');
+  }
+  function at(e) { const r = cv.getBoundingClientRect(); return Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * D.duration; }
+  cv.addEventListener('pointermove', e => read(at(e)));
+  cv.addEventListener('pointerdown', e => read(at(e)));
+  cv.addEventListener('pointerleave', () => { hover = null; draw(); });
+  cv.addEventListener('click', e => { const t = at(e);
+    const s = D.sections.find(s => t >= s.start && t < s.end); if (!s) return;
+    document.querySelectorAll('.sec.hl').forEach(n => n.classList.remove('hl'));
+    const el = document.getElementById('sec-' + s.bar); if (el) { el.classList.add('hl'); } });
+  new ResizeObserver(draw).observe(cv);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  if (document.fonts) document.fonts.ready.then(draw);
+  draw();
+})();
+</script>
