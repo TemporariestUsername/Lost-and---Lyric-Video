@@ -49,11 +49,10 @@ def main():
         s["bar_end"] = secs[i + 1]["bar"] - 1 if i + 1 < len(secs) else len(g["downbeats"]) - 1
 
     frame_meta = []
-    for fname, sec, lyric in STYLE_FRAMES:
+    for fname, sec, lyric, tt in STYLE_FRAMES:
         src = HERE / "frames" / f"{fname}.png"
         dst = HERE / "frames" / f"{fname}.jpg"
-        Image.open(src).convert("RGB").save(dst, quality=86, optimize=True)
-        tt = {"A_white_coats": 126.0, "B_spoken_help": 189.6, "C_the_run": 294.7}[fname]
+        Image.open(src).convert("RGB").save(dst, quality=88, optimize=True)
         bar = int(np.searchsorted(g["downbeats"], tt, side="right"))
         frame_meta.append(dict(file=f"frames/{fname}.jpg", section=sec, lyric=lyric,
                                t=tt, bar=bar, key=fname[0]))

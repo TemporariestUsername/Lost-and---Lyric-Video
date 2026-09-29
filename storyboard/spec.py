@@ -1,210 +1,199 @@
 """Storyboard spec: one entry per section in analysis/out/grid.json.
 
-world    colour world the section lives in (drives palette in the renderer)
-         institute | memory | her | run | void
-visual   what is drawn
-type     how the lyric is set
-sync     what locks to which part of the grid
+Direction: a long exposure of a memory. Nothing is drawn literally.
+She is a veil of hair and a pale gap, caught in several exposures at once.
+He is never shown: he is warm light leaking in from outside the frame.
+The white coats are overexposure, flicker, scratches and film burns.
+Time is tally marks (one per bar) and the exposure echo.
+
+world    colour world (drives palette and optics in the renderer)
+         void | her | institute | memory | run
 """
 
 WORLDS = {
-    "void": ("Void", "White field, one violet point"),
-    "her": ("Her room", "Pale paper, violet stipple, amber voice"),
-    "institute": ("Institute", "Graph paper, ink, red pen"),
-    "memory": ("Memory", "Night navy, amber contour, violet light"),
-    "run": ("The run", "Sodium night, neon accents"),
+    "void": ("Bleach", "Fog thinning to white"),
+    "her": ("Her room", "Lavender haze, soft padded corner"),
+    "institute": ("Institute", "Cold overexposure, flicker, scratches, burns"),
+    "memory": ("Memory", "Plum dark, warm light through it"),
+    "run": ("The run", "Sodium and neon streaks, fast"),
 }
 
 SECTIONS = {
     "Intro": dict(
         world="void",
-        visual="White field. A single violet point breathes on every kick. "
-               "A thin ECG line draws left to right across the five bars, "
-               "one tick per downbeat. The title types in: lost and, then a "
-               "blinking cursor where “found” should be.",
-        type="Title only, Garamond italic. The missing word is the hook of "
-             "the whole video.",
-        sync="Point pulses on kicks; ECG ticks on downbeats; title types on "
-             "the last bar."),
+        visual="Bleached white fog with dust drifting through it. On the "
+               "first downbeat a single tally mark scratches into the wall, "
+               "then one more every bar for the rest of the film. The title "
+               "surfaces out of the fog, and the space after it, where "
+               "“found” would go, stays empty.",
+        type="Title only, ghosted serif.",
+        sync="Tally mark on every downbeat; dust brightens slightly on each "
+             "kick."),
     "Verse A: Through eyes": dict(
         world="her",
-        visual="The white room as an isometric line drawing: bed, a door with "
-               "no handle. She is a stipple figure, seated. On eyes/years, a "
-               "close-up of her stipple face with calendar pages flicking in "
-               "the reflection. On “a voice came to her” an amber "
-               "contour enters from frame edge and traces a hand. On “she "
-               "got lost inside him” her particles stream into his "
-               "outline and fill it.",
-        type="Her voice: words bloom out of blur on their sung onset and "
-             "dissolve upward after the line. Backing echoes (sweet, so "
-             "sweet) are small ghost copies.",
-        sync="Slow camera push on each downbeat; particles brighten on "
-             "kicks."),
+        visual="Lavender haze and a padded corner you feel more than see. "
+               "She is a veil of long hair around a pale gap where a face "
+               "would be, caught in three exposures at once. From “a "
+               "voice came to her” warmth gathers behind her shoulder. "
+               "On “lost inside him” it floods through her hair.",
+        type="Her voice, dark ink in the haze. Each word focus-pulls in and "
+             "sheds two ghost exposures that drift apart and linger.",
+        sync="Ghost exposures swell on kicks; the warm light rises across "
+             "the verse and peaks on “inside him”."),
     "There comes a once": dict(
         world="memory",
-        visual="Split diptych. Left panel is the “no” timeline, "
-               "right is “yes”. Each “once” is a clock-tick "
-               "flash and a hard cut. Both panels end the same way: his "
-               "contour unravels into a straight line. “Lost to her / to "
-               "the world” pulls back to a globe of dots.",
-        type="Her voice, one line per panel; the parenthesised (once...) "
-             "echo sits in the opposite panel.",
-        sync="Cuts on downbeats; tick flashes on the word onsets of "
-             "“once”."),
+        visual="Two timelines in one frame. Each “once” flashes the "
+               "image to white, and it comes back shifted: the "
+               "“no” drifts left, the “yes” drifts right. "
+               "“Lost to the world” pulls focus until nothing is "
+               "sharp.",
+        type="Her voice, white with film halation; the (once...) echoes "
+             "sit on the opposite side of the frame.",
+        sync="White flashes on the “once” onsets; the focus pull "
+             "runs over two bars."),
     "Refrain I: Stay lost now girl": dict(
         world="her",
-        visual="The type is the image. “Stay lost now girl” fills "
-               "the frame, then scatters to particles on the pulse. “Throw "
-               "away everything he found”: map pins (the things he "
-               "found) are flung out of frame one per pulse.",
-        type="Her voice at display size (~220px). Echoes (forever, forever / "
-             "again, again) trail as ghost copies.",
-        sync="Scatter on kicks; “Never again” holds for its full "
-             "length, then the frame fades to white."),
+        visual="The type becomes the weather. The refrain is exposed large "
+               "and soft, and its echoes smear sideways on every kick. On "
+               "“throw away everything he found” the warm light is "
+               "pushed out of frame one pulse at a time.",
+        type="Her voice at display size; echoes (forever / again) pile up "
+             "as fading exposures.",
+        sync="Smear on kicks; “Never again” is held, and the frame "
+             "bleaches to white."),
     "Break I": dict(
         world="institute",
-        visual="Transition into the institute. Graph-paper grid draws in, "
-               "one gridline family per pulse; the institute mark stamps on "
-               "the downbeat; the case file slides in.",
+        visual="A fluorescent hum arrives as flicker. The fog goes cold and "
+               "scratches start to run through the emulsion.",
         type="No lyric.",
-        sync="Grid on kicks; stamp on bar 33."),
+        sync="Flicker dips on the eighths; scratches thicken bar by bar."),
     "White Coats I": dict(
         world="institute",
-        visual="Style frame A. Clipboard chart with her stipple ID photo and "
-               "a vitals trace. Three faceless white coats watch. Scribbles "
-               "grow over the chart on each “scribble”; each "
-               "“stab” punches a hole with a red ink ring and a red "
-               "frame flash. “A nice white room” becomes a "
-               "blueprint floor plan. “With time” is a clock face; "
-               "“find anything” is a radar sweep across the chart.",
-        type="White-coat voice: monospace caps typed letter by letter into "
-             "a NOTES field, block cursor blinking on the eighths. "
-             "“Stab” in red bold; HOW set larger in red.",
-        sync="Holes on the exact stab onsets; clock ticks on eighths; "
-             "coats nod on kicks."),
+        visual="Style frame B. Overexposed, cold, humming. She is small and "
+               "far off, barely there. Every “scribble” tears "
+               "scratches through the emulsion; every “stab” burns "
+               "a hole through the film. On “with time” the "
+               "flicker locks into a clock-like pulse.",
+        type="The chant is etched into the image in monospace caps, letter "
+             "by letter, each glyph jittered and partly eroded. HOW is "
+             "etched larger.",
+        sync="Burns on the exact stab onsets; scratches on the scribble "
+             "onsets; flicker on eighths."),
     "They brought a man": dict(
         world="memory",
-        visual="The Finder is drawn as one continuous amber contour that "
-               "writes on over two bars, standing in the doorway. His "
-               "finding is a radar sweep over a topographic map of her "
-               "mind; the contours tighten to a glowing core (“something "
-               "VERY hard to find”). Then the mirror: her particles find "
-               "the same core in him.",
-        type="Her voice; VERY set at 1.6× on its onset; (in her) / "
-             "(in him) as ghost echoes.",
-        sync="Radar sweep period = one bar; core flares on the downbeat "
-             "after “found”."),
+        visual="He is never shown. He arrives as warmth: a light leak "
+               "creeping in from the frame edge and searching the fog, "
+               "softening as it reaches her. On “something VERY hard "
+               "to find” it finds the one warm point inside her, and "
+               "she glows back.",
+        type="Her voice; VERY swells with halation on its onset.",
+        sync="The leak advances a step per bar; the flare lands on the "
+             "downbeat after “found”."),
     "Spoken I: I can help you find": dict(
         world="memory",
-        visual="Style frame B. Dark and still. Two profiles facing each "
-               "other: his is a warm contour, hers is light made of points. "
-               "Three threads are drawn between them as he names them: "
-               "protecting, trusting, believing. These threads come back in "
-               "The Cutting.",
-        type="His voice: Inter Light caps, wide tracking, no animation, "
-             "words appear on time like a close-mic subtitle.",
-        sync="Each thread draws on from its word onset; nothing moves on "
-             "the beat here."),
+        visual="Near-dark. As he names protecting, trusting and believing, "
+               "three shafts of warm light open through the dark, one per "
+               "word. They come back in The Cutting.",
+        type="His voice: Inter Light caps, wide tracking, rendered as warm "
+             "light through a crack. It never moves.",
+        sync="Each shaft opens on its word onset; nothing else moves on "
+             "the beat."),
     "Break II": dict(
         world="memory",
-        visual="The threads braid and glow; slow push-in; the ECG line from "
-               "the intro returns, now amber.",
+        visual="The three shafts breathe; dust turns gold inside them.",
         type="No lyric.",
-        sync="Thread glow on kicks."),
+        sync="Shaft brightness on kicks."),
     "White Coats II": dict(
         world="institute",
-        visual="Back to the chart, colder. The threads show faintly on her "
-               "ID photo. “Too lost” crosses her chart out in red. "
-               "“Not worth the time” brings down a rubber stamp. "
-               "The coats turn to face camera. The clock runs faster.",
-        type="White-coat voice as before.",
-        sync="Stamp on a downbeat; clock ticks double speed."),
+        visual="Colder, brighter, faster flicker. The etched chant starts to "
+               "cover the walls. On “not worth the time” the "
+               "exposure clips to pure white for a beat.",
+        type="Etched chant, as White Coats I.",
+        sync="White clip on the downbeat after “time”; burns on "
+             "stabs."),
     "A gun and a bullet": dict(
         world="institute",
-        visual="Ink still life on a steel tray: a revolver outline, then a "
-               "single bullet, placed on consecutive downbeats. “Go "
-               "and find that girl”: radar over a city grid. “He "
-               "found her” twice: the crosshair locks onto her point, "
-               "and the second time it dissolves. He doesn’t shoot.",
-        type="Her voice for narration; the quoted order is set in "
-             "white-coat mono.",
-        sync="Object placements on downbeats; crosshair locks on the "
-             "“found” onsets."),
+        visual="For the first time something is in sharp focus: a small, "
+               "cold glint on the floor, crisp in a soft world. On “he "
+               "found her” the warm light closes on her twice. The "
+               "second time it stops short and goes no further.",
+        type="Her voice for the narration; “go and find that "
+             "girl” is etched.",
+        sync="The glint appears on a downbeat; the light's two approaches "
+             "land on the “found” onsets."),
     "Spoken II: I won't lose you": dict(
         world="memory",
-        visual="Dark, close. His amber hand opens and sets the bullet down. "
-               "The three threads re-tie.",
-        type="His voice, as in Spoken I.",
-        sync="Threads re-tie on the word onsets."),
+        visual="His words as light again. The three shafts re-open around "
+               "her.",
+        type="His voice, as Spoken I.",
+        sync="Shafts re-open on the word onsets."),
     "The Run": dict(
         world="run",
-        visual="Style frame C. Sodium night. Tunnel rings rush past and "
-               "flash on the kick. The motel sign flickers on with "
-               "“motel”; a diner sign; an alley in line art. A map "
-               "route line gains a pin on every downbeat. “Forever and "
-               "ever and ever”: headlight trails loop into an infinity "
-               "sign.",
-        type="Her voice, warm-tinted, with glow. “Lost and found, found "
-             "and lost” flips like a split-flap board.",
-        sync="Rings and lamps on kicks; route pins on downbeats; flaps on "
-             "word onsets."),
+        visual="The only warm, fast section. Sodium and neon smear into "
+               "long-exposure streaks across the fog, headlights flare "
+               "through, and her ghosts trail sideways like motion blur. "
+               "The tally marks stop: time isn't counted here.",
+        type="Her voice, warm and hot, smeared along the direction of "
+             "travel. “Lost and found, found and lost” swap "
+             "places as double exposures.",
+        sync="Streak bursts on kicks; a headlight flare on every "
+             "downbeat."),
     "But...": dict(
         world="void",
-        visual="Everything freezes on “But…”. Colour drains "
-               "over one bar. “Round the bend”: headlight glare "
-               "resolves into three white-coat silhouettes, then the frame "
-               "goes paper-white.",
-        type="Her voice; “But…” held alone, centred, for the "
-             "whole pause.",
-        sync="Freeze frame exactly on the “But” onset."),
+        visual="Everything freezes: the exposure echo holds the last frame. "
+               "Over one bar it bleaches to white. The coats come "
+               "“round the bend” as a single hard, cold sweep of "
+               "light.",
+        type="“But…” held alone for the whole pause.",
+        sync="The freeze lands exactly on the “But” onset."),
     "White Coats III": dict(
         world="institute",
-        visual="His file now: the ID photo is his amber contour. “Cut "
-               "out his something hard to find”: a dotted scalpel line "
-               "is drawn around the heart of his contour. ANYTHING is huge. "
-               "“Except…” holds, cursor blinking.",
-        type="White-coat voice; ANYTHING set at display size.",
-        sync="Scalpel line traces over one bar."),
+        visual="Back in the white. The scratches now cut across the spot "
+               "where his warmth used to come in.",
+        type="Etched chant; ANYTHING etched at display size, then "
+             "“Except…” on its own.",
+        sync="Burns on stabs; flicker on eighths."),
     "The Cutting": dict(
-        world="institute",
-        visual="The three threads from Spoken I are cut one per line, each "
-               "snip on its “cut” onset, and fall slack and grey. The "
-               "tray returns with the gun and bullet. Her stipple figure is "
-               "wiped away region by region (arms, legs, eyes, ears) by a "
-               "clinical eraser sweep, not gore, leaving a year counter "
-               "that keeps ticking. “Agains and agains”: earlier "
-               "shots repeat in shrinking nested frames.",
-        type="Her voice, colder white. The virtue labels (PROTECTING / "
-             "TRUSTING / BELIEVING) grey out as each thread is cut.",
-        sync="Snips on word onsets; eraser wipes on kicks; year counter on "
-             "eighths."),
+        world="memory",
+        visual="Style frame C. Dark. The three shafts from Spoken I return, "
+               "and each “cut” drops a blade through one and it "
+               "gutters out. The warmth behind her drains with each cut "
+               "until she is a silhouette against nothing. The glint "
+               "stays sharp. Then her exposures are taken one by one. For "
+               "“eyes” the focus goes. For “ears” the "
+               "image stops reacting to the music. The years stay: the "
+               "tally marks remain.",
+        type="Her voice, white-hot with halation, cooling as the light "
+             "goes.",
+        sync="Blades on the “cut” onsets; beat-reactivity "
+             "switches off on “ears”."),
     "Refrain II: Stay lost now girl": dict(
         world="her",
-        visual="The same big refrain as Refrain I, but the scattered "
-               "particles never re-form; they drift into the year counter.",
-        type="Her voice at display size, as Refrain I.",
-        sync="Scatter on kicks, slower decay than Refrain I."),
+        visual="The refrain again, but nothing reacts to the beat any more "
+               "because she can't hear it. The echoes pile up instead: "
+               "her agains, in layers.",
+        type="Her voice at display size, with more ghosts than Refrain I.",
+        sync="Deliberately unsynced: only the word onsets drive "
+             "anything."),
     "Verse A reprise": dict(
         world="her",
-        visual="Shot-for-shot rhyme with Verse A, aged: gridlines cracked, "
-               "calendar pages piled up, her stipple sparser. The amber "
-               "voice returns, fainter. Memory or return? It stays open.",
+        visual="A shot-for-shot rhyme with Verse A, seen through years of "
+               "accumulated exposure: overexposed, the wall covered in "
+               "tallies, many more ghosts. The warmth returns faintly "
+               "behind her shoulder. Memory or return? It stays open.",
         type="Her voice, as Verse A.",
-        sync="Same camera moves as Verse A, on the same bar offsets."),
+        sync="Same bar offsets as Verse A."),
     "Outro": dict(
         world="void",
-        visual="The ECG line flattens into a horizon. The single bullet "
-               "sits on the tray in white space. Her point pulses once more "
-               "on the last downbeat. The title retypes “lost and”, "
-               "the cursor blinks, cut to white.",
-        type="Title only.",
-        sync="Final pulse on the last downbeat; cursor blinks on eighths "
-             "to the end of the audio."),
+        visual="The fog thins toward white. The glint is the last sharp "
+               "thing on screen. The final tally mark lands on the last "
+               "downbeat, then white.",
+        type="Title returns, ghosted, with the empty space after it.",
+        sync="Last tally on the last downbeat."),
 }
 
 STYLE_FRAMES = [
-    ("A_white_coats", "White Coats I", "Scribble scribble, stab stab the charts."),
-    ("B_spoken_help", "Spoken I: I can help you find",
-     "I can help you find protecting, trusting and believing"),
-    ("C_the_run", "The Run", "Through every tunnel, every motel."),
+    ("A_lost_inside_him", "Verse A: Through eyes", "She got lost inside him", 46.3),
+    ("B_stab_the_charts", "White Coats I", "Scribble scribble, stab stab the charts.", 125.9),
+    ("C_cut_away", "The Cutting", "They cut away his trusting.", 368.3),
 ]

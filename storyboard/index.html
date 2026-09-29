@@ -5,10 +5,10 @@
 <style>
 /* Layout: one reading column like a case file; timeline and frames run wider. */
 :root {
-  --paper: #EEF0EC; --sheet: #F8F9F6; --ink: #1C2327; --ink-2: #56646A;
-  --rule: #C9D5D6; --grid: #DCE4E4; --red: #C21F35;
-  --w-void: #6B777C; --w-her: #5E4FC4; --w-institute: #C21F35;
-  --w-memory: #B8492F; --w-run: #A8660F;
+  --paper: #ECE9F0; --sheet: #F6F4F8; --ink: #2B2233; --ink-2: #6A6378;
+  --rule: #CFC8DA; --grid: #DDD7E6; --red: #B8561C; --glow: #E07A2E;
+  --w-void: #8A8497; --w-her: #6A58B8; --w-institute: #4F6474;
+  --w-memory: #B8611C; --w-run: #C0412F;
   --display: "EB Garamond", "Garamond", "Times New Roman", serif;
   --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -16,15 +16,15 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --paper: #0C111E; --sheet: #141A2B; --ink: #E8E4DA; --ink-2: #99A2B3;
-  --rule: #2A3350; --grid: #1B2238; --red: #F0475C;
-  --w-void: #A7AFBD; --w-her: #BDB2FF; --w-institute: #F0475C;
-  --w-memory: #F07E68; --w-run: #F2A541; color-scheme: dark; } }
+  --paper: #140F19; --sheet: #1D1724; --ink: #EDE6EE; --ink-2: #A59DB2;
+  --rule: #342B40; --grid: #241D2D; --red: #F29A5A; --glow: #FF9A4A;
+  --w-void: #B7B0C2; --w-her: #C3B8FF; --w-institute: #A9BCCB;
+  --w-memory: #FF9A4A; --w-run: #F2765E; color-scheme: dark; } }
 :root[data-theme="dark"] {
-  --paper: #0C111E; --sheet: #141A2B; --ink: #E8E4DA; --ink-2: #99A2B3;
-  --rule: #2A3350; --grid: #1B2238; --red: #F0475C;
-  --w-void: #A7AFBD; --w-her: #BDB2FF; --w-institute: #F0475C;
-  --w-memory: #F07E68; --w-run: #F2A541; color-scheme: dark; }
+  --paper: #140F19; --sheet: #1D1724; --ink: #EDE6EE; --ink-2: #A59DB2;
+  --rule: #342B40; --grid: #241D2D; --red: #F29A5A; --glow: #FF9A4A;
+  --w-void: #B7B0C2; --w-her: #C3B8FF; --w-institute: #A9BCCB;
+  --w-memory: #FF9A4A; --w-run: #F2765E; color-scheme: dark; }
 
 body { background: var(--paper); color: var(--ink); font: 16px/1.6 var(--body); }
 .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 96px;
@@ -44,11 +44,11 @@ a:focus-visible { outline: 2px solid var(--w-her); outline-offset: 2px; }
 /* Masthead */
 .mast { display: grid; gap: 18px; border-bottom: 1.5px solid var(--ink); padding-bottom: 28px; }
 .mast .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-h1 { font: italic 400 clamp(3.4rem, 11vw, 7.5rem)/0.9 var(--display); letter-spacing: -0.02em; }
-.cursor { display: inline-block; width: 0.42em; height: 0.78em; background: var(--w-her);
-  vertical-align: -0.04em; margin-left: 0.08em; animation: blink 0.855s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+h1 { font: italic 400 clamp(3.4rem, 11vw, 7.5rem)/0.9 var(--display); letter-spacing: -0.02em;
+  text-shadow: -0.32em 0.02em 0.06em color-mix(in srgb, var(--ink) 16%, transparent),
+               0.30em -0.02em 0.09em color-mix(in srgb, var(--ink) 10%, transparent); }
+h1 .gap { display: inline-block; width: 1.6em; height: 0.7em; margin-left: 0.12em; vertical-align: -0.02em;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--glow) 45%, transparent), transparent); }
 .lede { max-width: 62ch; color: var(--ink-2); font-size: 1.05rem; }
 .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px 24px;
   margin: 8px 0 0; }
@@ -83,8 +83,10 @@ h1 { font: italic 400 clamp(3.4rem, 11vw, 7.5rem)/0.9 var(--display); letter-spa
 .voice .sample { min-height: 3.2rem; display: flex; align-items: center; overflow-wrap: anywhere; }
 .s-her { font: italic 400 1.9rem/1.1 var(--display); color: var(--w-her); }
 .s-coats { font: 400 1.05rem/1.3 var(--mono); text-transform: uppercase; }
-.s-coats em { font-style: normal; font-weight: 600; color: var(--red); }
-.s-him { font: 300 0.95rem/1.5 var(--him); text-transform: uppercase; letter-spacing: 0.22em; }
+.s-coats em { font-style: normal; font-weight: 600; color: var(--red); text-shadow: 0 0 0.5em var(--glow); }
+.s-him { font: 300 0.95rem/1.5 var(--him); text-transform: uppercase; letter-spacing: 0.22em;
+  color: var(--glow); text-shadow: 0 0 0.6em color-mix(in srgb, var(--glow) 60%, transparent); }
+.s-her { text-shadow: 0.9em 0.05em 0.12em color-mix(in srgb, var(--w-her) 18%, transparent); }
 .voice p { font-size: 0.92rem; color: var(--ink-2); }
 
 /* Frames */
@@ -130,9 +132,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
 <div class="wrap">
   <header class="mast">
     <div class="top"><span class="eyebrow">Lyric video · storyboard for approval</span>
-      <span class="eyebrow">Drawn in code · skia + ffmpeg</span></div>
-    <h1>lost and<span class="cursor" aria-hidden="true"></span></h1>
-    <p class="lede">A beat-mapped plan for the full-length video, built from the track analysis. Every section, bar number and timecode below comes from the audio. Three style frames are rendered with the actual engine. Nothing further gets built until you approve.</p>
+      <span class="eyebrow">Drawn in code · skia, numpy, ffmpeg · revision 2</span></div>
+    <h1>lost and<span class="gap" aria-hidden="true"></span></h1>
+    <p class="lede">Revision 2 of the beat-mapped plan, rebuilt around the track art: a long exposure of a memory rather than a diagram of the story. The analysis and timing are unchanged. Three new style frames are rendered with the new engine. Nothing further gets built until you approve.</p>
     <dl class="facts"><div><dt>Length</dt><dd>8:13 (493.6 s)</dd></div><div><dt>Pulse</dt><dd>70.2 BPM kick</dd></div><div><dt>Grid</dt><dd>140 BPM eighths, drifting 136→142</dd></div><div><dt>Bars</dt><dd>149 × ~3.4 s</dd></div><div><dt>Lyrics</dt><dd>616 / 630 words timed</dd></div><div><dt>Output</dt><dd>1920×1080 · 30 fps</dd></div></dl>
   </header>
 
@@ -141,29 +143,29 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <div class="tl">
       <canvas id="tl" role="img" aria-label="Timeline of the song: loudness curve, 149 bars, 19 sections coloured by visual world, lyric line positions and style frame markers."></canvas>
       <div class="readout" id="readout">Hover or tap the timeline to read a moment.</div>
-      <ul class="legend"><li><span class="chip" data-world="void">Void</span> White field, one violet point</li><li><span class="chip" data-world="her">Her room</span> Pale paper, violet stipple, amber voice</li><li><span class="chip" data-world="institute">Institute</span> Graph paper, ink, red pen</li><li><span class="chip" data-world="memory">Memory</span> Night navy, amber contour, violet light</li><li><span class="chip" data-world="run">The run</span> Sodium night, neon accents</li></ul>
+      <ul class="legend"><li><span class="chip" data-world="void">Bleach</span> Fog thinning to white</li><li><span class="chip" data-world="her">Her room</span> Lavender haze, soft padded corner</li><li><span class="chip" data-world="institute">Institute</span> Cold overexposure, flicker, scratches, burns</li><li><span class="chip" data-world="memory">Memory</span> Plum dark, warm light through it</li><li><span class="chip" data-world="run">The run</span> Sodium and neon streaks, fast</li></ul>
     </div>
     <p class="note col">librosa tracks this song at about 140 BPM, but that is eighth-note resolution. The kick lands on every other tracked beat, so the video's pulse is the kick at about 70 BPM, and each sung line is one four-pulse bar of about 3.4 s. The tempo drifts up about 4% after 3:00, so the grid follows the audio rather than a fixed click.</p>
   </section>
 
   <section aria-labelledby="h-story">
-    <div class="col"><span class="eyebrow">Story</span><h2 id="h-story">The Finder</h2></div>
+    <div class="col"><span class="eyebrow">Story</span><h2 id="h-story">Agains</h2></div>
     <div class="story">
-      <p>A psychic girl is held in an institute's white room. Her gift is getting lost: she drifts out of herself, and the white coats who chart her can't find where she goes. So they bring in a man whose gift is finding people. He finds her, and he finds something in her that he wasn't sent for. He offers her three things he can help her find: protecting, trusting, believing. On screen these become three threads of light between them.</p>
-      <p>The institute decides she isn't worth the time. It hands him a gun and a single bullet and sends him to find her. He finds her and doesn't shoot. They run through tunnels, motels, diners and alleys until the coats come round the bend. The coats cut his three threads and leave him the gun and the bullet. They take her senses one by one and leave her the years.</p>
-      <p>The song opens and closes on the same verse, so the video is a loop. We start in the white room and end there years later, with her replaying the agains. Whether his voice at the end is a memory or a return stays open.</p>
-      <p class="note">This grew from your Mage: The Ascension premise, with the agent and the psychic girl taken for experimentation. The characters, the institute and its circle-and-crosshair mark are all original designs, with no game iconography.</p>
+      <p>The story is still there: the girl in the white room, the man sent to find her, the three things he offers her, the run, the cutting, the years. But it's told the way a memory feels from inside, not shown as events.</p>
+      <p>She is never fully drawn. She's a veil of hair and a pale gap where a face would be, caught in several exposures at once: the self she couldn't learn. He is never drawn at all. He's warmth leaking in from outside the frame, glowing through her hair. His three virtues are three shafts of that light, and the cutting shutters them one by one. The white coats aren't people. They're the overexposure itself, the fluorescent flicker, the scratches and the burns in the film.</p>
+      <p>Time is literal in only one place: a tally mark scratched into the wall on every bar, 149 by the end. It's also in the image itself. An exposure echo keeps earlier moments ghosted into the present, so the film gets more layered as it goes, and the reprise of the first verse is seen through all of it. In a film where everything is soft, the bullet is the only thing ever in sharp focus.</p>
+      <p class="note">This grew from your Mage: The Ascension premise, with the mood taken from the track art. No character is depicted in detail, the institute has no emblem, and nothing is drawn from the game.</p>
     </div>
   </section>
 
   <section aria-labelledby="h-look">
-    <div class="col"><span class="eyebrow">Look</span><h2 id="h-look">Clinical ink, sodium light</h2></div>
+    <div class="col"><span class="eyebrow">Look</span><h2 id="h-look">Long exposure of a memory</h2></div>
     <div class="two">
       <div class="story">
-        <p>Everything is drawn as line. Institute scenes are overlit paper with a graph grid, black ink and one red pen. Memory scenes invert to night navy, where he is a single warm contour and she is light made of points. The run is the only place colour gets warm and saturated. There is film grain throughout, and bloom only on light sources.</p>
-        <p>This follows the track's dark-synthpop split: cold, clinical textures against breathy, reverb-lit vocals, with nursery-rhyme chants in between.</p>
+        <p>Bleached lavender haze, lifted milky blacks, fog that moves, dust in the air. The optics do most of the work: bloom, film halation (warm fringes bleeding off bright edges), a diffusion filter, lens fringing at the edges and grain. Warm light is the only saturated colour, and it always means him.</p>
+        <p>This matches the track's split: breathy, reverb-drenched vocals over cold, clinical textures, with a sing-song chant cutting through.</p>
       </div>
-      <ul class="worlds"><li><span class="chip" data-world="void">Void</span> White field, one violet point</li><li><span class="chip" data-world="her">Her room</span> Pale paper, violet stipple, amber voice</li><li><span class="chip" data-world="institute">Institute</span> Graph paper, ink, red pen</li><li><span class="chip" data-world="memory">Memory</span> Night navy, amber contour, violet light</li><li><span class="chip" data-world="run">The run</span> Sodium night, neon accents</li></ul>
+      <ul class="worlds"><li><span class="chip" data-world="void">Bleach</span> Fog thinning to white</li><li><span class="chip" data-world="her">Her room</span> Lavender haze, soft padded corner</li><li><span class="chip" data-world="institute">Institute</span> Cold overexposure, flicker, scratches, burns</li><li><span class="chip" data-world="memory">Memory</span> Plum dark, warm light through it</li><li><span class="chip" data-world="run">The run</span> Sodium and neon streaks, fast</li></ul>
     </div>
   </section>
 
@@ -172,13 +174,13 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <div class="voices">
       <div class="voice"><span class="eyebrow">Her · sung lead</span>
         <div class="sample s-her">She got lost inside him</div>
-        <p>EB Garamond Italic. Each word blooms out of blur on its sung onset, then drifts up and dissolves after the line. Parenthesised backing vocals are small ghost echoes.</p></div>
+        <p>EB Garamond Italic. Each word focus-pulls out of blur on its sung onset and sheds two ghost exposures that drift apart and linger. It's dark ink in the haze and white-hot with halation in the dark.</p></div>
       <div class="voice"><span class="eyebrow">White coats · chant</span>
         <div class="sample s-coats">Scribble scribble, <em>stab stab</em> the charts</div>
-        <p>IBM Plex Mono caps, typed letter by letter into form fields. The block cursor blinks on the eighth notes, and "stab" is set in red bold.</p></div>
+        <p>IBM Plex Mono caps, etched into the image letter by letter, each glyph jittered and partly eroded. A "stab" doesn't change the type: it burns a hole through the film.</p></div>
       <div class="voice"><span class="eyebrow">Him · spoken</span>
         <div class="sample s-him">I won't lose you</div>
-        <p>Inter Light caps with wide tracking and no motion. Words simply appear on time, like a subtitle for a dry close-mic voice.</p></div>
+        <p>Inter Light caps with wide tracking, rendered as warm light through a crack. The words never move, like his dry close-mic voice.</p></div>
     </div>
   </section>
 
@@ -186,22 +188,22 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <div class="col"><span class="eyebrow">Style frames · rendered by the engine</span><h2 id="h-frames">Three moments</h2></div>
     <div class="frames">
 <figure id="frame-A">
-  <img src="frames/A_white_coats.jpg" alt="Style frame A: White Coats I, Scribble scribble, stab stab the charts." width="1920" height="1080" loading="lazy">
-  <figcaption><span class="k">A</span> <b>White Coats I</b>
-    <span class="tc">2:06.0 · bar 37</span>
-    <span class="lyr">Scribble scribble, stab stab the charts.</span></figcaption>
+  <img src="frames/A_lost_inside_him.jpg" alt="Style frame A: Verse A: Through eyes, She got lost inside him" width="1920" height="1080" loading="lazy">
+  <figcaption><span class="k">A</span> <b>Verse A: Through eyes</b>
+    <span class="tc">0:46.3 · bar 13</span>
+    <span class="lyr">She got lost inside him</span></figcaption>
 </figure>
 <figure id="frame-B">
-  <img src="frames/B_spoken_help.jpg" alt="Style frame B: Spoken I: I can help you find, I can help you find protecting, trusting and believing" width="1920" height="1080" loading="lazy">
-  <figcaption><span class="k">B</span> <b>Spoken I: I can help you find</b>
-    <span class="tc">3:09.6 · bar 56</span>
-    <span class="lyr">I can help you find protecting, trusting and believing</span></figcaption>
+  <img src="frames/B_stab_the_charts.jpg" alt="Style frame B: White Coats I, Scribble scribble, stab stab the charts." width="1920" height="1080" loading="lazy">
+  <figcaption><span class="k">B</span> <b>White Coats I</b>
+    <span class="tc">2:05.9 · bar 37</span>
+    <span class="lyr">Scribble scribble, stab stab the charts.</span></figcaption>
 </figure>
 <figure id="frame-C">
-  <img src="frames/C_the_run.jpg" alt="Style frame C: The Run, Through every tunnel, every motel." width="1920" height="1080" loading="lazy">
-  <figcaption><span class="k">C</span> <b>The Run</b>
-    <span class="tc">4:54.7 · bar 89</span>
-    <span class="lyr">Through every tunnel, every motel.</span></figcaption>
+  <img src="frames/C_cut_away.jpg" alt="Style frame C: The Cutting, They cut away his trusting." width="1920" height="1080" loading="lazy">
+  <figcaption><span class="k">C</span> <b>The Cutting</b>
+    <span class="tc">6:08.3 · bar 110</span>
+    <span class="lyr">They cut away his trusting.</span></figcaption>
 </figure></div>
   </section>
 
@@ -215,13 +217,13 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <span class="meta">16.9 s · -29 dB</span>
   </div>
   <div class="body">
-    <header><span class="chip" data-world="void">Void</span>
+    <header><span class="chip" data-world="void">Bleach</span>
       <h3>Intro</h3></header>
     
     <dl>
-      <dt>Picture</dt><dd>White field. A single violet point breathes on every kick. A thin ECG line draws left to right across the five bars, one tick per downbeat. The title types in: lost and, then a blinking cursor where “found” should be.</dd>
-      <dt>Type</dt><dd>Title only, Garamond italic. The missing word is the hook of the whole video.</dd>
-      <dt>Sync</dt><dd>Point pulses on kicks; ECG ticks on downbeats; title types on the last bar.</dd>
+      <dt>Picture</dt><dd>Bleached white fog with dust drifting through it. On the first downbeat a single tally mark scratches into the wall, then one more every bar for the rest of the film. The title surfaces out of the fog, and the space after it, where “found” would go, stays empty.</dd>
+      <dt>Type</dt><dd>Title only, ghosted serif.</dd>
+      <dt>Sync</dt><dd>Tally mark on every downbeat; dust brightens slightly on each kick.</dd>
     </dl>
   </div>
 </article>
@@ -233,12 +235,12 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   </div>
   <div class="body">
     <header><span class="chip" data-world="her">Her room</span>
-      <h3>Verse A: Through eyes</h3></header>
+      <h3>Verse A: Through eyes</h3><a class="fref" href="#frame-A">Style frame A</a></header>
     <p class="lyr">Through eyes that were hers and weren&#x27;t</p>
     <dl>
-      <dt>Picture</dt><dd>The white room as an isometric line drawing: bed, a door with no handle. She is a stipple figure, seated. On eyes/years, a close-up of her stipple face with calendar pages flicking in the reflection. On “a voice came to her” an amber contour enters from frame edge and traces a hand. On “she got lost inside him” her particles stream into his outline and fill it.</dd>
-      <dt>Type</dt><dd>Her voice: words bloom out of blur on their sung onset and dissolve upward after the line. Backing echoes (sweet, so sweet) are small ghost copies.</dd>
-      <dt>Sync</dt><dd>Slow camera push on each downbeat; particles brighten on kicks.</dd>
+      <dt>Picture</dt><dd>Lavender haze and a padded corner you feel more than see. She is a veil of long hair around a pale gap where a face would be, caught in three exposures at once. From “a voice came to her” warmth gathers behind her shoulder. On “lost inside him” it floods through her hair.</dd>
+      <dt>Type</dt><dd>Her voice, dark ink in the haze. Each word focus-pulls in and sheds two ghost exposures that drift apart and linger.</dd>
+      <dt>Sync</dt><dd>Ghost exposures swell on kicks; the warm light rises across the verse and peaks on “inside him”.</dd>
     </dl>
   </div>
 </article>
@@ -253,9 +255,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>There comes a once</h3></header>
     <p class="lyr">But there comes a once... once...</p>
     <dl>
-      <dt>Picture</dt><dd>Split diptych. Left panel is the “no” timeline, right is “yes”. Each “once” is a clock-tick flash and a hard cut. Both panels end the same way: his contour unravels into a straight line. “Lost to her / to the world” pulls back to a globe of dots.</dd>
-      <dt>Type</dt><dd>Her voice, one line per panel; the parenthesised (once...) echo sits in the opposite panel.</dd>
-      <dt>Sync</dt><dd>Cuts on downbeats; tick flashes on the word onsets of “once”.</dd>
+      <dt>Picture</dt><dd>Two timelines in one frame. Each “once” flashes the image to white, and it comes back shifted: the “no” drifts left, the “yes” drifts right. “Lost to the world” pulls focus until nothing is sharp.</dd>
+      <dt>Type</dt><dd>Her voice, white with film halation; the (once...) echoes sit on the opposite side of the frame.</dd>
+      <dt>Sync</dt><dd>White flashes on the “once” onsets; the focus pull runs over two bars.</dd>
     </dl>
   </div>
 </article>
@@ -270,9 +272,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>Refrain I: Stay lost now girl</h3></header>
     <p class="lyr">Stay lost now girl (forever, forever)</p>
     <dl>
-      <dt>Picture</dt><dd>The type is the image. “Stay lost now girl” fills the frame, then scatters to particles on the pulse. “Throw away everything he found”: map pins (the things he found) are flung out of frame one per pulse.</dd>
-      <dt>Type</dt><dd>Her voice at display size (~220px). Echoes (forever, forever / again, again) trail as ghost copies.</dd>
-      <dt>Sync</dt><dd>Scatter on kicks; “Never again” holds for its full length, then the frame fades to white.</dd>
+      <dt>Picture</dt><dd>The type becomes the weather. The refrain is exposed large and soft, and its echoes smear sideways on every kick. On “throw away everything he found” the warm light is pushed out of frame one pulse at a time.</dd>
+      <dt>Type</dt><dd>Her voice at display size; echoes (forever / again) pile up as fading exposures.</dd>
+      <dt>Sync</dt><dd>Smear on kicks; “Never again” is held, and the frame bleaches to white.</dd>
     </dl>
   </div>
 </article>
@@ -287,9 +289,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>Break I</h3></header>
     
     <dl>
-      <dt>Picture</dt><dd>Transition into the institute. Graph-paper grid draws in, one gridline family per pulse; the institute mark stamps on the downbeat; the case file slides in.</dd>
+      <dt>Picture</dt><dd>A fluorescent hum arrives as flicker. The fog goes cold and scratches start to run through the emulsion.</dd>
       <dt>Type</dt><dd>No lyric.</dd>
-      <dt>Sync</dt><dd>Grid on kicks; stamp on bar 33.</dd>
+      <dt>Sync</dt><dd>Flicker dips on the eighths; scratches thicken bar by bar.</dd>
     </dl>
   </div>
 </article>
@@ -301,12 +303,12 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   </div>
   <div class="body">
     <header><span class="chip" data-world="institute">Institute</span>
-      <h3>White Coats I</h3><a class="fref" href="#frame-A">Style frame A</a></header>
+      <h3>White Coats I</h3><a class="fref" href="#frame-B">Style frame B</a></header>
     <p class="lyr">The white coats said:</p>
     <dl>
-      <dt>Picture</dt><dd>Style frame A. Clipboard chart with her stipple ID photo and a vitals trace. Three faceless white coats watch. Scribbles grow over the chart on each “scribble”; each “stab” punches a hole with a red ink ring and a red frame flash. “A nice white room” becomes a blueprint floor plan. “With time” is a clock face; “find anything” is a radar sweep across the chart.</dd>
-      <dt>Type</dt><dd>White-coat voice: monospace caps typed letter by letter into a NOTES field, block cursor blinking on the eighths. “Stab” in red bold; HOW set larger in red.</dd>
-      <dt>Sync</dt><dd>Holes on the exact stab onsets; clock ticks on eighths; coats nod on kicks.</dd>
+      <dt>Picture</dt><dd>Style frame B. Overexposed, cold, humming. She is small and far off, barely there. Every “scribble” tears scratches through the emulsion; every “stab” burns a hole through the film. On “with time” the flicker locks into a clock-like pulse.</dd>
+      <dt>Type</dt><dd>The chant is etched into the image in monospace caps, letter by letter, each glyph jittered and partly eroded. HOW is etched larger.</dd>
+      <dt>Sync</dt><dd>Burns on the exact stab onsets; scratches on the scribble onsets; flicker on eighths.</dd>
     </dl>
   </div>
 </article>
@@ -321,9 +323,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>They brought a man</h3></header>
     <p class="lyr">They brought a man.</p>
     <dl>
-      <dt>Picture</dt><dd>The Finder is drawn as one continuous amber contour that writes on over two bars, standing in the doorway. His finding is a radar sweep over a topographic map of her mind; the contours tighten to a glowing core (“something VERY hard to find”). Then the mirror: her particles find the same core in him.</dd>
-      <dt>Type</dt><dd>Her voice; VERY set at 1.6× on its onset; (in her) / (in him) as ghost echoes.</dd>
-      <dt>Sync</dt><dd>Radar sweep period = one bar; core flares on the downbeat after “found”.</dd>
+      <dt>Picture</dt><dd>He is never shown. He arrives as warmth: a light leak creeping in from the frame edge and searching the fog, softening as it reaches her. On “something VERY hard to find” it finds the one warm point inside her, and she glows back.</dd>
+      <dt>Type</dt><dd>Her voice; VERY swells with halation on its onset.</dd>
+      <dt>Sync</dt><dd>The leak advances a step per bar; the flare lands on the downbeat after “found”.</dd>
     </dl>
   </div>
 </article>
@@ -335,12 +337,12 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   </div>
   <div class="body">
     <header><span class="chip" data-world="memory">Memory</span>
-      <h3>Spoken I: I can help you find</h3><a class="fref" href="#frame-B">Style frame B</a></header>
+      <h3>Spoken I: I can help you find</h3></header>
     <p class="lyr">&quot;I can help you find protecting, trusting and believing</p>
     <dl>
-      <dt>Picture</dt><dd>Style frame B. Dark and still. Two profiles facing each other: his is a warm contour, hers is light made of points. Three threads are drawn between them as he names them: protecting, trusting, believing. These threads come back in The Cutting.</dd>
-      <dt>Type</dt><dd>His voice: Inter Light caps, wide tracking, no animation, words appear on time like a close-mic subtitle.</dd>
-      <dt>Sync</dt><dd>Each thread draws on from its word onset; nothing moves on the beat here.</dd>
+      <dt>Picture</dt><dd>Near-dark. As he names protecting, trusting and believing, three shafts of warm light open through the dark, one per word. They come back in The Cutting.</dd>
+      <dt>Type</dt><dd>His voice: Inter Light caps, wide tracking, rendered as warm light through a crack. It never moves.</dd>
+      <dt>Sync</dt><dd>Each shaft opens on its word onset; nothing else moves on the beat.</dd>
     </dl>
   </div>
 </article>
@@ -355,9 +357,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>Break II</h3></header>
     
     <dl>
-      <dt>Picture</dt><dd>The threads braid and glow; slow push-in; the ECG line from the intro returns, now amber.</dd>
+      <dt>Picture</dt><dd>The three shafts breathe; dust turns gold inside them.</dd>
       <dt>Type</dt><dd>No lyric.</dd>
-      <dt>Sync</dt><dd>Thread glow on kicks.</dd>
+      <dt>Sync</dt><dd>Shaft brightness on kicks.</dd>
     </dl>
   </div>
 </article>
@@ -372,9 +374,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>White Coats II</h3></header>
     <p class="lyr">But with time, with time,</p>
     <dl>
-      <dt>Picture</dt><dd>Back to the chart, colder. The threads show faintly on her ID photo. “Too lost” crosses her chart out in red. “Not worth the time” brings down a rubber stamp. The coats turn to face camera. The clock runs faster.</dd>
-      <dt>Type</dt><dd>White-coat voice as before.</dd>
-      <dt>Sync</dt><dd>Stamp on a downbeat; clock ticks double speed.</dd>
+      <dt>Picture</dt><dd>Colder, brighter, faster flicker. The etched chant starts to cover the walls. On “not worth the time” the exposure clips to pure white for a beat.</dd>
+      <dt>Type</dt><dd>Etched chant, as White Coats I.</dd>
+      <dt>Sync</dt><dd>White clip on the downbeat after “time”; burns on stabs.</dd>
     </dl>
   </div>
 </article>
@@ -389,9 +391,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>A gun and a bullet</h3></header>
     <p class="lyr">And with time, and with time,</p>
     <dl>
-      <dt>Picture</dt><dd>Ink still life on a steel tray: a revolver outline, then a single bullet, placed on consecutive downbeats. “Go and find that girl”: radar over a city grid. “He found her” twice: the crosshair locks onto her point, and the second time it dissolves. He doesn’t shoot.</dd>
-      <dt>Type</dt><dd>Her voice for narration; the quoted order is set in white-coat mono.</dd>
-      <dt>Sync</dt><dd>Object placements on downbeats; crosshair locks on the “found” onsets.</dd>
+      <dt>Picture</dt><dd>For the first time something is in sharp focus: a small, cold glint on the floor, crisp in a soft world. On “he found her” the warm light closes on her twice. The second time it stops short and goes no further.</dd>
+      <dt>Type</dt><dd>Her voice for the narration; “go and find that girl” is etched.</dd>
+      <dt>Sync</dt><dd>The glint appears on a downbeat; the light&#x27;s two approaches land on the “found” onsets.</dd>
     </dl>
   </div>
 </article>
@@ -406,9 +408,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>Spoken II: I won&#x27;t lose you</h3></header>
     <p class="lyr">&quot;I won&#x27;t lose you.</p>
     <dl>
-      <dt>Picture</dt><dd>Dark, close. His amber hand opens and sets the bullet down. The three threads re-tie.</dd>
-      <dt>Type</dt><dd>His voice, as in Spoken I.</dd>
-      <dt>Sync</dt><dd>Threads re-tie on the word onsets.</dd>
+      <dt>Picture</dt><dd>His words as light again. The three shafts re-open around her.</dd>
+      <dt>Type</dt><dd>His voice, as Spoken I.</dd>
+      <dt>Sync</dt><dd>Shafts re-open on the word onsets.</dd>
     </dl>
   </div>
 </article>
@@ -420,12 +422,12 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   </div>
   <div class="body">
     <header><span class="chip" data-world="run">The run</span>
-      <h3>The Run</h3><a class="fref" href="#frame-C">Style frame C</a></header>
+      <h3>The Run</h3></header>
     <p class="lyr">And they ran... ran... ran...</p>
     <dl>
-      <dt>Picture</dt><dd>Style frame C. Sodium night. Tunnel rings rush past and flash on the kick. The motel sign flickers on with “motel”; a diner sign; an alley in line art. A map route line gains a pin on every downbeat. “Forever and ever and ever”: headlight trails loop into an infinity sign.</dd>
-      <dt>Type</dt><dd>Her voice, warm-tinted, with glow. “Lost and found, found and lost” flips like a split-flap board.</dd>
-      <dt>Sync</dt><dd>Rings and lamps on kicks; route pins on downbeats; flaps on word onsets.</dd>
+      <dt>Picture</dt><dd>The only warm, fast section. Sodium and neon smear into long-exposure streaks across the fog, headlights flare through, and her ghosts trail sideways like motion blur. The tally marks stop: time isn&#x27;t counted here.</dd>
+      <dt>Type</dt><dd>Her voice, warm and hot, smeared along the direction of travel. “Lost and found, found and lost” swap places as double exposures.</dd>
+      <dt>Sync</dt><dd>Streak bursts on kicks; a headlight flare on every downbeat.</dd>
     </dl>
   </div>
 </article>
@@ -436,13 +438,13 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <span class="meta">14.4 s · -17 dB</span>
   </div>
   <div class="body">
-    <header><span class="chip" data-world="void">Void</span>
+    <header><span class="chip" data-world="void">Bleach</span>
       <h3>But...</h3></header>
     <p class="lyr">But…</p>
     <dl>
-      <dt>Picture</dt><dd>Everything freezes on “But…”. Colour drains over one bar. “Round the bend”: headlight glare resolves into three white-coat silhouettes, then the frame goes paper-white.</dd>
-      <dt>Type</dt><dd>Her voice; “But…” held alone, centred, for the whole pause.</dd>
-      <dt>Sync</dt><dd>Freeze frame exactly on the “But” onset.</dd>
+      <dt>Picture</dt><dd>Everything freezes: the exposure echo holds the last frame. Over one bar it bleaches to white. The coats come “round the bend” as a single hard, cold sweep of light.</dd>
+      <dt>Type</dt><dd>“But…” held alone for the whole pause.</dd>
+      <dt>Sync</dt><dd>The freeze lands exactly on the “But” onset.</dd>
     </dl>
   </div>
 </article>
@@ -457,26 +459,26 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>White Coats III</h3></header>
     <p class="lyr">And the coats said:</p>
     <dl>
-      <dt>Picture</dt><dd>His file now: the ID photo is his amber contour. “Cut out his something hard to find”: a dotted scalpel line is drawn around the heart of his contour. ANYTHING is huge. “Except…” holds, cursor blinking.</dd>
-      <dt>Type</dt><dd>White-coat voice; ANYTHING set at display size.</dd>
-      <dt>Sync</dt><dd>Scalpel line traces over one bar.</dd>
+      <dt>Picture</dt><dd>Back in the white. The scratches now cut across the spot where his warmth used to come in.</dd>
+      <dt>Type</dt><dd>Etched chant; ANYTHING etched at display size, then “Except…” on its own.</dd>
+      <dt>Sync</dt><dd>Burns on stabs; flicker on eighths.</dd>
     </dl>
   </div>
 </article>
-<article class="sec" data-world="institute" id="sec-109">
+<article class="sec" data-world="memory" id="sec-109">
   <div class="when">
     <span class="bars">bars 109–118</span>
     <span class="tc">6:04.0 → 6:36.6</span>
     <span class="meta">32.6 s · -18 dB</span>
   </div>
   <div class="body">
-    <header><span class="chip" data-world="institute">Institute</span>
-      <h3>The Cutting</h3></header>
+    <header><span class="chip" data-world="memory">Memory</span>
+      <h3>The Cutting</h3><a class="fref" href="#frame-C">Style frame C</a></header>
     <p class="lyr">They cut away his protecting.</p>
     <dl>
-      <dt>Picture</dt><dd>The three threads from Spoken I are cut one per line, each snip on its “cut” onset, and fall slack and grey. The tray returns with the gun and bullet. Her stipple figure is wiped away region by region (arms, legs, eyes, ears) by a clinical eraser sweep, not gore, leaving a year counter that keeps ticking. “Agains and agains”: earlier shots repeat in shrinking nested frames.</dd>
-      <dt>Type</dt><dd>Her voice, colder white. The virtue labels (PROTECTING / TRUSTING / BELIEVING) grey out as each thread is cut.</dd>
-      <dt>Sync</dt><dd>Snips on word onsets; eraser wipes on kicks; year counter on eighths.</dd>
+      <dt>Picture</dt><dd>Style frame C. Dark. The three shafts from Spoken I return, and each “cut” drops a blade through one and it gutters out. The warmth behind her drains with each cut until she is a silhouette against nothing. The glint stays sharp. Then her exposures are taken one by one. For “eyes” the focus goes. For “ears” the image stops reacting to the music. The years stay: the tally marks remain.</dd>
+      <dt>Type</dt><dd>Her voice, white-hot with halation, cooling as the light goes.</dd>
+      <dt>Sync</dt><dd>Blades on the “cut” onsets; beat-reactivity switches off on “ears”.</dd>
     </dl>
   </div>
 </article>
@@ -491,9 +493,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>Refrain II: Stay lost now girl</h3></header>
     <p class="lyr">Stay lost now girl (forever, forever)</p>
     <dl>
-      <dt>Picture</dt><dd>The same big refrain as Refrain I, but the scattered particles never re-form; they drift into the year counter.</dd>
-      <dt>Type</dt><dd>Her voice at display size, as Refrain I.</dd>
-      <dt>Sync</dt><dd>Scatter on kicks, slower decay than Refrain I.</dd>
+      <dt>Picture</dt><dd>The refrain again, but nothing reacts to the beat any more because she can&#x27;t hear it. The echoes pile up instead: her agains, in layers.</dd>
+      <dt>Type</dt><dd>Her voice at display size, with more ghosts than Refrain I.</dd>
+      <dt>Sync</dt><dd>Deliberately unsynced: only the word onsets drive anything.</dd>
     </dl>
   </div>
 </article>
@@ -508,9 +510,9 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
       <h3>Verse A reprise</h3></header>
     <p class="lyr">Through eyes that were hers and weren&#x27;t</p>
     <dl>
-      <dt>Picture</dt><dd>Shot-for-shot rhyme with Verse A, aged: gridlines cracked, calendar pages piled up, her stipple sparser. The amber voice returns, fainter. Memory or return? It stays open.</dd>
+      <dt>Picture</dt><dd>A shot-for-shot rhyme with Verse A, seen through years of accumulated exposure: overexposed, the wall covered in tallies, many more ghosts. The warmth returns faintly behind her shoulder. Memory or return? It stays open.</dd>
       <dt>Type</dt><dd>Her voice, as Verse A.</dd>
-      <dt>Sync</dt><dd>Same camera moves as Verse A, on the same bar offsets.</dd>
+      <dt>Sync</dt><dd>Same bar offsets as Verse A.</dd>
     </dl>
   </div>
 </article>
@@ -521,13 +523,13 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <span class="meta">41.6 s · -18 dB</span>
   </div>
   <div class="body">
-    <header><span class="chip" data-world="void">Void</span>
+    <header><span class="chip" data-world="void">Bleach</span>
       <h3>Outro</h3></header>
     
     <dl>
-      <dt>Picture</dt><dd>The ECG line flattens into a horizon. The single bullet sits on the tray in white space. Her point pulses once more on the last downbeat. The title retypes “lost and”, the cursor blinks, cut to white.</dd>
-      <dt>Type</dt><dd>Title only.</dd>
-      <dt>Sync</dt><dd>Final pulse on the last downbeat; cursor blinks on eighths to the end of the audio.</dd>
+      <dt>Picture</dt><dd>The fog thins toward white. The glint is the last sharp thing on screen. The final tally mark lands on the last downbeat, then white.</dd>
+      <dt>Type</dt><dd>Title returns, ghosted, with the empty space after it.</dd>
+      <dt>Sync</dt><dd>Last tally on the last downbeat.</dd>
     </dl>
   </div>
 </article></div>
@@ -549,7 +551,7 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
         <ol class="steps">
           <li>Build scene by scene, one module per section, all driven by the timing files.</li>
           <li>For each scene, render a contact sheet (one frame per second, stamped with timecode and bar) and run automatic checks: every word visible within one frame of its onset, text inside title-safe, no text colliding. Fix and re-sheet until clean.</li>
-          <li>Render 1920×1080 at 30 fps in parallel chunks, H.264 CRF 17. Concatenate and mux the original audio as AAC 320k.</li>
+          <li>Speed up the renderer first. It takes about 3 s a frame now, so I'll render the fog and glow layers at lower resolution and cache the hair. Then render 1920×1080 at 30 fps in parallel chunks, each with a warm-up so the exposure echo is continuous across the joins, as H.264 CRF 17 with the original audio as AAC 320k.</li>
           <li>Verify with ffprobe: stream specs, frame count against duration, audio and video lengths within one frame, and sync spot-checks at three lyric onsets.</li>
         </ol>
       </div>
@@ -557,8 +559,8 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
     <div class="ask">
       <h3>What I need from you</h3>
       <ul class="plain">
-        <li>Approve the story, look and typography, or tell me what to change.</li>
-        <li>The ending keeps the gun and bullet on screen but never fired. Do you want it that open?</li>
+        <li>Is this closer to the vibe? Approve the direction, or tell me what still reads too literal or too clean.</li>
+        <li>The bullet is the only sharp object and is never fired. Is that as open an ending as you want?</li>
         <li>16:9 at 1080p30 only, or a 9:16 vertical cut as well?</li>
       </ul>
     </div>
@@ -566,7 +568,7 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
 </div>
 
 <script>
-const D = {"duration":493.6209977324263,"loud_t":0.5,"loud":[-47.0,-80.9,-60.6,-44.5,-39.1,-36.3,-33.6,-30.7,-28.0,-27.2,-27.0,-26.6,-26.8,-26.0,-24.4,-24.1,-24.0,-23.0,-23.1,-21.6,-19.4,-18.7,-19.1,-21.8,-23.9,-24.4,-25.6,-25.4,-24.3,-24.4,-23.7,-23.2,-22.7,-23.0,-23.6,-22.5,-20.9,-20.0,-19.8,-19.4,-20.0,-20.2,-19.6,-19.3,-19.4,-19.2,-19.6,-21.1,-21.5,-21.8,-20.6,-19.3,-19.1,-19.4,-20.7,-20.8,-18.9,-18.8,-20.3,-19.6,-19.8,-19.6,-18.9,-20.0,-19.6,-19.3,-19.3,-20.2,-21.0,-20.3,-19.4,-19.6,-19.8,-18.8,-19.3,-19.7,-19.1,-19.8,-20.5,-20.8,-20.3,-20.5,-21.3,-20.9,-19.7,-20.1,-21.0,-19.7,-19.5,-19.1,-18.7,-18.6,-18.3,-19.2,-19.5,-19.6,-19.4,-19.4,-19.2,-18.7,-20.4,-20.7,-19.5,-19.4,-19.7,-18.3,-17.4,-19.4,-21.7,-22.3,-22.4,-22.1,-21.6,-21.0,-19.7,-19.1,-18.8,-18.9,-19.1,-18.2,-18.4,-19.2,-18.6,-18.2,-18.2,-18.9,-18.6,-17.8,-17.4,-17.2,-17.7,-18.1,-19.0,-18.8,-18.6,-18.7,-17.7,-18.1,-18.6,-18.9,-18.6,-17.8,-17.5,-17.6,-18.3,-18.1,-17.7,-17.6,-18.0,-18.4,-17.7,-18.0,-17.8,-17.4,-17.8,-17.6,-17.2,-17.6,-18.4,-17.7,-17.5,-17.8,-18.6,-18.9,-17.7,-17.5,-17.3,-16.9,-17.1,-17.7,-18.2,-18.1,-17.5,-17.8,-18.1,-17.3,-17.4,-17.7,-17.1,-17.1,-16.9,-17.8,-17.6,-17.2,-17.5,-17.5,-17.9,-17.7,-17.5,-17.0,-16.9,-17.4,-17.5,-18.4,-18.9,-18.3,-17.1,-17.1,-17.4,-16.6,-17.3,-17.6,-16.9,-16.1,-16.5,-17.4,-17.1,-17.2,-17.3,-17.0,-16.1,-16.2,-16.9,-16.7,-17.3,-17.4,-16.4,-15.7,-16.1,-17.4,-17.6,-18.0,-18.2,-16.4,-15.7,-15.9,-15.7,-16.2,-17.5,-18.1,-18.7,-18.6,-19.4,-18.0,-16.2,-17.6,-18.0,-18.1,-18.2,-22.3,-22.2,-17.0,-16.5,-17.2,-17.2,-16.7,-17.2,-17.2,-17.6,-18.2,-17.6,-18.1,-17.2,-18.1,-19.3,-17.9,-17.7,-17.0,-16.5,-15.8,-15.5,-16.1,-17.0,-17.5,-17.4,-17.9,-17.2,-17.6,-18.6,-17.1,-16.2,-16.2,-16.4,-15.6,-15.1,-16.2,-17.1,-17.0,-16.9,-17.4,-16.6,-16.3,-17.0,-17.3,-16.9,-16.6,-16.2,-15.3,-15.8,-16.2,-16.6,-16.9,-16.8,-16.9,-16.2,-16.4,-16.5,-15.5,-15.2,-15.5,-15.3,-14.5,-14.8,-15.4,-15.6,-15.6,-15.4,-15.8,-16.1,-15.5,-15.6,-16.1,-16.4,-16.1,-15.1,-14.9,-14.8,-15.8,-16.2,-15.5,-15.4,-15.7,-16.0,-15.8,-17.0,-17.1,-16.8,-16.7,-15.6,-15.5,-15.3,-15.5,-15.3,-15.6,-15.9,-15.7,-15.8,-15.8,-16.2,-16.1,-15.8,-15.9,-15.3,-15.2,-15.0,-14.9,-15.6,-15.6,-15.5,-15.4,-15.8,-16.2,-16.2,-16.6,-16.0,-15.4,-15.2,-15.3,-15.4,-15.2,-15.7,-15.6,-15.2,-15.3,-15.7,-16.2,-18.4,-22.2,-22.6,-21.9,-23.3,-25.0,-22.7,-20.3,-21.3,-21.5,-22.4,-24.0,-22.9,-21.5,-21.7,-22.4,-22.6,-22.2,-21.2,-21.2,-21.5,-21.8,-21.1,-19.8,-20.1,-18.7,-16.5,-16.1,-16.5,-16.8,-16.6,-15.9,-15.8,-16.2,-16.5,-16.9,-16.8,-16.2,-15.6,-15.7,-16.0,-16.0,-16.4,-16.4,-16.0,-15.9,-15.8,-16.1,-16.2,-16.5,-16.9,-16.2,-15.7,-15.9,-16.5,-16.6,-17.0,-16.9,-16.1,-16.2,-16.0,-16.4,-16.6,-16.6,-16.3,-15.6,-15.7,-15.9,-16.3,-16.7,-16.8,-16.7,-16.0,-15.9,-16.2,-16.2,-16.5,-16.4,-16.4,-15.9,-16.0,-16.4,-16.5,-16.8,-16.6,-16.3,-16.1,-15.8,-16.0,-16.2,-16.9,-16.7,-15.8,-15.8,-15.9,-16.6,-16.8,-16.7,-16.6,-16.1,-16.2,-16.1,-16.3,-16.6,-16.5,-16.5,-15.8,-15.7,-16.1,-16.5,-16.6,-16.6,-16.3,-15.3,-15.6,-16.1,-15.5,-15.8,-15.9,-15.4,-14.8,-14.8,-15.5,-15.8,-16.4,-16.5,-15.7,-15.3,-15.4,-16.0,-15.7,-15.6,-15.6,-14.7,-15.0,-15.4,-15.7,-16.3,-16.6,-16.5,-15.6,-15.6,-16.1,-16.0,-16.4,-16.4,-15.7,-15.3,-15.2,-16.1,-16.6,-16.2,-15.6,-15.4,-15.3,-15.5,-16.2,-16.5,-16.2,-15.4,-15.3,-15.3,-15.1,-15.6,-15.9,-15.8,-15.6,-15.8,-15.8,-15.8,-16.2,-16.7,-16.2,-15.4,-16.0,-17.4,-19.4,-19.4,-22.8,-25.1,-19.5,-15.9,-16.1,-16.4,-16.6,-17.0,-16.3,-15.5,-15.7,-16.1,-16.0,-16.4,-16.5,-16.6,-16.8,-17.4,-17.4,-16.3,-16.0,-17.4,-18.8,-18.2,-18.3,-17.4,-16.0,-16.8,-17.2,-17.4,-17.8,-18.0,-18.0,-16.8,-16.7,-17.7,-17.5,-17.2,-17.3,-17.6,-16.8,-16.8,-17.4,-17.3,-17.2,-17.3,-17.6,-16.7,-16.3,-16.9,-17.0,-17.6,-17.6,-17.6,-17.3,-17.0,-18.8,-18.8,-18.3,-18.5,-17.6,-16.7,-17.0,-17.3,-16.6,-16.7,-17.2,-16.9,-16.6,-17.1,-17.4,-17.6,-17.1,-16.7,-16.8,-17.3,-17.3,-16.9,-16.4,-16.5,-16.9,-17.0,-17.7,-17.3,-16.2,-17.6,-17.7,-17.0,-17.1,-17.0,-17.7,-17.4,-17.8,-17.6,-16.8,-16.7,-17.0,-17.6,-17.1,-16.7,-16.9,-16.5,-16.4,-17.1,-17.6,-17.1,-16.9,-16.9,-16.8,-17.3,-16.9,-16.8,-16.9,-16.7,-17.1,-17.4,-17.6,-17.3,-16.6,-16.3,-16.6,-16.6,-16.2,-16.8,-17.5,-17.5,-18.3,-18.6,-18.1,-17.7,-18.0,-18.7,-18.6,-18.6,-18.4,-17.3,-17.1,-17.8,-18.0,-17.8,-17.8,-18.2,-17.7,-18.2,-19.6,-18.8,-18.3,-18.4,-17.8,-16.8,-17.5,-18.3,-17.7,-18.0,-17.8,-17.6,-17.6,-17.7,-18.7,-18.4,-18.6,-18.7,-17.7,-17.2,-17.3,-17.8,-18.1,-18.4,-18.4,-17.5,-17.7,-18.6,-18.8,-18.3,-17.7,-17.7,-18.1,-18.6,-18.5,-17.5,-18.0,-18.9,-18.4,-18.1,-18.6,-18.5,-17.5,-18.6,-19.1,-18.0,-17.7,-18.1,-18.4,-18.0,-18.7,-18.8,-17.9,-18.1,-18.6,-18.1,-18.2,-18.8,-18.8,-18.0,-18.2,-18.6,-18.1,-18.8,-19.2,-18.6,-17.8,-18.7,-19.5,-18.3,-18.5,-19.1,-18.6,-18.6,-18.4,-18.6,-18.7,-18.7,-18.6,-17.8,-18.1,-18.3,-18.4,-18.6,-18.3,-18.5,-18.2,-18.1,-18.4,-17.6,-17.3,-17.7,-18.3,-18.3,-18.4,-18.8,-18.3,-18.0,-17.7,-17.0,-16.7,-17.2,-17.7,-17.6,-17.4,-17.3,-16.7,-16.8,-17.9,-17.6,-17.9,-18.8,-18.6,-18.3,-18.0,-18.3,-17.6,-17.3,-17.8,-18.4,-18.5,-18.6,-19.1,-18.7,-18.6,-18.5,-17.9,-17.7,-17.9,-19.2,-19.1,-18.7,-18.5,-17.9,-18.3,-17.9,-17.6,-18.0,-18.5,-18.3,-17.2,-17.2,-17.8,-17.6,-17.6,-18.0,-18.5,-18.2,-17.7,-18.1,-17.8,-18.7,-19.3,-17.8,-17.3,-18.2,-18.9,-17.7,-17.7,-18.5,-17.8,-17.8,-19.1,-19.6,-18.1,-18.2,-18.4,-17.8,-18.7,-18.6,-17.0,-17.0,-18.3,-18.4,-17.4,-16.6,-17.2,-18.0,-17.7,-17.3,-18.4,-18.3,-18.1,-18.4,-17.4,-17.2,-17.9,-18.9,-18.2,-17.9,-18.8,-18.5,-18.9,-19.0,-19.0,-18.4,-17.4,-18.1,-18.3,-19.0,-19.2,-18.9,-18.5,-17.4,-18.2,-18.4,-18.7,-19.2,-18.1,-17.5,-18.0,-21.7,-25.5,-22.3,-19.1,-21.2,-21.3,-19.6,-18.5,-17.5,-17.4,-17.3,-17.0,-17.5,-17.4,-17.2,-17.2,-17.0,-17.6,-17.8,-17.5,-17.5,-18.0,-18.1,-18.1,-18.1,-17.3,-17.0,-17.6,-17.7,-17.5,-17.2,-17.4,-17.4,-18.1,-18.9,-18.1,-18.2,-18.3,-17.5,-17.0,-17.6,-18.4,-17.8,-18.0,-18.4,-17.6,-17.5,-18.2,-18.3,-17.7,-17.8,-18.0,-17.5,-17.5,-17.3,-16.9,-17.5,-18.0,-17.5,-17.2,-18.7,-18.9,-17.1,-17.3,-17.2,-17.1,-17.0,-16.7,-17.0,-16.8,-16.8,-16.8,-16.7,-16.6,-16.3,-16.9,-17.0,-16.7,-16.7,-16.2,-16.3,-16.7,-16.6,-16.3,-16.7,-20.1,-27.7,-36.8,-26.0],"bars":[0.418,3.3672,6.828,10.3616,13.9019,20.0866,23.6284,27.166,30.705,34.2453,37.7775,41.3056,44.8364,48.3672,51.8966,55.4247,58.9432,62.4535,65.9583,69.4563,72.9503,76.4456,79.9436,83.4389,84.3103,87.7974,91.2804,94.7606,98.2423,101.7212,105.1932,106.9279,110.4013,113.898,116.5382,120.0677,123.5971,127.1156,130.6327,134.1458,137.6424,141.1268,144.6016,148.0764,151.5416,155.0014,158.4543,161.9045,165.3575,168.8063,172.2511,175.6876,179.1187,182.5498,183.4076,186.8428,190.2739,193.7063,196.2769,199.6971,203.12,206.5429,209.9617,213.3764,216.7911,220.2071,223.6136,227.0119,230.4089,233.8045,237.1973,240.5874,243.9748,247.3581,250.74,255.8019,259.1688,262.4565,264.5067,266.5774,269.8992,271.5341,276.0757,279.4877,282.9037,283.756,287.168,290.5745,293.9837,297.3998,300.8131,304.2251,307.6357,311.0477,314.4569,317.8648,321.2699,324.671,328.072,331.4676,334.0122,337.401,340.7856,344.173,347.5604,350.9437,354.3283,357.7075,361.0908,367.0132,370.3938,373.7757,377.1563,380.5368,383.9146,387.2952,390.673,394.0467,396.5832,399.961,403.332,406.7002,410.0767,413.4559,416.8378,417.686,421.0884,424.5086,427.9369,431.3653,434.7977,438.2288,441.6572,445.0883,448.5194,451.9491,452.8055,456.2325,459.6581,463.0865,466.5039,469.9036,473.2882,476.6715,480.0575,483.4449,486.8296,490.206,493.5634],"sections":[{"name":"Intro","start":0.0,"end":16.92,"world":"void","bar":0},{"name":"Verse A: Through eyes","start":16.92,"end":55.2,"world":"her","bar":5},{"name":"There comes a once","start":55.2,"end":84.15,"world":"memory","bar":15},{"name":"Refrain I: Stay lost now girl","start":84.15,"end":106.35,"world":"her","bar":24},{"name":"Break I","start":106.35,"end":116.47,"world":"institute","bar":31},{"name":"White Coats I","start":116.47,"end":151.81,"world":"institute","bar":34},{"name":"They brought a man","start":151.81,"end":183.43,"world":"memory","bar":45},{"name":"Spoken I: I can help you find","start":183.43,"end":195.57,"world":"memory","bar":55},{"name":"Break II","start":195.57,"end":208.42,"world":"memory","bar":58},{"name":"White Coats II","start":208.42,"end":252.73,"world":"institute","bar":62},{"name":"A gun and a bullet","start":252.73,"end":273.81,"world":"institute","bar":75},{"name":"Spoken II: I won't lose you","start":273.81,"end":283.79,"world":"memory","bar":82},{"name":"The Run","start":283.79,"end":318.0,"world":"run","bar":86},{"name":"But...","start":318.0,"end":332.45,"world":"void","bar":96},{"name":"White Coats III","start":332.45,"end":363.99,"world":"institute","bar":100},{"name":"The Cutting","start":363.99,"end":396.63,"world":"institute","bar":109},{"name":"Refrain II: Stay lost now girl","start":396.63,"end":417.57,"world":"her","bar":119},{"name":"Verse A reprise","start":417.57,"end":452.07,"world":"her","bar":125},{"name":"Outro","start":452.07,"end":493.621,"world":"void","bar":136}],"lines":[{"n":1,"s":16.92,"e":20.3,"x":"Through eyes that were hers and weren't","pin":true},{"n":2,"s":20.45,"e":24.02,"x":"Through years that weren't hers and were","pin":true},{"n":3,"s":24.02,"e":27.46,"x":"Left in rooms she couldn't leave","pin":false},{"n":4,"s":27.46,"e":30.86,"x":"Learning a self she couldn't learn","pin":false},{"n":5,"s":30.86,"e":35.28,"x":"And a voice came to her (sweet, so sweet)","pin":false},{"n":6,"s":35.28,"e":42.96,"x":"A hand, as ever as it was once (good, so good)","pin":false},{"n":7,"s":43.7,"e":46.96,"x":"She got lost inside him","pin":false},{"n":8,"s":46.96,"e":50.52,"x":"Lost and lost inside him","pin":false},{"n":9,"s":50.52,"e":54.04,"x":"Like she swore she never would.","pin":false},{"n":11,"s":55.2,"e":58.68,"x":"But there comes a once... once...","pin":false},{"n":12,"s":58.68,"e":64.7,"x":"She said \"no\" (once...). And she lost him for a lifetime.","pin":false},{"n":13,"s":64.7,"e":67.28,"x":"There comes a once... once...","pin":false},{"n":14,"s":67.28,"e":73.28,"x":"She said \"yes\" (once...).  And she lost him forever.","pin":false},{"n":15,"s":73.28,"e":75.12,"x":"Lost and lost.","pin":false},{"n":16,"s":75.38,"e":76.6,"x":"Lost to her.","pin":false},{"n":17,"s":76.6,"e":78.47,"x":"Lost to the world.","pin":false},{"n":18,"s":78.47,"e":84.15,"x":"Forever and ever.","pin":false},{"n":20,"s":84.15,"e":89.29,"x":"Stay lost now girl (forever, forever)","pin":false},{"n":21,"s":89.29,"e":92.49,"x":"Throw away everything he found","pin":false},{"n":22,"s":92.49,"e":97.75,"x":"So he never got lost inside you. (again, again)","pin":false},{"n":23,"s":97.75,"e":104.65,"x":"Forever again, forever again.","pin":false},{"n":24,"s":105.17,"e":106.35,"x":"Never again...","pin":false},{"n":26,"s":116.47,"e":118.69,"x":"The white coats said:","pin":false},{"n":27,"s":118.69,"e":123.05,"x":"We've found a girl who is very lost.","pin":false},{"n":28,"s":123.05,"e":126.91,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":29,"s":126.91,"e":130.23,"x":"Keep her safe in a nice white room.","pin":false},{"n":30,"s":130.23,"e":133.95,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":31,"s":133.95,"e":137.79,"x":"We\u2019ll find out HOW lost she really is.","pin":false},{"n":32,"s":137.79,"e":140.97,"x":"With time, with time...","pin":false},{"n":33,"s":141.35,"e":144.63,"x":"With time we can find anything.","pin":false},{"n":34,"s":144.63,"e":147.87,"x":"With time, with time...","pin":false},{"n":35,"s":147.87,"e":151.81,"x":"Even a girl who is very hard to find.","pin":false},{"n":37,"s":151.81,"e":153.39,"x":"They brought a man.","pin":false},{"n":38,"s":154.45,"e":158.85,"x":"A man who could find someone hard to find.","pin":false},{"n":39,"s":158.85,"e":164.09,"x":"And in the end, he found, oh he found...","pin":false},{"n":40,"s":164.09,"e":168.99,"x":"...something VERY hard to find (in her).","pin":false},{"n":41,"s":170.65,"e":176.19,"x":"And in the end, she found, oh she found...","pin":false},{"n":42,"s":176.19,"e":181.55,"x":"Her forever. And ever... (in him).","pin":false},{"n":44,"s":183.43,"e":188.85,"x":"\"I can help you find protecting, trusting and believing","pin":false},{"n":45,"s":190.63,"e":195.57,"x":"Even if they're very hard to find.\"","pin":false},{"n":47,"s":208.42,"e":212.26,"x":"But with time, with time,","pin":false},{"n":48,"s":213.12,"e":214.74,"x":"the white coats said:","pin":false},{"n":49,"s":214.74,"e":217.14,"x":"Hmm... this girl is too lost.","pin":false},{"n":50,"s":217.66,"e":222.26,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":51,"s":224.09,"e":229.23,"x":"This girl is too hard to find.","pin":false},{"n":52,"s":231.05,"e":235.91,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":53,"s":237.09,"e":240.37,"x":"With time, with time...","pin":false},{"n":54,"s":240.37,"e":244.23,"x":"We found she isn't worth the time.","pin":false},{"n":55,"s":244.23,"e":247.19,"x":"With time, with time...","pin":false},{"n":56,"s":247.19,"e":251.25,"x":"This girl who is very hard to find.","pin":false},{"n":58,"s":252.73,"e":256.03,"x":"And with time, and with time,","pin":false},{"n":59,"s":256.03,"e":260.29,"x":"The white coats brought the man a gun and a bullet","pin":false},{"n":60,"s":260.29,"e":264.37,"x":"And said \"go and find that girl.\"","pin":false},{"n":61,"s":264.37,"e":266.05,"x":"And he did,","pin":false},{"n":62,"s":266.73,"e":267.79,"x":"he did...","pin":false},{"n":63,"s":267.79,"e":270.27,"x":"He found her,","pin":false},{"n":64,"s":270.31,"e":272.61,"x":"he found her...","pin":false},{"n":66,"s":273.81,"e":275.99,"x":"\"I won't lose you.","pin":false},{"n":67,"s":275.99,"e":279.69,"x":"Together, we'll find you the time.\"","pin":false},{"n":69,"s":283.79,"e":288.57,"x":"And they ran... ran... ran...","pin":false},{"n":70,"s":289.15,"e":291.25,"x":"Forever and ever.","pin":false},{"n":71,"s":291.25,"e":295.11,"x":"Through every tunnel, every motel.","pin":false},{"n":72,"s":295.11,"e":298.65,"x":"Lost in diners, lost in alleys...","pin":false},{"n":73,"s":298.65,"e":300.51,"x":"Lost in each other.","pin":false},{"n":74,"s":300.51,"e":302.91,"x":"And found. (And found...)","pin":false},{"n":75,"s":303.81,"e":307.19,"x":"Lost and found, found and lost...","pin":false},{"n":76,"s":307.87,"e":312.42,"x":"Forever and ever and ever.","pin":false},{"n":78,"s":318.0,"e":319.4,"x":"But\u2026","pin":true},{"n":80,"s":319.58,"e":324.27,"x":"But forever... always comes to an end,","pin":false},{"n":81,"s":324.39,"e":327.41,"x":"when the coats... come round the bend.","pin":false},{"n":83,"s":332.45,"e":334.104,"x":"And the coats said:","pin":false},{"n":84,"s":334.45,"e":337.15,"x":"Hmm... this man is too lost.","pin":false},{"n":85,"s":337.17,"e":340.03,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":86,"s":340.13,"e":343.63,"x":"We\u2019ll have to cut out his something hard to find.","pin":false},{"n":87,"s":343.99,"e":346.91,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":88,"s":347.13,"e":348.53,"x":"With time, with time","pin":false},{"n":89,"s":348.57,"e":351.27,"x":"We'll see how lost this girl can be.","pin":false},{"n":90,"s":351.93,"e":353.55,"x":"With time, with time","pin":false},{"n":91,"s":353.65,"e":357.73,"x":"We'll make her a girl who can find ANYTHING.","pin":false},{"n":92,"s":357.73,"e":361.49,"x":"Except... something hard to find.","pin":false},{"n":94,"s":363.99,"e":367.35,"x":"They cut away his protecting.","pin":false},{"n":95,"s":367.35,"e":370.75,"x":"They cut away his trusting.","pin":false},{"n":96,"s":370.75,"e":374.05,"x":"They cut away his believing.","pin":false},{"n":97,"s":374.05,"e":377.31,"x":"But left him the gun\u2026 and the bullet.","pin":false},{"n":99,"s":377.31,"e":379.67,"x":"They took her arms to hug,","pin":false},{"n":100,"s":379.67,"e":381.41,"x":"They took her legs to run,","pin":false},{"n":101,"s":381.41,"e":384.91,"x":"Her eyes to see and ears to hear...","pin":false},{"n":102,"s":384.91,"e":388.43,"x":"But left her the years (and years and years)...","pin":false},{"n":103,"s":388.43,"e":390.89,"x":"Alone, with time... with time...","pin":false},{"n":104,"s":390.89,"e":394.49,"x":"And all her agains and agains and agains...","pin":false},{"n":105,"s":394.49,"e":396.63,"x":"Of him...  and her...","pin":false},{"n":107,"s":396.63,"e":401.25,"x":"Stay lost now girl (forever, forever)","pin":false},{"n":108,"s":401.71,"e":405.61,"x":"Throw away everything he could find","pin":false},{"n":109,"s":405.61,"e":410.49,"x":"So he never got lost inside you. (again, again)","pin":false},{"n":110,"s":410.49,"e":415.57,"x":"Forever again, forever again.","pin":false},{"n":111,"s":415.81,"e":417.57,"x":"Never again...","pin":false},{"n":113,"s":417.57,"e":421.11,"x":"Through eyes that were hers and weren't","pin":false},{"n":114,"s":421.33,"e":425.07,"x":"Through years that weren't hers and were","pin":false},{"n":115,"s":425.07,"e":428.27,"x":"Left in rooms she couldn't leave","pin":false},{"n":116,"s":428.27,"e":431.41,"x":"Learning a self she couldn't learn","pin":false},{"n":117,"s":431.41,"e":435.77,"x":"And a voice came to her (sweet, so sweet)","pin":false},{"n":118,"s":435.77,"e":441.01,"x":"A hand, as ever as it was once (good, so good)","pin":false},{"n":119,"s":441.01,"e":444.47,"x":"She got lost inside him","pin":false},{"n":120,"s":444.55,"e":448.05,"x":"Lost and lost inside him","pin":false},{"n":121,"s":448.05,"e":452.07,"x":"Like she swore she never would.","pin":false}],"frames":[{"key":"A","t":126.0,"section":"White Coats I"},{"key":"B","t":189.6,"section":"Spoken I: I can help you find"},{"key":"C","t":294.7,"section":"The Run"}]};
+const D = {"duration":493.6209977324263,"loud_t":0.5,"loud":[-47.0,-80.9,-60.6,-44.5,-39.1,-36.3,-33.6,-30.7,-28.0,-27.2,-27.0,-26.6,-26.8,-26.0,-24.4,-24.1,-24.0,-23.0,-23.1,-21.6,-19.4,-18.7,-19.1,-21.8,-23.9,-24.4,-25.6,-25.4,-24.3,-24.4,-23.7,-23.2,-22.7,-23.0,-23.6,-22.5,-20.9,-20.0,-19.8,-19.4,-20.0,-20.2,-19.6,-19.3,-19.4,-19.2,-19.6,-21.1,-21.5,-21.8,-20.6,-19.3,-19.1,-19.4,-20.7,-20.8,-18.9,-18.8,-20.3,-19.6,-19.8,-19.6,-18.9,-20.0,-19.6,-19.3,-19.3,-20.2,-21.0,-20.3,-19.4,-19.6,-19.8,-18.8,-19.3,-19.7,-19.1,-19.8,-20.5,-20.8,-20.3,-20.5,-21.3,-20.9,-19.7,-20.1,-21.0,-19.7,-19.5,-19.1,-18.7,-18.6,-18.3,-19.2,-19.5,-19.6,-19.4,-19.4,-19.2,-18.7,-20.4,-20.7,-19.5,-19.4,-19.7,-18.3,-17.4,-19.4,-21.7,-22.3,-22.4,-22.1,-21.6,-21.0,-19.7,-19.1,-18.8,-18.9,-19.1,-18.2,-18.4,-19.2,-18.6,-18.2,-18.2,-18.9,-18.6,-17.8,-17.4,-17.2,-17.7,-18.1,-19.0,-18.8,-18.6,-18.7,-17.7,-18.1,-18.6,-18.9,-18.6,-17.8,-17.5,-17.6,-18.3,-18.1,-17.7,-17.6,-18.0,-18.4,-17.7,-18.0,-17.8,-17.4,-17.8,-17.6,-17.2,-17.6,-18.4,-17.7,-17.5,-17.8,-18.6,-18.9,-17.7,-17.5,-17.3,-16.9,-17.1,-17.7,-18.2,-18.1,-17.5,-17.8,-18.1,-17.3,-17.4,-17.7,-17.1,-17.1,-16.9,-17.8,-17.6,-17.2,-17.5,-17.5,-17.9,-17.7,-17.5,-17.0,-16.9,-17.4,-17.5,-18.4,-18.9,-18.3,-17.1,-17.1,-17.4,-16.6,-17.3,-17.6,-16.9,-16.1,-16.5,-17.4,-17.1,-17.2,-17.3,-17.0,-16.1,-16.2,-16.9,-16.7,-17.3,-17.4,-16.4,-15.7,-16.1,-17.4,-17.6,-18.0,-18.2,-16.4,-15.7,-15.9,-15.7,-16.2,-17.5,-18.1,-18.7,-18.6,-19.4,-18.0,-16.2,-17.6,-18.0,-18.1,-18.2,-22.3,-22.2,-17.0,-16.5,-17.2,-17.2,-16.7,-17.2,-17.2,-17.6,-18.2,-17.6,-18.1,-17.2,-18.1,-19.3,-17.9,-17.7,-17.0,-16.5,-15.8,-15.5,-16.1,-17.0,-17.5,-17.4,-17.9,-17.2,-17.6,-18.6,-17.1,-16.2,-16.2,-16.4,-15.6,-15.1,-16.2,-17.1,-17.0,-16.9,-17.4,-16.6,-16.3,-17.0,-17.3,-16.9,-16.6,-16.2,-15.3,-15.8,-16.2,-16.6,-16.9,-16.8,-16.9,-16.2,-16.4,-16.5,-15.5,-15.2,-15.5,-15.3,-14.5,-14.8,-15.4,-15.6,-15.6,-15.4,-15.8,-16.1,-15.5,-15.6,-16.1,-16.4,-16.1,-15.1,-14.9,-14.8,-15.8,-16.2,-15.5,-15.4,-15.7,-16.0,-15.8,-17.0,-17.1,-16.8,-16.7,-15.6,-15.5,-15.3,-15.5,-15.3,-15.6,-15.9,-15.7,-15.8,-15.8,-16.2,-16.1,-15.8,-15.9,-15.3,-15.2,-15.0,-14.9,-15.6,-15.6,-15.5,-15.4,-15.8,-16.2,-16.2,-16.6,-16.0,-15.4,-15.2,-15.3,-15.4,-15.2,-15.7,-15.6,-15.2,-15.3,-15.7,-16.2,-18.4,-22.2,-22.6,-21.9,-23.3,-25.0,-22.7,-20.3,-21.3,-21.5,-22.4,-24.0,-22.9,-21.5,-21.7,-22.4,-22.6,-22.2,-21.2,-21.2,-21.5,-21.8,-21.1,-19.8,-20.1,-18.7,-16.5,-16.1,-16.5,-16.8,-16.6,-15.9,-15.8,-16.2,-16.5,-16.9,-16.8,-16.2,-15.6,-15.7,-16.0,-16.0,-16.4,-16.4,-16.0,-15.9,-15.8,-16.1,-16.2,-16.5,-16.9,-16.2,-15.7,-15.9,-16.5,-16.6,-17.0,-16.9,-16.1,-16.2,-16.0,-16.4,-16.6,-16.6,-16.3,-15.6,-15.7,-15.9,-16.3,-16.7,-16.8,-16.7,-16.0,-15.9,-16.2,-16.2,-16.5,-16.4,-16.4,-15.9,-16.0,-16.4,-16.5,-16.8,-16.6,-16.3,-16.1,-15.8,-16.0,-16.2,-16.9,-16.7,-15.8,-15.8,-15.9,-16.6,-16.8,-16.7,-16.6,-16.1,-16.2,-16.1,-16.3,-16.6,-16.5,-16.5,-15.8,-15.7,-16.1,-16.5,-16.6,-16.6,-16.3,-15.3,-15.6,-16.1,-15.5,-15.8,-15.9,-15.4,-14.8,-14.8,-15.5,-15.8,-16.4,-16.5,-15.7,-15.3,-15.4,-16.0,-15.7,-15.6,-15.6,-14.7,-15.0,-15.4,-15.7,-16.3,-16.6,-16.5,-15.6,-15.6,-16.1,-16.0,-16.4,-16.4,-15.7,-15.3,-15.2,-16.1,-16.6,-16.2,-15.6,-15.4,-15.3,-15.5,-16.2,-16.5,-16.2,-15.4,-15.3,-15.3,-15.1,-15.6,-15.9,-15.8,-15.6,-15.8,-15.8,-15.8,-16.2,-16.7,-16.2,-15.4,-16.0,-17.4,-19.4,-19.4,-22.8,-25.1,-19.5,-15.9,-16.1,-16.4,-16.6,-17.0,-16.3,-15.5,-15.7,-16.1,-16.0,-16.4,-16.5,-16.6,-16.8,-17.4,-17.4,-16.3,-16.0,-17.4,-18.8,-18.2,-18.3,-17.4,-16.0,-16.8,-17.2,-17.4,-17.8,-18.0,-18.0,-16.8,-16.7,-17.7,-17.5,-17.2,-17.3,-17.6,-16.8,-16.8,-17.4,-17.3,-17.2,-17.3,-17.6,-16.7,-16.3,-16.9,-17.0,-17.6,-17.6,-17.6,-17.3,-17.0,-18.8,-18.8,-18.3,-18.5,-17.6,-16.7,-17.0,-17.3,-16.6,-16.7,-17.2,-16.9,-16.6,-17.1,-17.4,-17.6,-17.1,-16.7,-16.8,-17.3,-17.3,-16.9,-16.4,-16.5,-16.9,-17.0,-17.7,-17.3,-16.2,-17.6,-17.7,-17.0,-17.1,-17.0,-17.7,-17.4,-17.8,-17.6,-16.8,-16.7,-17.0,-17.6,-17.1,-16.7,-16.9,-16.5,-16.4,-17.1,-17.6,-17.1,-16.9,-16.9,-16.8,-17.3,-16.9,-16.8,-16.9,-16.7,-17.1,-17.4,-17.6,-17.3,-16.6,-16.3,-16.6,-16.6,-16.2,-16.8,-17.5,-17.5,-18.3,-18.6,-18.1,-17.7,-18.0,-18.7,-18.6,-18.6,-18.4,-17.3,-17.1,-17.8,-18.0,-17.8,-17.8,-18.2,-17.7,-18.2,-19.6,-18.8,-18.3,-18.4,-17.8,-16.8,-17.5,-18.3,-17.7,-18.0,-17.8,-17.6,-17.6,-17.7,-18.7,-18.4,-18.6,-18.7,-17.7,-17.2,-17.3,-17.8,-18.1,-18.4,-18.4,-17.5,-17.7,-18.6,-18.8,-18.3,-17.7,-17.7,-18.1,-18.6,-18.5,-17.5,-18.0,-18.9,-18.4,-18.1,-18.6,-18.5,-17.5,-18.6,-19.1,-18.0,-17.7,-18.1,-18.4,-18.0,-18.7,-18.8,-17.9,-18.1,-18.6,-18.1,-18.2,-18.8,-18.8,-18.0,-18.2,-18.6,-18.1,-18.8,-19.2,-18.6,-17.8,-18.7,-19.5,-18.3,-18.5,-19.1,-18.6,-18.6,-18.4,-18.6,-18.7,-18.7,-18.6,-17.8,-18.1,-18.3,-18.4,-18.6,-18.3,-18.5,-18.2,-18.1,-18.4,-17.6,-17.3,-17.7,-18.3,-18.3,-18.4,-18.8,-18.3,-18.0,-17.7,-17.0,-16.7,-17.2,-17.7,-17.6,-17.4,-17.3,-16.7,-16.8,-17.9,-17.6,-17.9,-18.8,-18.6,-18.3,-18.0,-18.3,-17.6,-17.3,-17.8,-18.4,-18.5,-18.6,-19.1,-18.7,-18.6,-18.5,-17.9,-17.7,-17.9,-19.2,-19.1,-18.7,-18.5,-17.9,-18.3,-17.9,-17.6,-18.0,-18.5,-18.3,-17.2,-17.2,-17.8,-17.6,-17.6,-18.0,-18.5,-18.2,-17.7,-18.1,-17.8,-18.7,-19.3,-17.8,-17.3,-18.2,-18.9,-17.7,-17.7,-18.5,-17.8,-17.8,-19.1,-19.6,-18.1,-18.2,-18.4,-17.8,-18.7,-18.6,-17.0,-17.0,-18.3,-18.4,-17.4,-16.6,-17.2,-18.0,-17.7,-17.3,-18.4,-18.3,-18.1,-18.4,-17.4,-17.2,-17.9,-18.9,-18.2,-17.9,-18.8,-18.5,-18.9,-19.0,-19.0,-18.4,-17.4,-18.1,-18.3,-19.0,-19.2,-18.9,-18.5,-17.4,-18.2,-18.4,-18.7,-19.2,-18.1,-17.5,-18.0,-21.7,-25.5,-22.3,-19.1,-21.2,-21.3,-19.6,-18.5,-17.5,-17.4,-17.3,-17.0,-17.5,-17.4,-17.2,-17.2,-17.0,-17.6,-17.8,-17.5,-17.5,-18.0,-18.1,-18.1,-18.1,-17.3,-17.0,-17.6,-17.7,-17.5,-17.2,-17.4,-17.4,-18.1,-18.9,-18.1,-18.2,-18.3,-17.5,-17.0,-17.6,-18.4,-17.8,-18.0,-18.4,-17.6,-17.5,-18.2,-18.3,-17.7,-17.8,-18.0,-17.5,-17.5,-17.3,-16.9,-17.5,-18.0,-17.5,-17.2,-18.7,-18.9,-17.1,-17.3,-17.2,-17.1,-17.0,-16.7,-17.0,-16.8,-16.8,-16.8,-16.7,-16.6,-16.3,-16.9,-17.0,-16.7,-16.7,-16.2,-16.3,-16.7,-16.6,-16.3,-16.7,-20.1,-27.7,-36.8,-26.0],"bars":[0.418,3.3672,6.828,10.3616,13.9019,20.0866,23.6284,27.166,30.705,34.2453,37.7775,41.3056,44.8364,48.3672,51.8966,55.4247,58.9432,62.4535,65.9583,69.4563,72.9503,76.4456,79.9436,83.4389,84.3103,87.7974,91.2804,94.7606,98.2423,101.7212,105.1932,106.9279,110.4013,113.898,116.5382,120.0677,123.5971,127.1156,130.6327,134.1458,137.6424,141.1268,144.6016,148.0764,151.5416,155.0014,158.4543,161.9045,165.3575,168.8063,172.2511,175.6876,179.1187,182.5498,183.4076,186.8428,190.2739,193.7063,196.2769,199.6971,203.12,206.5429,209.9617,213.3764,216.7911,220.2071,223.6136,227.0119,230.4089,233.8045,237.1973,240.5874,243.9748,247.3581,250.74,255.8019,259.1688,262.4565,264.5067,266.5774,269.8992,271.5341,276.0757,279.4877,282.9037,283.756,287.168,290.5745,293.9837,297.3998,300.8131,304.2251,307.6357,311.0477,314.4569,317.8648,321.2699,324.671,328.072,331.4676,334.0122,337.401,340.7856,344.173,347.5604,350.9437,354.3283,357.7075,361.0908,367.0132,370.3938,373.7757,377.1563,380.5368,383.9146,387.2952,390.673,394.0467,396.5832,399.961,403.332,406.7002,410.0767,413.4559,416.8378,417.686,421.0884,424.5086,427.9369,431.3653,434.7977,438.2288,441.6572,445.0883,448.5194,451.9491,452.8055,456.2325,459.6581,463.0865,466.5039,469.9036,473.2882,476.6715,480.0575,483.4449,486.8296,490.206,493.5634],"sections":[{"name":"Intro","start":0.0,"end":16.92,"world":"void","bar":0},{"name":"Verse A: Through eyes","start":16.92,"end":55.2,"world":"her","bar":5},{"name":"There comes a once","start":55.2,"end":84.15,"world":"memory","bar":15},{"name":"Refrain I: Stay lost now girl","start":84.15,"end":106.35,"world":"her","bar":24},{"name":"Break I","start":106.35,"end":116.47,"world":"institute","bar":31},{"name":"White Coats I","start":116.47,"end":151.81,"world":"institute","bar":34},{"name":"They brought a man","start":151.81,"end":183.43,"world":"memory","bar":45},{"name":"Spoken I: I can help you find","start":183.43,"end":195.57,"world":"memory","bar":55},{"name":"Break II","start":195.57,"end":208.42,"world":"memory","bar":58},{"name":"White Coats II","start":208.42,"end":252.73,"world":"institute","bar":62},{"name":"A gun and a bullet","start":252.73,"end":273.81,"world":"institute","bar":75},{"name":"Spoken II: I won't lose you","start":273.81,"end":283.79,"world":"memory","bar":82},{"name":"The Run","start":283.79,"end":318.0,"world":"run","bar":86},{"name":"But...","start":318.0,"end":332.45,"world":"void","bar":96},{"name":"White Coats III","start":332.45,"end":363.99,"world":"institute","bar":100},{"name":"The Cutting","start":363.99,"end":396.63,"world":"memory","bar":109},{"name":"Refrain II: Stay lost now girl","start":396.63,"end":417.57,"world":"her","bar":119},{"name":"Verse A reprise","start":417.57,"end":452.07,"world":"her","bar":125},{"name":"Outro","start":452.07,"end":493.621,"world":"void","bar":136}],"lines":[{"n":1,"s":16.92,"e":20.3,"x":"Through eyes that were hers and weren't","pin":true},{"n":2,"s":20.45,"e":24.02,"x":"Through years that weren't hers and were","pin":true},{"n":3,"s":24.02,"e":27.46,"x":"Left in rooms she couldn't leave","pin":false},{"n":4,"s":27.46,"e":30.86,"x":"Learning a self she couldn't learn","pin":false},{"n":5,"s":30.86,"e":35.28,"x":"And a voice came to her (sweet, so sweet)","pin":false},{"n":6,"s":35.28,"e":42.96,"x":"A hand, as ever as it was once (good, so good)","pin":false},{"n":7,"s":43.7,"e":46.96,"x":"She got lost inside him","pin":false},{"n":8,"s":46.96,"e":50.52,"x":"Lost and lost inside him","pin":false},{"n":9,"s":50.52,"e":54.04,"x":"Like she swore she never would.","pin":false},{"n":11,"s":55.2,"e":58.68,"x":"But there comes a once... once...","pin":false},{"n":12,"s":58.68,"e":64.7,"x":"She said \"no\" (once...). And she lost him for a lifetime.","pin":false},{"n":13,"s":64.7,"e":67.28,"x":"There comes a once... once...","pin":false},{"n":14,"s":67.28,"e":73.28,"x":"She said \"yes\" (once...).  And she lost him forever.","pin":false},{"n":15,"s":73.28,"e":75.12,"x":"Lost and lost.","pin":false},{"n":16,"s":75.38,"e":76.6,"x":"Lost to her.","pin":false},{"n":17,"s":76.6,"e":78.47,"x":"Lost to the world.","pin":false},{"n":18,"s":78.47,"e":84.15,"x":"Forever and ever.","pin":false},{"n":20,"s":84.15,"e":89.29,"x":"Stay lost now girl (forever, forever)","pin":false},{"n":21,"s":89.29,"e":92.49,"x":"Throw away everything he found","pin":false},{"n":22,"s":92.49,"e":97.75,"x":"So he never got lost inside you. (again, again)","pin":false},{"n":23,"s":97.75,"e":104.65,"x":"Forever again, forever again.","pin":false},{"n":24,"s":105.17,"e":106.35,"x":"Never again...","pin":false},{"n":26,"s":116.47,"e":118.69,"x":"The white coats said:","pin":false},{"n":27,"s":118.69,"e":123.05,"x":"We've found a girl who is very lost.","pin":false},{"n":28,"s":123.05,"e":126.91,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":29,"s":126.91,"e":130.23,"x":"Keep her safe in a nice white room.","pin":false},{"n":30,"s":130.23,"e":133.95,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":31,"s":133.95,"e":137.79,"x":"We\u2019ll find out HOW lost she really is.","pin":false},{"n":32,"s":137.79,"e":140.97,"x":"With time, with time...","pin":false},{"n":33,"s":141.35,"e":144.63,"x":"With time we can find anything.","pin":false},{"n":34,"s":144.63,"e":147.87,"x":"With time, with time...","pin":false},{"n":35,"s":147.87,"e":151.81,"x":"Even a girl who is very hard to find.","pin":false},{"n":37,"s":151.81,"e":153.39,"x":"They brought a man.","pin":false},{"n":38,"s":154.45,"e":158.85,"x":"A man who could find someone hard to find.","pin":false},{"n":39,"s":158.85,"e":164.09,"x":"And in the end, he found, oh he found...","pin":false},{"n":40,"s":164.09,"e":168.99,"x":"...something VERY hard to find (in her).","pin":false},{"n":41,"s":170.65,"e":176.19,"x":"And in the end, she found, oh she found...","pin":false},{"n":42,"s":176.19,"e":181.55,"x":"Her forever. And ever... (in him).","pin":false},{"n":44,"s":183.43,"e":188.85,"x":"\"I can help you find protecting, trusting and believing","pin":false},{"n":45,"s":190.63,"e":195.57,"x":"Even if they're very hard to find.\"","pin":false},{"n":47,"s":208.42,"e":212.26,"x":"But with time, with time,","pin":false},{"n":48,"s":213.12,"e":214.74,"x":"the white coats said:","pin":false},{"n":49,"s":214.74,"e":217.14,"x":"Hmm... this girl is too lost.","pin":false},{"n":50,"s":217.66,"e":222.26,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":51,"s":224.09,"e":229.23,"x":"This girl is too hard to find.","pin":false},{"n":52,"s":231.05,"e":235.91,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":53,"s":237.09,"e":240.37,"x":"With time, with time...","pin":false},{"n":54,"s":240.37,"e":244.23,"x":"We found she isn't worth the time.","pin":false},{"n":55,"s":244.23,"e":247.19,"x":"With time, with time...","pin":false},{"n":56,"s":247.19,"e":251.25,"x":"This girl who is very hard to find.","pin":false},{"n":58,"s":252.73,"e":256.03,"x":"And with time, and with time,","pin":false},{"n":59,"s":256.03,"e":260.29,"x":"The white coats brought the man a gun and a bullet","pin":false},{"n":60,"s":260.29,"e":264.37,"x":"And said \"go and find that girl.\"","pin":false},{"n":61,"s":264.37,"e":266.05,"x":"And he did,","pin":false},{"n":62,"s":266.73,"e":267.79,"x":"he did...","pin":false},{"n":63,"s":267.79,"e":270.27,"x":"He found her,","pin":false},{"n":64,"s":270.31,"e":272.61,"x":"he found her...","pin":false},{"n":66,"s":273.81,"e":275.99,"x":"\"I won't lose you.","pin":false},{"n":67,"s":275.99,"e":279.69,"x":"Together, we'll find you the time.\"","pin":false},{"n":69,"s":283.79,"e":288.57,"x":"And they ran... ran... ran...","pin":false},{"n":70,"s":289.15,"e":291.25,"x":"Forever and ever.","pin":false},{"n":71,"s":291.25,"e":295.11,"x":"Through every tunnel, every motel.","pin":false},{"n":72,"s":295.11,"e":298.65,"x":"Lost in diners, lost in alleys...","pin":false},{"n":73,"s":298.65,"e":300.51,"x":"Lost in each other.","pin":false},{"n":74,"s":300.51,"e":302.91,"x":"And found. (And found...)","pin":false},{"n":75,"s":303.81,"e":307.19,"x":"Lost and found, found and lost...","pin":false},{"n":76,"s":307.87,"e":312.42,"x":"Forever and ever and ever.","pin":false},{"n":78,"s":318.0,"e":319.4,"x":"But\u2026","pin":true},{"n":80,"s":319.58,"e":324.27,"x":"But forever... always comes to an end,","pin":false},{"n":81,"s":324.39,"e":327.41,"x":"when the coats... come round the bend.","pin":false},{"n":83,"s":332.45,"e":334.104,"x":"And the coats said:","pin":false},{"n":84,"s":334.45,"e":337.15,"x":"Hmm... this man is too lost.","pin":false},{"n":85,"s":337.17,"e":340.03,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":86,"s":340.13,"e":343.63,"x":"We\u2019ll have to cut out his something hard to find.","pin":false},{"n":87,"s":343.99,"e":346.91,"x":"Scribble scribble, stab stab the charts.","pin":false},{"n":88,"s":347.13,"e":348.53,"x":"With time, with time","pin":false},{"n":89,"s":348.57,"e":351.27,"x":"We'll see how lost this girl can be.","pin":false},{"n":90,"s":351.93,"e":353.55,"x":"With time, with time","pin":false},{"n":91,"s":353.65,"e":357.73,"x":"We'll make her a girl who can find ANYTHING.","pin":false},{"n":92,"s":357.73,"e":361.49,"x":"Except... something hard to find.","pin":false},{"n":94,"s":363.99,"e":367.35,"x":"They cut away his protecting.","pin":false},{"n":95,"s":367.35,"e":370.75,"x":"They cut away his trusting.","pin":false},{"n":96,"s":370.75,"e":374.05,"x":"They cut away his believing.","pin":false},{"n":97,"s":374.05,"e":377.31,"x":"But left him the gun\u2026 and the bullet.","pin":false},{"n":99,"s":377.31,"e":379.67,"x":"They took her arms to hug,","pin":false},{"n":100,"s":379.67,"e":381.41,"x":"They took her legs to run,","pin":false},{"n":101,"s":381.41,"e":384.91,"x":"Her eyes to see and ears to hear...","pin":false},{"n":102,"s":384.91,"e":388.43,"x":"But left her the years (and years and years)...","pin":false},{"n":103,"s":388.43,"e":390.89,"x":"Alone, with time... with time...","pin":false},{"n":104,"s":390.89,"e":394.49,"x":"And all her agains and agains and agains...","pin":false},{"n":105,"s":394.49,"e":396.63,"x":"Of him...  and her...","pin":false},{"n":107,"s":396.63,"e":401.25,"x":"Stay lost now girl (forever, forever)","pin":false},{"n":108,"s":401.71,"e":405.61,"x":"Throw away everything he could find","pin":false},{"n":109,"s":405.61,"e":410.49,"x":"So he never got lost inside you. (again, again)","pin":false},{"n":110,"s":410.49,"e":415.57,"x":"Forever again, forever again.","pin":false},{"n":111,"s":415.81,"e":417.57,"x":"Never again...","pin":false},{"n":113,"s":417.57,"e":421.11,"x":"Through eyes that were hers and weren't","pin":false},{"n":114,"s":421.33,"e":425.07,"x":"Through years that weren't hers and were","pin":false},{"n":115,"s":425.07,"e":428.27,"x":"Left in rooms she couldn't leave","pin":false},{"n":116,"s":428.27,"e":431.41,"x":"Learning a self she couldn't learn","pin":false},{"n":117,"s":431.41,"e":435.77,"x":"And a voice came to her (sweet, so sweet)","pin":false},{"n":118,"s":435.77,"e":441.01,"x":"A hand, as ever as it was once (good, so good)","pin":false},{"n":119,"s":441.01,"e":444.47,"x":"She got lost inside him","pin":false},{"n":120,"s":444.55,"e":448.05,"x":"Lost and lost inside him","pin":false},{"n":121,"s":448.05,"e":452.07,"x":"Like she swore she never would.","pin":false}],"frames":[{"key":"A","t":46.3,"section":"Verse A: Through eyes"},{"key":"B","t":125.9,"section":"White Coats I"},{"key":"C","t":368.3,"section":"The Cutting"}]};
 (function () {
   const cv = document.getElementById('tl'), ro = document.getElementById('readout');
   const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
