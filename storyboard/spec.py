@@ -1,7 +1,7 @@
 """Storyboard spec: one entry per section in analysis/out/grid.json.
 
 Direction: a long exposure of a memory. Nothing is drawn literally.
-She is an emptiness: a hollow in the fog with a faint, broken outline.
+She is a veil of hair and a pale gap, caught in several exposures at once.
 He is never shown: he is warm light leaking in from outside the frame.
 The white coats are overexposure, flicker, scratches and film burns.
 Time is tally marks (one per bar) and the exposure echo.
@@ -32,12 +32,10 @@ SECTIONS = {
     "Verse A: Through eyes": dict(
         world="her",
         visual="Lavender haze and a padded corner you feel more than see. "
-               "She sits on the floor hugging her knees, but only as an "
-               "absence: a hollow in the fog with a faint, broken outline "
-               "that breathes and sheds motes, beside fainter earlier "
-               "selves. From \u201ca voice came to her\u201d warmth leaks in. "
-               "On \u201clost inside him\u201d it pours into the empty shape "
-               "of her.",
+               "She is a veil of long hair around a pale gap where a face "
+               "would be, caught in three exposures at once. From “a "
+               "voice came to her” warmth gathers behind her shoulder. "
+               "On “lost inside him” it floods through her hair.",
         type="Her voice, dark ink in the haze. Each word focus-pulls in and "
              "sheds two ghost exposures that drift apart and linger.",
         sync="Ghost exposures swell on kicks; the warm light rises across "
@@ -72,7 +70,7 @@ SECTIONS = {
     "White Coats I": dict(
         world="institute",
         visual="Style frame B. Overexposed, cold, humming. She is small and "
-               "far off, surfacing only in fragments when the light dips or a burn flares. Every “scribble” tears "
+               "far off, barely there. Every “scribble” tears "
                "scratches through the emulsion; every “stab” burns "
                "a hole through the film. On “with time” the "
                "flicker locks into a clock-like pulse.",
@@ -160,8 +158,8 @@ SECTIONS = {
         visual="Style frame C. Dark. The three shafts from Spoken I return, "
                "and each “cut” drops a blade through one and it "
                "gutters out. The warmth behind her drains with each cut "
-               "until only a dim outline is left. The glint "
-               "stays sharp. Then her outline is taken piece by piece. For "
+               "until she is a silhouette against nothing. The glint "
+               "stays sharp. Then her exposures are taken one by one. For "
                "“eyes” the focus goes. For “ears” the "
                "image stops reacting to the music. The years stay: the "
                "tally marks remain.",
