@@ -116,6 +116,16 @@ def main():
 </figure>""" for f in frame_meta)
 
     renders_html = ""
+    if (HERE / "renders" / "film" / "index.m3u8").exists():
+        renders_html += f"""
+<figure class="render" id="render-film">
+  <video id="film" controls playsinline preload="none" poster="renders/film_poster.jpg" width="1280" height="720"
+         data-src="renders/film/index.m3u8"></video>
+  <figcaption><b>The full film</b>
+    <span class="tc">0:00 → {tc(a['duration'])} · all 19 sections</span>
+    <span class="note">Streamed at 720p for the page. The 1080p master was rendered in one continuous pass
+      and verified with ffprobe. <a href="renders/film_contact.jpg">Contact sheet</a></span></figcaption>
+</figure>"""
     for slug, name, note in RENDERS:
         sec = next(x for x in secs if x["name"] == name)
         renders_html += f"""

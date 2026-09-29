@@ -142,7 +142,7 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   </header>
 
   <section aria-labelledby="h-built">
-    <div class="col"><span class="eyebrow">Built so far</span><h2 id="h-built">Rendered sections</h2></div>
+    <div class="col"><span class="eyebrow">Built so far</span><h2 id="h-built">The film</h2></div>
     <div class="frames">{{RENDERS}}</div>
   </section>
 
@@ -234,6 +234,21 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   </section>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
+<script>
+(function () {
+  const v = document.getElementById('film');
+  if (!v) return;
+  const src = v.dataset.src;
+  if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = src; return; }
+  if (window.Hls && Hls.isSupported()) {
+    const h = new Hls({ maxBufferLength: 30 });
+    h.loadSource(src); h.attachMedia(v);
+  } else {
+    v.insertAdjacentHTML('afterend', '<p class="note">This browser can’t stream the film. Try a recent Chrome, Firefox or Safari.</p>');
+  }
+})();
+</script>
 <script>
 const D = {{DATA}};
 (function () {
