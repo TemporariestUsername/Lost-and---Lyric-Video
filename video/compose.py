@@ -26,7 +26,7 @@ VERSE_A_SHOTS = {
     3: dict(style="stack", hero=2),     # rooms
     4: dict(style="depth", hero=2),     # self
     5: dict(style="hero", hero=2),      # voice
-    6: dict(style="stack", hero=1),     # hand
+    6: dict(hero=[3, 7]),               # ever / once: eternity against a single moment
     7: dict(style="stack", hero=2),     # lost
     8: dict(style="depth", hero=0),     # lost (and lost)
     9: dict(style="track", hero=4),     # never

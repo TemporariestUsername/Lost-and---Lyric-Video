@@ -202,6 +202,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("verse_a_line6", "Verse A: Through eyes",
+     "Revised line: 'A hand, as ever as it was once'. 'ever' and 'once' set against each other on a diagonal; 'ever' keeps opening, 'once' lands. The Verse A clip below still has the old version of this line.",
+     (34.5, 44.5)),
     ("verse_a", "Verse A: Through eyes",
      "Kinetic typography (a designed shot per line, hero words, per-letter timing, camera through the type) over drifting memory photographs. Web copy at 720p; the 1080p master passed QA and ffprobe."),
     ("there_comes_a_once", "There comes a once",

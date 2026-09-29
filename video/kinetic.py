@@ -55,6 +55,11 @@ def _norm(s):
 def _choose(T, n, style=None, hero=None, caps=False):
     words = [dict(w, disp=_clean(w["text"]).upper() if caps else _clean(w["text"]))
              for w in T.lines[n]["words"] if not w["backing"]]
+    if isinstance(hero, (list, tuple)):               # two heroes: a juxtaposed pair
+        hero = [h for h in hero if 0 <= h < len(words)]
+        if len(hero) == 2:
+            return words, hero, "pair"
+        hero = hero[0] if hero else None
     if hero is not None and not 0 <= hero < len(words):
         hero = None                                   # bad index: choose automatically
     if hero is None:
@@ -108,7 +113,37 @@ def layout(T, n, style=None, hero=None, seed=0, voice="her"):
             y += small * 1.9
         return out, style
 
-    if style == "stack":
+    if style == "pair":
+        # two heroes set against each other on a diagonal (e.g. ever / once):
+        # small words before, hero A, small words between, hero B offset right
+        ha, hb = hi
+        f = font(ki, small)
+        sa = _fit(words[ha]["disp"], kr, big * 0.95, maxw * 0.55)
+        sb = _fit(words[hb]["disp"], kr, big * 0.95, maxw * 0.55)
+        groups = [(list(range(0, ha)), "word"), ([ha], "A"), (list(range(ha + 1, hb)), "word"),
+                  ([hb], "B"), (list(range(hb + 1, len(words))), "word")]
+        heights = {"A": sa * 0.95, "B": sb * 0.95, "word": small * 1.15}
+        total = sum(heights[k] for g, k in groups if g)
+        y = (y0 + y1) / 2 - total / 2
+        a_w = font(kr, sa).measureText(words[ha]["disp"])
+        for g, k in groups:
+            if not g:
+                continue
+            y += heights[k]
+            if k == "A":
+                out.append(dict(word=words[ha], x=x0, y=y, size=sa, key=kr, z=1.0,
+                                tracking=0.0, role="hero", stretch=True))
+            elif k == "B":
+                out.append(dict(word=words[hb], x=x0 + a_w * 0.85, y=y, size=sb, key=kr, z=1.0,
+                                tracking=0.0, role="hero", pop=True))
+            else:
+                x = x0 + 30 + (a_w * 0.35 if g[0] > ha else 0)
+                for i in g:
+                    out.append(dict(word=words[i], x=x, y=y, size=small, key=ki, z=1.0,
+                                    tracking=0.0, role="word"))
+                    x += f.measureText(words[i]["disp"]) + small * 0.28
+
+    elif style == "stack":
         # rows of words; the hero gets a row to itself, huge
         rows, cur = [], []
         for i, w in enumerate(words):
@@ -351,6 +386,8 @@ class Kinetic:
                 ws = w["start"] - (0.25 if o["role"] == "ghost_hero" else 0.0)
                 if p["style"] == "track" and o["role"] != "backing":
                     track = o["tracking"] + (TRACK_MAX - o["tracking"]) * ease_out(clamp01(age / 5), 2)
+                elif o.get("stretch"):                  # 'ever': spacing keeps opening
+                    track = o["tracking"] + 0.2 * ease_out(clamp01((t - w["start"]) / 4.5), 2)
                 elif o["role"] == "ghost_hero":
                     track = o["tracking"] * (1 + 1.5 * clamp01(age / 6))
                 else:
@@ -392,6 +429,10 @@ class Kinetic:
                     sx += cam[0] * z + (sx - cx) * 0.25 * ex * (v == "her")
                     sy += cam[1] * z - 40 * ex * (v == "her")
                     sc = push * fly
+                    if o.get("pop") and t >= w["start"]:    # 'once': lands with a punch
+                        pop = 1 + 0.12 * math.exp(-7 * (t - w["start"]))
+                        sx += xs[i] * push * (pop - 1)
+                        sc *= pop
                     if v == "her":
                         sig = (1 - u) * 9 + ex * 16 + (4 if o["role"] == "ghost_hero" else 0)
                     elif v == "coats":

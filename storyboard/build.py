@@ -126,14 +126,18 @@ def main():
     <span class="note">Streamed at 720p for the page. The 1080p master was rendered in one continuous pass
       and verified with ffprobe. <a href="renders/film_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>"""
-    for slug, name, note in RENDERS:
-        sec = next(x for x in secs if x["name"] == name)
+    for slug, name, note, *span in RENDERS:
+        sec = dict(next(x for x in secs if x["name"] == name))
+        if span:                                   # a chunk within a section
+            sec.update(start=span[0][0], end=span[0][1])
+            sec["bar"] = int(np.searchsorted(g["downbeats"], sec["start"] + 1e-3, side="right")) - 1
+            sec["bar_end"] = int(np.searchsorted(g["downbeats"], sec["end"] - 1e-3, side="right")) - 1
         renders_html += f"""
 <figure class="render" id="render-{slug}">
   <video controls playsinline preload="metadata" poster="renders/{slug}_poster.jpg" width="1280" height="720">
     <source src="renders/{slug}.mp4" type="video/mp4">
   </video>
-  <figcaption><b>{esc(name)}</b>
+  <figcaption><b>{esc(name)}{' (chunk)' if span else ''}</b>
     <span class="tc">{tc(sec['start'])} \u2192 {tc(sec['end'])} \u00b7 bars {sec['bar']}\u2013{sec['bar_end']}</span>
     <span class="note">{esc(note)} <a href="renders/{slug}_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>"""
