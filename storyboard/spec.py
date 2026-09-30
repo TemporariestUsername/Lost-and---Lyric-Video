@@ -203,7 +203,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("refrain_i", "Refrain I: Stay lost now girl",
-     "Rebuilt as prophecy: she sees the future and tries to unmake it. Words appear faintly before they are sung; 'stay lost' is unwritten letter by letter; the memories are thrown out; the line rewinds and snaps forward on each 'again' with flashes of the future; 'forever again' recedes in a beat-stepped tunnel; a cold stop on 'Never'. Web copy at 720p; the 1080p master passed QA and ffprobe."),
+     "Rebuilt as prophecy: she sees the future and tries to unmake it. Words appear faintly before they are sung; 'stay lost' is unwritten letter by letter; the memories are thrown out; the line rewinds and snaps forward on each 'again' with flashes of the future; 'forever again' recedes in a beat-stepped tunnel; a cold stop on 'Never'. Revised: calmer motion (lines drift and are unwritten, never float toward the viewer), a slow continuous tunnel, tally marks moved left. Web copy at 720p; the 1080p master passed QA and ffprobe."),
     ("verse_a_line6", "Verse A: Through eyes",
      "Revised line: 'A hand, as ever as it was once'. 'ever' and 'once' set against each other on a diagonal; 'ever' keeps opening, 'once' lands. The Verse A clip below still has the old version of this line.",
      (34.5, 44.5)),
