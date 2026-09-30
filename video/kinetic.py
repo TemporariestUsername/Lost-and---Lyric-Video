@@ -331,6 +331,11 @@ class Kinetic:
             for o in placed:
                 if o["role"] == "hero" and ov.get("ghost_second") and o.get("pop"):
                     o["pop"], o["ghost"] = False, True
+            if ov.get("split_second"):               # the 2nd echo peels off the 1st
+                back = [o for o in placed if o["role"] == "backing"]
+                if len(back) >= 2:
+                    back[1].update(x=back[0]["x"], y=back[0]["y"], size=back[0]["size"],
+                                   key=back[0]["key"], split=True)
             plan = dict(placed=placed, style=style, voice=v, opts=ov,
                         life=_lifetime(T, n, self.lines, hold))
             if ov.get("rewind"):
@@ -340,6 +345,11 @@ class Kinetic:
                            if placed[pi]["role"] == "hero") + 1
                 plan["rw_order"] = [(pi, i) for _, pi, i in order]
                 plan["rw_keep"] = stop                # never un-type the hero or before it
+            if ov.get("split_second"):               # ...and is thrown out on the next
+                idx = self.lines.index(n)            # line's first beat
+                nxt = T.lines[self.lines[idx + 1]]["start"] if idx + 1 < len(self.lines) else \
+                    T.lines[n]["end"] + 1.0
+                plan["split_fling"] = float(min((q for q in T.pulses if q >= nxt), default=nxt))
             self.plan[n] = plan
         self._separate()
 
@@ -469,6 +479,10 @@ class Kinetic:
                         a = 0.0 if gone else base_a
                         fl = 0.82 + 0.18 * _hash01(n, i, int(t * 30))
                         a *= fl
+                    elif o.get("split"):                        # won't be unwritten; thrown
+                        fl = p["split_fling"]
+                        a = u * base_a * (1 - smooth(ramp(t, fl + 0.1, fl + 0.5)))
+                        ex = 0.0
                     elif dissolve:                              # unwritten, letter by letter
                         if o["role"] == "backing":             # the echoes outlast her words
                             dis = smooth(ramp(t, e0 + 0.2, e0 + 0.9))
@@ -491,7 +505,14 @@ class Kinetic:
                     if i == 0:
                         word_alpha = a / max(base_a, 1e-3) if v in ("coats", "her") else u * (1 - ex)
                     px = o["x"] + xs[i] + drift_x
-                    py = o["y"] + ((1 - u) * o["size"] * 0.35 if v == "her" else 0.0)
+                    if o.get("split"):                      # peels away, drifts, is flung
+                        g = t - w["start"]
+                        fl = p["split_fling"]
+                        px += 150 * ease_out(clamp01(g / 2.2), 2) + 2600 * clamp01((t - fl) / 0.45) ** 2
+                        py_split = -26 * ease_out(clamp01(g / 2.2), 2) - 500 * clamp01((t - fl) / 0.45) ** 2
+                    else:
+                        py_split = 0.0
+                    py = o["y"] + ((1 - u) * o["size"] * 0.35 if v == "her" else 0.0) + py_split
                     if v == "coats":                            # hand-set, slightly off
                         px += (_hash01(n, i, 1) - 0.5) * 3.0
                         py += (_hash01(n, i, 2) - 0.5) * 4.0
