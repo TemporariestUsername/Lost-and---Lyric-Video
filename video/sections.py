@@ -326,9 +326,11 @@ def break_i(t, T, lines):
 COATS_SHOTS = {
     26: dict(style="track"),
     27: dict(hero=[1, 7]),                                   # FOUND / LOST: the title's axis
-    28: dict(style="stack", hero=5, jag=[2, 3]),             # ...the CHARTS; the stabs out of line
+    28: dict(style="stack", hero=5,                          # STAB STAB slammed in, out of line
+             shock=dict(words=[2, 3], at=[(40, 150), (430, 255)], size=2.5)),
     29: dict(hero=[2, 5]),                                   # SAFE / NICE: the euphemisms
-    30: dict(style="stack", hero=3, jag=[2, 3]),             # STAB
+    30: dict(style="stack", hero=3,
+             shock=dict(words=[2, 3], at=[(480, 150), (60, 255)], size=2.5)),
     31: dict(style="stack", hero=4),                         # how LOST
     32: dict(style="track", hero=1, overstrike=True, nocomma=True),   # with time, typed over itself
     33: dict(style="stack", hero=5),                         # ANYTHING
@@ -389,8 +391,17 @@ def coats(name, photos, seed):
             clip = max(clip, math.exp(-3.5 * (t - st)) if t >= st else 0.0)
         img = fx.vignette(img, 0.55, "#5E6A78")
         img = K.draw(img, t, cam=(dx * 0.2, dy * 0.2))
+        # each stab startles: the frame jolts and the exposure hits down for an instant
+        jolt, jx, jy = 0.0, 0.0, 0.0
+        for k, w in enumerate(stabs):
+            if 0 <= t - w["start"] < 0.35:
+                e = math.exp(-(t - w["start"]) / 0.06)
+                a_ = 2.4 + 1.7 * k
+                jolt, jx, jy = max(jolt, e), 11 * e * math.cos(a_), 7 * e * math.sin(a_)
+        if jolt > 0.01:
+            img = fx.shift(img, jx, jy)
         img = img + np.float32(0.8) * clip
-        return img, post("institute", exposure=1.08 + 0.4 * clip)
+        return img, post("institute", exposure=1.08 + 0.4 * clip - 0.1 * jolt)
     return scene
 
 

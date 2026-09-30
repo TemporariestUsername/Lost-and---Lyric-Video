@@ -732,7 +732,8 @@ def pencil_underline(img, t, t0, x0, x1, y, seed, t_end=None, color=None, size=1
         path.lineTo(xa - nx * w0, ya - ny * w0)
         path.close()
         c.drawPath(path, p)
-        c.drawCircle(xa, ya, w0, p)                      # where the lead bit in
+        if u > 0.3:
+            c.drawCircle(xa, ya, w0, p)                  # where the lead bit in
     m = fx.skia_alpha(draw)
     grain = 0.8 + 0.2 * np.clip(fx.fog(seed * 3.1, seed=seed + 70, period=5.0) / 2.5, -1, 1)
     color = hexc("#1C1F24") if color is None else color
