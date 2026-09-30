@@ -1176,7 +1176,7 @@
    "text": "The white coats said:",
    "stanza": 3,
    "start": 117.1,
-   "end": 118.69,
+   "end": 119.5,
    "support": 1.0,
    "pinned": true,
    "words": [
@@ -1204,7 +1204,7 @@
     {
      "text": "said:",
      "start": 118.07,
-     "end": 118.69,
+     "end": 119.5,
      "matched": true,
      "backing": false
     }
@@ -1214,21 +1214,21 @@
    "line": 27,
    "text": "We've found a girl who is very lost.",
    "stanza": 3,
-   "start": 118.69,
+   "start": 120.2,
    "end": 123.05,
-   "support": 0.88,
-   "pinned": false,
+   "support": 1.0,
+   "pinned": true,
    "words": [
     {
      "text": "We've",
-     "start": 118.69,
-     "end": 119.52,
-     "matched": false,
+     "start": 120.2,
+     "end": 120.42,
+     "matched": true,
      "backing": false
     },
     {
      "text": "found",
-     "start": 120.35,
+     "start": 120.45,
      "end": 120.65,
      "matched": true,
      "backing": false

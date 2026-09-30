@@ -330,9 +330,9 @@ COATS_SHOTS = {
     29: dict(hero=[2, 5]),                                   # SAFE / NICE: the euphemisms
     30: dict(style="stack", hero=3),                         # STAB
     31: dict(style="stack", hero=3),                         # HOW
-    32: dict(style="track", hero=1, overstrike=True),        # with time, typed over itself
+    32: dict(style="track", hero=1, overstrike=True, nocomma=True),   # with time, typed over itself
     33: dict(style="stack", hero=5),                         # ANYTHING
-    34: dict(style="track", hero=1, overstrike=True),
+    34: dict(style="track", hero=1, overstrike=True, nocomma=True),
     35: dict(style="stack", hero=8),                         # ...hard to FIND
     47: dict(style="track", hero=2), 48: dict(style="track"), 49: dict(style="stack", hero=5),
     50: dict(style="depth", hero=5), 51: dict(style="stack", hero=4), 52: dict(style="hero", hero=5),
@@ -346,12 +346,14 @@ COATS_SHOTS = {
 
 
 def _word_box(K, w):
-    """Screen centre of a placed word (the coats' type never moves)."""
+    """Where a placed word sits (the coats' type never moves):
+    (x0, top, x1, baseline, size, line's exit time)."""
     for p in K.plan.values():
         for o in p["placed"]:
             if o["word"]["start"] == w["start"] and o["word"]["text"] == w["text"]:
                 f = font(o["key"], o["size"])
-                return o["x"] + f.measureText(o["word"]["disp"]) / 2, o["y"] - o["size"] * 0.35
+                return (o["x"], o["y"] - o["size"] * 0.72, o["x"] + f.measureText(o["word"]["disp"]),
+                        o["y"], o["size"], p["life"][1])
     return None
 
 
@@ -373,11 +375,13 @@ def coats(name, photos, seed):
         img = look.scratches(img, t, 2.0 + 9 * sc)
         stabs = [w for n in lines for w in T.lines[n]["words"]
                  if w["text"].lower().startswith("stab")]
-        for k, w in enumerate(stabs):                   # burned through behind the typed word
-            c = _word_box(K, w)
-            if c:
-                img = look.film_burn(img, t, w["start"], c[0] + dx * 0.2, c[1] + dy * 0.2, 50 + k,
-                                     cold=True)
+        for k, w in enumerate(stabs):                   # a pencil jabbed at the typed word
+            b = _word_box(K, w)
+            if b:
+                x0, top, x1, base, size, e0 = b
+                img = look.pencil_jab(img, t, w["start"], x0 + 0.3 * (x1 - x0) + dx * 0.2,
+                                      top + 0.3 * size + dy * 0.2, 50 + k, t_end=e0,
+                                      size=0.8 + 0.4 * (size / 150))
         img = fluorescent(img, t)
         # 'not worth the time': the exposure clips to white for a beat
         clip = 0.0

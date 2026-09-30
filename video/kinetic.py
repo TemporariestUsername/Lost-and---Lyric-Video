@@ -331,6 +331,9 @@ class Kinetic:
             if v == "coats":                        # no punch, no stretch: clinical
                 for o in placed:
                     o["pop"] = o["stretch"] = False
+            if ov.get("nocomma"):                    # e.g. 'with time' so the ellipsis lands
+                for o in placed:
+                    o["word"]["disp"] = o["word"]["disp"].rstrip(",")
             if ov.get("overstrike"):                 # the repeat is typed over the first
                 ws = [o for o in placed if o["role"] in ("word", "hero")]
                 half = len(ws) // 2

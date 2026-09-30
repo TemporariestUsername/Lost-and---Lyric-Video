@@ -703,6 +703,48 @@ def film_burn(img, t, t0, cx, cy, seed, cold=False):
     return img * (1 - (core * fade)[..., None]) + hot * (core * fade)[..., None]
 
 
+def pencil_jab(img, t, t0, x, y, seed, t_end=None, color=None, size=1.0):
+    """'Stab stab the charts': a pencil jabbed at the chart. A short, heavy
+    graphite stroke strikes in (two frames) toward (x, y) and ends in a
+    pressed dot with a little smudge; it stays like an annotation and fades
+    after `t_end`."""
+    age = t - t0
+    if age < 0 or (t_end is not None and t > t_end + 0.4):
+        return img
+    r = np.random.default_rng(seed)
+    ang = math.radians(r.uniform(-150, -115))            # comes in from the upper right
+    ln = r.uniform(80, 115) * size
+    sx, sy = x - math.cos(ang) * ln, y - math.sin(ang) * ln
+    u = clamp01(age / 0.066)                             # the strike
+    ex, ey = sx + (x - sx) * u, sy + (y - sy) * u
+    fade = 1.0 if t_end is None else 1 - smooth(clamp01((t - t_end) / 0.4))
+    nx, ny = -(y - sy) / ln, (x - sx) / ln               # unit normal to the stroke
+
+    def draw(c):
+        p = skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1))
+        w0, w1 = 1.0 * size, 6.0 * size                   # light touch -> pressed hard
+        path = skia.Path()
+        path.moveTo(sx + nx * w0, sy + ny * w0)
+        path.lineTo(ex + nx * w1, ey + ny * w1)
+        path.lineTo(ex - nx * w1, ey - ny * w1)
+        path.lineTo(sx - nx * w0, sy - ny * w0)
+        path.close()
+        c.drawPath(path, p)
+        if u >= 1:
+            c.drawCircle(x, y, 7.5 * size, p)            # the point driven in
+            p.setStyle(skia.Paint.kStroke_Style)
+            p.setStrokeWidth(1.6 * size)
+            for _ in range(3):                           # the lead skids a little
+                a2 = ang + r.normal(0, 0.5)
+                c.drawLine(x, y, x + math.cos(a2) * r.uniform(8, 18) * size,
+                           y + math.sin(a2) * r.uniform(8, 18) * size, p)
+    m = fx.skia_alpha(draw)
+    grain = 0.82 + 0.18 * np.clip(fx.fog(seed * 3.1, seed=seed + 70, period=6.0) / 2.5, -1, 1)
+    color = hexc("#1C1F24") if color is None else color
+    img = fx.over(img, color, fx.blur(m, 4.0) * 0.18 * fade)          # graphite smudge
+    return fx.over(img, color, m * grain * 0.92 * fade)
+
+
 def scratches(img, t, density, seed=6):
     """Emulsion scratches: jittering vertical hairlines plus a few scrawls."""
     if density <= 0.01:

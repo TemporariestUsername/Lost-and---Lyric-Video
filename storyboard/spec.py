@@ -79,14 +79,15 @@ SECTIONS = {
         world="institute",
         visual="Cold, bright, humming. The coats never move: their words are "
                "typed on and stay perfectly still, against her drift. Every "
-               "\u201cscribble\u201d tears scratches through the emulsion; "
-               "every \u201cstab\u201d burns a cold white hole through the film "
-               "behind the typed word. While they say \u201cwith time\u201d her "
-               "tally marks surface: their time is her count.",
+               "“scribble” scrawls through the emulsion; every "
+               "“stab” is a pencil jabbed at the chart, a heavy graphite "
+               "stroke driven into the typed word and left there like an "
+               "annotation. While they say “with time” her tally marks "
+               "surface: their time is her count.",
         type="Typed monospace caps. FOUND / LOST and SAFE / NICE set against "
-             "each other; HOW, ANYTHING and FIND held large; \u201cwith time, "
-             "with time\u201d typed over itself like a typewriter overstrike.",
-        sync="Burns on the exact stab attacks; scratches on the scribbles; "
+             "each other; HOW, ANYTHING and FIND held large; “with time "
+             "with time...” typed over itself like a typewriter overstrike.",
+        sync="Pencil jabs on the exact stab attacks; scrawls on the scribbles; "
              "nothing pulses on the beat."),
     "They brought a man": dict(
         world="memory",
@@ -210,7 +211,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("white_coats_i", "White Coats I",
-     "The coats never move: typed on, perfectly still, blinked out letter by letter, against her drift (no push toward the viewer, nothing on the beat). FOUND / LOST and SAFE / NICE set against each other; HOW, ANYTHING and FIND held large. Each 'stab' burns a cold white hole through the film behind the typed word (the stabs were re-timed to their sung attacks). 'With time, with time' is typed over itself like a typewriter overstrike, and her tally marks surface while they say it. The 'coats' vision in Refrain I is re-shot from this section's 2:05.9.",
+     "Revised: 'We've' now waits for its real entry (2:00.2, after the coats hold 'said'); each 'stab' is a pencil jabbed at the chart, a heavy graphite stroke driven into the typed STAB and left there like an annotation (no more burns); 'with time' has no comma, so the overstruck second 'with time...' ends on its ellipsis. Unchanged: the coats never move (typed on, still, blinked out); FOUND / LOST and SAFE / NICE pairs; HOW, ANYTHING, FIND; her tally surfaces during 'with time'.",
     ),
     ("break_i", "Break I",
      "What she foresaw arrives: 'Never again...' lets go and the corridor from her vision becomes the room, with white coats far down it. As the music's top end closes (1:53-1:55) the picture goes soft, dim and quiet with it; the fluorescent tubes strike back on in a stutter on the hits and hold into White Coats I. Includes a second either side for the handoffs. The corridor vision in Refrain I is re-shot from this frame at 1:50.5, so it will update when Refrain I is next rendered.",
