@@ -515,7 +515,6 @@ REFRAIN_I_SHOTS = {
     23: dict(hero=[0, 1]),                                                     # forever / again
     24: dict(hero=[0, 1], ghost_second=True),                                  # never / again...
 }
-_FEEDBACK = {}
 
 
 def refrain_i(t, T, lines):
@@ -571,19 +570,24 @@ def refrain_i(t, T, lines):
     img = kin(T, name, lines, REFRAIN_I_SHOTS).draw(img, t, cam=(dx * 0.35, dy * 0.35),
                                                     kick=0.0 if frozen else kick)
     if t0 <= t < t1:
-        fb = _FEEDBACK.get(name)
-        if fb is not None:
-            sc = 0.93 - 0.025 * kick
-            rot = 1.2 if int((t - t0) / 1.7) % 2 == 0 else -1.2
-            M = cv2.getRotationMatrix2D((W / 2, H / 2 - 40), rot, sc)
-            warped = cv2.warpAffine(fb, M, (W, H), flags=cv2.INTER_LINEAR,
-                                    borderMode=cv2.BORDER_REPLICATE)
-            ramp_in = smooth(ramp(t, t0, t0 + 0.8))
-            img = img - 0.62 * ramp_in * np.clip(img - warped, 0, None)   # darker copies recede
-        _FEEDBACK[name] = img.copy()
-    elif t >= t1:
-        _FEEDBACK.pop(name, None)
-
+        # beat-stepped tunnel: at each past pulse the line left a copy; older copies
+        # step further back (smaller, fainter, softer). Redrawn from the type at those
+        # moments, so every render chunk agrees.
+        K = kin(T, name, lines, REFRAIN_I_SHOTS)
+        past = [p0 for p0 in T.pulses if t0 <= p0 <= t][-5:][::-1]
+        ramp_in = smooth(ramp(t, t0, t0 + 0.6))
+        cxy = (560, 520)
+        for k, p0 in enumerate(past, start=1):
+            blank = np.ones((H, W, 3), np.float32)
+            layer = K.draw(blank, p0 + 0.01)
+            m = np.clip(1 - layer.mean(-1), 0, 1)
+            step = 1 - clamp01((t - p0) / 0.25) * 0 if k > 1 else ease_out(clamp01((t - p0) / 0.3))
+            sc = 0.8 ** (k - 1 + step)
+            M = cv2.getRotationMatrix2D(cxy, 2.0 * (k - 1 + step) * (1 if k % 2 else -1), sc)
+            m = cv2.warpAffine(m, M, (W, H), flags=cv2.INTER_LINEAR, borderValue=0)
+            m = cv2.GaussianBlur(m, (0, 0), 1.0 + 1.6 * k)
+            wgt = 0.55 * 0.7 ** (k - 1) * ramp_in
+            img = img * (1 - wgt * m[..., None]) + kinetic.INK * wgt * m[..., None]
     # 'Never again...': clean and cold; then the future seeps in from the edges
     g = post("her", exposure=0.92, sat=0.85)
     if frozen:

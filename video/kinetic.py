@@ -452,7 +452,7 @@ class Kinetic:
                         u = ease_out(ramp(t, cs - 0.03, cs + 0.14), 2)
                     if u <= 0.001:
                         if fk and t >= a0 - fk and v == "her":   # she already knows the words
-                            pa = 0.16 * smooth(ramp(t, a0 - fk, a0 - fk + 0.6)) * \
+                            pa = 0.26 * smooth(ramp(t, a0 - fk, a0 - fk + 0.6)) * \
                                 (0.55 if o["role"] == "backing" else 1.0)
                             psx = cx + (o["x"] + xs[i] - cx) * push + cam[0] * z
                             psy = cy + (o["y"] - cy) * push + cam[1] * z
