@@ -1,5 +1,5 @@
 {
-  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR. Line 20 words 4-5 ('forever, forever'): Whisper stretched the first to 2.2 s and squeezed the second into 0.5 s before 'Throw'. Pitch tracking (voiced 86.62-87.54 and 88.19-89.25) and two tight Whisper re-runs (86.4-87.6 / 88.0-89.2) agree; pinned to the consensus.",
+  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR. Line 20 words 4-5 ('forever, forever'): Whisper stretched the first to 2.2 s and squeezed the second into 0.5 s before 'Throw'. Pitch tracking (voiced 86.62-87.54 and 88.19-89.25) and two tight Whisper re-runs (86.4-87.6 / 88.0-89.2) agree; pinned to the consensus. Word pins from the vocal-stem timing check (analysis/out/timing_check.md): line 11 'But' starts after dead silence at 56.0; line 18 'and' ends ~81.6 and 'ever' enters at 82.6; line 22 backing 'again, again' land on the kicks at 96.4 / 97.3; line 23 second 'forever' enters out of silence at 103.1 with 'again' at 103.5; line 26 'The' starts at 117.1.",
   "lines": {
     "1": [
       16.92,
@@ -23,6 +23,48 @@
       "5": [
         88.1,
         89.2
+      ]
+    },
+    "11": {
+      "0": [
+        56.0,
+        56.14
+      ]
+    },
+    "18": {
+      "1": [
+        80.23,
+        81.6
+      ],
+      "2": [
+        82.6,
+        84.15
+      ]
+    },
+    "22": {
+      "7": [
+        96.4,
+        97.0
+      ],
+      "8": [
+        97.3,
+        97.75
+      ]
+    },
+    "23": {
+      "2": [
+        103.1,
+        103.5
+      ],
+      "3": [
+        103.5,
+        104.65
+      ]
+    },
+    "26": {
+      "0": [
+        117.1,
+        117.27
       ]
     }
   }

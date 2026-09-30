@@ -510,7 +510,7 @@ REFRAIN_I_SHOTS = {
              backing_at=(560, 330, 64), backing_alpha=0.8, split_second=True),
     21: dict(style="stack", hero=4),                                           # throw away
     22: dict(style="stack", hero=2, foreknow=0.5,                              # the failed rewind
-             rewind=dict(start=96.0, snaps=(96.23, 96.79), rate=32),
+             rewind=dict(start=96.0, snaps=(96.4, 97.3), rate=32),     # the backing agains, on the kicks
              backing_at=(620, 300, 92), backing_alpha=0.85),
     23: dict(hero=[0, 1]),                                                     # forever / again
     24: dict(hero=[0, 1], ghost_second=True),                                  # never / again...
