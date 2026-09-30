@@ -670,21 +670,32 @@ def him_light(img, t, T, lines, cx, y, size=30, tracking=0.3):
 
 
 # ================================================================ events
-def film_burn(img, t, t0, cx, cy, seed):
+def film_burn(img, t, t0, cx, cy, seed, cold=False):
     """A stab: the celluloid blisters and burns through. Blown core with
-    yellow texture, a molten orange edge, and a brown scorch that spreads."""
+    yellow texture, a molten orange edge, and a brown scorch that spreads.
+    `cold`: smaller, and white light burning through with a grey scorch
+    (warmth belongs to him)."""
     age = t - t0
     if age < 0 or age > 1.6:
         return img
-    r = 25 + 140 * ease_out(clamp01(age / 0.7), 2)
+    r = (18 + 80 * ease_out(clamp01(age / 0.6), 2)) if cold else 25 + 140 * ease_out(clamp01(age / 0.7), 2)
     yy, xx = fx._yy_xx()
     n1 = fx.fog(seed * 7.0, seed=seed + 40, period=50.0)
     n2 = fx.fog(seed * 7.0 + 3, seed=seed + 41, period=50.0)
+    if cold:                         # noise centred on the burn, so every stab is the same size
+        iy, ix = int(np.clip(cy, 0, H - 1)), int(np.clip(cx, 0, W - 1))
+        n1, n2 = n1 - n1[iy, ix], n2 - n2[iy, ix]
     d = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2) / r + 0.30 * n1 + 0.10 * n2
     fade = 1 - smooth(clamp01((age - 0.7) / 0.9))
     core = np.clip((0.82 - d) / 0.12, 0, 1)
     edge = np.clip(1 - np.abs(d - 0.92) / 0.10, 0, 1)
     scorch = np.clip(1 - np.abs(d - 1.08) / 0.16, 0, 1)
+    if cold:
+        img = img * (1 - (scorch * 0.45 * fade)[..., None]) + hexc("#3E444C") * (scorch * 0.2 * fade)[..., None]
+        img = img * (1 - (edge * 0.5 * fade)[..., None]) + hexc("#E4ECF4") * (edge * 0.9 * fade)[..., None]
+        tex = 0.92 + 0.08 * n2
+        hot = np.stack([1.12 * tex, 1.14 * tex, 1.18 * tex], -1)
+        return img * (1 - (core * fade)[..., None]) + hot * (core * fade)[..., None]
     img = img * (1 - (scorch * 0.75 * fade)[..., None]) + hexc("#5A2A0E") * (scorch * 0.35 * fade)[..., None]
     img = img * (1 - (edge * 0.6 * fade)[..., None]) + hexc("#E0621C") * (edge * 1.3 * fade)[..., None]
     tex = 0.85 + 0.15 * n2

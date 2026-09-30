@@ -328,6 +328,15 @@ class Kinetic:
                     if o["role"] == "backing":
                         o.update(x=bx, y=by, size=bs, key=VOICES[v][0])
                         bx += font(o["key"], bs).measureText(o["word"]["disp"]) + bs * 0.3
+            if v == "coats":                        # no punch, no stretch: clinical
+                for o in placed:
+                    o["pop"] = o["stretch"] = False
+            if ov.get("overstrike"):                 # the repeat is typed over the first
+                ws = [o for o in placed if o["role"] in ("word", "hero")]
+                half = len(ws) // 2
+                for a_, b_ in zip(ws[:half], ws[half:]):
+                    b_.update(x=a_["x"] + 3, y=a_["y"] - 2, size=a_["size"], key=a_["key"],
+                              tracking=a_["tracking"], role=a_["role"])
             for o in placed:
                 if o["role"] == "hero" and ov.get("ghost_second") and o.get("pop"):
                     o["pop"], o["ghost"] = False, True
@@ -425,7 +434,7 @@ class Kinetic:
                 push = 1.0 + 0.004 * min(age, 8)
                 fly = 1.0
             elif v == "coats":
-                push = 1.0 + 0.008 * min(age, 8) + 0.02 * kick * react
+                push = 1.0                              # typed and still: they never move
                 fly = 1.0
             else:
                 cx, cy = W / 2, 830

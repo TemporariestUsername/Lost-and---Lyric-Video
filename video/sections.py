@@ -68,9 +68,9 @@ def base_night(t, T, tally=True, lift=1.0):
     return img
 
 
-def base_institute(t, T):
+def base_institute(t, T, tally=0.35):
     img = look.padded_room(t, base=C["clinic"], seam=0.03)
-    return look.tally(img, t, T, alpha=0.35, blur=2.5)
+    return look.tally(img, t, T, alpha=tally, blur=2.5)
 
 
 def fluorescent(img, t, amount=1.0):
@@ -256,7 +256,7 @@ def refrain(name, react):
 #                loses its detail the same way, going soft, dim and quiet
 #   115.4-116.5  the highs slam back in a stutter (115.42 tick, 115.84 hit,
 #                116.06, 116.53 downbeat): the tubes strike, then hold
-COATS_I_PHOTOS = ["hospital_corridor", "cinderblock_plate", "stairwell_spiral", "corridor"]
+COATS_I_PHOTOS = ["hospital_corridor", "cinderblock_plate", "stairwell_spiral"]   # no legible signs
 CLOSE = (113.0, 115.1)
 STRIKE = ((115.42, 0.22), (115.84, 0.75), (116.06, 0.9), (116.53, 1.0))
 
@@ -322,11 +322,18 @@ def break_i(t, T, lines):
     return img, g
 
 
+# The coats never move: typed on, still, blinked out. Against her drift.
 COATS_SHOTS = {
-    26: dict(style="track"), 27: dict(style="stack", hero=7), 28: dict(style="depth", hero=5),
-    29: dict(style="stack", hero=6), 30: dict(style="hero", hero=5), 31: dict(style="stack", hero=3),
-    32: dict(style="track", hero=1), 33: dict(style="stack", hero=5), 34: dict(style="track", hero=1),
-    35: dict(style="stack", hero=6),
+    26: dict(style="track"),
+    27: dict(hero=[1, 7]),                                   # FOUND / LOST: the title's axis
+    28: dict(style="stack", hero=5),                         # ...the CHARTS; burns on the stabs
+    29: dict(hero=[2, 5]),                                   # SAFE / NICE: the euphemisms
+    30: dict(style="stack", hero=3),                         # STAB
+    31: dict(style="stack", hero=3),                         # HOW
+    32: dict(style="track", hero=1, overstrike=True),        # with time, typed over itself
+    33: dict(style="stack", hero=5),                         # ANYTHING
+    34: dict(style="track", hero=1, overstrike=True),
+    35: dict(style="stack", hero=8),                         # ...hard to FIND
     47: dict(style="track", hero=2), 48: dict(style="track"), 49: dict(style="stack", hero=5),
     50: dict(style="depth", hero=5), 51: dict(style="stack", hero=4), 52: dict(style="hero", hero=5),
     53: dict(style="track", hero=1), 54: dict(style="stack", hero=4), 55: dict(style="track", hero=1),
@@ -338,9 +345,24 @@ COATS_SHOTS = {
 }
 
 
+def _word_box(K, w):
+    """Screen centre of a placed word (the coats' type never moves)."""
+    for p in K.plan.values():
+        for o in p["placed"]:
+            if o["word"]["start"] == w["start"] and o["word"]["text"] == w["text"]:
+                f = font(o["key"], o["size"])
+                return o["x"] + f.measureText(o["word"]["disp"]) / 2, o["y"] - o["size"] * 0.35
+    return None
+
+
 def coats(name, photos, seed):
     def scene(t, T, lines):
-        img = base_institute(t, T)
+        K = kin(T, name, lines, COATS_SHOTS, voice="coats")
+        # 'with time': their time is her tally; the marks surface while they say it
+        timed = [T.lines[n] for n in lines if "with time" in T.lines[n]["text"].lower()]
+        tl = max([smooth(ramp(t, L["start"], L["start"] + 0.8)) *
+                  (1 - smooth(ramp(t, L["end"] + 0.4, L["end"] + 1.6))) for L in timed] or [0.0])
+        img = base_institute(t, T, tally=0.35 + 0.3 * tl)
         dx, dy, dr = mem.drift(t, seed=seed, amp=(18, 10))
         img = fx.shift(img, dx * 0.4, dy * 0.4, 0, 1.02)
         img = draw_mems(img, t, mems(T, name, photos, every=2, life=9.0, seed=seed, keep_left=1000),
@@ -349,17 +371,20 @@ def coats(name, photos, seed):
         sc = max((1 - clamp01((t - s) / 1.8)) for s in scribs if t >= s) \
             if any(t >= s for s in scribs) else 0.0
         img = look.scratches(img, t, 2.0 + 9 * sc)
-        for k, st in enumerate(words_like(T, lines, "stab")):
-            r = np.random.default_rng(900 + k + seed * 31)
-            img = look.film_burn(img, t, st, r.uniform(1150, 1700), r.uniform(250, 850), 50 + k)
+        stabs = [w for n in lines for w in T.lines[n]["words"]
+                 if w["text"].lower().startswith("stab")]
+        for k, w in enumerate(stabs):                   # burned through behind the typed word
+            c = _word_box(K, w)
+            if c:
+                img = look.film_burn(img, t, w["start"], c[0] + dx * 0.2, c[1] + dy * 0.2, 50 + k,
+                                     cold=True)
         img = fluorescent(img, t)
         # 'not worth the time': the exposure clips to white for a beat
         clip = 0.0
         for st in words_like(T, lines, "worth"):
             clip = max(clip, math.exp(-3.5 * (t - st)) if t >= st else 0.0)
         img = fx.vignette(img, 0.55, "#5E6A78")
-        img = kin(T, name, lines, COATS_SHOTS, voice="coats").draw(
-            img, t, cam=(dx * 0.2, dy * 0.2), kick=T.pulse_env(t, 9.0))
+        img = K.draw(img, t, cam=(dx * 0.2, dy * 0.2))
         img = img + np.float32(0.8) * clip
         return img, post("institute", exposure=1.08 + 0.4 * clip)
     return scene

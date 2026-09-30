@@ -77,16 +77,17 @@ SECTIONS = {
              "hits 115.4, 115.8, 116.1 and hold from the 116.5 downbeat."),
     "White Coats I": dict(
         world="institute",
-        visual="Style frame B. Overexposed, cold, humming. She is small and "
-               "far off, barely there. Every “scribble” tears "
-               "scratches through the emulsion; every “stab” burns "
-               "a hole through the film. On “with time” the "
-               "flicker locks into a clock-like pulse.",
-        type="The chant is etched into the image in monospace caps, letter "
-             "by letter, each glyph jittered and partly eroded. HOW is "
-             "etched larger.",
-        sync="Burns on the exact stab onsets; scratches on the scribble "
-             "onsets; flicker on eighths."),
+        visual="Cold, bright, humming. The coats never move: their words are "
+               "typed on and stay perfectly still, against her drift. Every "
+               "\u201cscribble\u201d tears scratches through the emulsion; "
+               "every \u201cstab\u201d burns a cold white hole through the film "
+               "behind the typed word. While they say \u201cwith time\u201d her "
+               "tally marks surface: their time is her count.",
+        type="Typed monospace caps. FOUND / LOST and SAFE / NICE set against "
+             "each other; HOW, ANYTHING and FIND held large; \u201cwith time, "
+             "with time\u201d typed over itself like a typewriter overstrike.",
+        sync="Burns on the exact stab attacks; scratches on the scribbles; "
+             "nothing pulses on the beat."),
     "They brought a man": dict(
         world="memory",
         visual="He is never shown. He arrives as warmth: a light leak "
