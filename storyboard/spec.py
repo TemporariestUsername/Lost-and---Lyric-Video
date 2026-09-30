@@ -208,6 +208,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("break_i", "Break I",
+     "What she foresaw arrives: 'Never again...' lets go and the corridor from her vision becomes the room, with white coats far down it. As the music's top end closes (1:53-1:55) the picture goes soft, dim and quiet with it; the fluorescent tubes strike back on in a stutter on the hits and hold into White Coats I. Includes a second either side for the handoffs. The corridor vision in Refrain I is re-shot from this frame at 1:50.5, so it will update when Refrain I is next rendered.",
+     (105.5, 117.8)),
     ("refrain_again", "Refrain I: Stay lost now girl",
      "Timing check: the backing 'again, again' now land on the kicks (96.4 / 97.3), so the rewind snaps and the future flashes fire on the sung words (the second one had been 0.5 s early). The second 'forever' in 'Forever again' now arrives as the voice returns at 103.1 instead of 0.6 s into the silence.",
      (93.5, 106.3)),
