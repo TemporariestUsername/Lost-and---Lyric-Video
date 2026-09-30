@@ -202,6 +202,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("refrain_again", "Refrain I: Stay lost now girl",
+     "Timing check: the backing 'again, again' now land on the kicks (96.4 / 97.3), so the rewind snaps and the future flashes fire on the sung words (the second one had been 0.5 s early). The second 'forever' in 'Forever again' now arrives as the voice returns at 103.1 instead of 0.6 s into the silence.",
+     (93.5, 106.3)),
     ("refrain_forever", "Refrain I: Stay lost now girl",
      "Revised: the second 'forever' peels off the first as a copy, drifts slowly, outlasts the rest of the line, and is the last thing unwritten, letter by letter, as 'Throw away everything' arrives. Timing corrected: the second 'forever' is sung at 88.1 s and held ~1.1 s (it had been placed 0.65 s late). The full Refrain I clip below has the old version of this moment.",
      (84.15, 92.5)),
