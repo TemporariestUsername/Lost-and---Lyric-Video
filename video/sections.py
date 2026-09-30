@@ -329,7 +329,7 @@ COATS_SHOTS = {
     28: dict(style="stack", hero=5),                         # ...the CHARTS; burns on the stabs
     29: dict(hero=[2, 5]),                                   # SAFE / NICE: the euphemisms
     30: dict(style="stack", hero=3),                         # STAB
-    31: dict(style="stack", hero=3),                         # HOW
+    31: dict(style="stack", hero=4),                         # how LOST
     32: dict(style="track", hero=1, overstrike=True, nocomma=True),   # with time, typed over itself
     33: dict(style="stack", hero=5),                         # ANYTHING
     34: dict(style="track", hero=1, overstrike=True, nocomma=True),
@@ -375,13 +375,13 @@ def coats(name, photos, seed):
         img = look.scratches(img, t, 2.0 + 9 * sc)
         stabs = [w for n in lines for w in T.lines[n]["words"]
                  if w["text"].lower().startswith("stab")]
-        for k, w in enumerate(stabs):                   # a pencil jabbed at the typed word
+        for k, w in enumerate(stabs):                   # struck underneath, hard, in pencil
             b = _word_box(K, w)
             if b:
                 x0, top, x1, base, size, e0 = b
-                img = look.pencil_jab(img, t, w["start"], x0 + 0.3 * (x1 - x0) + dx * 0.2,
-                                      top + 0.3 * size + dy * 0.2, 50 + k, t_end=e0,
-                                      size=0.8 + 0.4 * (size / 150))
+                img = look.pencil_underline(img, t, w["start"], x0 + dx * 0.2, x1 + dx * 0.2,
+                                            base + 0.16 * size + dy * 0.2, 50 + k, t_end=e0,
+                                            size=0.9 + 0.8 * (size / 150))
         img = fluorescent(img, t)
         # 'not worth the time': the exposure clips to white for a beat
         clip = 0.0
