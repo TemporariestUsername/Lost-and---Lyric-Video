@@ -64,7 +64,7 @@ def base_night(t, T, tally=True, lift=1.0):
     img[:] = hexc("#2A2233") * lift
     img = img + (fx.fog(t, seed=12) * 0.035)[..., None]
     if tally:
-        img = look.tally(img, t, T, x0=1440, y0=190, color=hexc("#7A6D86"), alpha=0.35, blur=2.0)
+        img = look.tally(img, t, T, color=hexc("#7A6D86"), alpha=0.35, blur=2.0)
     return img
 
 
@@ -537,7 +537,7 @@ def refrain_i(t, T, lines):
 
     dx, dy, dr = mem.drift(tt, seed=5)
     img = base_her(tt, T)
-    img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, 1.03 + 0.02 * kick * (not frozen))
+    img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, 1.03)                  # no beat zoom
     warm = 0.35 * (1 - smooth(ramp(t, L[21]["start"], L[21]["end"])))  # his warmth thrown out
     photos = ["curtain_window", "rain_window", "doorway_figure", "car_window_night"]
     ms = mems(T, name, photos, every=2, life=9.0, seed=17, keep_left=900)
@@ -570,23 +570,22 @@ def refrain_i(t, T, lines):
     img = kin(T, name, lines, REFRAIN_I_SHOTS).draw(img, t, cam=(dx * 0.35, dy * 0.35),
                                                     kick=0.0 if frozen else kick)
     if t0 <= t < t1:
-        # beat-stepped tunnel: at each past pulse the line left a copy; older copies
-        # step further back (smaller, fainter, softer). Redrawn from the type at those
-        # moments, so every render chunk agrees.
+        # a slow, continuous recession: copies of the line glide back into the
+        # distance at an even pace (no beat steps), each smaller, fainter, softer.
+        # Redrawn from the type at earlier moments, so every render chunk agrees.
         K = kin(T, name, lines, REFRAIN_I_SHOTS)
-        past = [p0 for p0 in T.pulses if t0 <= p0 <= t][-5:][::-1]
-        ramp_in = smooth(ramp(t, t0, t0 + 0.6))
-        cxy = (560, 520)
-        for k, p0 in enumerate(past, start=1):
+        dt, cxy = 1.5, (560, 520)
+        phase = ((t - t0) / dt) % 1.0
+        ramp_in = smooth(ramp(t, t0, t0 + 1.0))
+        for k in range(5):
+            depth = k + phase
+            tk = max(t0 + 0.02, t - depth * dt)
             blank = np.ones((H, W, 3), np.float32)
-            layer = K.draw(blank, p0 + 0.01)
-            m = np.clip(1 - layer.mean(-1), 0, 1)
-            step = 1 - clamp01((t - p0) / 0.25) * 0 if k > 1 else ease_out(clamp01((t - p0) / 0.3))
-            sc = 0.8 ** (k - 1 + step)
-            M = cv2.getRotationMatrix2D(cxy, 2.0 * (k - 1 + step) * (1 if k % 2 else -1), sc)
+            m = np.clip(1 - K.draw(blank, tk).mean(-1), 0, 1)
+            M = cv2.getRotationMatrix2D(cxy, 1.6 * depth, 0.82 ** depth)
             m = cv2.warpAffine(m, M, (W, H), flags=cv2.INTER_LINEAR, borderValue=0)
-            m = cv2.GaussianBlur(m, (0, 0), 1.0 + 1.6 * k)
-            wgt = 0.55 * 0.7 ** (k - 1) * ramp_in
+            m = cv2.GaussianBlur(m, (0, 0), 1.0 + 1.5 * depth)
+            wgt = 0.5 * 0.72 ** depth * smooth(clamp01(depth / 0.8)) * ramp_in
             img = img * (1 - wgt * m[..., None]) + kinetic.INK * wgt * m[..., None]
     # 'Never again...': clean and cold; then the future seeps in from the edges
     g = post("her", exposure=0.92, sat=0.85)

@@ -358,7 +358,10 @@ class Kinetic:
             # (typed coats lines are readable the instant they land, so for them
             # any overlap with the outgoing line's life counts)
             lead = 0.0 if b["voice"] == "coats" else 0.15
-            if "him" in (a["voice"], b["voice"]) or a["life"][1] <= b["life"][0] + lead:
+            tail = 0.75 if a["voice"] == "her" else 0.0      # her lines unwrite slowly
+            if a.get("opts", {}).get("exit") == "dissolve":
+                tail = 2.0
+            if "him" in (a["voice"], b["voice"]) or a["life"][1] + tail <= b["life"][0] + lead:
                 continue
             a0, a1 = self._yspan(a)
             b0, b1 = self._yspan(b)
@@ -367,7 +370,8 @@ class Kinetic:
             down = a1 + gap - b0
             up = a0 - gap - b1
             options = [s for s in (down, up) if top <= b0 + s and b1 + s <= bottom]
-            if not options:
+            if not options:            # no room to move it: the outgoing line leaves sooner
+                a["fast"] = True
                 continue
             shift = min(options, key=abs)
             for o in b["placed"]:
@@ -391,7 +395,7 @@ class Kinetic:
             opts = p.get("opts", {})
             fk = opts.get("foreknow", 0.0)
             dissolve = opts.get("exit") == "dissolve"
-            if t < a0 - 0.1 - fk or t > e0 + (1.8 if dissolve else 0.9):
+            if t < a0 - 0.1 - fk or t > e0 + (1.8 if dissolve else 1.2 if v == "her" else 0.9):
                 continue
             ex_len = {"her": 0.55, "coats": 0.28, "him": 0.9}[v]   # coats: gone before the next types
             ex = smooth(ramp(t, e0, e0 + ex_len))
@@ -406,9 +410,9 @@ class Kinetic:
                 hidden = set(order[len(order) - k:]) if k > 0 else set()
             age = t - a0
             cx, cy = BOX[0] + 120, (BOX[1] + BOX[3]) / 2
-            if v == "her":
-                push = 1.0 + 0.02 * min(age, 8) + 0.012 * kick * react
-                fly = 1.0 + 0.45 * ex ** 1.4
+            if v == "her":                          # drifts; never comes toward the viewer
+                push = 1.0 + 0.004 * min(age, 8)
+                fly = 1.0
             elif v == "coats":
                 push = 1.0 + 0.008 * min(age, 8) + 0.02 * kick * react
                 fly = 1.0
@@ -473,10 +477,19 @@ class Kinetic:
                             dis = smooth(ramp(t, gt, gt + 0.5))
                         a = u * (1 - dis) * base_a
                         ex = 0.0
+                    elif v == "her":                            # her lines leave the same way,
+                        if p.get("fast"):                       # just quicker
+                            gt = e0 - 0.3 + 0.2 * _hash01(n, pi, i, 13)
+                            dis = smooth(ramp(t, gt, gt + 0.3))
+                        else:
+                            gt = e0 + 0.5 * _hash01(n, pi, i, 13)
+                            dis = smooth(ramp(t, gt, gt + 0.45))
+                        a = u * (1 - dis) * base_a
+                        ex = 0.0
                     else:
                         a = u * (1 - ex) * base_a
                     if i == 0:
-                        word_alpha = a if (v == "coats" or dissolve) else u * (1 - ex)
+                        word_alpha = a / max(base_a, 1e-3) if v in ("coats", "her") else u * (1 - ex)
                     px = o["x"] + xs[i] + drift_x
                     py = o["y"] + ((1 - u) * o["size"] * 0.35 if v == "her" else 0.0)
                     if v == "coats":                            # hand-set, slightly off
@@ -491,11 +504,10 @@ class Kinetic:
                         pop = 1 + 0.12 * math.exp(-7 * (t - w["start"]))
                         sx += xs[i] * push * (pop - 1)
                         sc *= pop
-                    if dissolve and v == "her":
-                        sig = (1 - u) * 9 + 16 * (1 - a / max(base_a * u, 1e-3))
-                        sy -= 34 * (1 - a / max(base_a * u, 1e-3))
-                    elif v == "her":
-                        sig = (1 - u) * 9 + ex * 16 + (4 if o["role"] == "ghost_hero" else 0)
+                    if v == "her":
+                        gone = 1 - a / max(base_a * u, 1e-3)      # how far unwritten
+                        sig = (1 - u) * 9 + 16 * gone + (4 if o["role"] == "ghost_hero" else 0)
+                        sy -= 34 * gone
                         if o.get("ghost"):
                             sig += 5
                     elif v == "coats":

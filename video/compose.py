@@ -133,7 +133,7 @@ def cutting(t, T, lines):
     img = look.her_presence(img, t, T, cx=820, floor=990, s=560, ghosts=True, rim=0.5 * live,
                             body_col=look.hexc("#1E1726"), hair_col=look.hexc("#0B080F"),
                             light=(1000, 420), face=False, behind=back)
-    img = look.tally(img, t, T, x0=1420, y0=150, color=look.hexc("#6E5F78"), alpha=0.35,
+    img = look.tally(img, t, T, color=look.hexc("#6E5F78"), alpha=0.35,
                      blur=2.0)
     cur = [n for n in lines if T.lines[n]["start"] - 0.3 <= t < T.lines[n]["end"] + 2.0]
     for n in cur[-1:]:

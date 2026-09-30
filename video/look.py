@@ -449,13 +449,22 @@ def padded_room(t, base=None, corner_x=1330, floor_y=760, seam=0.06):
     return img
 
 
-def tally(img, t, T, x0=1440, y0=190, color=None, alpha=0.55, blur=1.3, count=None,
-          cols=5, dx=92, dy=118):
-    """One scratched mark per elapsed bar, grouped in fives: time made visible."""
+def tally(img, t, T, x0=64, y0=84, color=None, alpha=0.55, blur=1.3, count=None,
+          cols=5, dx=86, dy=112, fade=0.5):
+    """One scratched mark per elapsed bar, grouped in fives: time made visible.
+    Upper left, behind the lyric column and faded (`fade`) so it never
+    competes with the words. The newest mark scratches itself in slowly
+    over half a bar rather than appearing on the downbeat."""
     n = count if count is not None else T.since(T.bars, t)[0] + 1
     if n <= 0:
         return img
     color = C["graphite"] if color is None else color
+    prog = 1.0
+    if count is None and 0 <= n - 1 < len(T.bars):
+        b0 = T.bars[n - 1]
+        b1 = T.bars[n] if n < len(T.bars) else b0 + 3.4
+        prog = clamp01((t - b0) / (0.5 * (b1 - b0)))
+        prog = prog * prog * (3 - 2 * prog)
 
     def draw(c):
         r = np.random.default_rng(77)
@@ -466,13 +475,17 @@ def tally(img, t, T, x0=1440, y0=190, color=None, alpha=0.55, blur=1.3, count=No
             gx = x0 + (g % cols) * dx + r.normal(0, 3)
             gy = y0 + (g // cols) * dy + r.normal(0, 3)
             if k < 4:
-                x = gx + k * 14
-                c.drawLine(x + r.normal(0, 2), gy + r.normal(0, 3),
-                           x + r.normal(0, 3), gy + 62 + r.normal(0, 4), p)
+                xa = gx + k * 14
+                p0 = (xa + r.normal(0, 2), gy + r.normal(0, 3))
+                p1 = (xa + r.normal(0, 3), gy + 62 + r.normal(0, 4))
             else:
-                c.drawLine(gx - 8, gy + 44 + r.normal(0, 3), gx + 58, gy + 14 + r.normal(0, 3), p)
-    m = fx.blur(fx.skia_alpha(draw), blur)
-    return fx.over(img, color, m * alpha)
+                p0 = (gx - 8, gy + 44 + r.normal(0, 3))
+                p1 = (gx + 58, gy + 14 + r.normal(0, 3))
+            u = prog if i == n - 1 else 1.0
+            if u > 0.01:
+                c.drawLine(p0[0], p0[1], p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u, p)
+    m = fx.blur(fx.skia_alpha(draw), blur + 0.8)
+    return fx.over(img, color, m * alpha * fade)
 
 
 # ================================================================ type
