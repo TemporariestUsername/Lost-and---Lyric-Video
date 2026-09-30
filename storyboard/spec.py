@@ -80,13 +80,14 @@ SECTIONS = {
         visual="Cold, bright, humming. The coats never move: their words are "
                "typed on and stay perfectly still, against her drift. Every "
                "“scribble” scrawls through the emulsion; every "
-               "“stab” strikes a hard pencil underline beneath the "
-               "typed word, left there like an annotation. While they say “with time” her tally marks "
+               "“stab” is hammered on out of line with the orderly "
+               "scribbles, letters knocked askew, and a pencil slash is "
+               "struck beneath it, left there like an annotation. While they say “with time” her tally marks "
                "surface: their time is her count.",
         type="Typed monospace caps. FOUND / LOST and SAFE / NICE set against "
              "each other; LOST, ANYTHING and FIND held large; “with time "
              "with time...” typed over itself like a typewriter overstrike.",
-        sync="Underlines struck on the exact stab attacks; scrawls on the scribbles; "
+        sync="Stabs hammered on and slashed on the exact stab attacks; scrawls on the scribbles; "
              "nothing pulses on the beat."),
     "They brought a man": dict(
         world="memory",
@@ -210,7 +211,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("white_coats_i", "White Coats I",
-     "Revised: 'We've' now waits for its real entry (2:00.2, after the coats hold 'said'); each 'stab' strikes a hard pencil underline beneath the typed STAB, left there like an annotation; in 'We'll find out how lost she really is' LOST is now the held word; 'with time' has no comma, so the overstruck second 'with time...' ends on its ellipsis. Unchanged: the coats never move (typed on, still, blinked out); FOUND / LOST and SAFE / NICE pairs; ANYTHING, FIND; her tally surfaces during 'with time'.",
+     "Revised: 'We've' now waits for its real entry (2:00.2, after the coats hold 'said'); each 'stab' is hammered on out of line with the orderly 'scribble scribble' (letters knocked askew, landing out of rhythm) and a straight pencil slash is struck beneath it, left there like an annotation; in 'We'll find out how lost she really is' LOST is now the held word; 'with time' has no comma, so the overstruck second 'with time...' ends on its ellipsis. Unchanged: the coats never move (typed on, still, blinked out); FOUND / LOST and SAFE / NICE pairs; ANYTHING, FIND; her tally surfaces during 'with time'.",
     ),
     ("break_i", "Break I",
      "What she foresaw arrives: 'Never again...' lets go and the corridor from her vision becomes the room, with white coats far down it. As the music's top end closes (1:53-1:55) the picture goes soft, dim and quiet with it; the fluorescent tubes strike back on in a stutter on the hits and hold into White Coats I. Includes a second either side for the handoffs. The corridor vision in Refrain I is re-shot from this frame at 1:50.5, so it will update when Refrain I is next rendered.",

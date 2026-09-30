@@ -331,6 +331,18 @@ class Kinetic:
             if v == "coats":                        # no punch, no stretch: clinical
                 for o in placed:
                     o["pop"] = o["stretch"] = False
+            for k in ov.get("jag", ()):              # words knocked out of line; the rows
+                wk = T.lines[n]["words"][k]              # below make room for them
+                for o in placed:
+                    if o["word"]["start"] == wk["start"] and o["word"]["text"] == wk["text"]:
+                        rj = np.random.default_rng(n * 71 + k)
+                        y_row, room = o["y"], 0.3 * o["size"]
+                        for q in placed:
+                            if q["y"] > y_row + 1:
+                                q["y"] += room
+                        o["x"] += rj.uniform(0.04, 0.12) * o["size"]
+                        o["y"] += rj.uniform(0.04, 0.14) * o["size"]
+                        o["jag"] = True
             if ov.get("nocomma"):                    # e.g. 'with time' so the ellipsis lands
                 for o in placed:
                     o["word"]["disp"] = o["word"]["disp"].rstrip(",")
@@ -471,6 +483,8 @@ class Kinetic:
                 word_alpha = 0.0
                 for i, ch in enumerate(txt):
                     cs = ws + i * stagger
+                    if o.get("jag"):                         # hammered on, out of rhythm
+                        cs = ws + i * stagger * 0.5 + 0.09 * _hash01(n, pi, i, 23)
                     if v == "her":
                         u = ease_out(ramp(t, cs - 0.05, cs + 0.32), 3)
                     elif v == "coats":
@@ -528,6 +542,9 @@ class Kinetic:
                     py = o["y"] + ((1 - u) * o["size"] * 0.35 if v == "her" else 0.0) + py_split
                     if v == "coats":                            # hand-set, slightly off
                         px += (_hash01(n, i, 1) - 0.5) * 3.0
+                        if o.get("jag"):                     # knocked out of line
+                            px += (_hash01(n, pi, i, 31) - 0.5) * 0.28 * o["size"]
+                            py += (_hash01(n, pi, i, 32) - 0.5) * 0.34 * o["size"]
                         py += (_hash01(n, i, 2) - 0.5) * 4.0
                     sx = cx + (px - cx) * push * fly * (1 + 0.1 * (z - 1) * age / 6)
                     sy = cy + (py - cy) * push * fly
@@ -549,7 +566,11 @@ class Kinetic:
                     else:
                         sig = (1 - u) * 4 + ex * 6
                     if a > 0.004:
-                        put(kind, sig, (ch, sx, sy, f, sc, a))
+                        if o.get("jag"):
+                            put(kind, sig, (ch, sx, sy, f, sc * (0.9 + 0.25 * _hash01(n, pi, i, 33)), a,
+                                            (_hash01(n, pi, i, 34) - 0.5) * 22))
+                        else:
+                            put(kind, sig, (ch, sx, sy, f, sc, a))
                         if o["role"] in ("word", "hero") and ex < 0.5 and v == "her":
                             halo.append((ch, sx, sy, f, sc, a * 0.9))
                         g_age = t - cs
@@ -570,9 +591,12 @@ class Kinetic:
 
         def mask(ops):
             def draw(c):
-                for ch, x, y, f, sc, a in ops:
+                for op in ops:
+                    ch, x, y, f, sc, a = op[:6]
                     c.save()
                     c.translate(x, y)
+                    if len(op) > 6:                         # a rotated glyph (degrees)
+                        c.rotate(op[6])
                     c.scale(sc, sc)
                     c.drawString(ch, 0, 0, f, skia.Paint(AntiAlias=True,
                                                          Color4f=skia.Color4f(1, 1, 1, min(1, a))))

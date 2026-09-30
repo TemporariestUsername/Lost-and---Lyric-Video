@@ -326,9 +326,9 @@ def break_i(t, T, lines):
 COATS_SHOTS = {
     26: dict(style="track"),
     27: dict(hero=[1, 7]),                                   # FOUND / LOST: the title's axis
-    28: dict(style="stack", hero=5),                         # ...the CHARTS; burns on the stabs
+    28: dict(style="stack", hero=5, jag=[2, 3]),             # ...the CHARTS; the stabs out of line
     29: dict(hero=[2, 5]),                                   # SAFE / NICE: the euphemisms
-    30: dict(style="stack", hero=3),                         # STAB
+    30: dict(style="stack", hero=3, jag=[2, 3]),             # STAB
     31: dict(style="stack", hero=4),                         # how LOST
     32: dict(style="track", hero=1, overstrike=True, nocomma=True),   # with time, typed over itself
     33: dict(style="stack", hero=5),                         # ANYTHING
@@ -380,7 +380,7 @@ def coats(name, photos, seed):
             if b:
                 x0, top, x1, base, size, e0 = b
                 img = look.pencil_underline(img, t, w["start"], x0 + dx * 0.2, x1 + dx * 0.2,
-                                            base + 0.16 * size + dy * 0.2, 50 + k, t_end=e0,
+                                            base + 0.16 * size + 9 + dy * 0.2, 50 + k, t_end=e0,
                                             size=0.9 + 0.8 * (size / 150))
         img = fluorescent(img, t)
         # 'not worth the time': the exposure clips to white for a beat
