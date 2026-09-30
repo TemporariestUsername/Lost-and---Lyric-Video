@@ -65,10 +65,16 @@ SECTIONS = {
              "bleaches to white."),
     "Break I": dict(
         world="institute",
-        visual="A fluorescent hum arrives as flicker. The fog goes cold and "
-               "scratches start to run through the emulsion.",
-        type="No lyric.",
-        sync="Flicker dips on the eighths; scratches thicken bar by bar."),
+        visual="What she foresaw arrives. The corridor that seeped in at the "
+               "end of the refrain becomes the room: cold light, a hospital "
+               "corridor drifting past with white coats far down it. Then "
+               "the music's top end closes and the picture goes soft, dim "
+               "and quiet with it, a held breath, until the fluorescent "
+               "tubes strike back on in a stutter.",
+        type="No lyric. 'Never again...' lets go as the room changes.",
+        sync="The hum and scratches creep in bar by bar; the defocus follows "
+             "the high end closing (113.0-115.1); the tubes strike on the "
+             "hits 115.4, 115.8, 116.1 and hold from the 116.5 downbeat."),
     "White Coats I": dict(
         world="institute",
         visual="Style frame B. Overexposed, cold, humming. She is small and "

@@ -246,17 +246,80 @@ def refrain(name, react):
     return scene
 
 
-def break_institute(t, T, lines):
+# ================================================================ Break I: it arrives
+# What she foresaw arrives. The prophecy's corridor, seeping in at the end
+# of the refrain, becomes the room. Break I shares White Coats I's camera and
+# memory stream, so the prints drift on across the cut; only the light
+# differs. The music drives it (measured on the no-vocals stem):
+#   106.4-113.0  steady groove: cold light, the hum and the scratches creep in
+#   113.0-115.1  the top end fades ~30 dB (a closing filter): the picture
+#                loses its detail the same way, going soft, dim and quiet
+#   115.4-116.5  the highs slam back in a stutter (115.42 tick, 115.84 hit,
+#                116.06, 116.53 downbeat): the tubes strike, then hold
+COATS_I_PHOTOS = ["hospital_corridor", "cinderblock_plate", "stairwell_spiral", "corridor"]
+CLOSE = (113.0, 115.1)
+STRIKE = ((115.42, 0.22), (115.84, 0.75), (116.06, 0.9), (116.53, 1.0))
+
+
+def _tubes(t):
+    """Fluorescent tubes striking: each hit jumps the light up over two
+    frames, then it sags back toward the level of the last hit before."""
+    lvl, prev = 0.0, 0.0
+    for t0, v in STRIKE:
+        if t < t0:
+            break
+        rise = clamp01((t - t0) / 0.07)
+        settle = prev + (v - prev) * 0.55 if v < 1.0 else 1.0
+        peak = prev + (v - prev) * rise
+        lvl = peak if rise < 1 else settle + (v - settle) * math.exp(-9 * (t - t0 - 0.07))
+        prev = settle
+    return lvl
+
+
+def _mix_post(a, b, u):
+    out = {}
+    for k in set(a) | set(b):
+        x, y = a.get(k, b.get(k)), b.get(k, a.get(k))
+        if k == "shadow":
+            c = fx.hexc(x) * (1 - u) + fx.hexc(y) * u
+            out[k] = "#" + "".join(f"{int(round(v * 255)):02X}" for v in c)
+        elif k == "ghosts":
+            out[k] = tuple(tuple(p * (1 - u) + q * u for p, q in zip(g, h)) for g, h in zip(x, y))
+        elif isinstance(x, (int, float)):
+            out[k] = x * (1 - u) + y * u
+        else:
+            out[k] = y if u >= 0.5 else x
+    return out
+
+
+def break_i(t, T, lines):
     s = sec_of(T, "Break I")
-    u = smooth(ramp(t, s["start"], s["end"]))
-    a = base_her(t, T)
-    b = base_institute(t, T)
-    img = a * (1 - u) + b * u
-    img = draw_mems(img, t, mems(T, "Break I", ["hospital_corridor", "facade_windows"], every=1, life=8.0,
-                                 seed=23, keep_left=700))
-    img = look.scratches(img, t, 4 * u)
-    img = fluorescent(img, t, u)
-    return img, post("institute", exposure=0.9 + 0.18 * u)
+    t0 = s["start"]
+    build = smooth(ramp(t, t0, CLOSE[0]))                     # the institute creeping in
+    close = smooth(ramp(t, *CLOSE)) * (1 - smooth(ramp(t, STRIKE[1][0], STRIKE[1][0] + 0.12)))
+    tubes = _tubes(t)
+
+    img = base_institute(t, T)
+    dx, dy, dr = mem.drift(t, seed=61, amp=(18, 10))           # White Coats I's camera
+    img = fx.shift(img, dx * 0.4, dy * 0.4, 0, 1.02)
+    img = draw_mems(img, t, mems(T, "White Coats I", COATS_I_PHOTOS, every=2, life=9.0,
+                                 seed=61, keep_left=1000), offset=(dx, dy))
+    img = look.scratches(img, t, (0.4 + 1.6 * build) * (1 - 0.8 * close))    # ends at White Coats I's 2.0
+    img = fluorescent(img, t, max((0.35 + 0.65 * build) * (1 - close), tubes))
+    img = fx.vignette(img, 0.55 * (0.5 + 0.5 * build), "#5E6A78")
+    if close > 0.01:                                           # the picture loses its highs
+        img = fx.blur(img, 1 + 11 * close)
+        img = img * (1 - 0.12 * close) + fx.hexc("#8E8698") * 0.12 * close
+    g = post("institute", exposure=0.96 + 0.06 * build - 0.1 * close + 0.06 * tubes,   # -> 1.08
+             sat=0.5 + 0.1 * close, diffusion=0.12 + 0.1 * close)
+
+    # the refrain lets go: its last frame and 'Never again...' give way
+    u = smooth(ramp(t, t0, t0 + 1.6))
+    if u < 1:
+        ref, rp = refrain_i(t, T, range(20, 25))
+        img = ref * (1 - u) + img * u
+        g = _mix_post(rp, g, u)
+    return img, g
 
 
 COATS_SHOTS = {

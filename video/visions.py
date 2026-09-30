@@ -2,6 +2,7 @@
 scene can let the future bleed into the present (she is precognitive).
 
     python3 video/visions.py          # (re)render the cache
+    python3 video/visions.py corridor # just one
 """
 import pathlib
 import sys
@@ -17,7 +18,7 @@ CACHE = ROOT / "render" / "visions"
 
 # name -> (time in the film, section whose scene renders it)
 VISIONS = {
-    "corridor": (114.0, "Break I"),
+    "corridor": (110.5, "Break I"),
     "coats": (125.9, "White Coats I"),
     "shafts": (189.6, "Spoken I: I can help you find"),
     "bullet": (262.0, "A gun and a bullet"),
@@ -26,13 +27,15 @@ VISIONS = {
 }
 
 
-def render_all():
+def render_all(only=None):
     from compose import Compositor
     from engine import Timing
     from PIL import Image
     CACHE.mkdir(parents=True, exist_ok=True)
     T = Timing()
     for name, (t, scene) in VISIONS.items():
+        if only and name not in only:
+            continue
         c = Compositor(T)
         img = None
         for k in range(45, -1, -3):                # 1.5 s warm-up so the echo is real
@@ -86,4 +89,4 @@ def approach(img, name, u, strength=0.22):
 
 
 if __name__ == "__main__":
-    render_all()
+    render_all(sys.argv[1:])
