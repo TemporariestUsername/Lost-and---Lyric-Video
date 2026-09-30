@@ -939,9 +939,9 @@
    "text": "Stay lost now girl (forever, forever)",
    "stanza": 2,
    "start": 84.15,
-   "end": 89.29,
+   "end": 89.2,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Stay",
@@ -974,14 +974,14 @@
     {
      "text": "forever,",
      "start": 86.53,
-     "end": 88.75,
+     "end": 87.55,
      "matched": true,
      "backing": true
     },
     {
      "text": "forever",
-     "start": 88.75,
-     "end": 89.29,
+     "start": 88.1,
+     "end": 89.2,
      "matched": true,
      "backing": true
     }

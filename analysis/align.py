@@ -154,6 +154,12 @@ def main():
         for t, s0, s1 in zip(ws, edges[:-1], edges[1:]):
             t.update(start=round(float(s0), 3), end=round(float(s1), 3),
                      matched=True, pinned=True)
+    # Word pins: {line: {word index: [start, end]}} where Whisper's word
+    # edges (each word ending where the next starts) swallow real gaps.
+    for ln, wmap in pins.get("words", {}).items():
+        ws = [t for t in C if t["line"] == int(ln)]
+        for wi, (a, b) in wmap.items():
+            ws[int(wi)].update(start=round(a, 3), end=round(b, 3), matched=True, pinned=True)
 
     # Per-line summary + gap report (backing vocals excluded from support).
     out_lines, gaps = [], []
