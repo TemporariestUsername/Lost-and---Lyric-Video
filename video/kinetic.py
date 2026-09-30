@@ -405,7 +405,8 @@ class Kinetic:
             opts = p.get("opts", {})
             fk = opts.get("foreknow", 0.0)
             dissolve = opts.get("exit") == "dissolve"
-            if t < a0 - 0.1 - fk or t > e0 + (1.8 if dissolve else 1.2 if v == "her" else 0.9):
+            linger = 3.2 if opts.get("split_second") else 1.8 if dissolve else 1.2 if v == "her" else 0.9
+            if t < a0 - 0.1 - fk or t > e0 + linger:
                 continue
             ex_len = {"her": 0.55, "coats": 0.28, "him": 0.9}[v]   # coats: gone before the next types
             ex = smooth(ramp(t, e0, e0 + ex_len))
@@ -479,9 +480,10 @@ class Kinetic:
                         a = 0.0 if gone else base_a
                         fl = 0.82 + 0.18 * _hash01(n, i, int(t * 30))
                         a *= fl
-                    elif o.get("split"):                        # won't be unwritten; thrown
-                        fl = p["split_fling"]
-                        a = u * base_a * (1 - smooth(ramp(t, fl + 0.1, fl + 0.5)))
+                    elif o.get("split"):                        # outlasts the line, then is
+                        fl = p["split_fling"]                   # unwritten slowly, last of all
+                        gt = fl + 1.1 * _hash01(n, pi, i, 17)
+                        a = u * base_a * (1 - smooth(ramp(t, gt, gt + 0.9)))
                         ex = 0.0
                     elif dissolve:                              # unwritten, letter by letter
                         if o["role"] == "backing":             # the echoes outlast her words
@@ -505,11 +507,10 @@ class Kinetic:
                     if i == 0:
                         word_alpha = a / max(base_a, 1e-3) if v in ("coats", "her") else u * (1 - ex)
                     px = o["x"] + xs[i] + drift_x
-                    if o.get("split"):                      # peels away, drifts, is flung
+                    if o.get("split"):                      # peels away and drifts, slowly
                         g = t - w["start"]
-                        fl = p["split_fling"]
-                        px += 150 * ease_out(clamp01(g / 2.2), 2) + 2600 * clamp01((t - fl) / 0.45) ** 2
-                        py_split = -26 * ease_out(clamp01(g / 2.2), 2) - 500 * clamp01((t - fl) / 0.45) ** 2
+                        px += 95 * ease_out(clamp01(g / 3.5), 2)
+                        py_split = -30 * ease_out(clamp01(g / 3.5), 2)
                     else:
                         py_split = 0.0
                     py = o["y"] + ((1 - u) * o["size"] * 0.35 if v == "her" else 0.0) + py_split

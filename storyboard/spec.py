@@ -203,7 +203,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("refrain_forever", "Refrain I: Stay lost now girl",
-     "Revised: the second 'forever' peels off the first as a copy, won't be unwritten with the rest, drifts away, and is flung out on the first beat of 'throw away'. The full Refrain I clip below has the old version of this moment.",
+     "Revised: the second 'forever' peels off the first as a copy, drifts slowly, outlasts the rest of the line, and is the last thing unwritten, letter by letter, as 'Throw away everything' arrives. The full Refrain I clip below has the old version of this moment.",
      (84.15, 92.5)),
     ("refrain_i", "Refrain I: Stay lost now girl",
      "Rebuilt as prophecy: she sees the future and tries to unmake it. Words appear faintly before they are sung; 'stay lost' is unwritten letter by letter; the memories are thrown out; the line rewinds and snaps forward on each 'again' with flashes of the future; 'forever again' recedes in a beat-stepped tunnel; a cold stop on 'Never'. Revised: calmer motion (lines drift and are unwritten, never float toward the viewer), a slow continuous tunnel, tally marks moved left. Web copy at 720p; the 1080p master passed QA and ffprobe."),
