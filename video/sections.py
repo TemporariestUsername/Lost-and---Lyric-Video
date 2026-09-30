@@ -401,7 +401,9 @@ def coats(name, photos, seed):
         if jolt > 0.01:
             img = fx.shift(img, jx, jy)
         img = img + np.float32(0.8) * clip
-        return img, post("institute", exposure=1.08 + 0.4 * clip - 0.1 * jolt)
+        # (the echo trail is cut on a stab so the word hits at full strength on its first frame)
+        return img, post("institute", exposure=1.08 + 0.4 * clip - 0.1 * jolt,
+                         trail=POST["institute"]["trail"] * (1 - jolt))
     return scene
 
 
