@@ -322,8 +322,25 @@ class Kinetic:
             if v != "him":
                 for o in placed:                    # alternate lines sit a little high / low
                     o["y"] += 55 if n % 2 else -55
-            self.plan[n] = dict(placed=placed, style=style, voice=v,
-                                life=_lifetime(T, n, self.lines, hold))
+            if ov.get("backing_at"):                 # echoes placed on their own
+                bx, by, bs = ov["backing_at"]
+                for o in placed:
+                    if o["role"] == "backing":
+                        o.update(x=bx, y=by, size=bs, key=VOICES[v][0])
+                        bx += font(o["key"], bs).measureText(o["word"]["disp"]) + bs * 0.3
+            for o in placed:
+                if o["role"] == "hero" and ov.get("ghost_second") and o.get("pop"):
+                    o["pop"], o["ghost"] = False, True
+            plan = dict(placed=placed, style=style, voice=v, opts=ov,
+                        life=_lifetime(T, n, self.lines, hold))
+            if ov.get("rewind"):
+                order = sorted(((o["word"]["start"], pi, i) for pi, o in enumerate(placed)
+                                if o["role"] in ("word", "hero") for i in range(len(o["word"]["disp"]))))
+                stop = max(k for k, (_, pi, _i) in enumerate(order)
+                           if placed[pi]["role"] == "hero") + 1
+                plan["rw_order"] = [(pi, i) for _, pi, i in order]
+                plan["rw_keep"] = stop                # never un-type the hero or before it
+            self.plan[n] = plan
         self._separate()
 
     @staticmethod
@@ -371,10 +388,22 @@ class Kinetic:
             p = self.plan[n]
             v = p["voice"]
             a0, e0 = p["life"]
-            if t < a0 - 0.1 or t > e0 + 0.9:
+            opts = p.get("opts", {})
+            fk = opts.get("foreknow", 0.0)
+            dissolve = opts.get("exit") == "dissolve"
+            if t < a0 - 0.1 - fk or t > e0 + (1.8 if dissolve else 0.9):
                 continue
             ex_len = {"her": 0.55, "coats": 0.28, "him": 0.9}[v]   # coats: gone before the next types
             ex = smooth(ramp(t, e0, e0 + ex_len))
+            lead_end = max(w["end"] for w in self.T.lines[n]["words"] if not w["backing"])
+            hidden = set()
+            rw = opts.get("rewind")
+            if rw and t >= rw["start"]:               # un-type backwards; each snap restores
+                seg = max(s_ for s_ in [rw["start"]] + list(rw.get("snaps", ())) if s_ <= t)
+                k = int(rw.get("rate", 30) * (t - seg))
+                order = p["rw_order"]
+                k = min(k, len(order) - p["rw_keep"])
+                hidden = set(order[len(order) - k:]) if k > 0 else set()
             age = t - a0
             cx, cy = BOX[0] + 120, (BOX[1] + BOX[3]) / 2
             if v == "her":
@@ -387,7 +416,7 @@ class Kinetic:
                 cx, cy = W / 2, 830
                 push, fly = 1.0 + 0.004 * min(age, 8), 1.0
             kind = {"her": "lit" if self.light else "ink", "coats": "coat", "him": "warm"}[v]
-            for o in p["placed"]:
+            for pi, o in enumerate(p["placed"]):
                 w = o["word"]
                 txt = w["disp"] if (o["role"] != "ghost_hero" or v != "her") else w["disp"].lower()
                 f = font(o["key"], o["size"])
@@ -408,6 +437,10 @@ class Kinetic:
                 if v != "her":
                     drift_x = 0.0
                 base_a = {"ghost_hero": 0.2 if v == "her" else 0.12, "backing": 0.6}.get(o["role"], 1.0)
+                if o["role"] == "backing" and opts.get("backing_alpha"):
+                    base_a = opts["backing_alpha"]
+                if o.get("ghost"):                      # a word that seeps back rather than lands
+                    base_a = 0.42
                 word_alpha = 0.0
                 for i, ch in enumerate(txt):
                     cs = ws + i * stagger
@@ -418,16 +451,32 @@ class Kinetic:
                     else:
                         u = ease_out(ramp(t, cs - 0.03, cs + 0.14), 2)
                     if u <= 0.001:
+                        if fk and t >= a0 - fk and v == "her":   # she already knows the words
+                            pa = 0.16 * smooth(ramp(t, a0 - fk, a0 - fk + 0.6)) * \
+                                (0.55 if o["role"] == "backing" else 1.0)
+                            psx = cx + (o["x"] + xs[i] - cx) * push + cam[0] * z
+                            psy = cy + (o["y"] - cy) * push + cam[1] * z
+                            put(kind, 7, (ch, psx, psy, f, push, pa))
+                        continue
+                    if (pi, i) in hidden:
                         continue
                     if v == "coats":                            # blink out letter by letter
                         gone = t >= e0 + ex_len * _hash01(n, i, len(txt), 7)
                         a = 0.0 if gone else base_a
                         fl = 0.82 + 0.18 * _hash01(n, i, int(t * 30))
                         a *= fl
+                    elif dissolve:                              # unwritten, letter by letter
+                        if o["role"] == "backing":             # the echoes outlast her words
+                            dis = smooth(ramp(t, e0 + 0.2, e0 + 0.9))
+                        else:
+                            gt = lead_end + 0.35 + 1.3 * _hash01(n, pi, i, 11)
+                            dis = smooth(ramp(t, gt, gt + 0.5))
+                        a = u * (1 - dis) * base_a
+                        ex = 0.0
                     else:
                         a = u * (1 - ex) * base_a
                     if i == 0:
-                        word_alpha = a if v == "coats" else u * (1 - ex)
+                        word_alpha = a if (v == "coats" or dissolve) else u * (1 - ex)
                     px = o["x"] + xs[i] + drift_x
                     py = o["y"] + ((1 - u) * o["size"] * 0.35 if v == "her" else 0.0)
                     if v == "coats":                            # hand-set, slightly off
@@ -442,8 +491,13 @@ class Kinetic:
                         pop = 1 + 0.12 * math.exp(-7 * (t - w["start"]))
                         sx += xs[i] * push * (pop - 1)
                         sc *= pop
-                    if v == "her":
+                    if dissolve and v == "her":
+                        sig = (1 - u) * 9 + 16 * (1 - a / max(base_a * u, 1e-3))
+                        sy -= 34 * (1 - a / max(base_a * u, 1e-3))
+                    elif v == "her":
                         sig = (1 - u) * 9 + ex * 16 + (4 if o["role"] == "ghost_hero" else 0)
+                        if o.get("ghost"):
+                            sig += 5
                     elif v == "coats":
                         sig = 0.8 + (3 if o["role"] == "ghost_hero" else 0)
                     else:

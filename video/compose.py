@@ -150,7 +150,7 @@ SCENES = {
     "Intro": (S.intro, range(0)),
     "Verse A: Through eyes": (verse_a, range(1, 10)),
     "There comes a once": (S.there_comes_a_once, range(11, 19)),
-    "Refrain I: Stay lost now girl": (S.refrain("Refrain I: Stay lost now girl", True), range(20, 25)),
+    "Refrain I: Stay lost now girl": (S.refrain_i, range(20, 25)),
     "Break I": (S.break_institute, range(0)),
     "White Coats I": (S.coats("White Coats I", ["hospital_corridor", "cinderblock_plate", "stairwell_spiral", "corridor"], 61), range(26, 36)),
     "They brought a man": (S.brought_a_man, range(37, 43)),

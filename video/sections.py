@@ -497,3 +497,101 @@ def outro(t, T, lines):
     if t < s["end"] - 3.0:
         p["bullet"] = (1470, 925, 1.9)
     return img, p
+
+
+# ================================================================ Refrain I: prophecy
+# She is precognitive. The refrain comes before the story happens: she has
+# seen the future (every branch loses him) and tells herself to stay
+# unfindable, speaking of it in the past tense because to her it is done.
+# Erasure against recurrence: her words try to unmake it; the echoes and
+# the future keep writing it back.
+REFRAIN_I_SHOTS = {
+    20: dict(style="stack", hero=1, foreknow=1.0, exit="dissolve",          # stay lost: unwritten
+             backing_at=(560, 330, 64), backing_alpha=0.8),
+    21: dict(style="stack", hero=4),                                           # throw away
+    22: dict(style="stack", hero=2, foreknow=0.5,                              # the failed rewind
+             rewind=dict(start=96.0, snaps=(96.23, 96.79), rate=32),
+             backing_at=(620, 300, 92), backing_alpha=0.85),
+    23: dict(hero=[0, 1]),                                                     # forever / again
+    24: dict(hero=[0, 1], ghost_second=True),                                  # never / again...
+}
+_FEEDBACK = {}
+
+
+def refrain_i(t, T, lines):
+    name = "Refrain I: Stay lost now girl"
+    s = sec_of(T, name)
+    import visions as V
+    L = {n: T.lines[n] for n in lines}
+    kick = T.pulse_env(t, 6.0)
+    pulses = [p for p in T.pulses if L[21]["start"] <= p < L[21]["end"]]
+    stop = L[24]["start"]                                      # the hard stop
+
+    # the failed rewind runs the whole picture backwards, snapping forward on each 'again'
+    rw = REFRAIN_I_SHOTS[22]["rewind"]
+    bg_t = t
+    if rw["start"] <= t < L[23]["start"]:
+        seg = max(x for x in [rw["start"]] + list(rw["snaps"]) if x <= t)
+        bg_t = seg - (t - seg) * 1.6
+    frozen = t >= stop
+    tt = stop if frozen else bg_t
+
+    dx, dy, dr = mem.drift(tt, seed=5)
+    img = base_her(tt, T)
+    img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, 1.03 + 0.02 * kick * (not frozen))
+    warm = 0.35 * (1 - smooth(ramp(t, L[21]["start"], L[21]["end"])))  # his warmth thrown out
+    photos = ["curtain_window", "rain_window", "doorway_figure", "car_window_night"]
+    ms = mems(T, name, photos, every=2, life=9.0, seed=17, keep_left=900)
+    for k, m in enumerate(ms):
+        # 'throw away everything he found': each memory is flung out on a pulse
+        fling = 0.0
+        if pulses and m.t0 < pulses[-1]:
+            p0 = pulses[k % len(pulses)]
+            fling = 2600 * clamp01((t - p0) / 0.45) ** 2
+        img = m.draw(img, tt, warm=warm, offset=(dx + fling, dy - 0.25 * fling))
+    img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.3)
+
+    # glimpses of the future
+    img = V.glimpse(img, t, "corridor", L[20]["start"] + 0.2, strength=0.16, hold=1.6, decay=1.5)
+    for k, p0 in enumerate(pulses):                            # thrown out among the photos
+        img = V.glimpse(img, t, ["coats", "bullet", "run", "shafts"][k % 4], p0, strength=0.42,
+                        hold=0.12, decay=0.45)
+    for k, s0 in enumerate(rw["snaps"]):                       # each 'again' flashes it back
+        img = V.glimpse(img, t, ["cutting", "bullet"][k], s0, strength=0.5, hold=0.1, decay=0.5)
+
+    # 'Forever again': a feedback tunnel, the past receding as the future approaches
+    t0, t1 = L[23]["start"], stop
+    if t0 <= t < t1:
+        bars = [b for b in T.bars if t0 - 0.5 <= b < t1]
+        bi = max([i for i, b in enumerate(bars) if b <= t], default=0)
+        b0 = bars[bi] if bars else t0
+        b1 = bars[bi + 1] if bi + 1 < len(bars) else t1
+        img = V.approach(img, ["shafts", "run", "cutting", "bullet"][bi % 4],
+                         clamp01((t - b0) / max(0.1, b1 - b0)), strength=0.24)
+    img = kin(T, name, lines, REFRAIN_I_SHOTS).draw(img, t, cam=(dx * 0.35, dy * 0.35),
+                                                    kick=0.0 if frozen else kick)
+    if t0 <= t < t1:
+        fb = _FEEDBACK.get(name)
+        if fb is not None:
+            sc = 0.93 - 0.025 * kick
+            rot = 1.2 if int((t - t0) / 1.7) % 2 == 0 else -1.2
+            M = cv2.getRotationMatrix2D((W / 2, H / 2 - 40), rot, sc)
+            warped = cv2.warpAffine(fb, M, (W, H), flags=cv2.INTER_LINEAR,
+                                    borderMode=cv2.BORDER_REPLICATE)
+            ramp_in = smooth(ramp(t, t0, t0 + 0.8))
+            img = img - 0.62 * ramp_in * np.clip(img - warped, 0, None)   # darker copies recede
+        _FEEDBACK[name] = img.copy()
+    elif t >= t1:
+        _FEEDBACK.pop(name, None)
+
+    # 'Never again...': clean and cold; then the future seeps in from the edges
+    g = post("her", exposure=0.92, sat=0.85)
+    if frozen:
+        seep = smooth(ramp(t, L[24]["words"][1]["start"] + 0.2, s["end"] + 0.3))
+        yy, xx = fx._yy_xx()
+        edge = np.clip((np.maximum(np.abs(xx - W / 2) / (W / 2), np.abs(yy - H / 2) / (H / 2))
+                        - (1 - seep)) / 0.35, 0, 1)
+        v = V.load("corridor")
+        img = img * (1 - 0.55 * edge[..., None]) + v * 0.55 * edge[..., None]
+        g.update(sat=0.45, exposure=0.95)
+    return img, g
