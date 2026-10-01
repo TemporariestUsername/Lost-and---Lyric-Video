@@ -225,6 +225,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("break_ii", "Break II",
+     "His three shafts stay after his words and breathe slowly (over two bars, not on the beat). Dust drifts down inside them; when she answers with a wordless held note (3:24.4) it turns gold and lifts. Just before the coats return on 'But', one flicker of the future: the shafts being cut.",
+    ),
     ("spoken_i", "Spoken I: I can help you find",
      "Near-dark, only his light. Three shafts pour down as he names protecting, trusting and believing, and each virtue sits in its own shaft, lit by it (the same shafts are cut in The Cutting). His words are light and perfectly still: no drift, no ghost copies. 'Even if they're very hard to find' sits apart, small. The spoken words are re-timed to when he actually says them ('I' at 3:04.0, 'trusting' 3:07.45, 'even' 3:11.05).",
     ),
