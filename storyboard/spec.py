@@ -187,18 +187,14 @@ SECTIONS = {
              "the “But...” freeze."),
     "But...": dict(
         world="void",
-        visual="Everything stops. The run freezes on the downbeat under "
-               "“But...” and bleaches to white over one bar; “But...”, "
-               "written in her light, dissolves into the white with it. Then dark "
-               "ink on the white: forever, the run's word, ends, and the end is "
-               "the coats'. On “bend” one hard, cold sweep of light; her "
-               "tally comes back: their count resumes in the silence before they "
-               "speak.",
-        type="BUT... alone in her light; then her ink: FOREVER... opening, "
-             "“always comes to an” END; “when the” COATS “come round "
-             "the” BEND. END and COATS in the coats' grey type, as EVER was.",
-        sync="The freeze lands on the 5:17.86 downbeat; the sweep on "
-             "“bend”."),
+        visual="Her prophecy comes true. The run keeps moving (the band never "
+               "stops) but time comes back: the uncounted bars scratch in. The "
+               "warm lights go out one by one; in the dark the coats arrive as "
+               "cold light round a bend and swell into their white.",
+        type="BUT... in her light; FOREVER... lets go and only the coats' END "
+             "stays; “when the” COATS “come round the bend”.",
+        sync="A mark per eighth note from “But”; a light out on each "
+             "sparse hit; the flood swells from “bend” with the band."),
     "White Coats III": dict(
         world="institute",
         visual="Back in the white. The scratches now cut across the spot "
@@ -254,7 +250,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("but", "But...",
-     "Heavier: the run freezes on the downbeat under 'But...' (in her light, dissolving) and drains to a cold, heavy white, not a clean one. 'But FOREVER... always comes to an' END, with END and COATS now in the coats' darkest ink, bold, near-black. From END the white closes in: the edges darken, and they darken further from COATS, holding through the cold sweep on 'bend' and into the silence, while her tally marks come back. Their count resumes in the dark.",
+     "Rebuilt: the one moment her prophecy comes true. The band never stops, so neither does the run; time comes back instead. On 'But...' her tally returns and the bars the run didn't count scratch back in, one per eighth note. On the sparse hits of 'forever always comes to an end' the run's warm lights go out one by one, leaving the darkest frame in the film; FOREVER and the rest let go and only the coats' END stays. In the dark the coats arrive as cold light swinging in from the right, round a bend (one flicker of the 'coats' vision she saw in Refrain I as it turns toward us), and it swells with the band into their white, so White Coats III begins inside it, her count standing in it.",
     ),
     ("the_run", "The Run",
      "The one time they are free. Warm and fast, but nothing pulses and nothing comes at the viewer: speed is sideways (long-exposure streaks, motel and diner photographs rushing past, light trails behind her words). No tally marks: time isn't counted here. four 'ran's (no ellipses) scattered across the frame; FOREVER / EVER; TUNNEL / MOTEL; 'lost' turns good (LOST / LOST, lost in each OTHER); FOUND with its echo. Then the title is sung outright: 'lost and found' set plainly in the title's place, and its words slide past each other into 'found and lost...'. 'Forever and ever and ever' steps down and lets go before 'But...'.",

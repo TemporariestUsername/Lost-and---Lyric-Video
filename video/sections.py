@@ -741,67 +741,121 @@ def the_run(t, T, lines):
 
 
 # ================================================================ But...
-# Everything stops. The run freezes on the downbeat under 'But...' and
-# bleaches to white; 'But...', written in her light, dissolves into the white
-# with it. Then dark ink on the white: forever, the run's word, ends, and the
-# end is the coats' (END and COATS in their grey type, as EVER was). On
-# 'bend' one hard cold sweep of light; their count resumes (the tally comes
-# back) in the silence before they speak.
-BUT_I_SHOTS = {78: dict(set=[([0], 2.6, 60)], dy=-230)}                       # BUT... alone, in her light
+# The one moment her prophecy comes true. The band never stops, so neither
+# does the run: time comes back instead (the uncounted bars of the run
+# scratch back in at once), the warm lights go out one by one on the sparse
+# hits of 'forever always comes to an end', and in the dark the coats arrive
+# as cold light swinging round a bend, swelling with the band into their
+# white so White Coats III begins inside it.
+BUT_I_SHOTS = {78: dict(set=[([0], 2.6, 430)], dy=-120)}               # BUT... in her light
 BUT_SHOTS = {
-    80: dict(dy=130, exit_at=325.9,                                      # lower left, held so END
-             set=[([0], 1.0, 0), ([1], 2.3, 30, {"stretch": True}),     # can be read: but FOREVER...
-                  ([2, 3, 4, 5], 1.0, 60),                             # always comes to an
-                  ([6], 2.3, 60, {"voice": "coats", "kind": "coatdark", "key": "coats_bold"})]),   # END
-    81: dict(dy=-250, no_separate=True,                                  # upper right, beside it
+    80: dict(dy=265, exit_at=325.9,                                      # lower left: but FOREVER...
+             set=[([0], 1.0, 0), ([1], 2.3, 30, {"stretch": True}),     # always comes to an END
+                  ([2, 3, 4, 5], 1.0, 60),
+                  ([6], 2.3, 60, {"voice": "coats", "key": "coats_bold"})],
+             diffuse=dict(keep=[6], after=6, delay=0.35, dur=2.0)),     # all but END lets go
+    81: dict(dy=-250, no_separate=True,                                  # upper right
              set=[([0, 1], 1.0, 560),                                  # when the
-                  ([2], 2.3, 560, {"voice": "coats", "kind": "coatdark", "key": "coats_bold",
-                                   "bare": True}),                     # COATS
-                  ([3, 4, 5], 1.0, 600), ([6], 2.2, 600)]),            # come round the BEND
+                  ([2], 2.3, 560, {"voice": "coats", "key": "coats_bold", "bare": True}),   # COATS
+                  ([3, 4, 5], 1.0, 600), ([6], 2.2, 600)]),            # come round the bend
 }
+RUN_PHOTOS = ["tunnel_lights", "light_trails", "no_vacancy", "highway_trails", "open_sign",
+              "gas_station", "tunnel_dark", "parking_rain", "streets_night", "dusk_drive"]
+
+
+def _lights_out_hits(T):
+    """The sparse hits under 'forever always comes to an end' (no-vocals stem):
+    one warm light goes out on each."""
+    def find():
+        import librosa
+        from engine import ROOT
+        y, sr = librosa.load(str(ROOT / "render" / "stems" / "htdemucs" / "lost_and" / "no_vocals.wav"),
+                             sr=22050, offset=320.0, duration=4.4)
+        env = librosa.onset.onset_strength(y=y, sr=sr, hop_length=256)
+        on = librosa.onset.onset_detect(onset_envelope=env, sr=sr, hop_length=256, units="time", delta=0.25)
+        strong = sorted(((float(env[int(x * sr / 256)]), float(x) + 320.0) for x in on), reverse=True)
+        picked = []
+        for _, x in strong:
+            if all(abs(x - q) > 0.55 for q in picked):
+                picked.append(x)
+            if len(picked) == 5:
+                break
+        return sorted(picked)
+    try:
+        return cached(("but_hits",), find)
+    except Exception:
+        return [320.5, 321.5, 322.5, 323.0, 324.0]
 
 
 def but(t, T, lines):
     name = "But..."
     s = sec_of(T, name)
-    t_but = float(min((b for b in T.bars if b >= T.lines[78]["start"]), default=T.lines[78]["start"]))
-    bar = 60 / 70.2 * 4
-    frozen = min(t, t_but)                                     # everything stops on the downbeat
-    drain = smooth(ramp(t, t_but, t_but + bar))
-    img = base_night(frozen, T, tally=False, lift=0.9) + hexc("#3A2210") * 0.3
-    dx, dy, dr = mem.drift(frozen, seed=13, amp=(60, 26))
-    img = fx.shift(img, dx, dy, dr, 1.04)
-    img = draw_mems(img, t, mems(T, "The Run", ["tunnel_lights", "light_trails", "no_vacancy",
-                                                  "highway_trails", "open_sign", "gas_station",
-                                                  "tunnel_dark", "parking_rain", "streets_night",
-                                                  "dusk_drive"], every=1, life=6.5, seed=43,
-                                 keep_left=900), freeze=t_but, offset=(dx * 1.5, dy),
-                    warm=0.35 * (1 - drain))
-    img = streaks(img, 0.8 * (1 - drain))
-    # 'But...' in her light, frozen with the run, dissolving into the white
-    img = kin(T, "But...#light", [78], BUT_I_SHOTS, light=True, hold=0.0).draw(img, t)
-    L = img.mean(-1, keepdims=True)
-    cold_white = np.array([0.95, 0.975, 1.0], np.float32)
-    img = img * (1 - drain) + (L * 0.22 + 0.66) * cold_white * drain   # drains to a cold, heavy white
-    # from END the white closes in: the edges darken and stay dark into the silence
+    t_but = T.lines[78]["start"]
+    hits = _lights_out_hits(T)
+    # warmth: 1 through 'But...', then one step down per hit (each light gutters out)
+    warmth = 1.0
+    for k, h in enumerate(hits):
+        step = 1.0 / len(hits)
+        warmth -= step * smooth(clamp01((t - h) / 0.35))
     end_t = word_at(T, 80, "end")
-    close = 0.0 if end_t is None else smooth(ramp(t, end_t, end_t + 2.2))
-    coats_t = word_at(T, 81, "coats")
-    close = max(close, 0.0 if coats_t is None else 1.4 * smooth(ramp(t, coats_t, coats_t + 2.5)))
-    if close > 0.01:
-        img = fx.vignette(img, 0.25 + 0.45 * close, "#1A1D22")
-        img = img * (1 - 0.1 * close)
-    # 'round the bend': one hard cold sweep of light
+    when_t = T.lines[81]["start"]
     bend = word_at(T, 81, "bend")
-    if bend is not None and t >= bend - 0.3:
-        u = clamp01((t - bend + 0.3) / 1.4)
-        xx = fx._yy_xx()[1]
-        sweep = np.exp(-((xx - (-400 + 2800 * u)) / 260) ** 2) * (1 - u) * 0.9
-        img = img + np.array([0.85, 0.92, 1.0], np.float32) * sweep[..., None]
-        # and their count starts again
-        img = look.tally(img, t, T, alpha=0.35 * smooth(ramp(t, bend, bend + 2.5)), blur=2.5)
-    img = kin(T, name, [n for n in lines if n != 78], BUT_SHOTS, hold=3.0).draw(img, t)
-    return img, post("bleach", exposure=0.95 + 0.05 * drain, ghosts=())
+    flood = smooth(ramp(t, bend, s["end"] - 0.1))                       # their white, with the band
+
+    # the run, still moving (as The Run's scene), its warmth draining
+    dx, dy, dr = mem.drift(t, seed=13, amp=(60, 26))
+    dark = np.array(hexc("#14161C"), np.float32)
+    img = base_night(t, T, tally=False, lift=0.9 * (0.4 + 0.6 * warmth))
+    img = img + hexc("#3A2210") * 0.3 * warmth
+    img = fx.shift(img, dx, dy, dr, 1.04)
+    bg = img
+    lit = draw_mems(img, t, mems(T, "The Run", RUN_PHOTOS, every=1, life=6.5, seed=43, keep_left=900),
+                    offset=(dx * 1.5, dy), warm=0.35)
+    img = bg + (lit - bg) * warmth                                       # the lights go out
+    img = streaks(img, (0.8 + 0.15 * math.sin(t * 0.9)) * warmth)
+    img = fx.light_leak(img, t, "right", color="#FFB35A", strength=0.32 * warmth)
+    img = img * (0.55 + 0.45 * warmth) + dark * (1 - warmth) * 0.45    # cold dark left behind
+
+    # the coats round the bend: a cold light swinging in from the right
+    if t >= when_t - 0.5:
+        u = smooth(ramp(t, when_t - 0.5, bend + 0.4))
+        yy, xx = fx._yy_xx()
+        cx = W + 500 - 900 * u
+        cy = H * 0.45
+        r = 380 + 520 * u
+        beam = np.exp(-(((xx - cx) / r) ** 2 + ((yy - cy) / (r * 0.75)) ** 2))
+        img = img + np.array([0.80, 0.88, 1.0], np.float32) * (beam * (0.25 + 0.55 * u))[..., None]
+    import visions as V
+    if bend is not None:                                                 # the vision she had, fulfilled
+        img = V.glimpse(img, t, "coats", bend, strength=0.32, hold=0.12, decay=0.6)
+
+    # her words (light); END and COATS in their cold type
+    img = kin(T, "But...#light", [78], BUT_I_SHOTS, light=True, hold=0.0).draw(img, t)
+    img = kin(T, name, [n for n in lines if n != 78], BUT_SHOTS, light=True, hold=3.0).draw(img, t)
+
+    # the flood of their white, so White Coats III begins inside it
+    if flood > 0:
+        white = np.array([0.86, 0.89, 0.93], np.float32)
+        img = img * (1 - flood) + white * flood
+
+    # time comes back: the run's uncounted bars scratch in, one per eighth note
+    n_now = T.since(T.bars, t)[0] + 1
+    n_run = T.since(T.bars, sec_of(T, "The Run")["start"])[0] + 1
+    eighth = 60 / 70.2 / 2
+    if t >= t_but:
+        k = int((t - t_but) / eighth) + 1
+        cnt = min(n_now, n_run + k)
+        catching = cnt < n_now
+        a_t = 0.85 * (1 - 0.45 * smooth(ramp(t, end_t or t_but, (end_t or t_but) + 3)))
+        a_t *= smooth(ramp(t, t_but, t_but + 0.9))                      # the old count returns
+        col = hexc("#C9C2CF") * (1 - flood) + hexc("#1C1E24") * flood   # light in the dark, ink on white
+        img = look.tally(img, t, T, count=cnt if catching else None, alpha=a_t, color=col,
+                         blur=1.0, fade=1.0)
+    p = post("run")
+    p = _mix_post(p, post("night"), 1 - warmth)
+    p = _mix_post(p, post("institute", exposure=1.02), flood)
+    p["ghosts"] = ()
+    return img, p
 
 
 CUT_SHOTS = {94: dict(style="stack", hero=4), 95: dict(style="stack", hero=4),
