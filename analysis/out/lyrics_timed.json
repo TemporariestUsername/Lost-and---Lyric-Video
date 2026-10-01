@@ -3518,15 +3518,15 @@
    "line": 78,
    "text": "But\u2026",
    "stanza": 10,
-   "start": 318.0,
-   "end": 319.4,
+   "start": 317.65,
+   "end": 319.8,
    "support": 1.0,
    "pinned": true,
    "words": [
     {
      "text": "But\u2026",
-     "start": 318.0,
-     "end": 319.4,
+     "start": 317.65,
+     "end": 319.8,
      "matched": true,
      "backing": false
     }
@@ -3536,23 +3536,23 @@
    "line": 80,
    "text": "But forever... always comes to an end,",
    "stanza": 11,
-   "start": 319.58,
+   "start": 319.86,
    "end": 324.27,
-   "support": 0.86,
-   "pinned": false,
+   "support": 1.0,
+   "pinned": true,
    "words": [
     {
      "text": "But",
-     "start": 319.58,
-     "end": 320.98,
+     "start": 319.86,
+     "end": 320.2,
      "matched": true,
      "backing": false
     },
     {
      "text": "forever...",
-     "start": 320.98,
-     "end": 321.245,
-     "matched": false,
+     "start": 320.28,
+     "end": 321.4,
+     "matched": true,
      "backing": false
     },
     {
@@ -3596,15 +3596,15 @@
    "line": 81,
    "text": "when the coats... come round the bend.",
    "stanza": 11,
-   "start": 324.39,
+   "start": 324.65,
    "end": 327.41,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "when",
-     "start": 324.39,
-     "end": 325.01,
+     "start": 324.65,
+     "end": 325.0,
      "matched": true,
      "backing": false
     },

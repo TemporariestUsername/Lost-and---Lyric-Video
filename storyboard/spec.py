@@ -187,12 +187,18 @@ SECTIONS = {
              "the “But...” freeze."),
     "But...": dict(
         world="void",
-        visual="Everything freezes: the exposure echo holds the last frame. "
-               "Over one bar it bleaches to white. The coats come "
-               "“round the bend” as a single hard, cold sweep of "
-               "light.",
-        type="“But…” held alone for the whole pause.",
-        sync="The freeze lands exactly on the “But” onset."),
+        visual="Everything stops. The run freezes on the downbeat under "
+               "“But...” and bleaches to white over one bar; “But...”, "
+               "written in her light, dissolves into the white with it. Then dark "
+               "ink on the white: forever, the run's word, ends, and the end is "
+               "the coats'. On “bend” one hard, cold sweep of light; her "
+               "tally comes back: their count resumes in the silence before they "
+               "speak.",
+        type="BUT... alone in her light; then her ink: FOREVER... opening, "
+             "“always comes to an” END; “when the” COATS “come round "
+             "the” BEND. END and COATS in the coats' grey type, as EVER was.",
+        sync="The freeze lands on the 5:17.86 downbeat; the sweep on "
+             "“bend”."),
     "White Coats III": dict(
         world="institute",
         visual="Back in the white. The scratches now cut across the spot "

@@ -740,34 +740,56 @@ def the_run(t, T, lines):
     return img, post("run")
 
 
-BUT_SHOTS = {78: dict(style="stack", hero=0), 80: dict(style="track", hero=1),
-             81: dict(style="stack", hero=6)}
+# ================================================================ But...
+# Everything stops. The run freezes on the downbeat under 'But...' and
+# bleaches to white; 'But...', written in her light, dissolves into the white
+# with it. Then dark ink on the white: forever, the run's word, ends, and the
+# end is the coats' (END and COATS in their grey type, as EVER was). On
+# 'bend' one hard cold sweep of light; their count resumes (the tally comes
+# back) in the silence before they speak.
+BUT_I_SHOTS = {78: dict(set=[([0], 2.6, 60)], dy=-230)}                       # BUT... alone, in her light
+BUT_SHOTS = {
+    80: dict(set=[([0], 1.0, 0), ([1], 2.3, 30, {"stretch": True}),     # but FOREVER...
+                  ([2, 3, 4, 5], 1.0, 60),                             # always comes to an
+                  ([6], 2.0, 60, {"voice": "coats", "kind": "coat"})]),   # END: their ink
+    81: dict(set=[([0, 1], 1.0, 0),                                    # when the
+                  ([2], 2.0, 0, {"voice": "coats", "kind": "coat", "bare": True}),   # COATS
+                  ([3, 4, 5], 1.0, 40), ([6], 2.2, 40)]),              # come round the BEND
+}
 
 
 def but(t, T, lines):
     name = "But..."
     s = sec_of(T, name)
-    t_but = T.lines[78]["start"]
+    t_but = float(min((b for b in T.bars if b >= T.lines[78]["start"]), default=T.lines[78]["start"]))
     bar = 60 / 70.2 * 4
-    frozen = min(t, t_but)                                     # everything stops on 'But'
+    frozen = min(t, t_but)                                     # everything stops on the downbeat
     drain = smooth(ramp(t, t_but, t_but + bar))
     img = base_night(frozen, T, tally=False, lift=0.9) + hexc("#3A2210") * 0.3
+    dx, dy, dr = mem.drift(frozen, seed=13, amp=(60, 26))
+    img = fx.shift(img, dx, dy, dr, 1.04)
     img = draw_mems(img, t, mems(T, "The Run", ["tunnel_lights", "light_trails", "no_vacancy",
                                                   "highway_trails", "open_sign", "gas_station",
                                                   "tunnel_dark", "parking_rain", "streets_night",
                                                   "dusk_drive"], every=1, life=6.5, seed=43,
-                                 keep_left=900), freeze=t_but, warm=0.35 * (1 - drain))
+                                 keep_left=900), freeze=t_but, offset=(dx * 1.5, dy),
+                    warm=0.35 * (1 - drain))
+    img = streaks(img, 0.8 * (1 - drain))
+    # 'But...' in her light, frozen with the run, dissolving into the white
+    img = kin(T, "But...#light", [78], BUT_I_SHOTS, light=True, hold=0.0).draw(img, t)
     L = img.mean(-1, keepdims=True)
-    img = img * (1 - drain) + (L * 0.4 + 0.62) * drain          # colour drains, bleaches
+    img = img * (1 - drain) + (L * 0.25 + 0.72) * drain        # colour drains, bleaches
     # 'round the bend': one hard cold sweep of light
     bend = word_at(T, 81, "bend")
     if bend is not None and t >= bend - 0.3:
         u = clamp01((t - bend + 0.3) / 1.4)
         xx = fx._yy_xx()[1]
-        sweep = np.exp(-((xx - (-400 + 2800 * u)) / 260) ** 2) * (1 - u) * 1.4
+        sweep = np.exp(-((xx - (-400 + 2800 * u)) / 260) ** 2) * (1 - u) * 0.9
         img = img + np.array([0.85, 0.92, 1.0], np.float32) * sweep[..., None]
-    img = kin(T, name, lines, BUT_SHOTS, hold=1.5).draw(img, t, kick=0.0, react=0.0)
-    return img, post("bleach", exposure=0.95 + 0.1 * drain)
+        # and their count starts again
+        img = look.tally(img, t, T, alpha=0.35 * smooth(ramp(t, bend, bend + 2.5)), blur=2.5)
+    img = kin(T, name, [n for n in lines if n != 78], BUT_SHOTS, hold=3.0).draw(img, t)
+    return img, post("bleach", exposure=0.95 + 0.05 * drain, ghosts=())
 
 
 CUT_SHOTS = {94: dict(style="stack", hero=4), 95: dict(style="stack", hero=4),
