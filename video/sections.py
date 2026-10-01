@@ -102,7 +102,7 @@ POST = {
                       ghosts=((0.8, -60, 0, 0, 0.14), (1.6, 60, 0, 0, 0.08))),
     "run": dict(exposure=1.1, lift=0.06, sat=1.0, bloom=0.95, hal=0.9, thresh=0.55,
                 diffusion=0.18, grain=0.06, trail=0.55, shadow="#2E2436",
-                ghosts=((0.6, -110, 0, 0, 0.10), (1.2, -220, 0, 0, 0.05))),
+                ghosts=((0.6, -110, 0, 0, 0.05), (1.2, -220, 0, 0, 0.025))),   # trails, kept legible
     "bleach": dict(exposure=1.0, lift=0.1, sat=0.7, bloom=0.4, hal=0.4, thresh=1.05,
                    diffusion=0.2, grain=0.045, trail=0.66,
                    ghosts=((1.4, -120, 0, -3, 0.12), (2.8, 110, 0, 3, 0.08))),

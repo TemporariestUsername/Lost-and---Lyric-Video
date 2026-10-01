@@ -724,8 +724,10 @@ class Kinetic:
                     px = o["x"] + xs[i] + drift_x
                     if o.get("slide"):                      # sliding into its twin's place,
                         sdx, st0, sdur = o["slide"]          # fading as it arrives
-                        px += sdx * smooth(clamp01((t - st0) / sdur))
-                        a *= 1 - smooth(clamp01((t - st0 - sdur * 0.55) / (sdur * 0.5)))
+                        mv = smooth(clamp01((t - st0) / sdur))
+                        px += sdx * mv
+                        a *= (1 - 0.5 * math.sin(math.pi * mv)) * \
+                            (1 - smooth(clamp01((t - st0 - sdur * 0.55) / (sdur * 0.5))))
                     if o.get("split"):                      # peels away and drifts, slowly
                         g = t - w["start"]
                         px += 95 * ease_out(clamp01(g / 3.5), 2)
