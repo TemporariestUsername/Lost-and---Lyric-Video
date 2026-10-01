@@ -753,7 +753,7 @@ BUT_SHOTS = {
              set=[([0], 1.0, 0), ([1], 2.3, 30, {"stretch": True}),     # can be read: but FOREVER...
                   ([2, 3, 4, 5], 1.0, 60),                             # always comes to an
                   ([6], 2.0, 60, {"voice": "coats", "kind": "coat"})]),   # END: their ink
-    81: dict(dy=-90, no_separate=True,                                   # upper right, beside it
+    81: dict(dy=-250, no_separate=True,                                  # upper right, beside it
              set=[([0, 1], 1.0, 560),                                  # when the
                   ([2], 2.0, 560, {"voice": "coats", "kind": "coat", "bare": True}),   # COATS
                   ([3, 4, 5], 1.0, 600), ([6], 2.2, 600)]),            # come round the BEND

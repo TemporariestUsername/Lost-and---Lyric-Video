@@ -253,6 +253,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("but", "But...",
+     "Everything stops. The run freezes on the downbeat under 'But...' and bleaches to white over one bar; 'But...', written in her light, dissolves into the white with it. Then dark ink on the white: 'But FOREVER... always comes to an' END, forever being the run's word, and the end the coats': END and COATS are in their grey type, as EVER was. 'When the COATS come round the BEND' answers it at the upper right; on 'bend' one hard cold sweep of light, and her tally marks come back: their count resumes in the silence before they speak.",
+    ),
     ("the_run", "The Run",
      "The one time they are free. Warm and fast, but nothing pulses and nothing comes at the viewer: speed is sideways (long-exposure streaks, motel and diner photographs rushing past, light trails behind her words). No tally marks: time isn't counted here. four 'ran's (no ellipses) scattered across the frame; FOREVER / EVER; TUNNEL / MOTEL; 'lost' turns good (LOST / LOST, lost in each OTHER); FOUND with its echo. Then the title is sung outright: 'lost and found' set plainly in the title's place, and its words slide past each other into 'found and lost...'. 'Forever and ever and ever' steps down and lets go before 'But...'.",
     ),
