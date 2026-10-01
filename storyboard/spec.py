@@ -216,6 +216,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("brought_a_man", "They brought a man",
+     "The title's missing word arrives. The coats' white drains into his night; he is never shown, only warmth searching in from the right, flaring on VERY. Each second 'found...' is written into the empty space after a faint 'lost and', so the title reads whole for a moment, for him and then again for her. 'find someone hard to find': the second 'find' only seeps in. FOREVER / EVER both slowly open; 'in her' and 'in him' echo from the same place. (The night world's exposure ghosts are turned down to a trace here: bright type was doubling.)",
+    ),
     ("white_coats_i", "White Coats I",
      "Latest: no punctuation on screen except ellipses (film-wide from now on). Each 'stab' slams in whole on its attack, big and out of line with the orderly 'scribble scribble', and startles: the frame jolts and the exposure hits down for an instant, with a straight pencil slash struck beneath. 'We've' waits for its real entry (2:00.2); LOST is the held word in 'We'll find out how lost she really is'; 'with time with time...' is typed over itself. The coats never move: typed on, still, blinked out. FOUND / LOST and SAFE / NICE pairs; ANYTHING, FIND; her tally surfaces during 'with time'.",
     ),
