@@ -415,11 +415,16 @@ def coats(name, photos, seed):
 # the same place: the mirror.
 MAN_SHOTS = {
     37: dict(style="stack", hero=3, dy=-230),                          # MAN (clear of the coats' last line)
-    38: dict(hero=[4, 8], ghost_second=True),                          # find / (hard to) find
-    39: dict(style="stack", hero=5, title_word=8),                     # he found, oh he found...
+    38: dict(set=[([0, 1, 2], 1.0, 0), ([3, 4], 2.1, 40),              # COULD FIND against
+                  ([5], 1.0, 90), ([6, 7, 8], 2.1, 140, {"ghost": True})]),   # HARD TO FIND, seeping
+    39: dict(set=[([0, 1, 2, 3], 1.0, 0), ([4, 5], 2.4, 180, {"gap": 40}),   # in the end... HE FOUND
+                  ([6, 7], 1.0, 200)], title_word=8),                  # apart; 'found...' completes
     40: dict(style="stack", hero=1, backing_at=(780, 330, 64)),        # VERY; (in her)
-    41: dict(style="stack", hero=5, title_word=8),                     # she found, oh she found...
-    42: dict(hero=[1, 3], stretch_both=True, backing_at=(780, 330, 64)),   # FOREVER / EVER; (in him)
+    41: dict(set=[([0, 1, 2, 3], 1.0, 0), ([4, 5], 2.4, 180, {"gap": 40}),
+                  ([6, 7], 1.0, 200)], title_word=8),                  # ...SHE FOUND
+    42: dict(set=[([0], 1.0, 0), ([1], 2.6, 20, {"rise": True, "stretch": True}),   # FOREVER reaches;
+                  ([2], 1.0, 90), ([3], 1.7, 170, {"voice": "coats"})],              # EVER... traps
+             backing_at=(780, 330, 64)),                               # (in him)
 }
 
 
@@ -437,8 +442,8 @@ def title_ghost(img, a):
             for ch in "lost and":
                 c.drawString(ch, x, ty, f, skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1)))
                 x += f.measureText(ch) + 0.01 * ts
-        m = fx.skia_alpha(draw)
-        return cv2.GaussianBlur(m, (0, 0), 2.5), cv2.GaussianBlur(m, (0, 0), 14)
+        m = fx.skia_alpha(draw)                          # an echo, not a word: unreadable
+        return cv2.GaussianBlur(m, (0, 0), 22), cv2.GaussianBlur(m, (0, 0), 44)   # on first viewing
     m, glow = cached(("title_ghost",), mask)
     warm = np.array([1.0, 0.93, 0.86], np.float32)
     img = fx.add(img, kinetic.AMBER, glow * a * 0.5)
@@ -466,7 +471,7 @@ def brought_a_man(t, T, lines):
         tt = K.plan[n].get("title_t")
         if tt is not None:
             e0 = K.plan[n]["life"][1]
-            img = title_ghost(img, 0.6 * smooth(ramp(t, tt - 0.5, tt + 0.2)) *
+            img = title_ghost(img, 0.26 * smooth(ramp(t, tt - 0.5, tt + 0.2)) *
                               (1 - smooth(ramp(t, e0 + 0.1, e0 + 0.9))))
     img = K.draw(img, t, cam=(dx * 0.35, dy * 0.35))
     g = post("night")

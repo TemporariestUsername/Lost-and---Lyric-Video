@@ -297,6 +297,7 @@ INK = np.array([0.09, 0.07, 0.12], np.float32)
 GRAPHITE = np.array([0.09, 0.1, 0.12], np.float32)
 AMBER = np.array([1.0, 0.6, 0.29], np.float32)
 AMBER_HOT = np.array([1.0, 0.8, 0.56], np.float32)
+COLD = np.array([0.78, 0.86, 1.0], np.float32)
 
 
 class Kinetic:
@@ -361,6 +362,44 @@ class Kinetic:
                 for a_, b_ in zip(ws[:half], ws[half:]):
                     b_.update(x=a_["x"] + 3, y=a_["y"] - 2, size=a_["size"], key=a_["key"],
                               tracking=a_["tracking"], role=a_["role"])
+            if ov.get("set"):                        # phrases set row by row, by hand:
+                lw = T.lines[n]["words"]             # [(word indices, scale, dx, flags), ...]
+                style = "set"                        # (no style's own spacing or ghost word)
+                placed = [o for o in placed if o["role"] != "ghost_hero"]
+                ki_, kr_, caps_, small_, _b = VOICES[v]
+                byk = {}
+                for o in placed:
+                    if o["role"] in ("word", "hero"):
+                        for k, wk in enumerate(lw):
+                            if wk["start"] == o["word"]["start"] and wk["text"] == o["word"]["text"]:
+                                byk[k] = o
+                rows = []
+                for idxs, scale, dx, *fl in ov["set"]:
+                    fl = dict(fl[0]) if fl else {}
+                    wv = fl.pop("voice", v)
+                    size = (VOICES[wv][3] if wv != v else small_) * scale
+                    key = VOICES[wv][1] if scale > 1.3 else VOICES[wv][0]
+                    rows.append((idxs, size, dx, key, wv, fl.pop("gap", 0.0), fl))
+                total = sum(size * 1.05 + gap for _i, size, _d, _k, _v, gap, _f in rows)
+                y = (BOX[1] + BOX[3]) / 2 - total / 2 + (55 if n % 2 else -55) + ov.get("dy", 0)
+                for idxs, size, dx, key, wv, gap, fl in rows:
+                    y += size * 1.05 + gap
+                    x = BOX[0] + dx
+                    for k in idxs:
+                        if k not in byk:
+                            continue
+                        o = byk[k]
+                        if wv != v:
+                            o["voice"] = wv
+                            o["word"]["disp"] = display_text(o["word"]["text"])
+                            if VOICES[wv][2]:
+                                o["word"]["disp"] = o["word"]["disp"].upper()
+                        upd = dict(x=x, y=y, size=size, key=key, z=1.0, tracking=0.0,
+                                   role="hero" if size > small_ * 1.3 else "word", pop=False,
+                                   stretch=False)
+                        upd.update(fl)
+                        o.update(upd)
+                        x += font(key, size).measureText(o["word"]["disp"]) + size * 0.28
             if ov.get("stretch_both"):               # both heroes open slowly; nothing punches
                 for o in placed:
                     if o["role"] == "hero":
@@ -488,9 +527,13 @@ class Kinetic:
             else:
                 cx, cy = W / 2, 830
                 push, fly = 1.0 + 0.004 * min(age, 8), 1.0
-            kind = {"her": "lit" if self.light else "ink", "coats": "coat", "him": "warm"}[v]
+            push_line = push
             for pi, o in enumerate(p["placed"]):
                 w = o["word"]
+                v = o.get("voice", p["voice"])         # a word may speak in another voice
+                push = 1.0 if v == "coats" else push_line
+                kind = {"her": "lit" if self.light else "ink",
+                        "coats": "cold" if self.light else "coat", "him": "warm"}[v]
                 txt = w["disp"] if (o["role"] != "ghost_hero" or v != "her") else w["disp"].lower()
                 f = font(o["key"], o["size"])
                 dur = max(0.18, w["end"] - w["start"])
@@ -589,6 +632,8 @@ class Kinetic:
                         pop = 1 + 0.12 * math.exp(-7 * (t - w["start"]))
                         sx += xs[i] * push * (pop - 1)
                         sc *= pop
+                    if o.get("rise") and t >= w["start"]:     # reaching: lifts slowly as it opens
+                        sy -= 30 * ease_out(clamp01((t - w["start"]) / 5.0), 2)
                     if v == "her":
                         gone = 1 - a / max(base_a * u, 1e-3)      # how far unwritten
                         sig = (1 - u) * 9 + 16 * gone + (4 if o["role"] == "ghost_hero" else 0)
@@ -609,6 +654,8 @@ class Kinetic:
                                 d = 38 * k * sgn * ease_out(clamp01(g_age / 3))
                                 ga = a * (0.26 / k) * (1 - 0.5 * clamp01(g_age / 5))
                                 put(kind, sig + 5 + 3 * k, (ch, sx + d * sc, sy - 5 * k, f, sc, ga))
+                        if o.get("rise") and self.light:         # and is warmed from within
+                            put("warm", 12, (ch, sx, sy, f, sc, a * 0.55))
                         if v == "him":                          # his light: a soft bloom
                             put("warm", 10, (ch, sx, sy, f, sc, a * 0.9))
                 if TEXT_LOG is not None and o["role"] in ("word", "hero") and word_alpha > 0.5 \
@@ -641,6 +688,8 @@ class Kinetic:
                 img = fx.over(img, self.color, m)
             elif kind == "coat":
                 img = fx.over(img, GRAPHITE, m * 0.92)
+            elif kind == "cold":                            # the coats' type as cold light
+                img = fx.add(img, COLD, m * 1.1)
             elif kind == "lit":
                 img = fx.add(img, np.array([1.0, 0.93, 0.86], np.float32), m * 1.25)
             else:                                           # warm
