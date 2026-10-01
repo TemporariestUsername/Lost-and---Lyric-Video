@@ -220,6 +220,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("spoken_i", "Spoken I: I can help you find",
+     "Near-dark, only his light. Three shafts pour down as he names protecting, trusting and believing, and each virtue sits in its own shaft, lit by it (the same shafts are cut in The Cutting). His words are light and perfectly still: no drift, no ghost copies. 'Even if they're very hard to find' sits apart, small. The spoken words are re-timed to when he actually says them ('I' at 3:04.0, 'trusting' 3:07.45, 'even' 3:11.05).",
+    ),
     ("brought_a_man", "They brought a man",
      "Latest: 'in her' diffuses away after it is sung; in 'Her forever And ever in him' everything but EVER lets go (blurs, lifts and fades) as EVER lands, and EVER stays: no ellipsis, in the coats' dark grey ink on a faint patch of their cold light. Also: COULD FIND against HARD TO FIND; HE FOUND / SHE FOUND apart from 'in the end'; the 'lost and' before each completing 'found...' only a blurred smudge; FOREVER reaching in her warm light.",
     ),
