@@ -470,6 +470,9 @@ class Kinetic:
                 tail = 2.0
             if "him" in (a["voice"], b["voice"]) or a["life"][1] + tail <= b["life"][0] + lead:
                 continue
+            if b.get("title_t") is not None:   # a title line keeps its place: the other goes sooner
+                a["fast"] = True
+                continue
             a0, a1 = self._yspan(a)
             b0, b1 = self._yspan(b)
             if b1 <= a0 - gap or b0 >= a1 + gap:
@@ -597,14 +600,14 @@ class Kinetic:
                         a = u * (1 - dis) * base_a
                         ex = 0.0
                     elif v == "her":                            # her lines leave the same way,
-                        if p.get("fast"):                       # just quicker
+                        if p.get("title_t") is not None and not o.get("title"):
+                            gt = p["title_t"] + 0.15 + 0.35 * _hash01(n, pi, i, 13)   # step aside
+                            dis = smooth(ramp(t, gt, gt + 0.4))                        # for the title
+                        elif p.get("fast"):                     # just quicker
                             gt = e0 - 0.3 + 0.2 * _hash01(n, pi, i, 13)
                             dis = smooth(ramp(t, gt, gt + 0.3))
                         else:
-                            ew = e0
-                            if p.get("title_t") is not None and not o.get("title"):
-                                ew = min(e0, p["title_t"] + 0.35)
-                            gt = ew + 0.5 * _hash01(n, pi, i, 13)
+                            gt = e0 + 0.5 * _hash01(n, pi, i, 13)
                             dis = smooth(ramp(t, gt, gt + 0.45))
                         a = u * (1 - dis) * base_a
                         ex = 0.0
