@@ -146,8 +146,9 @@ SECTIONS = {
         world="institute",
         visual="His finding becomes a hunt. The coats' white drains into the "
                "night as their clock follows him into it. On “bullet” the "
-               "first sharp thing in the film appears: a small cold glint on the "
-               "floor. On “he found her” his light closes on her; the "
+               "first sharp thing in the film appears: the bullet itself, "
+               "tumbling slowly end over end down the centre of the frame, top "
+               "to bottom, through the rest of the hunt. On “he found her” his light closes on her; the "
                "second time it stops short, and “found” lands in the "
                "title's space again, behind the same unreadable smudge, with "
                "“her...” after it.",
@@ -157,7 +158,8 @@ SECTIONS = {
              "BULLET, FIND, DID, then HE DID... seeping in; FOUND. The last "
              "\u201cfound her...\u201d returns to her voice, in the title's space.",
         sync="Every phrase re-timed to its sung onset after the silences; the "
-             "glint appears on “bullet” and stays."),
+             "bullet starts its fall on “bullet” and leaves the frame as the "
+             "section ends."),
     "Spoken II: I won't lose you": dict(
         world="memory",
         visual="His answer to the coats' verdict. Near-dark. On “together” all three of his shafts "
