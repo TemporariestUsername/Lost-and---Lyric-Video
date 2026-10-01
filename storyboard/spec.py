@@ -144,14 +144,18 @@ SECTIONS = {
              "on “with time”; the white clip lands on “time”."),
     "A gun and a bullet": dict(
         world="institute",
-        visual="For the first time something is in sharp focus: a small, "
-               "cold glint on the floor, crisp in a soft world. On “he "
-               "found her” the warm light closes on her twice. The "
-               "second time it stops short and goes no further.",
-        type="Her voice for the narration; “go and find that "
-             "girl” is etched.",
-        sync="The glint appears on a downbeat; the light's two approaches "
-             "land on the “found” onsets."),
+        visual="His finding becomes a hunt. The coats' white drains into the "
+               "night as their clock follows him into it. On “bullet” the "
+               "first sharp thing in the film appears: a small cold glint on the "
+               "floor. On “he found her” his light closes on her; the "
+               "second time it stops short, and “found” lands in the "
+               "title's space again, behind the same unreadable smudge, with "
+               "“her...” after it.",
+        type="Her voice narrates; the coats' things and words in their cold "
+             "type: “with time” overstruck, GUN, BULLET, GO AND FIND THAT "
+             "GIRL. DID, then “he did...” seeping in; FOUND.",
+        sync="Every phrase re-timed to its sung onset after the silences; the "
+             "glint appears on “bullet” and stays."),
     "Spoken II: I won't lose you": dict(
         world="memory",
         visual="His words as light again. The three shafts re-open around "

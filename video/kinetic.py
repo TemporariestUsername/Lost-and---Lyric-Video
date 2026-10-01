@@ -407,19 +407,28 @@ class Kinetic:
                                 byk[k] = o
                 for idxs, rcx, ry, scale, *fl in ov["rows_at"]:
                     fl = dict(fl[0]) if fl else {}
-                    size = small_ * scale
-                    key = fl.pop("key", ki_)
+                    wv = fl.pop("voice", v)
+                    size = (VOICES[wv][3] if wv != v else small_) * scale
+                    key = fl.pop("key", VOICES[wv][0])
+                    if wv != v:                          # this row speaks in another voice
+                        for k in idxs:
+                            if k in byk:
+                                byk[k]["voice"] = wv
+                                byk[k]["word"]["disp"] = display_text(byk[k]["word"]["text"])
+                                if VOICES[wv][2]:
+                                    byk[k]["word"]["disp"] = byk[k]["word"]["disp"].upper()
                     tr = fl.pop("tracking", byk[idxs[0]]["tracking"] if idxs and idxs[0] in byk else 0.0)
                     f = font(key, size)
                     widths = [f.measureText(byk[k]["word"]["disp"]) + tr * size * len(byk[k]["word"]["disp"])
                               for k in idxs if k in byk]
-                    x = rcx - (sum(widths) + size * 0.9 * (len(widths) - 1)) / 2
+                    gapw = size * (0.9 if v == "him" else 0.28)
+                    x = rcx if fl.pop("left", False) else rcx - (sum(widths) + gapw * (len(widths) - 1)) / 2
                     for k, wd in zip([k for k in idxs if k in byk], widths):
                         upd = dict(x=x, y=ry, size=size, key=key, tracking=tr, z=1.0,
                                    role="hero" if scale > 1.3 else "word")
                         upd.update(fl)
                         byk[k].update(upd)
-                        x += wd + size * 0.9
+                        x += wd + gapw
             if ov.get("overstrike"):                 # the repeat is typed over the first:
                 ws = [o for o in placed if o["role"] in ("word", "hero")]   # True = second half
                 pairs = ov["overstrike"]             # over first; or [(i, j), ...] word j over i
@@ -457,13 +466,24 @@ class Kinetic:
                 tx, ty, ts = TITLE_AT
                 ft = font("her_roman", ts)
                 gap = tx + sum(ft.measureText(ch) + 0.01 * ts for ch in "lost and") + ft.measureText(" ")
-                rest = []
+                tail = {(T.lines[n]["words"][k]["start"], T.lines[n]["words"][k]["text"])
+                        for k in ov.get("title_tail", ())}       # words that follow it on the line
+                rest, tails = [], []
                 for o in placed:
                     if o["word"]["start"] == tw["start"] and o["word"]["text"] == tw["text"]:
                         o.update(x=gap, y=ty, size=ts, key="her_roman", role="hero", title=True,
                                  pop=False, stretch=False, z=1.0, tracking=0.0)
+                        tx_end = gap + font("her_roman", ts).measureText(o["word"]["disp"])
+                    elif (o["word"]["start"], o["word"]["text"]) in tail:
+                        tails.append(o)
                     elif o["role"] in ("word", "hero", "backing"):
                         rest.append(o)
+                xt = tx_end + ts * 0.22
+                for o in sorted(tails, key=lambda q: q["word"]["start"]):
+                    sz = ts * 0.42
+                    o.update(x=xt, y=ty, size=sz, role="word", title=True, z=1.0, tracking=0.0,
+                             pop=False, stretch=False)
+                    xt += font(o["key"], sz).measureText(o["word"]["disp"]) + sz * 0.28
                 if rest:                             # the rest of the line sits above it
                     low = max(o["y"] + o["size"] * 0.3 for o in rest)
                     lift = min(0.0, ty - ts * 0.8 - 50 - low)
@@ -479,6 +499,8 @@ class Kinetic:
                                    key=back[0]["key"], split=True)
             plan = dict(placed=placed, style=style, voice=v, opts=ov,
                         life=_lifetime(T, n, self.lines, hold))
+            if ov.get("exit_at") is not None:        # held (or cut) to a set moment
+                plan["life"] = (plan["life"][0], ov["exit_at"])
             if ov.get("title_word") is not None:
                 plan["title_t"] = T.lines[n]["words"][ov["title_word"]]["start"]
             if ov.get("rewind"):
@@ -517,6 +539,8 @@ class Kinetic:
             if a.get("opts", {}).get("exit") == "dissolve":
                 tail = 2.0
             if "him" in (a["voice"], b["voice"]) or a["life"][1] + tail <= b["life"][0] + lead:
+                continue
+            if b.get("opts", {}).get("no_separate"):    # placed by hand around the other
                 continue
             if b.get("title_t") is not None:   # a title line keeps its place: the other goes sooner
                 a["fast"] = True

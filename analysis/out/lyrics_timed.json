@@ -2743,50 +2743,50 @@
    "line": 58,
    "text": "And with time, and with time,",
    "stanza": 7,
-   "start": 252.73,
-   "end": 256.03,
+   "start": 253.4,
+   "end": 256.0,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "And",
-     "start": 252.73,
-     "end": 253.59,
+     "start": 253.4,
+     "end": 253.55,
      "matched": true,
      "backing": false
     },
     {
      "text": "with",
-     "start": 253.59,
-     "end": 253.79,
+     "start": 253.55,
+     "end": 253.8,
      "matched": true,
      "backing": false
     },
     {
      "text": "time,",
-     "start": 253.79,
-     "end": 254.35,
+     "start": 253.85,
+     "end": 254.4,
      "matched": true,
      "backing": false
     },
     {
      "text": "and",
-     "start": 254.81,
-     "end": 255.29,
+     "start": 255.1,
+     "end": 255.25,
      "matched": true,
      "backing": false
     },
     {
      "text": "with",
-     "start": 255.29,
-     "end": 255.57,
+     "start": 255.25,
+     "end": 255.5,
      "matched": true,
      "backing": false
     },
     {
      "text": "time,",
-     "start": 255.57,
-     "end": 256.03,
+     "start": 255.5,
+     "end": 256.0,
      "matched": true,
      "backing": false
     }
@@ -2796,22 +2796,22 @@
    "line": 59,
    "text": "The white coats brought the man a gun and a bullet",
    "stanza": 7,
-   "start": 256.03,
+   "start": 257.2,
    "end": 260.29,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "The",
-     "start": 256.03,
-     "end": 257.39,
+     "start": 257.2,
+     "end": 257.35,
      "matched": true,
      "backing": false
     },
     {
      "text": "white",
-     "start": 257.39,
-     "end": 257.69,
+     "start": 257.35,
+     "end": 257.65,
      "matched": true,
      "backing": false
     },
@@ -2885,9 +2885,9 @@
    "text": "And said \"go and find that girl.\"",
    "stanza": 7,
    "start": 260.29,
-   "end": 264.37,
+   "end": 264.35,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "And",
@@ -2926,15 +2926,15 @@
     },
     {
      "text": "that",
-     "start": 262.85,
+     "start": 263.55,
      "end": 263.85,
      "matched": true,
      "backing": false
     },
     {
      "text": "girl.\"",
-     "start": 263.85,
-     "end": 264.37,
+     "start": 263.95,
+     "end": 264.35,
      "matched": true,
      "backing": false
     }
@@ -2944,29 +2944,29 @@
    "line": 61,
    "text": "And he did,",
    "stanza": 7,
-   "start": 264.37,
-   "end": 266.05,
+   "start": 265.3,
+   "end": 266.1,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "And",
-     "start": 264.37,
-     "end": 265.49,
+     "start": 265.3,
+     "end": 265.45,
      "matched": true,
      "backing": false
     },
     {
      "text": "he",
-     "start": 265.49,
-     "end": 265.71,
+     "start": 265.45,
+     "end": 265.65,
      "matched": true,
      "backing": false
     },
     {
      "text": "did,",
-     "start": 265.71,
-     "end": 266.05,
+     "start": 265.7,
+     "end": 266.1,
      "matched": true,
      "backing": false
     }
@@ -2976,22 +2976,22 @@
    "line": 62,
    "text": "he did...",
    "stanza": 7,
-   "start": 266.73,
-   "end": 267.79,
+   "start": 267.15,
+   "end": 268.0,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "he",
-     "start": 266.73,
-     "end": 267.31,
+     "start": 267.15,
+     "end": 267.35,
      "matched": true,
      "backing": false
     },
     {
      "text": "did...",
-     "start": 267.31,
-     "end": 267.79,
+     "start": 267.4,
+     "end": 268.0,
      "matched": true,
      "backing": false
     }
@@ -3001,29 +3001,29 @@
    "line": 63,
    "text": "He found her,",
    "stanza": 7,
-   "start": 267.79,
-   "end": 270.27,
+   "start": 268.8,
+   "end": 269.9,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "He",
-     "start": 267.79,
-     "end": 268.99,
+     "start": 268.8,
+     "end": 268.95,
      "matched": true,
      "backing": false
     },
     {
      "text": "found",
-     "start": 268.99,
-     "end": 269.45,
+     "start": 268.95,
+     "end": 269.4,
      "matched": true,
      "backing": false
     },
     {
      "text": "her,",
      "start": 269.45,
-     "end": 270.27,
+     "end": 269.9,
      "matched": true,
      "backing": false
     }
@@ -3033,29 +3033,29 @@
    "line": 64,
    "text": "he found her...",
    "stanza": 7,
-   "start": 270.31,
-   "end": 272.61,
+   "start": 271.35,
+   "end": 272.8,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "he",
-     "start": 270.31,
-     "end": 271.53,
+     "start": 271.35,
+     "end": 271.5,
      "matched": true,
      "backing": false
     },
     {
      "text": "found",
-     "start": 271.53,
-     "end": 271.97,
+     "start": 271.5,
+     "end": 271.95,
      "matched": true,
      "backing": false
     },
     {
      "text": "her...",
      "start": 271.97,
-     "end": 272.61,
+     "end": 272.8,
      "matched": true,
      "backing": false
     }

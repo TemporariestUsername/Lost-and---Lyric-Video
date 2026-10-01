@@ -606,32 +606,64 @@ def break_ii(t, T, lines):
     return img, post("night", exposure=0.95, ghosts=())
 
 
-GUN_SHOTS = {58: dict(style="track", hero=2), 59: dict(style="track", hero=10),
-             60: dict(style="stack", hero=4, voice="coats"), 61: dict(style="hero", hero=2),
-             62: dict(style="stack", hero=1), 63: dict(style="stack", hero=1),
-             64: dict(style="depth", hero=1)}
+# ================================================================ A gun and a bullet
+# His finding becomes a hunt. The coats' clock follows him into the night;
+# their objects (GUN, BULLET) and their order are set in their cold type;
+# the bullet appears as the film's first sharp thing. 'He found her...' is
+# the title's word again, now in dread: 'found' lands in the title's space
+# with 'her...' after it, and his light stops short.
+GUN_SHOTS = {
+    58: dict(voice="coats", style="track", hero=2, overstrike=True),            # with time x2
+    59: dict(exit_at=260.8, set=[([0, 1, 2], 1.0, 0), ([3, 4, 5, 6], 1.0, 0),
+                  ([7], 2.0, 40, {"voice": "coats"}), ([8, 9], 1.0, 40),
+                  ([10], 2.0, 40, {"voice": "coats"})]),                         # GUN / BULLET
+    60: dict(voice="coats", no_separate=True,                                    # GO AND FIND THAT GIRL,
+             rows_at=[([0, 1], 150, 215, 1.0, {"left": True, "voice": "her"}),   # after the gun and
+                      ([2, 3], 180, 470, 1.3, {"left": True}),                   # bullet have hung
+                      ([4], 180, 600, 2.2, {"left": True, "key": "coats_bold"}),
+                      ([5, 6], 180, 680, 1.3, {"left": True})]),
+    61: dict(style="stack", hero=2),                                             # and he DID
+    62: dict(set=[([0, 1], 1.6, 80, {"ghost": True})]),                          # he did... (seeping)
+    63: dict(style="stack", hero=1),                                             # he FOUND her
+    64: dict(set=[([0], 1.0, 40)], title_word=1, title_tail=[2]),                # lost and found her...
+}
 
 
 def gun_and_bullet(t, T, lines):
     name = "A gun and a bullet"
+    s = sec_of(T, name)
     dx, dy, dr = mem.drift(t, seed=9)
     img = base_night(t, T, lift=1.25)
     img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, 1.02)
     img = draw_mems(img, t, mems(T, name, ["dark_street", "parking_rain", "streets_night",
                                            "fog_park"], every=2, life=10.0, seed=41,
                                  keep_left=900), offset=(dx, dy), warm=0.2)
-    # 'he found her' twice: his light closes on her, the second time it stops short
+    # 'he found her' twice: his light closes on her; the second time it stops short
     for k, st in enumerate(words_like(T, [63, 64], "found")):
         if t >= st:
             u = ease_out(clamp01((t - st) / 1.2))
             x = 1600 - 500 * u * (1 if k == 0 else 0.6)
             img = fx.hotspot(img, t, x, 560, 220, strength=0.45 * (1 - 0.4 * k) * (1 - clamp01((t - st - 2.5) / 2)))
-    img = kin(T, name, lines, GUN_SHOTS, light=True).draw(img, t, cam=(dx * 0.35, dy * 0.35),
-                                                        kick=T.pulse_env(t, 7.0))
+    K = kin(T, name, lines, GUN_SHOTS, light=True)
+    for n in lines:                                      # the same unreadable 'lost and'
+        tt = K.plan[n].get("title_t")
+        if tt is not None:
+            e0 = K.plan[n]["life"][1]
+            img = title_ghost(img, 0.26 * smooth(ramp(t, tt - 0.5, tt + 0.2)) *
+                              (1 - smooth(ramp(t, e0 + 0.1, e0 + 0.9))))
+    img = K.draw(img, t, cam=(dx * 0.35, dy * 0.35))
     p = post("night")
     bt = word_at(T, 59, "bullet")
     if bt is not None and t >= bt:
         p["bullet"] = (1470, 925, 1.9)
+    # out of the coats' white into the night
+    u = smooth(ramp(t, s["start"], s["start"] + 1.8))
+    if u < 1:
+        ref, rp = coats("White Coats II", ["stairwell_cage", "cinderblock_hole", "hospital_corridor"],
+                        67, hot=1.0)(t, T, range(47, 57))
+        img = ref * (1 - u) + img * u
+        rp = dict(rp)
+        p = dict(_mix_post(rp, p, u), **({"bullet": p["bullet"]} if "bullet" in p else {}))
     return img, p
 
 
