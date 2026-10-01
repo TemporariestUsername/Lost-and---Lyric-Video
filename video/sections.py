@@ -96,7 +96,7 @@ POST = {
                 ghosts=((1.2, -160, 0, -5, 0.16), (2.4, 150, -10, 4, 0.10))),
     "night": dict(exposure=1.05, lift=0.07, sat=0.9, bloom=0.8, hal=0.8, thresh=0.62,
                   diffusion=0.2, grain=0.055, trail=0.6, shadow="#3A2F45",
-                  ghosts=((1.2, -140, 0, -4, 0.18), (2.4, 130, -8, 3, 0.11))),
+                  ghosts=((1.2, -140, 0, -4, 0.09), (2.4, 130, -8, 3, 0.05))),   # light type doubles easily
     "institute": dict(exposure=1.02, lift=0.04, sat=0.5, bloom=0.7, hal=0.7, thresh=1.1,
                       diffusion=0.12, grain=0.06, trail=0.5, shadow="#7A8290",
                       ghosts=((0.8, -60, 0, 0, 0.14), (1.6, 60, 0, 0, 0.08))),
@@ -361,7 +361,7 @@ def _word_box(K, w):
 
 def coats(name, photos, seed):
     def scene(t, T, lines):
-        K = kin(T, name, lines, COATS_SHOTS, voice="coats")
+        K = kin(T, name, lines, COATS_SHOTS, voice="coats", hold=0.2)   # last line blinks out at the cut
         # 'with time': their time is her tally; the marks surface while they say it
         timed = [T.lines[n] for n in lines if "with time" in T.lines[n]["text"].lower()]
         tl = max([smooth(ramp(t, L["start"], L["start"] + 0.8)) *
@@ -414,7 +414,7 @@ def coats(name, photos, seed):
 # a moment, and again for her (recurrence). 'in her' / 'in him' echo from
 # the same place: the mirror.
 MAN_SHOTS = {
-    37: dict(style="stack", hero=3),                                   # MAN
+    37: dict(style="stack", hero=3, dy=-230),                          # MAN (clear of the coats' last line)
     38: dict(hero=[4, 8], ghost_second=True),                          # find / (hard to) find
     39: dict(style="stack", hero=5, title_word=8),                     # he found, oh he found...
     40: dict(style="stack", hero=1, backing_at=(780, 330, 64)),        # VERY; (in her)

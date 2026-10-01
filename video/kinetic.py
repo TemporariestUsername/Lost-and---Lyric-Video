@@ -322,7 +322,7 @@ class Kinetic:
             placed, style = layout(T, n, ov.get("style"), ov.get("hero"), seed, v)
             if v != "him":
                 for o in placed:                    # alternate lines sit a little high / low
-                    o["y"] += 55 if n % 2 else -55
+                    o["y"] += (55 if n % 2 else -55) + ov.get("dy", 0)
             if ov.get("backing_at"):                 # echoes placed on their own
                 bx, by, bs = ov["backing_at"]
                 for o in placed:
