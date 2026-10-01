@@ -2100,14 +2100,14 @@
    "line": 44,
    "text": "\"I can help you find protecting, trusting and believing",
    "stanza": 5,
-   "start": 183.43,
+   "start": 184.0,
    "end": 188.85,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "\"I",
-     "start": 183.43,
+     "start": 184.0,
      "end": 184.13,
      "matched": true,
      "backing": false
@@ -2149,7 +2149,7 @@
     },
     {
      "text": "trusting",
-     "start": 187.09,
+     "start": 187.45,
      "end": 188.05,
      "matched": true,
      "backing": false
@@ -2174,14 +2174,14 @@
    "line": 45,
    "text": "Even if they're very hard to find.\"",
    "stanza": 5,
-   "start": 190.63,
+   "start": 191.05,
    "end": 195.57,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Even",
-     "start": 190.63,
+     "start": 191.05,
      "end": 191.33,
      "matched": true,
      "backing": false

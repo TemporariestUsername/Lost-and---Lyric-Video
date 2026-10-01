@@ -86,6 +86,9 @@ def main():
     # Bar phase per section: the 4-pulse phase that most line starts sit on.
     downbeats = []
     sections = []
+    # sections whose lines are pickups (e.g. spoken) keep the previous section's bars
+    cont = set(json.loads((ROOT / "analysis" / "overrides.json").read_text()).get("phase_continue", []))
+    prev_phase = 0
     for name, l0, l1, t0, t1 in spans:
         pidx = np.where((pulses >= t0 - 0.05) & (pulses < t1 - 0.05))[0]
         if not len(pidx):
@@ -99,9 +102,12 @@ def main():
             for s, n in zip(starts, near):
                 votes[n % 4] += 1.0 / (1 + 4 * abs(pulses[n] - s))
             phase = int(np.argmax(votes))
+            if name in cont:
+                phase = prev_phase
         else:
             phase = int(pidx[0] % 4)  # instrumental: start bars at section start
         bars = [float(pulses[i]) for i in pidx if i % 4 == phase]
+        prev_phase = phase
         downbeats += bars
         sections.append({"name": name, "lines": [l0, l1] if l0 else None,
                          "start": round(t0, 3), "end": round(t1, 3),

@@ -109,13 +109,15 @@ SECTIONS = {
              "“VERY”; “lost and” surfaces on “oh he / oh she”."),
     "Spoken I: I can help you find": dict(
         world="memory",
-        visual="Near-dark. As he names protecting, trusting and believing, "
-               "three shafts of warm light open through the dark, one per "
-               "word. They come back in The Cutting.",
-        type="His voice: Inter Light caps, wide tracking, rendered as warm "
-             "light through a crack. It never moves.",
-        sync="Each shaft opens on its word onset; nothing else moves on "
-             "the beat."),
+        visual="Near-dark, nothing but his light. As he names protecting, "
+               "trusting and believing, three shafts of warm light pour down "
+               "through the dark, one per word, and each virtue sits in its "
+               "own shaft, lit by it. The same shafts are cut in The Cutting.",
+        type="His voice: Inter Light caps, wide tracking, warm light, perfectly "
+             "still. PROTECTING, TRUSTING, BELIEVING larger, each in its shaft; "
+             "“even if they're very hard to find” apart, small.",
+        sync="Each shaft pours open on its word (the words re-timed to the "
+             "spoken onsets); nothing moves on the beat."),
     "Break II": dict(
         world="memory",
         visual="The three shafts breathe; dust turns gold inside them.",

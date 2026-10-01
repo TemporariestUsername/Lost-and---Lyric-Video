@@ -402,6 +402,30 @@ class Kinetic:
                         if o.get("bare"):                    # no trailing ellipsis
                             o["word"]["disp"] = o["word"]["disp"].rstrip(".\u2026")
                         x += font(key, size).measureText(o["word"]["disp"]) + size * 0.28
+            if ov.get("rows_at"):                    # rows centred at fixed points:
+                lw = T.lines[n]["words"]             # [(word indices, cx, y, scale, flags)]
+                ki_, kr_, caps_, small_, _b = VOICES[v]
+                byk = {}
+                for o in placed:
+                    if o["role"] in ("word", "hero"):
+                        for k, wk in enumerate(lw):
+                            if wk["start"] == o["word"]["start"] and wk["text"] == o["word"]["text"]:
+                                byk[k] = o
+                for idxs, rcx, ry, scale, *fl in ov["rows_at"]:
+                    fl = dict(fl[0]) if fl else {}
+                    size = small_ * scale
+                    key = fl.pop("key", ki_)
+                    tr = fl.pop("tracking", byk[idxs[0]]["tracking"] if idxs and idxs[0] in byk else 0.0)
+                    f = font(key, size)
+                    widths = [f.measureText(byk[k]["word"]["disp"]) + tr * size * len(byk[k]["word"]["disp"])
+                              for k in idxs if k in byk]
+                    x = rcx - (sum(widths) + size * 0.9 * (len(widths) - 1)) / 2
+                    for k, wd in zip([k for k in idxs if k in byk], widths):
+                        upd = dict(x=x, y=ry, size=size, key=key, tracking=tr, z=1.0,
+                                   role="hero" if scale > 1.3 else "word")
+                        upd.update(fl)
+                        byk[k].update(upd)
+                        x += wd + size * 0.9
             if ov.get("diffuse"):                    # words that let go after they are sung:
                 dfo = ov["diffuse"]                  # keep=[i], after=i, backing=True, delay, dur
                 lw = T.lines[n]["words"]
@@ -543,9 +567,9 @@ class Kinetic:
             elif v == "coats":
                 push = 1.0                              # typed and still: they never move
                 fly = 1.0
-            else:
+            else:                                   # his words are light: they never move
                 cx, cy = W / 2, 830
-                push, fly = 1.0 + 0.004 * min(age, 8), 1.0
+                push, fly = 1.0, 1.0
             push_line = push
             for pi, o in enumerate(p["placed"]):
                 w = o["word"]

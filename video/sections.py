@@ -493,17 +493,38 @@ def virtue_opens(T):
     return [word_at(T, 44, v) for v in VIRTUE_WORDS]
 
 
-def spoken(name, reopen=None):
+# ================================================================ Spoken I / II
+# His words are light and never move. The virtues he offers each sit in
+# their own shaft, lit as it pours down: the same shafts are cut in The
+# Cutting. (Beam k runs from SRC down to (target k, below the frame).)
+BEAM_SRC, BEAM_TARGETS = (1780, -160), (690, 860, 1030)
+
+
+def beam_x(k, y):
+    """Where beam k crosses height y."""
+    tx = BEAM_TARGETS[k]
+    return BEAM_SRC[0] + (tx - BEAM_SRC[0]) * (y - BEAM_SRC[1]) / (H + 60 - BEAM_SRC[1])
+
+
+SPOKEN_SHOTS = {
+    44: dict(voice="him", rows_at=[([0, 1, 2, 3, 4], beam_x(0, 400), 400, 1.0),            # I can help you find
+                                   ([5], beam_x(0, 530), 530, 2.0, {"tracking": 0.16}),     # PROTECTING
+                                   ([6], beam_x(1, 680), 680, 2.0, {"tracking": 0.16}),     # TRUSTING
+                                   ([7], beam_x(2, 760), 760, 1.0),                          # and
+                                   ([8], beam_x(2, 860), 860, 2.0, {"tracking": 0.16})]),   # BELIEVING
+    45: dict(voice="him", rows_at=[([0, 1, 2], 520, 300, 1.0),                               # even if they're
+                                   ([3, 4, 5, 6], 520, 360, 1.0)]),                          # very hard to find
+}
+
+
+def spoken(name, reopen=None, shots=None):
     def scene(t, T, lines):
-        s = sec_of(T, name)
         img = base_night(t, T, lift=0.7)
         opens = virtue_opens(T) if reopen is None else [reopen(T, i) for i in range(3)]
-        img = look.beams(img, t, T, [None] * 3, open_times=opens, targets=(690, 860, 1030),
-                         strength=0.85)
-        img = draw_mems(img, t, mems(T, name, ["doorway_figure", "rain_glass_lights"], every=2,
-                                     life=10.0, seed=31, keep_left=1000), warm=0.6)
-        img = kin(T, name, lines, {n: dict(voice="him") for n in lines}, voice="him",
-                  hold=1.6).draw(img, t)
+        img = look.beams(img, t, T, [None] * 3, src=BEAM_SRC, open_times=opens,
+                         targets=BEAM_TARGETS, strength=0.85)
+        sh = shots or {n: dict(voice="him") for n in lines}
+        img = kin(T, name, lines, sh, voice="him", hold=1.6).draw(img, t)
         return img, post("night", exposure=0.95)
     return scene
 
