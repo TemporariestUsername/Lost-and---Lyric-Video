@@ -394,13 +394,13 @@ def coats(name, photos, seed, hot=0.0):
                 img = look.pencil_underline(img, t, w["start"], x0 + dx * 0.2, x1 + dx * 0.2,
                                             base + 0.16 * size + 9 + dy * 0.2, 50 + k, t_end=e0,
                                             size=0.9 + 0.8 * (size / 150))
-        img = fluorescent(img, t, 1.0 + 0.6 * hot)
+        img = fluorescent(img, t, 1.0 + 0.3 * hot)
         # 'not worth the time': once the verdict has been read, the exposure clips
         # to white for a beat on its last word
         clip = 0.0
         for st in [T.lines[n]["words"][-1]["start"] for n in lines if "worth" in T.lines[n]["text"]]:
             if t >= st:                                 # a quick swell (no single-frame jump), then decay
-                clip = max(clip, min(1.0, (t - st) / 0.12) * math.exp(-3.5 * max(0.0, t - st - 0.12)))
+                clip = max(clip, smooth(min(1.0, (t - st) / 0.3)) * math.exp(-3.0 * max(0.0, t - st - 0.3)))
         img = fx.vignette(img, 0.55, "#5E6A78")
         img = K.draw(img, t, cam=(dx * 0.2, dy * 0.2))
         # each stab startles: the frame jolts and the exposure hits down for an instant
@@ -412,9 +412,9 @@ def coats(name, photos, seed, hot=0.0):
                 jolt, jx, jy = max(jolt, e), 11 * e * math.cos(a_), 7 * e * math.sin(a_)
         if jolt > 0.01:
             img = fx.shift(img, jx, jy)
-        img = img + np.float32(0.8) * clip
+        img = img + np.float32(0.45) * clip                # near-white, not blown
         # (the echo trail is cut on a stab so the word hits at full strength on its first frame)
-        return img, post("institute", exposure=1.08 + 0.06 * hot + 0.4 * clip - 0.1 * jolt,
+        return img, post("institute", exposure=1.08 + 0.06 * hot + 0.22 * clip - 0.08 * jolt,
                          trail=POST["institute"]["trail"] * (1 - jolt))
     return scene
 
