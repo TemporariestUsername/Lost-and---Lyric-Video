@@ -421,7 +421,7 @@ class Kinetic:
                     f = font(key, size)
                     widths = [f.measureText(byk[k]["word"]["disp"]) + tr * size * len(byk[k]["word"]["disp"])
                               for k in idxs if k in byk]
-                    gapw = size * (0.9 if v == "him" else 0.28)
+                    gapw = size * (0.9 if v == "him" else 0.34)
                     x = rcx if fl.pop("left", False) else rcx - (sum(widths) + gapw * (len(widths) - 1)) / 2
                     for k, wd in zip([k for k in idxs if k in byk], widths):
                         upd = dict(x=x, y=ry, size=size, key=key, tracking=tr, z=1.0,
@@ -457,6 +457,39 @@ class Kinetic:
                         continue
                     t0 = (base_t if base_t is not None else o["word"]["start"]) + dfo.get("delay", 0.5)
                     o["diffuse"] = (max(t0, o["word"]["start"] + 0.5), dfo.get("dur", 2.5))
+            if ov.get("nopop"):
+                for o in placed:
+                    o["pop"] = False
+            if ov.get("swap"):                       # 'lost and found, found and lost': the
+                sw = ov["swap"]                      # first words slide into the second's
+                lw = T.lines[n]["words"]             # places as the second are sung
+                style = "set"
+                placed = [o for o in placed if o["role"] != "ghost_hero"]
+                for o in placed:
+                    if sw.get("lower"):
+                        o["word"]["disp"] = o["word"]["disp"].lower()
+                ki_, kr_, caps_, small_, _b = VOICES[v]
+                key, size = sw.get("key", kr_), sw["size"]
+                fsw = font(key, size)
+                byk = {}
+                for o in placed:
+                    for k, wk in enumerate(lw):
+                        if wk["start"] == o["word"]["start"] and wk["text"] == o["word"]["text"]:
+                            byk[k] = o
+
+                def lay(idxs):
+                    xs_, x_ = {}, sw["at"][0]
+                    for k in idxs:
+                        xs_[k] = x_
+                        x_ += fsw.measureText(byk[k]["word"]["disp"]) + size * 0.28
+                    return xs_
+                xa, xb = lay(sw["first"]), lay(sw["second"])
+                for k, x_ in list(xa.items()) + list(xb.items()):
+                    byk[k].update(x=x_, y=sw["at"][1], size=size, key=key, role="hero", z=1.0,
+                                  tracking=0.0, pop=False, stretch=False)
+                t_sw = lw[sw["second"][0]]["start"] - 0.25
+                for kf, kt in sw["pairs"]:
+                    byk[kf]["slide"] = (xb[kt] - xa[kf], t_sw, sw.get("dur", 1.0))
             if ov.get("stretch_both"):               # both heroes open slowly; nothing punches
                 for o in placed:
                     if o["role"] == "hero":
@@ -689,6 +722,10 @@ class Kinetic:
                     if i == 0:
                         word_alpha = a / max(base_a, 1e-3) if v in ("coats", "her") else u * (1 - ex)
                     px = o["x"] + xs[i] + drift_x
+                    if o.get("slide"):                      # sliding into its twin's place,
+                        sdx, st0, sdur = o["slide"]          # fading as it arrives
+                        px += sdx * smooth(clamp01((t - st0) / sdur))
+                        a *= 1 - smooth(clamp01((t - st0 - sdur * 0.55) / (sdur * 0.5)))
                     if o.get("split"):                      # peels away and drifts, slowly
                         g = t - w["start"]
                         px += 95 * ease_out(clamp01(g / 3.5), 2)

@@ -171,15 +171,20 @@ SECTIONS = {
              "“together”."),
     "The Run": dict(
         world="run",
-        visual="The only warm, fast section. Sodium and neon smear into "
-               "long-exposure streaks across the fog, headlights flare "
-               "through, and her ghosts trail sideways like motion blur. "
-               "The tally marks stop: time isn't counted here.",
-        type="Her voice, warm and hot, smeared along the direction of "
-             "travel. “Lost and found, found and lost” swap "
-             "places as double exposures.",
-        sync="Streak bursts on kicks; a headlight flare on every "
-             "downbeat."),
+        visual="The only time they are free: warm and fast, sodium and neon "
+               "smearing into long-exposure streaks, motel and diner photographs "
+               "rushing past. Speed is sideways, never toward the viewer and "
+               "never on the beat. The tally marks stop: time isn't counted "
+               "here. 'Lost' turns good (lost in each other), and the title is "
+               "sung outright: “lost and found” set plainly in the title's "
+               "place, then its words slide past each other into “found and "
+               "lost...”.",
+        type="Her voice as warm light. ran... ran... ran... stepping across the "
+             "frame; FOREVER / EVER; TUNNEL / MOTEL; LOST / LOST; each OTHER; "
+             "FOUND with its echo; the title, then its reversal; forever and "
+             "ever and ever stepping down.",
+        sync="Words re-timed where Whisper ran them together; the bars land on "
+             "the “But...” freeze."),
     "But...": dict(
         world="void",
         visual="Everything freezes: the exposure echo holds the last frame. "

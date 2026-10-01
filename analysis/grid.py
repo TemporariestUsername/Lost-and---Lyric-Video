@@ -87,7 +87,9 @@ def main():
     downbeats = []
     sections = []
     # sections whose lines are pickups (e.g. spoken) keep the previous section's bars
-    cont = set(json.loads((ROOT / "analysis" / "overrides.json").read_text()).get("phase_continue", []))
+    ov_ = json.loads((ROOT / "analysis" / "overrides.json").read_text())
+    cont = set(ov_.get("phase_continue", []))
+    phase_at = ov_.get("phase_at", {})   # {section: a time that must be a downbeat}
     prev_phase = 0
     for name, l0, l1, t0, t1 in spans:
         pidx = np.where((pulses >= t0 - 0.05) & (pulses < t1 - 0.05))[0]
@@ -104,6 +106,8 @@ def main():
             phase = int(np.argmax(votes))
             if name in cont:
                 phase = prev_phase
+            if name in phase_at:
+                phase = int(np.argmin(np.abs(pulses - phase_at[name]))) % 4
         else:
             phase = int(pidx[0] % 4)  # instrumental: start bars at section start
         bars = [float(pulses[i]) for i in pidx if i % 4 == phase]

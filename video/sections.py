@@ -700,27 +700,42 @@ def gun_and_bullet(t, T, lines):
     return img, p
 
 
-RUN_SHOTS = {69: dict(style="track", hero=3), 70: dict(style="hero", hero=0),
-             71: dict(style="depth", hero=2), 72: dict(style="stack", hero=2),
-             73: dict(style="stack", hero=3), 74: dict(style="hero", hero=1),
-             75: dict(style="depth", hero=0), 76: dict(style="track", hero=0)}
+# ================================================================ The Run
+# The one time they are free: warm and fast, but nothing pulses and nothing
+# comes at the viewer. Speed is sideways: streaks, rushing photos, and the
+# exposure echo trailing her words behind them. 'Lost' turns good, and the
+# title is sung outright: 'lost and found' plain in the title's place, then
+# the words slide past each other into 'found and lost'.
+RUN_SHOTS = {
+    69: dict(rows_at=[([0, 1], 150, 420, 1.0, {"left": True}),                      # and they
+                      ([2], 150, 560, 1.7, {"left": True, "key": "her_roman"}),     # ran...
+                      ([3], 560, 560, 1.7, {"left": True, "key": "her_roman"}),     #   ran...
+                      ([4], 970, 560, 1.7, {"left": True, "key": "her_roman"})]),   #     ran...
+    70: dict(hero=[0, 2], stretch_both=True),                                       # FOREVER / EVER
+    71: dict(hero=[2, 4], nopop=True),                                              # TUNNEL / MOTEL
+    72: dict(hero=[0, 3], nopop=True),                                              # LOST / LOST
+    73: dict(style="stack", hero=3),                                                # each OTHER
+    74: dict(style="stack", hero=1, backing_at=(760, 300, 64)),                     # FOUND (and found...)
+    75: dict(swap=dict(first=[0, 1, 2], second=[3, 4, 5], pairs=[(0, 5), (1, 4), (2, 3)],
+                       at=(150, 830), size=190, dur=1.1, lower=True)),                          # lost and found ->
+    76: dict(set=[([0], 2.4, 0, {"stretch": True}), ([1, 2], 1.6, 160),     # found and lost
+                  ([3, 4], 1.6, 330)]),                                             # forever, stepping on
+}
 
 
 def the_run(t, T, lines):
     name = "The Run"
     dx, dy, dr = mem.drift(t, seed=13, amp=(60, 26))
-    kick = T.pulse_env(t, 6.0)
     img = base_night(t, T, tally=False, lift=0.9)               # time isn't counted here
     img = img + hexc("#3A2210") * 0.3
-    img = fx.shift(img, dx, dy, dr, 1.04 + 0.015 * kick)
+    img = fx.shift(img, dx, dy, dr, 1.04)                       # no beat zoom
     photos = ["tunnel_lights", "light_trails", "no_vacancy", "highway_trails", "open_sign",
               "gas_station", "tunnel_dark", "parking_rain", "streets_night", "dusk_drive"]
     img = draw_mems(img, t, mems(T, name, photos, every=1, life=6.5, seed=43, keep_left=900),
                     offset=(dx * 1.5, dy), warm=0.35)
-    img = streaks(img, 0.5 + 0.8 * kick)
-    img = fx.light_leak(img, t, "right", color="#FFB35A", strength=0.25 + 0.2 * kick)
-    img = kin(T, name, lines, RUN_SHOTS, light=True).draw(img, t, cam=(dx * 0.4, dy * 0.4),
-                                                        kick=kick)
+    img = streaks(img, 0.8 + 0.15 * math.sin(t * 0.9))         # long exposure, not on the beat
+    img = fx.light_leak(img, t, "right", color="#FFB35A", strength=0.32)
+    img = kin(T, name, lines, RUN_SHOTS, light=True).draw(img, t, cam=(dx * 0.4, dy * 0.4))
     return img, post("run")
 
 

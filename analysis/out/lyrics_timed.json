@@ -3157,22 +3157,22 @@
    "line": 69,
    "text": "And they ran... ran... ran...",
    "stanza": 9,
-   "start": 283.79,
+   "start": 284.78,
    "end": 288.57,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "And",
-     "start": 283.79,
-     "end": 284.93,
+     "start": 284.78,
+     "end": 285.45,
      "matched": true,
      "backing": false
     },
     {
      "text": "they",
-     "start": 284.93,
-     "end": 285.25,
+     "start": 285.45,
+     "end": 286.3,
      "matched": true,
      "backing": false
     },
@@ -3204,9 +3204,9 @@
    "text": "Forever and ever.",
    "stanza": 9,
    "start": 289.15,
-   "end": 291.25,
+   "end": 291.2,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Forever",
@@ -3217,15 +3217,15 @@
     },
     {
      "text": "and",
-     "start": 289.15,
-     "end": 290.49,
+     "start": 289.7,
+     "end": 290.3,
      "matched": true,
      "backing": false
     },
     {
      "text": "ever.",
-     "start": 290.49,
-     "end": 291.25,
+     "start": 290.35,
+     "end": 291.2,
      "matched": true,
      "backing": false
     }
@@ -3374,9 +3374,9 @@
    "text": "And found. (And found...)",
    "stanza": 9,
    "start": 300.51,
-   "end": 302.91,
+   "end": 303.7,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "And",
@@ -3394,15 +3394,15 @@
     },
     {
      "text": "And",
-     "start": 301.87,
-     "end": 301.87,
-     "matched": false,
+     "start": 302.06,
+     "end": 302.55,
+     "matched": true,
      "backing": true
     },
     {
      "text": "found...",
-     "start": 301.87,
-     "end": 302.91,
+     "start": 302.6,
+     "end": 303.7,
      "matched": true,
      "backing": true
     }
