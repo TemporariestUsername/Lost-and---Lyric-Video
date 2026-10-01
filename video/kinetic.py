@@ -298,6 +298,7 @@ GRAPHITE = np.array([0.09, 0.1, 0.12], np.float32)
 AMBER = np.array([1.0, 0.6, 0.29], np.float32)
 AMBER_HOT = np.array([1.0, 0.8, 0.56], np.float32)
 COLD = np.array([0.78, 0.86, 1.0], np.float32)
+COAT_DARK = np.array([0.045, 0.05, 0.06], np.float32)
 
 
 class Kinetic:
@@ -818,6 +819,8 @@ class Kinetic:
                 img = fx.over(img, self.color, m)
             elif kind == "coat":
                 img = fx.over(img, GRAPHITE, m * 0.92)
+            elif kind == "coatdark":                        # the coats at their heaviest
+                img = fx.over(img, COAT_DARK, np.clip(m * 1.1, 0, 1))
             elif kind == "cold":                            # the coats' type as cold light
                 img = fx.add(img, COLD, m * 1.1)
             elif kind == "coldhalo":

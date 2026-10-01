@@ -752,10 +752,11 @@ BUT_SHOTS = {
     80: dict(dy=130, exit_at=325.9,                                      # lower left, held so END
              set=[([0], 1.0, 0), ([1], 2.3, 30, {"stretch": True}),     # can be read: but FOREVER...
                   ([2, 3, 4, 5], 1.0, 60),                             # always comes to an
-                  ([6], 2.0, 60, {"voice": "coats", "kind": "coat"})]),   # END: their ink
+                  ([6], 2.3, 60, {"voice": "coats", "kind": "coatdark", "key": "coats_bold"})]),   # END
     81: dict(dy=-250, no_separate=True,                                  # upper right, beside it
              set=[([0, 1], 1.0, 560),                                  # when the
-                  ([2], 2.0, 560, {"voice": "coats", "kind": "coat", "bare": True}),   # COATS
+                  ([2], 2.3, 560, {"voice": "coats", "kind": "coatdark", "key": "coats_bold",
+                                   "bare": True}),                     # COATS
                   ([3, 4, 5], 1.0, 600), ([6], 2.2, 600)]),            # come round the BEND
 }
 
@@ -780,7 +781,16 @@ def but(t, T, lines):
     # 'But...' in her light, frozen with the run, dissolving into the white
     img = kin(T, "But...#light", [78], BUT_I_SHOTS, light=True, hold=0.0).draw(img, t)
     L = img.mean(-1, keepdims=True)
-    img = img * (1 - drain) + (L * 0.25 + 0.72) * drain        # colour drains, bleaches
+    cold_white = np.array([0.95, 0.975, 1.0], np.float32)
+    img = img * (1 - drain) + (L * 0.22 + 0.66) * cold_white * drain   # drains to a cold, heavy white
+    # from END the white closes in: the edges darken and stay dark into the silence
+    end_t = word_at(T, 80, "end")
+    close = 0.0 if end_t is None else smooth(ramp(t, end_t, end_t + 2.2))
+    coats_t = word_at(T, 81, "coats")
+    close = max(close, 0.0 if coats_t is None else 1.4 * smooth(ramp(t, coats_t, coats_t + 2.5)))
+    if close > 0.01:
+        img = fx.vignette(img, 0.25 + 0.45 * close, "#1A1D22")
+        img = img * (1 - 0.1 * close)
     # 'round the bend': one hard cold sweep of light
     bend = word_at(T, 81, "bend")
     if bend is not None and t >= bend - 0.3:
