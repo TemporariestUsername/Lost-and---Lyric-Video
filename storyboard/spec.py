@@ -160,10 +160,14 @@ SECTIONS = {
              "glint appears on “bullet” and stays."),
     "Spoken II: I won't lose you": dict(
         world="memory",
-        visual="His words as light again. The three shafts re-open around "
-               "her.",
-        type="His voice, as Spoken I.",
-        sync="Shafts re-open on the word onsets."),
+        visual="His answer to the coats' verdict. Near-dark, the bullet still "
+               "sharp on the floor. On “together” all three of his shafts "
+               "pour open at once.",
+        type="His voice, still warm light: I WON'T LOSE YOU, then TOGETHER "
+             "large in the shafts, and “we'll find you the” TIME, his "
+             "time answering their “not worth the time”.",
+        sync="The words re-timed to when he says them; the shafts open on "
+             "“together”."),
     "The Run": dict(
         world="run",
         visual="The only warm, fast section. Sodium and neon smear into "

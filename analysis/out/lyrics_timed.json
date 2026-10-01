@@ -3065,36 +3065,36 @@
    "line": 66,
    "text": "\"I won't lose you.",
    "stanza": 8,
-   "start": 273.81,
-   "end": 275.99,
+   "start": 274.5,
+   "end": 275.6,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "\"I",
-     "start": 273.81,
-     "end": 274.67,
+     "start": 274.5,
+     "end": 274.6,
      "matched": true,
      "backing": false
     },
     {
      "text": "won't",
-     "start": 274.67,
-     "end": 274.93,
+     "start": 274.6,
+     "end": 274.85,
      "matched": true,
      "backing": false
     },
     {
      "text": "lose",
-     "start": 274.93,
-     "end": 275.19,
+     "start": 274.85,
+     "end": 275.15,
      "matched": true,
      "backing": false
     },
     {
      "text": "you.",
-     "start": 275.19,
-     "end": 275.99,
+     "start": 275.15,
+     "end": 275.6,
      "matched": true,
      "backing": false
     }
@@ -3104,15 +3104,15 @@
    "line": 67,
    "text": "Together, we'll find you the time.\"",
    "stanza": 8,
-   "start": 275.99,
+   "start": 277.05,
    "end": 279.69,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Together,",
-     "start": 275.99,
-     "end": 277.49,
+     "start": 277.05,
+     "end": 277.75,
      "matched": true,
      "backing": false
     },

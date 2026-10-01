@@ -529,15 +529,38 @@ SPOKEN_SHOTS = {
 }
 
 
-def spoken(name, reopen=None, shots=None):
+SPOKEN_II_SHOTS = {                    # his answer to 'not worth the time'
+    66: dict(voice="him", rows_at=[([0, 1, 2, 3], beam_x(0, 400), 400, 1.2)]),               # I won't lose you
+    67: dict(voice="him", rows_at=[([0], beam_x(1, 600), 600, 2.2, {"tracking": 0.16}),       # TOGETHER
+                                   ([1, 2, 3, 4], beam_x(2, 730), 730, 1.0),                  # we'll find you the
+                                   ([5], beam_x(2, 850), 850, 2.0, {"tracking": 0.16})]),     # TIME
+}
+
+
+def spoken(name, reopen=None, shots=None, after=None):
+    """`after`: the section before, whose last words finish leaving; the bullet
+    stays in the room once it has appeared."""
     def scene(t, T, lines):
         img = base_night(t, T, lift=0.7)
         opens = virtue_opens(T) if reopen is None else [reopen(T, i) for i in range(3)]
         img = look.beams(img, t, T, [None] * 3, src=BEAM_SRC, open_times=opens,
                          targets=BEAM_TARGETS, strength=0.85)
+        if after:
+            prev_name, prev_lines, prev_shots = after
+            K0 = kin(T, prev_name, prev_lines, prev_shots, light=True)
+            for n in prev_lines:
+                tt = K0.plan[n].get("title_t")
+                if tt is not None:
+                    e0 = K0.plan[n]["life"][1]
+                    img = title_ghost(img, 0.26 * (1 - smooth(ramp(t, e0 + 0.1, e0 + 0.9))))
+            img = K0.draw(img, t)
         sh = shots or {n: dict(voice="him") for n in lines}
         img = kin(T, name, lines, sh, voice="him", hold=1.6).draw(img, t)
-        return img, post("night", exposure=0.95, ghosts=())   # still words: no ghost copies
+        p = post("night", exposure=0.95, ghosts=())   # still words: no ghost copies
+        bt = word_at(T, 59, "bullet")
+        if bt is not None and t >= bt:
+            p["bullet"] = (1470, 925, 1.9)
+        return img, p
     return scene
 
 

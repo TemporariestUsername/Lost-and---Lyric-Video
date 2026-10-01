@@ -1,5 +1,5 @@
 {
-  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR. Line 20 words 4-5 ('forever, forever'): Whisper stretched the first to 2.2 s and squeezed the second into 0.5 s before 'Throw'. Pitch tracking (voiced 86.62-87.54 and 88.19-89.25) and two tight Whisper re-runs (86.4-87.6 / 88.0-89.2) agree; pinned to the consensus. Word pins from the vocal-stem timing check (analysis/out/timing_check.md): line 11 'But' starts after dead silence at 56.0; line 18 'and' ends ~81.6 and 'ever' enters at 82.6; line 22 backing 'again, again' land on the kicks at 96.4 / 97.3; line 23 second 'forever' enters out of silence at 103.1 with 'again' at 103.5; line 26 'The' starts at 117.1. Lines 28/30 'stab stab the': Whisper had the stabs 0.2-0.35 s late (the burns key off them); pinned to the 'st' attacks on the vocal stem (124.97/125.42, 131.97/132.46). Line 26 'said' is held on B3 until 119.5; line 27 'We've found' comes after the silence at 120.2 / 120.45 (Whisper had 'We've' at 118.69, inside 'said'). Spoken I (lines 44/45) is spoken, unpitched: 'I' starts at 184.0 after silence, 'trusting' at 187.45 and 'Even' at 191.05 (Whisper stretched each back into the silence). phase_continue: sections whose lines are pickups keep the previous section's bar phase. Lines 50/52 (White Coats II chant): scribble/stab/the pinned to their attacks on the vocal stem. A gun and a bullet (58-64): every phrase starts after a clear silence that Whisper stretched the first word back into; pinned to the onsets on the vocal stem.",
+  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR. Line 20 words 4-5 ('forever, forever'): Whisper stretched the first to 2.2 s and squeezed the second into 0.5 s before 'Throw'. Pitch tracking (voiced 86.62-87.54 and 88.19-89.25) and two tight Whisper re-runs (86.4-87.6 / 88.0-89.2) agree; pinned to the consensus. Word pins from the vocal-stem timing check (analysis/out/timing_check.md): line 11 'But' starts after dead silence at 56.0; line 18 'and' ends ~81.6 and 'ever' enters at 82.6; line 22 backing 'again, again' land on the kicks at 96.4 / 97.3; line 23 second 'forever' enters out of silence at 103.1 with 'again' at 103.5; line 26 'The' starts at 117.1. Lines 28/30 'stab stab the': Whisper had the stabs 0.2-0.35 s late (the burns key off them); pinned to the 'st' attacks on the vocal stem (124.97/125.42, 131.97/132.46). Line 26 'said' is held on B3 until 119.5; line 27 'We've found' comes after the silence at 120.2 / 120.45 (Whisper had 'We've' at 118.69, inside 'said'). Spoken I (lines 44/45) is spoken, unpitched: 'I' starts at 184.0 after silence, 'trusting' at 187.45 and 'Even' at 191.05 (Whisper stretched each back into the silence). phase_continue: sections whose lines are pickups keep the previous section's bar phase. Lines 50/52 (White Coats II chant): scribble/stab/the pinned to their attacks on the vocal stem. A gun and a bullet (58-64): every phrase starts after a clear silence that Whisper stretched the first word back into; pinned to the onsets on the vocal stem. Spoken II (66/67) is spoken: 'I won't lose you' starts at 274.5 after silence; 'Together' at 277.05.",
   "lines": {
     "1": [
       16.92,
@@ -262,9 +262,34 @@
         271.97,
         272.8
       ]
+    },
+    "66": {
+      "0": [
+        274.5,
+        274.6
+      ],
+      "1": [
+        274.6,
+        274.85
+      ],
+      "2": [
+        274.85,
+        275.15
+      ],
+      "3": [
+        275.15,
+        275.6
+      ]
+    },
+    "67": {
+      "0": [
+        277.05,
+        277.75
+      ]
     }
   },
   "phase_continue": [
-    "Spoken I: I can help you find"
+    "Spoken I: I can help you find",
+    "Spoken II: I won't lose you"
   ]
 }
