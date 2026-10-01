@@ -179,8 +179,8 @@ SECTIONS = {
                "sung outright: “lost and found” set plainly in the title's "
                "place, then its words slide past each other into “found and "
                "lost...”.",
-        type="Her voice as warm light. ran... ran... ran... stepping across the "
-             "frame; FOREVER / EVER; TUNNEL / MOTEL; LOST / LOST; each OTHER; "
+        type="Her voice as warm light. Four RANs, no ellipses, scattered "
+             "across the frame; FOREVER / EVER; TUNNEL / MOTEL; LOST / LOST; each OTHER; "
              "FOUND with its echo; the title, then its reversal; forever and "
              "ever and ever stepping down.",
         sync="Words re-timed where Whisper ran them together; the bars land on "
@@ -248,7 +248,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("the_run", "The Run",
-     "The one time they are free. Warm and fast, but nothing pulses and nothing comes at the viewer: speed is sideways (long-exposure streaks, motel and diner photographs rushing past, light trails behind her words). No tally marks: time isn't counted here. ran... ran... ran... steps across the frame; FOREVER / EVER; TUNNEL / MOTEL; 'lost' turns good (LOST / LOST, lost in each OTHER); FOUND with its echo. Then the title is sung outright: 'lost and found' set plainly in the title's place, and its words slide past each other into 'found and lost...'. 'Forever and ever and ever' steps down and lets go before 'But...'.",
+     "The one time they are free. Warm and fast, but nothing pulses and nothing comes at the viewer: speed is sideways (long-exposure streaks, motel and diner photographs rushing past, light trails behind her words). No tally marks: time isn't counted here. four 'ran's (no ellipses) scattered across the frame; FOREVER / EVER; TUNNEL / MOTEL; 'lost' turns good (LOST / LOST, lost in each OTHER); FOUND with its echo. Then the title is sung outright: 'lost and found' set plainly in the title's place, and its words slide past each other into 'found and lost...'. 'Forever and ever and ever' steps down and lets go before 'But...'.",
     ),
     ("spoken_ii", "Spoken II: I won't lose you",
      "His answer to the coats' verdict. The 'found her...' from the hunt finishes leaving; near-dark. I WON'T LOSE YOU in his still light; on 'together' all three shafts pour open at once (not one per word as in Spoken I), and 'we'll find you the' TIME sits in them: his time answering their 'not worth the time'. Words re-timed to when he says them.",

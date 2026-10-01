@@ -707,10 +707,11 @@ def gun_and_bullet(t, T, lines):
 # title is sung outright: 'lost and found' plain in the title's place, then
 # the words slide past each other into 'found and lost'.
 RUN_SHOTS = {
-    69: dict(rows_at=[([0, 1], 150, 420, 1.0, {"left": True}),                      # and they
-                      ([2], 150, 560, 1.7, {"left": True, "key": "her_roman"}),     # ran...
-                      ([3], 560, 560, 1.7, {"left": True, "key": "her_roman"}),     #   ran...
-                      ([4], 970, 560, 1.7, {"left": True, "key": "her_roman"})]),   #     ran...
+    69: dict(rows_at=[([0, 1], 150, 300, 1.0, {"left": True}),                        # and they
+                      ([2], 190, 520, 1.8, {"left": True, "key": "her_roman", "bare": True}),   # ran
+                      ([3], 640, 330, 1.25, {"left": True, "key": "her_roman", "bare": True}),  #  ran
+                      ([4], 430, 790, 2.2, {"left": True, "key": "her_roman", "bare": True}),   # ran
+                      ([5], 700, 610, 1.5, {"left": True, "key": "her_roman", "bare": True})]), # ran: scattered
     70: dict(hero=[0, 2], stretch_both=True),                                       # FOREVER / EVER
     71: dict(hero=[2, 4], nopop=True),                                              # TUNNEL / MOTEL
     72: dict(hero=[0, 3], nopop=True),                                              # LOST / LOST

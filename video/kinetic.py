@@ -428,6 +428,8 @@ class Kinetic:
                                    role="hero" if scale > 1.3 else "word")
                         upd.update(fl)
                         byk[k].update(upd)
+                        if byk[k].get("bare"):               # no trailing ellipsis
+                            byk[k]["word"]["disp"] = byk[k]["word"]["disp"].rstrip(".\u2026")
                         x += wd + gapw
             if ov.get("overstrike"):                 # the repeat is typed over the first:
                 ws = [o for o in placed if o["role"] in ("word", "hero")]   # True = second half

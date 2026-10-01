@@ -3155,10 +3155,10 @@
   },
   {
    "line": 69,
-   "text": "And they ran... ran... ran...",
+   "text": "And they ran... ran... ran... ran...",
    "stanza": 9,
    "start": 284.78,
-   "end": 288.57,
+   "end": 289.05,
    "support": 1.0,
    "pinned": true,
    "words": [
@@ -3178,22 +3178,29 @@
     },
     {
      "text": "ran...",
-     "start": 286.37,
-     "end": 286.97,
+     "start": 286.3,
+     "end": 287.1,
      "matched": true,
      "backing": false
     },
     {
      "text": "ran...",
-     "start": 287.29,
-     "end": 287.73,
+     "start": 287.35,
+     "end": 287.7,
      "matched": true,
      "backing": false
     },
     {
      "text": "ran...",
-     "start": 288.57,
-     "end": 288.57,
+     "start": 287.8,
+     "end": 288.55,
+     "matched": true,
+     "backing": false
+    },
+    {
+     "text": "ran...",
+     "start": 288.65,
+     "end": 289.05,
      "matched": true,
      "backing": false
     }
@@ -3203,15 +3210,15 @@
    "line": 70,
    "text": "Forever and ever.",
    "stanza": 9,
-   "start": 289.15,
+   "start": 289.1,
    "end": 291.2,
    "support": 1.0,
    "pinned": true,
    "words": [
     {
      "text": "Forever",
-     "start": 289.15,
-     "end": 289.15,
+     "start": 289.1,
+     "end": 289.65,
      "matched": true,
      "backing": false
     },
