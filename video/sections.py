@@ -749,12 +749,14 @@ def the_run(t, T, lines):
 # back) in the silence before they speak.
 BUT_I_SHOTS = {78: dict(set=[([0], 2.6, 60)], dy=-230)}                       # BUT... alone, in her light
 BUT_SHOTS = {
-    80: dict(set=[([0], 1.0, 0), ([1], 2.3, 30, {"stretch": True}),     # but FOREVER...
+    80: dict(dy=130, exit_at=325.9,                                      # lower left, held so END
+             set=[([0], 1.0, 0), ([1], 2.3, 30, {"stretch": True}),     # can be read: but FOREVER...
                   ([2, 3, 4, 5], 1.0, 60),                             # always comes to an
                   ([6], 2.0, 60, {"voice": "coats", "kind": "coat"})]),   # END: their ink
-    81: dict(set=[([0, 1], 1.0, 0),                                    # when the
-                  ([2], 2.0, 0, {"voice": "coats", "kind": "coat", "bare": True}),   # COATS
-                  ([3, 4, 5], 1.0, 40), ([6], 2.2, 40)]),              # come round the BEND
+    81: dict(dy=-90, no_separate=True,                                   # upper right, beside it
+             set=[([0, 1], 1.0, 560),                                  # when the
+                  ([2], 2.0, 560, {"voice": "coats", "kind": "coat", "bare": True}),   # COATS
+                  ([3, 4, 5], 1.0, 600), ([6], 2.2, 600)]),            # come round the BEND
 }
 
 
