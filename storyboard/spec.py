@@ -120,9 +120,14 @@ SECTIONS = {
              "spoken onsets); nothing moves on the beat."),
     "Break II": dict(
         world="memory",
-        visual="The three shafts breathe; dust turns gold inside them.",
-        type="No lyric.",
-        sync="Shaft brightness on kicks."),
+        visual="His three shafts stay after his words, breathing slowly. Dust "
+               "drifts down inside them; when she answers with a wordless held "
+               "note it turns gold and lifts. Just before the coats return, one "
+               "flicker of the future: the shafts being cut.",
+        type="No lyric. His last line finishes leaving.",
+        sync="The shafts breathe over two bars, not on the beat; the gold "
+             "swells with her held note (3:24.4-3:28.3); the glimpse lands "
+             "on its last onset."),
     "White Coats II": dict(
         world="institute",
         visual="Colder, brighter, faster flicker. The etched chant starts to "

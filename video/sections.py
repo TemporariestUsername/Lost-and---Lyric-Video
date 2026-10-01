@@ -529,13 +529,53 @@ def spoken(name, reopen=None, shots=None):
     return scene
 
 
-def break_threads(t, T, lines):
-    img = base_night(t, T, lift=0.8)
-    breathe = 0.75 + 0.25 * T.pulse_env(t, 3.0)
-    img = look.beams(img, t, T, [None] * 3, targets=(690, 860, 1030), strength=breathe)
-    img = draw_mems(img, t, mems(T, "Break II", ["rain_glass_lights", "fog_lamps"], every=2,
-                                 life=10.0, seed=37, keep_left=900), warm=0.6)
-    return img, post("night")
+# ================================================================ Break II
+# His three shafts stay after his words and breathe. Dust drifts down inside
+# them; when she answers with a wordless held note (vocal stem: 204.35-208.35)
+# it turns gold and lifts. One flicker of the future (the shafts being cut)
+# just before the coats come back on 'But'.
+HUM = (204.35, 208.35)
+
+
+def shaft_motes(img, t, strength, gold, lift, seed=91, n=70):
+    """Dust inside the three shafts: drifting down the beam, rising with `lift`."""
+    if strength <= 0.01:
+        return img
+    r = np.random.default_rng(seed)
+    span = H + 60 - BEAM_SRC[1]
+
+    def draw(c):
+        for k in range(3):
+            s0, lat = r.uniform(0, 1, n), r.normal(0, 0.4, n)
+            sp, ph, rad = r.uniform(0.008, 0.022, n), r.uniform(0, 6.28, n), r.uniform(1.6, 4.2, n)
+            for i in range(n):
+                fall = sp[i] * (t - 190.0) * (1 - 1.8 * lift)     # falls; lifts on her note
+                u = (s0[i] + fall) % 1.0
+                y = BEAM_SRC[1] + u * span
+                x = beam_x(k, y) + lat[i] * 62 * (0.3 + 0.7 * u) + 9 * math.sin(t * 0.4 + ph[i])
+                a = (0.45 + 0.55 * math.sin(t * 0.9 + ph[i]) ** 2) * min(1.0, u * 4)
+                c.drawCircle(x, y, rad[i], skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, a)))
+    m = fx.blur(fx.skia_alpha(draw), 1.3)
+    col = fx.hexc("#E9E3DC") * (1 - gold) + fx.hexc("#FFC266") * gold
+    return img + col * (m * 1.25 * strength)[..., None]
+
+
+def break_ii(t, T, lines):
+    import visions as V
+    s = sec_of(T, "Break II")
+    hum = smooth(ramp(t, HUM[0], HUM[0] + 1.2)) * (1 - smooth(ramp(t, HUM[1] - 0.3, HUM[1] + 0.3)))
+    breath = 1 + 0.12 * math.sin(2 * math.pi * (t - s["start"]) / 6.8)   # slow, not on the beat
+    img = base_night(t, T, lift=0.7 + 0.15 * hum)
+    img = look.beams(img, t, T, [None] * 3, src=BEAM_SRC, targets=BEAM_TARGETS,
+                     strength=0.85 * breath * (1 + 0.25 * hum))
+    gold = clamp01(0.15 + 0.5 * smooth(ramp(t, s["start"], HUM[0])) + 0.5 * hum)
+    img = shaft_motes(img, t, smooth(ramp(t, s["start"] - 0.5, s["start"] + 2.0)) * (1 + 0.6 * hum),
+                      gold, hum)
+    img = V.glimpse(img, t, "cutting", 207.63, strength=0.3, hold=0.1, decay=0.55)   # the future, once
+    # his last words finish leaving
+    img = kin(T, "Spoken I: I can help you find", range(44, 46), SPOKEN_SHOTS, voice="him",
+              hold=1.6).draw(img, t)
+    return img, post("night", exposure=0.95, ghosts=())
 
 
 GUN_SHOTS = {58: dict(style="track", hero=2), 59: dict(style="track", hero=10),
