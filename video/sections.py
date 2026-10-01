@@ -537,20 +537,36 @@ def spoken(name, reopen=None, shots=None):
 HUM = (204.35, 208.35)
 
 
-def shaft_motes(img, t, strength, gold, lift, seed=91, n=70):
-    """Dust inside the three shafts: drifting down the beam, rising with `lift`."""
+def hum_env(t):
+    """Her wordless held note, as an envelope."""
+    return smooth(ramp(t, HUM[0], HUM[0] + 1.2)) * (1 - smooth(ramp(t, HUM[1] - 0.3, HUM[1] + 0.3)))
+
+
+def mote_travel(t, t0=190.0):
+    """How far the dust has fallen by t: it falls at speed 1, slows on her
+    note to a hover and then a gentle rise (speed 1 - 1.3 * hum), integrated
+    so the change is a glide, never a jump."""
+    if t <= t0:
+        return t - t0
+    ts = np.linspace(t0, t, max(2, int((t - t0) * 30)))
+    v = np.array([1 - 1.3 * hum_env(x) for x in ts])
+    return float(np.sum((v[1:] + v[:-1]) * 0.5 * np.diff(ts)))
+
+
+def shaft_motes(img, t, strength, gold, seed=91, n=70):
+    """Dust inside the three shafts: her, made visible only by his light."""
     if strength <= 0.01:
         return img
     r = np.random.default_rng(seed)
     span = H + 60 - BEAM_SRC[1]
+    travel = mote_travel(t)
 
     def draw(c):
         for k in range(3):
             s0, lat = r.uniform(0, 1, n), r.normal(0, 0.4, n)
             sp, ph, rad = r.uniform(0.008, 0.022, n), r.uniform(0, 6.28, n), r.uniform(1.6, 4.2, n)
             for i in range(n):
-                fall = sp[i] * (t - 190.0) * (1 - 1.8 * lift)     # falls; lifts on her note
-                u = (s0[i] + fall) % 1.0
+                u = (s0[i] + sp[i] * travel) % 1.0
                 y = BEAM_SRC[1] + u * span
                 x = beam_x(k, y) + lat[i] * 62 * (0.3 + 0.7 * u) + 9 * math.sin(t * 0.4 + ph[i])
                 a = (0.45 + 0.55 * math.sin(t * 0.9 + ph[i]) ** 2) * min(1.0, u * 4)
@@ -563,14 +579,14 @@ def shaft_motes(img, t, strength, gold, lift, seed=91, n=70):
 def break_ii(t, T, lines):
     import visions as V
     s = sec_of(T, "Break II")
-    hum = smooth(ramp(t, HUM[0], HUM[0] + 1.2)) * (1 - smooth(ramp(t, HUM[1] - 0.3, HUM[1] + 0.3)))
+    hum = hum_env(t)
     breath = 1 + 0.12 * math.sin(2 * math.pi * (t - s["start"]) / 6.8)   # slow, not on the beat
     img = base_night(t, T, lift=0.7 + 0.15 * hum)
     img = look.beams(img, t, T, [None] * 3, src=BEAM_SRC, targets=BEAM_TARGETS,
                      strength=0.85 * breath * (1 + 0.25 * hum))
     gold = clamp01(0.15 + 0.5 * smooth(ramp(t, s["start"], HUM[0])) + 0.5 * hum)
     img = shaft_motes(img, t, smooth(ramp(t, s["start"] - 0.5, s["start"] + 2.0)) * (1 + 0.6 * hum),
-                      gold, hum)
+                      gold)
     img = V.glimpse(img, t, "cutting", 207.63, strength=0.3, hold=0.1, decay=0.55)   # the future, once
     # his last words finish leaving
     img = kin(T, "Spoken I: I can help you find", range(44, 46), SPOKEN_SHOTS, voice="him",
