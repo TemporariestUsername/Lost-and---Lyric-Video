@@ -846,11 +846,10 @@ def but(t, T, lines):
         k = int((t - t_but) / eighth) + 1
         cnt = min(n_now, n_run + k)
         catching = cnt < n_now
-        a_t = 0.85 * (1 - 0.45 * smooth(ramp(t, end_t or t_but, (end_t or t_but) + 3)))
-        a_t *= smooth(ramp(t, t_but, t_but + 0.9))                      # the old count returns
-        col = hexc("#C9C2CF") * (1 - flood) + hexc("#1C1E24") * flood   # light in the dark, ink on white
+        a_t = 0.42 * smooth(ramp(t, t_but, t_but + 0.9))                # the old count returns, faint
+        col = hexc("#6E6478") * (1 - flood) + hexc("#2A2D33") * flood   # a shade off the dark; ink on white
         img = look.tally(img, t, T, count=cnt if catching else None, alpha=a_t, color=col,
-                         blur=1.0, fade=1.0)
+                         blur=2.0, fade=0.8)
     p = post("run")
     p = _mix_post(p, post("night"), 1 - warmth)
     p = _mix_post(p, post("institute", exposure=1.02), flood)
