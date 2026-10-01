@@ -557,9 +557,6 @@ def spoken(name, reopen=None, shots=None, after=None):
         sh = shots or {n: dict(voice="him") for n in lines}
         img = kin(T, name, lines, sh, voice="him", hold=1.6).draw(img, t)
         p = post("night", exposure=0.95, ghosts=())   # still words: no ghost copies
-        bt = word_at(T, 59, "bullet")
-        if bt is not None and t >= bt:
-            p["bullet"] = (1470, 925, 1.9)
         return img, p
     return scene
 
@@ -652,6 +649,19 @@ GUN_SHOTS = {                                      # the hunt as their report, t
 }                                                                                 # lost and found her...
 
 
+def falling_bullet(t, T, end):
+    """From 'bullet' on, the bullet tumbles slowly down the centre of the frame,
+    in from above the top edge and out below the bottom as the section ends."""
+    t0 = word_at(T, 59, "bullet")
+    if t0 is None or t < t0 or t > end:
+        return None
+    u = (t - t0) / (end - t0)
+    y = -70 + (H + 140) * u
+    x = W / 2 + 10 * math.sin((t - t0) * 0.7)
+    rot = -8 + 62 * (t - t0)                      # a slow turn, end over end
+    return (x, y, 1.9, rot)
+
+
 def gun_and_bullet(t, T, lines):
     name = "A gun and a bullet"
     s = sec_of(T, name)
@@ -676,9 +686,9 @@ def gun_and_bullet(t, T, lines):
                               (1 - smooth(ramp(t, e0 + 0.1, e0 + 0.9))))
     img = K.draw(img, t, cam=(dx * 0.35, dy * 0.35))
     p = post("night")
-    bt = word_at(T, 59, "bullet")
-    if bt is not None and t >= bt:
-        p["bullet"] = (1470, 925, 1.9)
+    fb = falling_bullet(t, T, s["end"])
+    if fb:
+        p["bullet"] = fb
     # out of the coats' white into the night
     u = smooth(ramp(t, s["start"], s["start"] + 1.8))
     if u < 1:

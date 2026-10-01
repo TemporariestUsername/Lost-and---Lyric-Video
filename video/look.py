@@ -800,13 +800,13 @@ def beams(img, t, T, cut_times, src=(1780, -160), targets=(600, 820, 1040), colo
     return img
 
 
-def bullet(img_u8, x, y, scale=1.0):
+def bullet(img_u8, x, y, scale=1.0, rot=-8.0):
     """The only hard-focus object in the film. Drawn after all softening."""
     s = skia.Surface(W, H)
     c = s.getCanvas()
     c.clear(skia.ColorTRANSPARENT)
     c.translate(x, y)
-    c.rotate(-8)
+    c.rotate(rot)
     c.scale(scale, scale)
     body = skia.RRect.MakeRectXY(skia.Rect(-26, -7, 18, 7), 2, 2)
     grad = skia.GradientShader.MakeLinear([(0, -7), (0, 7)],

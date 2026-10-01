@@ -160,8 +160,7 @@ SECTIONS = {
              "glint appears on “bullet” and stays."),
     "Spoken II: I won't lose you": dict(
         world="memory",
-        visual="His answer to the coats' verdict. Near-dark, the bullet still "
-               "sharp on the floor. On “together” all three of his shafts "
+        visual="His answer to the coats' verdict. Near-dark. On “together” all three of his shafts "
                "pour open at once.",
         type="His voice, still warm light: I WON'T LOSE YOU, then TOGETHER "
              "large in the shafts, and “we'll find you the” TIME, his "
@@ -242,10 +241,10 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("spoken_ii", "Spoken II: I won't lose you",
-     "His answer to the coats' verdict. The 'found her...' from the hunt finishes leaving; near-dark, the bullet still sharp on the floor. I WON'T LOSE YOU in his still light; on 'together' all three shafts pour open at once (not one per word as in Spoken I), and 'we'll find you the' TIME sits in them: his time answering their 'not worth the time'. Words re-timed to when he says them.",
+     "His answer to the coats' verdict. The 'found her...' from the hunt finishes leaving; near-dark. I WON'T LOSE YOU in his still light; on 'together' all three shafts pour open at once (not one per word as in Spoken I), and 'we'll find you the' TIME sits in them: his time answering their 'not worth the time'. Words re-timed to when he says them.",
     ),
     ("gun_and_bullet", "A gun and a bullet",
-     "Revised for suspense: until the final 'he found her...', every line is the coats' cold typed monospace, their report of the hunt, typed as it is sung, with a cursor that waits and blinks through each silence. The night darkens as he closes in; the bullet glint stays the one sharp thing. The last 'found her...' returns to her voice in the title's space behind the unreadable smudge.",
+     "Revised for suspense: until the final 'he found her...', every line is the coats' cold typed monospace, their report of the hunt, typed as it is sung, with a cursor that waits and blinks through each silence. The night darkens as he closes in; the falling bullet is the one sharp thing. The last 'found her...' returns to her voice in the title's space behind the unreadable smudge.",
     ),
     ("white_coats_ii", "White Coats II",
      "Escalation. A hard cut from his gold shafts back to the white on 'But': BUT held alone, then 'with time with time' overstruck. Colder, brighter and more scratched than White Coats I. LOST ('this girl is too lost'); the stab chant slams in and is slashed as before (re-timed to the sung attacks); HARD ('too hard to find'); the verdict FOUND / WORTH (the title's word in their mouths), and once 'we found she isn't worth the time' has been read, the frame swells to near-white on 'time'. Ends on FIND, rhyming with White Coats I.",
