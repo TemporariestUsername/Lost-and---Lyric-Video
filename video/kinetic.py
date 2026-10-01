@@ -399,7 +399,23 @@ class Kinetic:
                                    stretch=False)
                         upd.update(fl)
                         o.update(upd)
+                        if o.get("bare"):                    # no trailing ellipsis
+                            o["word"]["disp"] = o["word"]["disp"].rstrip(".\u2026")
                         x += font(key, size).measureText(o["word"]["disp"]) + size * 0.28
+            if ov.get("diffuse"):                    # words that let go after they are sung:
+                dfo = ov["diffuse"]                  # keep=[i], after=i, backing=True, delay, dur
+                lw = T.lines[n]["words"]
+                keep = {(lw[k]["start"], lw[k]["text"]) for k in dfo.get("keep", ())}
+                base_t = lw[dfo["after"]]["start"] if "after" in dfo else None
+                for o in placed:
+                    if o["role"] not in ("word", "hero", "backing"):
+                        continue
+                    if dfo.get("backing") and o["role"] != "backing":
+                        continue
+                    if (o["word"]["start"], o["word"]["text"]) in keep:
+                        continue
+                    t0 = (base_t if base_t is not None else o["word"]["start"]) + dfo.get("delay", 0.5)
+                    o["diffuse"] = (max(t0, o["word"]["start"] + 0.5), dfo.get("dur", 2.5))
             if ov.get("stretch_both"):               # both heroes open slowly; nothing punches
                 for o in placed:
                     if o["role"] == "hero":
@@ -535,8 +551,8 @@ class Kinetic:
                 w = o["word"]
                 v = o.get("voice", p["voice"])         # a word may speak in another voice
                 push = 1.0 if v == "coats" else push_line
-                kind = {"her": "lit" if self.light else "ink",
-                        "coats": "cold" if self.light else "coat", "him": "warm"}[v]
+                kind = o.get("kind") or {"her": "lit" if self.light else "ink",
+                                         "coats": "cold" if self.light else "coat", "him": "warm"}[v]
                 txt = w["disp"] if (o["role"] != "ghost_hero" or v != "her") else w["disp"].lower()
                 f = font(o["key"], o["size"])
                 dur = max(0.18, w["end"] - w["start"])
@@ -637,6 +653,9 @@ class Kinetic:
                         sc *= pop
                     if o.get("rise") and t >= w["start"]:     # reaching: lifts slowly as it opens
                         sy -= 30 * ease_out(clamp01((t - w["start"]) / 5.0), 2)
+                    if o.get("diffuse"):                     # lets go: blurs, lifts and fades
+                        d0, dd = o["diffuse"]
+                        a *= 1 - smooth(ramp(t, d0, d0 + dd))
                     if v == "her":
                         gone = 1 - a / max(base_a * u, 1e-3)      # how far unwritten
                         sig = (1 - u) * 9 + 16 * gone + (4 if o["role"] == "ghost_hero" else 0)
@@ -649,6 +668,8 @@ class Kinetic:
                         sig = (1 - u) * 4 + ex * 6
                     if a > 0.004:
                         put(kind, sig, (ch, sx, sy, f, sc, a))
+                        if kind == "coat" and self.light:        # coats' ink in the dark: a cold
+                            put("coldhalo", 24, (ch, sx, sy, f, sc, a))   # patch of their light behind
                         if o["role"] in ("word", "hero") and ex < 0.5 and v == "her":
                             halo.append((ch, sx, sy, f, sc, a * 0.9))
                         g_age = t - cs
@@ -693,6 +714,8 @@ class Kinetic:
                 img = fx.over(img, GRAPHITE, m * 0.92)
             elif kind == "cold":                            # the coats' type as cold light
                 img = fx.add(img, COLD, m * 1.1)
+            elif kind == "coldhalo":
+                img = fx.add(img, COLD, np.clip(m * 0.9, 0, 0.32))
             elif kind == "lit":
                 img = fx.add(img, np.array([1.0, 0.93, 0.86], np.float32), m * 1.25)
             else:                                           # warm

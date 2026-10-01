@@ -102,7 +102,8 @@ SECTIONS = {
                "him and then again for her.",
         type="Her voice as light. COULD FIND / HARD TO FIND, the second only "
              "seeping in; HE FOUND apart from \u201cin the end\u201d; VERY; "
-             "FOREVER reaching, EVER... typed in the coats' cold monospace. "
+             "FOREVER reaching then letting go; EVER typed in the coats' dark grey "
+             "monospace and left alone. "
              "“in her” and “in him” echo from the same place.",
         sync="The warmth advances a step per bar; the flare lands on "
              "“VERY”; “lost and” surfaces on “oh he / oh she”."),
@@ -218,7 +219,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("brought_a_man", "They brought a man",
-     "Revised: COULD FIND set against HARD TO FIND (the second only seeping in); HE FOUND / SHE FOUND stand apart from 'And in the end'; the 'lost and' before each completing 'found...' is now only a blurred smudge of light, not readable on a first watch; FOREVER reaches (her warm light, rising slowly and opening) while EVER... traps (typed in the coats' cold monospace, flickering, perfectly still). Unchanged: white drains into his night; VERY; 'in her' / 'in him' from the same place.",
+     "Latest: 'in her' diffuses away after it is sung; in 'Her forever And ever in him' everything but EVER lets go (blurs, lifts and fades) as EVER lands, and EVER stays: no ellipsis, in the coats' dark grey ink on a faint patch of their cold light. Also: COULD FIND against HARD TO FIND; HE FOUND / SHE FOUND apart from 'in the end'; the 'lost and' before each completing 'found...' only a blurred smudge; FOREVER reaching in her warm light.",
     ),
     ("white_coats_i", "White Coats I",
      "Latest: no punctuation on screen except ellipses (film-wide from now on). Each 'stab' slams in whole on its attack, big and out of line with the orderly 'scribble scribble', and startles: the frame jolts and the exposure hits down for an instant, with a straight pencil slash struck beneath. 'We've' waits for its real entry (2:00.2); LOST is the held word in 'We'll find out how lost she really is'; 'with time with time...' is typed over itself. The coats never move: typed on, still, blinked out. FOUND / LOST and SAFE / NICE pairs; ANYTHING, FIND; her tally surfaces during 'with time'.",

@@ -419,12 +419,14 @@ MAN_SHOTS = {
                   ([5], 1.0, 90), ([6, 7, 8], 2.1, 140, {"ghost": True})]),   # HARD TO FIND, seeping
     39: dict(set=[([0, 1, 2, 3], 1.0, 0), ([4, 5], 2.4, 180, {"gap": 40}),   # in the end... HE FOUND
                   ([6, 7], 1.0, 200)], title_word=8),                  # apart; 'found...' completes
-    40: dict(style="stack", hero=1, backing_at=(780, 330, 64)),        # VERY; (in her)
+    40: dict(style="stack", hero=1, backing_at=(780, 330, 64),         # VERY; (in her) diffuses
+             diffuse=dict(backing=True, delay=0.7, dur=2.4)),
     41: dict(set=[([0, 1, 2, 3], 1.0, 0), ([4, 5], 2.4, 180, {"gap": 40}),
                   ([6, 7], 1.0, 200)], title_word=8),                  # ...SHE FOUND
     42: dict(set=[([0], 1.0, 0), ([1], 2.6, 20, {"rise": True, "stretch": True}),   # FOREVER reaches;
-                  ([2], 1.0, 90), ([3], 1.7, 170, {"voice": "coats"})],              # EVER... traps
-             backing_at=(780, 330, 64)),                               # (in him)
+                  ([2], 1.0, 90), ([3], 2.3, 170, {"voice": "coats", "bare": True, "kind": "coat"})],
+             backing_at=(780, 330, 64),                                # EVER traps: the coats' grey
+             diffuse=dict(keep=[3], after=3, delay=0.3, dur=2.6)),     # ink; all else lets go
 }
 
 
