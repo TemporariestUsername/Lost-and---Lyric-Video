@@ -432,6 +432,11 @@ class Kinetic:
                         if byk[k].get("bare"):               # no trailing ellipsis
                             byk[k]["word"]["disp"] = byk[k]["word"]["disp"].rstrip(".\u2026")
                         x += wd + gapw
+            if ov.get("ellipsis"):                   # trail off like the others ('with time...')
+                last = max((o for o in placed if o["role"] in ("word", "hero")),
+                           key=lambda o: o["word"]["start"])
+                if not last["word"]["disp"].endswith("..."):
+                    last["word"]["disp"] += "..."
             if ov.get("overstrike"):                 # the repeat is typed over the first:
                 ws = [o for o in placed if o["role"] in ("word", "hero")]   # True = second half
                 pairs = ov["overstrike"]             # over first; or [(i, j), ...] word j over i

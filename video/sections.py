@@ -360,9 +360,9 @@ COATS_SHOTS = {
              strike=[6, 9]),                                                       # to find, struck
     87: dict(style="stack", hero=5,
              shock=dict(words=[2, 3], at=[(60, 150), (440, 255)], size=2.5)),
-    88: dict(style="track", hero=1, overstrike=True),
+    88: dict(style="track", hero=1, overstrike=True, ellipsis=True),
     89: dict(style="stack", hero=3),                                     # how LOST this girl
-    90: dict(style="track", hero=1, overstrike=True),
+    90: dict(style="track", hero=1, overstrike=True, ellipsis=True),
     91: dict(set=[([0, 1, 2, 3, 4], 1.0, 0), ([5, 6, 7], 1.0, 0),
                   ([8], 3.0, 0, {"key": "coats_bold", "kind": "coatdark"})]),     # ANYTHING
     92: dict(set=[([0], 2.4, 0, {"key": "coats_bold"}),                            # EXCEPT...
