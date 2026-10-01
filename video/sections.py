@@ -525,7 +525,7 @@ def spoken(name, reopen=None, shots=None):
                          targets=BEAM_TARGETS, strength=0.85)
         sh = shots or {n: dict(voice="him") for n in lines}
         img = kin(T, name, lines, sh, voice="him", hold=1.6).draw(img, t)
-        return img, post("night", exposure=0.95)
+        return img, post("night", exposure=0.95, ghosts=())   # still words: no ghost copies
     return scene
 
 
