@@ -241,6 +241,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("spoken_ii", "Spoken II: I won't lose you",
+     "His answer to the coats' verdict. The 'found her...' from the hunt finishes leaving; near-dark, the bullet still sharp on the floor. I WON'T LOSE YOU in his still light; on 'together' all three shafts pour open at once (not one per word as in Spoken I), and 'we'll find you the' TIME sits in them: his time answering their 'not worth the time'. Words re-timed to when he says them.",
+    ),
     ("gun_and_bullet", "A gun and a bullet",
      "Revised for suspense: until the final 'he found her...', every line is the coats' cold typed monospace, their report of the hunt, typed as it is sung, with a cursor that waits and blinks through each silence. The night darkens as he closes in; the bullet glint stays the one sharp thing. The last 'found her...' returns to her voice in the title's space behind the unreadable smudge.",
     ),
