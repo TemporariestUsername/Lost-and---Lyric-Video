@@ -235,6 +235,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("gun_and_bullet", "A gun and a bullet",
+     "His finding becomes a hunt. The coats' white drains into the night as their clock ('with time', overstruck, in their cold type) follows him into it. GUN and BULLET are set in their type; on 'bullet' the film's first sharp thing appears, a cold glint on the floor, and stays. 'And said' in her voice above their order, GO AND FIND THAT GIRL. DID, then 'he did...' only seeping in. On 'he found her' his light closes on her; the second time it stops short, and 'found' lands in the title's space behind the same unreadable smudge, with 'her...' after it. Every phrase re-timed to its sung onset.",
+    ),
     ("white_coats_ii", "White Coats II",
      "Escalation. A hard cut from his gold shafts back to the white on 'But': BUT held alone, then 'with time with time' overstruck. Colder, brighter and more scratched than White Coats I. LOST ('this girl is too lost'); the stab chant slams in and is slashed as before (re-timed to the sung attacks); HARD ('too hard to find'); the verdict FOUND / WORTH (the title's word in their mouths), and once 'we found she isn't worth the time' has been read, the frame swells to near-white on 'time'. Ends on FIND, rhyming with White Coats I.",
     ),
