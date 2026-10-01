@@ -96,7 +96,7 @@ POST = {
                 ghosts=((1.2, -160, 0, -5, 0.16), (2.4, 150, -10, 4, 0.10))),
     "night": dict(exposure=1.05, lift=0.07, sat=0.9, bloom=0.8, hal=0.8, thresh=0.62,
                   diffusion=0.2, grain=0.055, trail=0.6, shadow="#3A2F45",
-                  ghosts=((1.2, -140, 0, -4, 0.09), (2.4, 130, -8, 3, 0.05))),   # light type doubles easily
+                  ghosts=((1.2, -140, 0, -4, 0.045), (2.4, 130, -8, 3, 0.025))),   # light type doubles easily
     "institute": dict(exposure=1.02, lift=0.04, sat=0.5, bloom=0.7, hal=0.7, thresh=1.1,
                       diffusion=0.12, grain=0.06, trail=0.5, shadow="#7A8290",
                       ghosts=((0.8, -60, 0, 0, 0.14), (1.6, 60, 0, 0, 0.08))),
