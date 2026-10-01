@@ -34,6 +34,7 @@ STYLES = ["stack", "hero", "depth", "track"]
 
 BOX = (150, 170, 1000, 900)  # x0, y0, x1, y1: where a composition may live
 TRACK_MAX = 0.14             # widest letter-spacing a 'track' line opens to (em)
+TITLE_AT = (150, 830, 210)   # where 'lost and' is set when a word completes the title
 
 # voice -> (support font, hero font, caps, support size, hero size)
 VOICES = {
@@ -360,6 +361,27 @@ class Kinetic:
                 for a_, b_ in zip(ws[:half], ws[half:]):
                     b_.update(x=a_["x"] + 3, y=a_["y"] - 2, size=a_["size"], key=a_["key"],
                               tracking=a_["tracking"], role=a_["role"])
+            if ov.get("stretch_both"):               # both heroes open slowly; nothing punches
+                for o in placed:
+                    if o["role"] == "hero":
+                        o["stretch"], o["pop"] = True, False
+            if ov.get("title_word") is not None:     # this word completes the title: it is set
+                tw = T.lines[n]["words"][ov["title_word"]]   # in the space after 'lost and'
+                tx, ty, ts = TITLE_AT
+                ft = font("her_roman", ts)
+                gap = tx + sum(ft.measureText(ch) + 0.01 * ts for ch in "lost and") + ft.measureText(" ")
+                rest = []
+                for o in placed:
+                    if o["word"]["start"] == tw["start"] and o["word"]["text"] == tw["text"]:
+                        o.update(x=gap, y=ty, size=ts, key="her_roman", role="hero", title=True,
+                                 pop=False, stretch=False, z=1.0, tracking=0.0)
+                    elif o["role"] in ("word", "hero", "backing"):
+                        rest.append(o)
+                if rest:                             # the rest of the line sits above it
+                    low = max(o["y"] + o["size"] * 0.3 for o in rest)
+                    lift = min(0.0, ty - ts * 0.8 - 50 - low)
+                    for o in rest:
+                        o["y"] += lift
             for o in placed:
                 if o["role"] == "hero" and ov.get("ghost_second") and o.get("pop"):
                     o["pop"], o["ghost"] = False, True
@@ -370,6 +392,8 @@ class Kinetic:
                                    key=back[0]["key"], split=True)
             plan = dict(placed=placed, style=style, voice=v, opts=ov,
                         life=_lifetime(T, n, self.lines, hold))
+            if ov.get("title_word") is not None:
+                plan["title_t"] = T.lines[n]["words"][ov["title_word"]]["start"]
             if ov.get("rewind"):
                 order = sorted(((o["word"]["start"], pi, i) for pi, o in enumerate(placed)
                                 if o["role"] in ("word", "hero") for i in range(len(o["word"]["disp"]))))
@@ -388,6 +412,8 @@ class Kinetic:
     @staticmethod
     def _yspan(p):
         ws = [o for o in p["placed"] if o["role"] in ("word", "hero", "backing")]
+        if p.get("title_t") is not None:
+            ws = [o for o in ws if o.get("title")]
         return (min(o["y"] - o["size"] * 0.85 for o in ws), max(o["y"] + o["size"] * 0.3 for o in ws))
 
     def _separate(self, gap=36, top=150, bottom=960):
@@ -454,7 +480,7 @@ class Kinetic:
             age = t - a0
             cx, cy = BOX[0] + 120, (BOX[1] + BOX[3]) / 2
             if v == "her":                          # drifts; never comes toward the viewer
-                push = 1.0 + 0.004 * min(age, 8)
+                push = 1.0 + 0.004 * min(age, 8) if p.get("title_t") is None else 1.0
                 fly = 1.0
             elif v == "coats":
                 push = 1.0                              # typed and still: they never move
@@ -532,7 +558,10 @@ class Kinetic:
                             gt = e0 - 0.3 + 0.2 * _hash01(n, pi, i, 13)
                             dis = smooth(ramp(t, gt, gt + 0.3))
                         else:
-                            gt = e0 + 0.5 * _hash01(n, pi, i, 13)
+                            ew = e0
+                            if p.get("title_t") is not None and not o.get("title"):
+                                ew = min(e0, p["title_t"] + 0.35)
+                            gt = ew + 0.5 * _hash01(n, pi, i, 13)
                             dis = smooth(ramp(t, gt, gt + 0.45))
                         a = u * (1 - dis) * base_a
                         ex = 0.0

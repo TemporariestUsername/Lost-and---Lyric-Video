@@ -407,9 +407,42 @@ def coats(name, photos, seed):
     return scene
 
 
-MAN_SHOTS = {37: dict(style="stack", hero=3), 38: dict(style="depth", hero=4),
-             39: dict(style="track", hero=5), 40: dict(style="stack", hero=1),
-             41: dict(style="track", hero=5), 42: dict(style="hero", hero=1)}
+# ================================================================ They brought a man
+# The title's missing word arrives. 'lost and ___' has waited since the
+# intro; here 'found' is sung four times. Each second 'found...' is written
+# into the empty space after a faint 'lost and', so the title reads whole for
+# a moment, and again for her (recurrence). 'in her' / 'in him' echo from
+# the same place: the mirror.
+MAN_SHOTS = {
+    37: dict(style="stack", hero=3),                                   # MAN
+    38: dict(hero=[4, 8], ghost_second=True),                          # find / (hard to) find
+    39: dict(style="stack", hero=5, title_word=8),                     # he found, oh he found...
+    40: dict(style="stack", hero=1, backing_at=(780, 330, 64)),        # VERY; (in her)
+    41: dict(style="stack", hero=5, title_word=8),                     # she found, oh she found...
+    42: dict(hero=[1, 3], stretch_both=True, backing_at=(780, 330, 64)),   # FOREVER / EVER; (in him)
+}
+
+
+def title_ghost(img, a):
+    """'lost and' as light, where a word is about to complete it."""
+    if a <= 0.004:
+        return img
+    tx, ty, ts = kinetic.TITLE_AT
+
+    def mask():
+        f = font("her_roman", ts)
+
+        def draw(c):
+            x = tx
+            for ch in "lost and":
+                c.drawString(ch, x, ty, f, skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1)))
+                x += f.measureText(ch) + 0.01 * ts
+        m = fx.skia_alpha(draw)
+        return cv2.GaussianBlur(m, (0, 0), 2.5), cv2.GaussianBlur(m, (0, 0), 14)
+    m, glow = cached(("title_ghost",), mask)
+    warm = np.array([1.0, 0.93, 0.86], np.float32)
+    img = fx.add(img, kinetic.AMBER, glow * a * 0.5)
+    return fx.add(img, warm, m * a * 1.15)
 
 
 def brought_a_man(t, T, lines):
@@ -428,9 +461,22 @@ def brought_a_man(t, T, lines):
                     warm=0.3 + 0.5 * reach, offset=(dx, dy))
     img = fx.light_leak(img, t, "right", strength=0.12 + 0.5 * reach)
     img = fx.hotspot(img, t, 1500 - 400 * reach, 520, 260, strength=0.15 + 0.5 * flare)
-    img = kin(T, name, lines, MAN_SHOTS, light=True).draw(
-        img, t, cam=(dx * 0.35, dy * 0.35), kick=T.pulse_env(t, 7.0))
-    return img, post("night")
+    K = kin(T, name, lines, MAN_SHOTS, light=True)
+    for n in lines:                                      # 'lost and' surfaces for each 'found...'
+        tt = K.plan[n].get("title_t")
+        if tt is not None:
+            e0 = K.plan[n]["life"][1]
+            img = title_ghost(img, 0.6 * smooth(ramp(t, tt - 0.5, tt + 0.2)) *
+                              (1 - smooth(ramp(t, e0 + 0.1, e0 + 0.9))))
+    img = K.draw(img, t, cam=(dx * 0.35, dy * 0.35))
+    g = post("night")
+    # they bring him in out of the white: the coats' room drains into his night
+    u = smooth(ramp(t, s["start"], s["start"] + 1.8))
+    if u < 1:
+        ref, rp = coats("White Coats I", COATS_I_PHOTOS, 61)(t, T, range(26, 36))
+        img = ref * (1 - u) + img * u
+        g = _mix_post(rp, g, u)
+    return img, g
 
 
 VIRTUE_WORDS = ("protecting", "trusting", "believing")

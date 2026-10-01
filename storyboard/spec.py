@@ -92,14 +92,19 @@ SECTIONS = {
              "nothing pulses on the beat."),
     "They brought a man": dict(
         world="memory",
-        visual="He is never shown. He arrives as warmth: a light leak "
-               "creeping in from the frame edge and searching the fog, "
-               "softening as it reaches her. On “something VERY hard "
-               "to find” it finds the one warm point inside her, and "
-               "she glows back.",
-        type="Her voice; VERY swells with halation on its onset.",
-        sync="The leak advances a step per bar; the flare lands on the "
-             "downbeat after “found”."),
+        visual="The coats' white drains into night: he is brought in. He is "
+               "never shown; he arrives as warmth, a light leak creeping in "
+               "from the right and searching the fog a step per bar. On "
+               "“VERY” it finds the one warm point inside her and she "
+               "glows back. The title's missing word arrives here: each second "
+               "“found...” is written into the empty space after a faint "
+               "“lost and”, so for a moment the title reads whole, for "
+               "him and then again for her.",
+        type="Her voice as light. find / (hard to) find, the second only "
+             "seeping in; FOUND; VERY; FOREVER / EVER both slowly opening. "
+             "“in her” and “in him” echo from the same place.",
+        sync="The warmth advances a step per bar; the flare lands on "
+             "“VERY”; “lost and” surfaces on “oh he / oh she”."),
     "Spoken I: I can help you find": dict(
         world="memory",
         visual="Near-dark. As he names protecting, trusting and believing, "
