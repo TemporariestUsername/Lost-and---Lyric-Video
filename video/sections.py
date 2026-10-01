@@ -354,7 +354,7 @@ COATS_SHOTS = {
     84: dict(hero=[2, 5]),                                               # this MAN / too LOST
     85: dict(style="stack", hero=5,
              shock=dict(words=[2, 3], at=[(480, 150), (60, 255)], size=2.5)),
-    86: dict(set=[([0, 1, 2], 1.0, 0), ([3, 4], 2.2, 0, {"key": "coats_bold"}),   # CUT OUT
+    86: dict(dy=130, set=[([0, 1, 2], 1.0, 0), ([3, 4], 2.2, 0, {"key": "coats_bold"}),   # CUT OUT
                   ([5], 1.0, 0),                                                   # his
                   ([6, 7, 8, 9], 1.6, 40, {"voice": "her"})],                      # something hard
              strike=[6, 9]),                                                       # to find, struck
