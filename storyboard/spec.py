@@ -151,9 +151,11 @@ SECTIONS = {
                "second time it stops short, and “found” lands in the "
                "title's space again, behind the same unreadable smudge, with "
                "“her...” after it.",
-        type="Her voice narrates; the coats' things and words in their cold "
-             "type: “with time” overstruck, GUN, BULLET, GO AND FIND THAT "
-             "GIRL. DID, then “he did...” seeping in; FOUND.",
+        type="Until the last line, everything is the coats' cold typed "
+             "monospace: their report of the hunt, typed as it is sung, a "
+             "cursor waiting after each phrase through the silences. GUN, "
+             "BULLET, FIND, DID, then HE DID... seeping in; FOUND. The last "
+             "\u201cfound her...\u201d returns to her voice, in the title's space.",
         sync="Every phrase re-timed to its sung onset after the silences; the "
              "glint appears on “bullet” and stays."),
     "Spoken II: I won't lose you": dict(
@@ -236,7 +238,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("gun_and_bullet", "A gun and a bullet",
-     "His finding becomes a hunt. The coats' white drains into the night as their clock ('with time', overstruck, in their cold type) follows him into it. GUN and BULLET are set in their type; on 'bullet' the film's first sharp thing appears, a cold glint on the floor, and stays. 'And said' in her voice above their order, GO AND FIND THAT GIRL. DID, then 'he did...' only seeping in. On 'he found her' his light closes on her; the second time it stops short, and 'found' lands in the title's space behind the same unreadable smudge, with 'her...' after it. Every phrase re-timed to its sung onset.",
+     "Revised for suspense: until the final 'he found her...', every line is the coats' cold typed monospace, their report of the hunt, typed as it is sung, with a cursor that waits and blinks through each silence. The night darkens as he closes in; the bullet glint stays the one sharp thing. The last 'found her...' returns to her voice in the title's space behind the unreadable smudge.",
     ),
     ("white_coats_ii", "White Coats II",
      "Escalation. A hard cut from his gold shafts back to the white on 'But': BUT held alone, then 'with time with time' overstruck. Colder, brighter and more scratched than White Coats I. LOST ('this girl is too lost'); the stab chant slams in and is slashed as before (re-timed to the sung attacks); HARD ('too hard to find'); the verdict FOUND / WORTH (the title's word in their mouths), and once 'we found she isn't worth the time' has been read, the frame swells to near-white on 'time'. Ends on FIND, rhyming with White Coats I.",

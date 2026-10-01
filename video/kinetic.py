@@ -603,6 +603,7 @@ class Kinetic:
                 cx, cy = W / 2, 830
                 push, fly = 1.0, 1.0
             push_line = push
+            cur = None                               # the coats' cursor: after the last typed letter
             for pi, o in enumerate(p["placed"]):
                 w = o["word"]
                 v = o.get("voice", p["voice"])         # a word may speak in another voice
@@ -724,6 +725,8 @@ class Kinetic:
                         sig = (1 - u) * 4 + ex * 6
                     if a > 0.004:
                         put(kind, sig, (ch, sx, sy, f, sc, a))
+                        if opts.get("cursor") and v == "coats" and (cur is None or cs >= cur[0]):
+                            cur = (cs, sx + f.measureText(ch) * sc + 0.08 * o["size"], sy, f, sc, a, kind)
                         if kind == "coat" and self.light:        # coats' ink in the dark: a cold
                             put("coldhalo", 24, (ch, sx, sy, f, sc, a))   # patch of their light behind
                         if o["role"] in ("word", "hero") and ex < 0.5 and v == "her":
@@ -745,6 +748,12 @@ class Kinetic:
                     wpx = (f.measureText(txt) + track * o["size"] * len(txt)) * push
                     TEXT_LOG.append((t, _clean(w["text"]), w["start"], x0, y0 - o["size"] * 0.8 * push,
                                      x0 + wpx, y0 + o["size"] * 0.25 * push))
+            later = [self.T.lines[m]["start"] for m in self.lines if m > n]
+            if cur is not None and t < e0 and not (later and t >= min(later)):   # one cursor: the
+                c_t, ux, uy, uf, usc, ua, uk = cur           # line being typed; solid while
+                idle = t - c_t                              # typing, then it blinks, waiting
+                if idle < 0.3 or int((idle - 0.3) / 0.42) % 2 == 1:
+                    put(uk, 1.2, ("_", ux, uy, uf, usc, ua * 0.9))
 
         def mask(ops):
             def draw(c):

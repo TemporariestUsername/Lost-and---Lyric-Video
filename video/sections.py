@@ -612,28 +612,28 @@ def break_ii(t, T, lines):
 # the bullet appears as the film's first sharp thing. 'He found her...' is
 # the title's word again, now in dread: 'found' lands in the title's space
 # with 'her...' after it, and his light stops short.
-GUN_SHOTS = {
-    58: dict(voice="coats", style="track", hero=2, overstrike=True),            # with time x2
-    59: dict(exit_at=260.8, set=[([0, 1, 2], 1.0, 0), ([3, 4, 5, 6], 1.0, 0),
-                  ([7], 2.0, 40, {"voice": "coats"}), ([8, 9], 1.0, 40),
-                  ([10], 2.0, 40, {"voice": "coats"})]),                         # GUN / BULLET
-    60: dict(voice="coats", no_separate=True,                                    # GO AND FIND THAT GIRL,
-             rows_at=[([0, 1], 150, 215, 1.0, {"left": True, "voice": "her"}),   # after the gun and
-                      ([2, 3], 180, 470, 1.3, {"left": True}),                   # bullet have hung
-                      ([4], 180, 600, 2.2, {"left": True, "key": "coats_bold"}),
+GUN_SHOTS = {                                      # the hunt as their report, typed, waiting
+    58: dict(voice="coats", style="track", hero=2, overstrike=True, cursor=True),   # with time x2
+    59: dict(voice="coats", exit_at=260.8, cursor=True,
+             set=[([0, 1, 2], 1.0, 0), ([3, 4, 5, 6], 1.0, 0), ([7], 1.9, 0),
+                  ([8, 9], 1.0, 0), ([10], 1.9, 0)]),                                # GUN / BULLET
+    60: dict(voice="coats", no_separate=True, cursor=True,
+             rows_at=[([0, 1], 150, 215, 1.0, {"left": True}),                     # and said
+                      ([2, 3], 180, 470, 1.3, {"left": True}),                     # GO AND FIND
+                      ([4], 180, 600, 2.2, {"left": True, "key": "coats_bold"}),  # THAT GIRL
                       ([5, 6], 180, 680, 1.3, {"left": True})]),
-    61: dict(style="stack", hero=2),                                             # and he DID
-    62: dict(set=[([0, 1], 1.6, 80, {"ghost": True})]),                          # he did... (seeping)
-    63: dict(style="stack", hero=1),                                             # he FOUND her
-    64: dict(set=[([0], 1.0, 40)], title_word=1, title_tail=[2]),                # lost and found her...
-}
+    61: dict(voice="coats", style="stack", hero=2, cursor=True),                  # and he DID
+    62: dict(voice="coats", set=[([0, 1], 1.6, 80, {"ghost": True})], cursor=True),   # he did...
+    63: dict(voice="coats", style="stack", hero=1, cursor=True),                  # he FOUND her
+    64: dict(set=[([0], 1.0, 40)], title_word=1, title_tail=[2]),                # her voice again:
+}                                                                                 # lost and found her...
 
 
 def gun_and_bullet(t, T, lines):
     name = "A gun and a bullet"
     s = sec_of(T, name)
     dx, dy, dr = mem.drift(t, seed=9)
-    img = base_night(t, T, lift=1.25)
+    img = base_night(t, T, lift=1.25 - 0.4 * smooth(ramp(t, 257.0, 271.3)))   # darker as he closes in
     img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, 1.02)
     img = draw_mems(img, t, mems(T, name, ["dark_street", "parking_rain", "streets_night",
                                            "fog_park"], every=2, life=10.0, seed=41,
