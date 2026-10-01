@@ -130,12 +130,18 @@ SECTIONS = {
              "on its last onset."),
     "White Coats II": dict(
         world="institute",
-        visual="Colder, brighter, faster flicker. The etched chant starts to "
-               "cover the walls. On “not worth the time” the "
-               "exposure clips to pure white for a beat.",
-        type="Etched chant, as White Coats I.",
-        sync="White clip on the downbeat after “time”; burns on "
-             "stabs."),
+        visual="A hard cut from his gold shafts back into the white on "
+               "“But”. Colder, brighter, more scratched than White "
+               "Coats I. The coats escalate from “too lost” to “too "
+               "hard to find” to the verdict; once “we found she isn't "
+               "worth the time” has been read, the frame clips to white on its "
+               "last word.",
+        type="Typed, still. BUT held alone, then “with time with time” "
+             "overstruck; LOST; the stab chant slams in and is slashed as in "
+             "White Coats I; HARD; FOUND / WORTH (the title's word in their "
+             "mouths); FIND.",
+        sync="Stabs slammed on their sung attacks (re-timed); her tally surfaces "
+             "on “with time”; the white clip lands on “time”."),
     "A gun and a bullet": dict(
         world="institute",
         visual="For the first time something is in sharp focus: a small, "

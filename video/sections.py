@@ -336,10 +336,19 @@ COATS_SHOTS = {
     33: dict(style="stack", hero=5),                         # ANYTHING
     34: dict(style="track", hero=1, overstrike=True),
     35: dict(style="stack", hero=8),                         # ...hard to FIND
-    47: dict(style="track", hero=2), 48: dict(style="track"), 49: dict(style="stack", hero=5),
-    50: dict(style="depth", hero=5), 51: dict(style="stack", hero=4), 52: dict(style="hero", hero=5),
-    53: dict(style="track", hero=1), 54: dict(style="stack", hero=4), 55: dict(style="track", hero=1),
-    56: dict(style="stack", hero=5),
+    # White Coats II: escalation, from 'too lost' to 'not worth the time'
+    47: dict(set=[([0], 2.4, 0), ([1, 2], 1.3, 10)], overstrike=[(1, 3), (2, 4)]),   # BUT; with time x2
+    48: dict(style="track"),
+    49: dict(style="stack", hero=5),                         # hmm... too LOST
+    50: dict(style="stack", hero=5,
+             shock=dict(words=[2, 3], at=[(470, 150), (90, 255)], size=2.5)),
+    51: dict(style="stack", hero=4),                         # too HARD to find
+    52: dict(style="stack", hero=5,
+             shock=dict(words=[2, 3], at=[(60, 150), (440, 255)], size=2.5)),
+    53: dict(style="track", hero=1, overstrike=True),
+    54: dict(hero=[1, 4]),                                   # FOUND / WORTH: the verdict
+    55: dict(style="track", hero=1, overstrike=True),
+    56: dict(style="stack", hero=7),                         # ...hard to FIND
     83: dict(style="track"), 84: dict(style="stack", hero=5), 85: dict(style="depth", hero=5),
     86: dict(style="stack", hero=3), 87: dict(style="hero", hero=5), 88: dict(style="track", hero=1),
     89: dict(style="stack", hero=3), 90: dict(style="track", hero=1), 91: dict(style="stack", hero=8),
@@ -359,7 +368,8 @@ def _word_box(K, w):
     return None
 
 
-def coats(name, photos, seed):
+def coats(name, photos, seed, hot=0.0):
+    """`hot`: White Coats II and on run colder, brighter, more scratched."""
     def scene(t, T, lines):
         K = kin(T, name, lines, COATS_SHOTS, voice="coats", hold=0.2)   # last line blinks out at the cut
         # 'with time': their time is her tally; the marks surface while they say it
@@ -374,7 +384,7 @@ def coats(name, photos, seed):
         scribs = words_like(T, lines, "scribble")
         sc = max((1 - clamp01((t - s) / 1.8)) for s in scribs if t >= s) \
             if any(t >= s for s in scribs) else 0.0
-        img = look.scratches(img, t, 2.0 + 9 * sc)
+        img = look.scratches(img, t, 2.0 + 1.2 * hot + 9 * sc)
         stabs = [w for n in lines for w in T.lines[n]["words"]
                  if w["text"].lower().startswith("stab")]
         for k, w in enumerate(stabs):                   # struck underneath, hard, in pencil
@@ -384,11 +394,13 @@ def coats(name, photos, seed):
                 img = look.pencil_underline(img, t, w["start"], x0 + dx * 0.2, x1 + dx * 0.2,
                                             base + 0.16 * size + 9 + dy * 0.2, 50 + k, t_end=e0,
                                             size=0.9 + 0.8 * (size / 150))
-        img = fluorescent(img, t)
-        # 'not worth the time': the exposure clips to white for a beat
+        img = fluorescent(img, t, 1.0 + 0.6 * hot)
+        # 'not worth the time': once the verdict has been read, the exposure clips
+        # to white for a beat on its last word
         clip = 0.0
-        for st in words_like(T, lines, "worth"):
-            clip = max(clip, math.exp(-3.5 * (t - st)) if t >= st else 0.0)
+        for st in [T.lines[n]["words"][-1]["start"] for n in lines if "worth" in T.lines[n]["text"]]:
+            if t >= st:                                 # a quick swell (no single-frame jump), then decay
+                clip = max(clip, min(1.0, (t - st) / 0.12) * math.exp(-3.5 * max(0.0, t - st - 0.12)))
         img = fx.vignette(img, 0.55, "#5E6A78")
         img = K.draw(img, t, cam=(dx * 0.2, dy * 0.2))
         # each stab startles: the frame jolts and the exposure hits down for an instant
@@ -402,7 +414,7 @@ def coats(name, photos, seed):
             img = fx.shift(img, jx, jy)
         img = img + np.float32(0.8) * clip
         # (the echo trail is cut on a stab so the word hits at full strength on its first frame)
-        return img, post("institute", exposure=1.08 + 0.4 * clip - 0.1 * jolt,
+        return img, post("institute", exposure=1.08 + 0.06 * hot + 0.4 * clip - 0.1 * jolt,
                          trail=POST["institute"]["trail"] * (1 - jolt))
     return scene
 

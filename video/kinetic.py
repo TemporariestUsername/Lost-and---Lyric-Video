@@ -356,12 +356,6 @@ class Kinetic:
                     for o in sorted(row, key=lambda q: q["word"]["start"]):
                         o.update(x=x, y=y, size=small_, key=ki_, role="word", tracking=0.0)
                         x += font(ki_, small_).measureText(o["word"]["disp"]) + small_ * 0.28
-            if ov.get("overstrike"):                 # the repeat is typed over the first
-                ws = [o for o in placed if o["role"] in ("word", "hero")]
-                half = len(ws) // 2
-                for a_, b_ in zip(ws[:half], ws[half:]):
-                    b_.update(x=a_["x"] + 3, y=a_["y"] - 2, size=a_["size"], key=a_["key"],
-                              tracking=a_["tracking"], role=a_["role"])
             if ov.get("set"):                        # phrases set row by row, by hand:
                 lw = T.lines[n]["words"]             # [(word indices, scale, dx, flags), ...]
                 style = "set"                        # (no style's own spacing or ghost word)
@@ -426,6 +420,20 @@ class Kinetic:
                         upd.update(fl)
                         byk[k].update(upd)
                         x += wd + size * 0.9
+            if ov.get("overstrike"):                 # the repeat is typed over the first:
+                ws = [o for o in placed if o["role"] in ("word", "hero")]   # True = second half
+                pairs = ov["overstrike"]             # over first; or [(i, j), ...] word j over i
+                if pairs is True:
+                    half = len(ws) // 2
+                    pairs = list(zip(ws[:half], ws[half:]))
+                else:
+                    lw = T.lines[n]["words"]
+                    at = {(o["word"]["start"], o["word"]["text"]): o for o in ws}
+                    pairs = [(at[(lw[i]["start"], lw[i]["text"])], at[(lw[j]["start"], lw[j]["text"])])
+                             for i, j in pairs]
+                for a_, b_ in pairs:
+                    b_.update(x=a_["x"] + 3, y=a_["y"] - 2, size=a_["size"], key=a_["key"],
+                              tracking=a_["tracking"], role=a_["role"])
             if ov.get("diffuse"):                    # words that let go after they are sung:
                 dfo = ov["diffuse"]                  # keep=[i], after=i, backing=True, delay, dur
                 lw = T.lines[n]["words"]

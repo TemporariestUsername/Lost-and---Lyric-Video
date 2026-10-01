@@ -1,5 +1,5 @@
 {
-  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR. Line 20 words 4-5 ('forever, forever'): Whisper stretched the first to 2.2 s and squeezed the second into 0.5 s before 'Throw'. Pitch tracking (voiced 86.62-87.54 and 88.19-89.25) and two tight Whisper re-runs (86.4-87.6 / 88.0-89.2) agree; pinned to the consensus. Word pins from the vocal-stem timing check (analysis/out/timing_check.md): line 11 'But' starts after dead silence at 56.0; line 18 'and' ends ~81.6 and 'ever' enters at 82.6; line 22 backing 'again, again' land on the kicks at 96.4 / 97.3; line 23 second 'forever' enters out of silence at 103.1 with 'again' at 103.5; line 26 'The' starts at 117.1. Lines 28/30 'stab stab the': Whisper had the stabs 0.2-0.35 s late (the burns key off them); pinned to the 'st' attacks on the vocal stem (124.97/125.42, 131.97/132.46). Line 26 'said' is held on B3 until 119.5; line 27 'We've found' comes after the silence at 120.2 / 120.45 (Whisper had 'We've' at 118.69, inside 'said'). Spoken I (lines 44/45) is spoken, unpitched: 'I' starts at 184.0 after silence, 'trusting' at 187.45 and 'Even' at 191.05 (Whisper stretched each back into the silence). phase_continue: sections whose lines are pickups keep the previous section's bar phase.",
+  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR. Line 20 words 4-5 ('forever, forever'): Whisper stretched the first to 2.2 s and squeezed the second into 0.5 s before 'Throw'. Pitch tracking (voiced 86.62-87.54 and 88.19-89.25) and two tight Whisper re-runs (86.4-87.6 / 88.0-89.2) agree; pinned to the consensus. Word pins from the vocal-stem timing check (analysis/out/timing_check.md): line 11 'But' starts after dead silence at 56.0; line 18 'and' ends ~81.6 and 'ever' enters at 82.6; line 22 backing 'again, again' land on the kicks at 96.4 / 97.3; line 23 second 'forever' enters out of silence at 103.1 with 'again' at 103.5; line 26 'The' starts at 117.1. Lines 28/30 'stab stab the': Whisper had the stabs 0.2-0.35 s late (the burns key off them); pinned to the 'st' attacks on the vocal stem (124.97/125.42, 131.97/132.46). Line 26 'said' is held on B3 until 119.5; line 27 'We've found' comes after the silence at 120.2 / 120.45 (Whisper had 'We've' at 118.69, inside 'said'). Spoken I (lines 44/45) is spoken, unpitched: 'I' starts at 184.0 after silence, 'trusting' at 187.45 and 'Even' at 191.05 (Whisper stretched each back into the silence). phase_continue: sections whose lines are pickups keep the previous section's bar phase. Lines 50/52 (White Coats II chant): scribble/stab/the pinned to their attacks on the vocal stem.",
   "lines": {
     "1": [
       16.92,
@@ -123,6 +123,46 @@
       "0": [
         191.05,
         191.33
+      ]
+    },
+    "50": {
+      "1": [
+        218.28,
+        219.7
+      ],
+      "2": [
+        219.76,
+        220.6
+      ],
+      "3": [
+        220.66,
+        221.2
+      ],
+      "4": [
+        221.25,
+        221.5
+      ]
+    },
+    "52": {
+      "1": [
+        231.95,
+        233.3
+      ],
+      "2": [
+        233.36,
+        234.2
+      ],
+      "3": [
+        234.27,
+        234.8
+      ],
+      "4": [
+        234.85,
+        235.15
+      ],
+      "5": [
+        235.18,
+        235.9
       ]
     }
   },

@@ -2375,7 +2375,7 @@
    "start": 217.66,
    "end": 222.26,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Scribble",
@@ -2386,29 +2386,29 @@
     },
     {
      "text": "scribble,",
-     "start": 218.06,
-     "end": 219.34,
+     "start": 218.28,
+     "end": 219.7,
      "matched": true,
      "backing": false
     },
     {
      "text": "stab",
-     "start": 219.98,
-     "end": 220.34,
+     "start": 219.76,
+     "end": 220.6,
      "matched": true,
      "backing": false
     },
     {
      "text": "stab",
-     "start": 220.34,
-     "end": 221.04,
+     "start": 220.66,
+     "end": 221.2,
      "matched": true,
      "backing": false
     },
     {
      "text": "the",
-     "start": 221.04,
-     "end": 221.56,
+     "start": 221.25,
+     "end": 221.5,
      "matched": true,
      "backing": false
     },
@@ -2486,9 +2486,9 @@
    "text": "Scribble scribble, stab stab the charts.",
    "stanza": 6,
    "start": 231.05,
-   "end": 235.91,
+   "end": 235.9,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Scribble",
@@ -2499,36 +2499,36 @@
     },
     {
      "text": "scribble,",
-     "start": 232.17,
-     "end": 233.29,
+     "start": 231.95,
+     "end": 233.3,
      "matched": true,
      "backing": false
     },
     {
      "text": "stab",
-     "start": 233.65,
-     "end": 233.95,
+     "start": 233.36,
+     "end": 234.2,
      "matched": true,
      "backing": false
     },
     {
      "text": "stab",
-     "start": 234.75,
-     "end": 234.75,
+     "start": 234.27,
+     "end": 234.8,
      "matched": true,
      "backing": false
     },
     {
      "text": "the",
-     "start": 234.75,
-     "end": 235.21,
+     "start": 234.85,
+     "end": 235.15,
      "matched": true,
      "backing": false
     },
     {
      "text": "charts.",
-     "start": 235.21,
-     "end": 235.91,
+     "start": 235.18,
+     "end": 235.9,
      "matched": true,
      "backing": false
     }

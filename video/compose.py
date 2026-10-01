@@ -156,7 +156,7 @@ SCENES = {
     "They brought a man": (S.brought_a_man, range(37, 43)),
     "Spoken I: I can help you find": (S.spoken("Spoken I: I can help you find", shots=S.SPOKEN_SHOTS), range(44, 46)),
     "Break II": (S.break_ii, range(0)),
-    "White Coats II": (S.coats("White Coats II", ["stairwell_cage", "cinderblock_hole", "facade_windows", "hospital_corridor"], 67), range(47, 57)),
+    "White Coats II": (S.coats("White Coats II", ["stairwell_cage", "cinderblock_hole", "hospital_corridor"], 67, hot=1.0), range(47, 57)),
     "A gun and a bullet": (S.gun_and_bullet, range(58, 65)),
     "Spoken II: I won't lose you": (S.spoken("Spoken II: I won't lose you",
                                              reopen=lambda T, i: T.lines[66]["start"] + 0.9 * i),
