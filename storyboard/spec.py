@@ -148,7 +148,7 @@ SECTIONS = {
                "night as their clock follows him into it. On “bullet” the "
                "first sharp thing in the film appears: the bullet itself, "
                "tumbling slowly end over end down the centre of the frame, top "
-               "to bottom, through the rest of the hunt. On “he found her” his light closes on her; the "
+               "to bottom, gone just before \u201cHe found her\u201d. On “he found her” his light closes on her; the "
                "second time it stops short, and “found” lands in the "
                "title's space again, behind the same unreadable smudge, with "
                "“her...” after it.",

@@ -651,7 +651,7 @@ GUN_SHOTS = {                                      # the hunt as their report, t
 
 def falling_bullet(t, T, end):
     """From 'bullet' on, the bullet tumbles slowly down the centre of the frame,
-    in from above the top edge and out below the bottom as the section ends."""
+    in from above the top edge and out below the bottom by `end`."""
     t0 = word_at(T, 59, "bullet")
     if t0 is None or t < t0 or t > end:
         return None
@@ -686,7 +686,7 @@ def gun_and_bullet(t, T, lines):
                               (1 - smooth(ramp(t, e0 + 0.1, e0 + 0.9))))
     img = K.draw(img, t, cam=(dx * 0.35, dy * 0.35))
     p = post("night")
-    fb = falling_bullet(t, T, s["end"])
+    fb = falling_bullet(t, T, T.lines[63]["start"] - 0.3)   # gone just before 'He found her'
     if fb:
         p["bullet"] = fb
     # out of the coats' white into the night
