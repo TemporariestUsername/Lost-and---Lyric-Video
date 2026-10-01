@@ -349,10 +349,25 @@ COATS_SHOTS = {
     54: dict(hero=[1, 4]),                                   # FOUND / WORTH: the verdict
     55: dict(style="track", hero=1, overstrike=True),
     56: dict(style="stack", hero=7),                         # ...hard to FIND
-    83: dict(style="track"), 84: dict(style="stack", hero=5), 85: dict(style="depth", hero=5),
-    86: dict(style="stack", hero=3), 87: dict(style="hero", hero=5), 88: dict(style="track", hero=1),
-    89: dict(style="stack", hero=3), 90: dict(style="track", hero=1), 91: dict(style="stack", hero=8),
-    92: dict(style="hero", hero=0),
+    # White Coats III: they turn on him; her 'something hard to find' in their mouths
+    83: dict(style="track"),                                             # and the coats said
+    84: dict(hero=[2, 5]),                                               # this MAN / too LOST
+    85: dict(style="stack", hero=5,
+             shock=dict(words=[2, 3], at=[(480, 150), (60, 255)], size=2.5)),
+    86: dict(set=[([0, 1, 2], 1.0, 0), ([3, 4], 2.2, 0, {"key": "coats_bold"}),   # CUT OUT
+                  ([5], 1.0, 0),                                                   # his
+                  ([6, 7, 8, 9], 1.6, 40, {"voice": "her"})],                      # something hard
+             strike=[6, 9]),                                                       # to find, struck
+    87: dict(style="stack", hero=5,
+             shock=dict(words=[2, 3], at=[(60, 150), (440, 255)], size=2.5)),
+    88: dict(style="track", hero=1, overstrike=True),
+    89: dict(style="stack", hero=3),                                     # how LOST this girl
+    90: dict(style="track", hero=1, overstrike=True),
+    91: dict(set=[([0, 1, 2, 3, 4], 1.0, 0), ([5, 6, 7], 1.0, 0),
+                  ([8], 3.0, 0, {"key": "coats_bold", "kind": "coatdark"})]),     # ANYTHING
+    92: dict(set=[([0], 2.4, 0, {"key": "coats_bold"}),                            # EXCEPT...
+                  ([1, 2, 3, 4], 1.6, 60, {"voice": "her"})]),                     # something hard to
+                                                                                   # find, untouched
 }
 
 
@@ -395,6 +410,14 @@ def coats(name, photos, seed, hot=0.0):
                                             base + 0.16 * size + 9 + dy * 0.2, 50 + k, t_end=e0,
                                             size=0.9 + 0.8 * (size / 150))
         img = fluorescent(img, t, 1.0 + 0.3 * hot)
+        strikes = []                                    # 'cut out his something hard to find':
+        for n in lines:                                 # struck through in pencil once said
+            sk = COATS_SHOTS.get(n, {}).get("strike")
+            if sk:
+                lw = T.lines[n]["words"]
+                b0, b1 = _word_box(K, lw[sk[0]]), _word_box(K, lw[sk[1]])
+                if b0 and b1:
+                    strikes.append((lw[sk[1]]["start"] + 0.15, b0[0], b1[2], b0[3] - 0.45 * b0[4], b0[5], n))
         # 'not worth the time': once the verdict has been read, the exposure clips
         # to white for a beat on its last word
         clip = 0.0
@@ -403,6 +426,9 @@ def coats(name, photos, seed, hot=0.0):
                 clip = max(clip, smooth(min(1.0, (t - st) / 0.3)) * math.exp(-3.0 * max(0.0, t - st - 0.3)))
         img = fx.vignette(img, 0.55, "#5E6A78")
         img = K.draw(img, t, cam=(dx * 0.2, dy * 0.2))
+        for st, x0, x1, ymid, e0, n in strikes:
+            img = look.pencil_underline(img, t, st, x0 + dx * 0.2, x1 + dx * 0.2, ymid + dy * 0.2,
+                                        80 + n, t_end=e0, size=1.5)
         # each stab startles: the frame jolts and the exposure hits down for an instant
         jolt, jx, jy = 0.0, 0.0, 0.0
         for k, w in enumerate(stabs):

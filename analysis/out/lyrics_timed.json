@@ -3656,15 +3656,15 @@
    "line": 83,
    "text": "And the coats said:",
    "stanza": 12,
-   "start": 332.45,
+   "start": 332.9,
    "end": 334.104,
    "support": 0.5,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "And",
-     "start": 332.45,
-     "end": 333.09,
+     "start": 332.9,
+     "end": 333.07,
      "matched": true,
      "backing": false
     },
@@ -3803,8 +3803,8 @@
    "stanza": 12,
    "start": 340.13,
    "end": 343.63,
-   "support": 0.9,
-   "pinned": false,
+   "support": 1.0,
+   "pinned": true,
    "words": [
     {
      "text": "We\u2019ll",
@@ -3844,14 +3844,14 @@
     {
      "text": "his",
      "start": 341.39,
-     "end": 341.39,
-     "matched": false,
+     "end": 341.6,
+     "matched": true,
      "backing": false
     },
     {
      "text": "something",
-     "start": 341.39,
-     "end": 341.93,
+     "start": 341.6,
+     "end": 341.92,
      "matched": true,
      "backing": false
     },
@@ -4157,7 +4157,7 @@
    "start": 357.73,
    "end": 361.49,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Except...",
@@ -4168,8 +4168,8 @@
     },
     {
      "text": "something",
-     "start": 359.15,
-     "end": 359.91,
+     "start": 358.73,
+     "end": 359.4,
      "matched": true,
      "backing": false
     },

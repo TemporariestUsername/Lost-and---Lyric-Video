@@ -165,7 +165,7 @@ SCENES = {
                                     range(66, 68)),
     "The Run": (S.the_run, range(69, 77)),
     "But...": (S.but, range(78, 82)),
-    "White Coats III": (S.coats("White Coats III", ["cinderblock_hole", "stairwell_spiral", "corridor", "stairwell_cage"], 71), range(83, 93)),
+    "White Coats III": (S.coats("White Coats III", ["cinderblock_hole", "stairwell_spiral", "stairwell_cage"], 71, hot=1.0), range(83, 93)),
     "The Cutting": (S.cutting, range(94, 106)),
     "Refrain II: Stay lost now girl": (S.refrain("Refrain II: Stay lost now girl", False),
                                        range(107, 112)),

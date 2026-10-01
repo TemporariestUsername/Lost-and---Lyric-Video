@@ -197,11 +197,17 @@ SECTIONS = {
              "sparse hit; the flood swells from “bend” with the band."),
     "White Coats III": dict(
         world="institute",
-        visual="Back in the white. The scratches now cut across the spot "
-               "where his warmth used to come in.",
-        type="Etched chant; ANYTHING etched at display size, then "
-             "“Except…” on its own.",
-        sync="Burns on stabs; flicker on eighths."),
+        visual="White Coats III begins inside the coats' white that flooded "
+               "“But...”. Colder and harsher than ever; the chant returns; "
+               "they turn on him.",
+        type="Their typed, still voice. MAN / LOST; the stabs slam in and are "
+             "slashed; CUT OUT his “something hard to find”, her words in "
+             "her own serif inside their line, struck through in pencil once "
+             "said; LOST; ANYTHING at their darkest; EXCEPT... alone, then "
+             "“something hard to find” again in her serif, untouched: the "
+             "one thing they cannot make her find.",
+        sync="Words re-timed after the pauses; the strike lands on "
+             "“find”; her tally surfaces on “with time”."),
     "The Cutting": dict(
         world="memory",
         visual="Style frame C. Dark. The three shafts from Spoken I return, "
