@@ -106,6 +106,19 @@ class Timing:
 
 
 # ---------------------------------------------------------------- easing
+def display_text(s):
+    """A lyric word as it is set on screen: no punctuation except ellipses
+    (kept where they fall, leading or trailing) and the apostrophes and
+    hyphens inside words."""
+    s = s.replace('"', "").replace("\u201c", "").replace("\u201d", "")
+    lead = next((e for e in ("...", "\u2026") if s.startswith(e)), "")
+    trail = next((e for e in ("...", "\u2026") if s.endswith(e) and len(s) > len(e)), "")
+    core = s[len(lead):len(s) - len(trail)] if trail else s[len(lead):]
+    core = core.strip(".,:;!?\u2026")
+    core = "".join(ch for ch in core if ch.isalnum() or ch in "'\u2019-")
+    return lead + core + trail
+
+
 def clamp01(x):
     return max(0.0, min(1.0, x))
 

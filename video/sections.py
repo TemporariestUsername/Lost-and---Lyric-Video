@@ -332,9 +332,9 @@ COATS_SHOTS = {
     30: dict(style="stack", hero=3,
              shock=dict(words=[2, 3], at=[(480, 150), (60, 255)], size=2.5)),
     31: dict(style="stack", hero=4),                         # how LOST
-    32: dict(style="track", hero=1, overstrike=True, nocomma=True),   # with time, typed over itself
+    32: dict(style="track", hero=1, overstrike=True),                 # with time, typed over itself
     33: dict(style="stack", hero=5),                         # ANYTHING
-    34: dict(style="track", hero=1, overstrike=True, nocomma=True),
+    34: dict(style="track", hero=1, overstrike=True),
     35: dict(style="stack", hero=8),                         # ...hard to FIND
     47: dict(style="track", hero=2), 48: dict(style="track"), 49: dict(style="stack", hero=5),
     50: dict(style="depth", hero=5), 51: dict(style="stack", hero=4), 52: dict(style="hero", hero=5),

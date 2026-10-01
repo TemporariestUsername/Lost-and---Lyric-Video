@@ -20,7 +20,7 @@ import numpy as np
 import skia
 
 import fx
-from engine import H, W, clamp01, ease_out, font, ramp, smooth
+from engine import H, W, clamp01, display_text, ease_out, font, ramp, smooth
 
 TEXT_LOG = None  # list -> (t, word, onset, x0, y0, x1, y1) for QA
 
@@ -53,7 +53,7 @@ def _norm(s):
 
 # ---------------------------------------------------------------- layout
 def _choose(T, n, style=None, hero=None, caps=False):
-    words = [dict(w, disp=_clean(w["text"]).upper() if caps else _clean(w["text"]))
+    words = [dict(w, disp=display_text(w["text"]).upper() if caps else display_text(w["text"]))
              for w in T.lines[n]["words"] if not w["backing"]]
     if isinstance(hero, (list, tuple)):               # two heroes: a juxtaposed pair
         hero = [h for h in hero if 0 <= h < len(words)]
@@ -252,7 +252,7 @@ def layout(T, n, style=None, hero=None, seed=0, voice="her"):
             y += small * 1.4
 
     # backing vocals: small echoes under the composition
-    back = [dict(w, disp=_clean(w["text"]).upper() if caps else _clean(w["text"]))
+    back = [dict(w, disp=display_text(w["text"]).upper() if caps else display_text(w["text"]))
             for w in T.lines[n]["words"] if w["backing"]]
     if back:
         last = max(out, key=lambda o: (o["y"], o["x"]))
@@ -354,9 +354,6 @@ class Kinetic:
                     for o in sorted(row, key=lambda q: q["word"]["start"]):
                         o.update(x=x, y=y, size=small_, key=ki_, role="word", tracking=0.0)
                         x += font(ki_, small_).measureText(o["word"]["disp"]) + small_ * 0.28
-            if ov.get("nocomma"):                    # e.g. 'with time' so the ellipsis lands
-                for o in placed:
-                    o["word"]["disp"] = o["word"]["disp"].rstrip(",")
             if ov.get("overstrike"):                 # the repeat is typed over the first
                 ws = [o for o in placed if o["role"] in ("word", "hero")]
                 half = len(ws) // 2

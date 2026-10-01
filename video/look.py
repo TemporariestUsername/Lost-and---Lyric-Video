@@ -13,7 +13,7 @@ import numpy as np
 import skia
 
 import fx
-from engine import H, W, clamp01, ease_out, font, ramp, smooth, smooth_path
+from engine import H, W, clamp01, display_text, ease_out, font, ramp, smooth, smooth_path
 from fx import F32, hexc
 
 # ---------------------------------------------------------------- palette
@@ -497,7 +497,7 @@ def word_list(T, lines):
     for n in lines:
         for w in T.lines[n]["words"]:
             d = dict(w)
-            d["disp"] = w["text"].replace('"', "")
+            d["disp"] = display_text(w["text"])
             d["line_end"] = T.lines[n]["end"]
             out.append(d)
     return out
@@ -511,7 +511,7 @@ def line_rows(T, n, size, max_w):
     for w in T.lines[n]["words"]:
         if w["backing"]:
             continue
-        ww = f.measureText(w["text"].replace('"', ""))
+        ww = f.measureText(display_text(w["text"]))
         if cw and cw + sp + ww > max_w:
             rows, cw = rows + 1, ww
         else:
@@ -616,7 +616,7 @@ def etched(img, t, T, lines, x, y, size=40, color=None, seed=5, big=None):
     f = font("coats", size)
     fbig = font("coats", size * 2.1)
     adv = f.measureText("M")
-    words = [dict(w, disp=w["text"].upper().replace('"', "")) for w in word_list(T, lines)]
+    words = [dict(w, disp=display_text(w["text"]).upper()) for w in word_list(T, lines)]
 
     def draw(c):
         r = np.random.default_rng(seed)
@@ -649,7 +649,7 @@ def etched(img, t, T, lines, x, y, size=40, color=None, seed=5, big=None):
 def him_light(img, t, T, lines, cx, y, size=30, tracking=0.3):
     """His words arrive as light through a crack: warm, steady, tracked caps."""
     f = font("him", size)
-    words = [dict(w, disp=w["text"].upper().replace('"', "")) for w in word_list(T, lines)]
+    words = [dict(w, disp=display_text(w["text"]).upper()) for w in word_list(T, lines)]
     total = sum(f.measureText(w["disp"]) + len(w["disp"]) * size * tracking + size * 0.8
                 for w in words)
 
