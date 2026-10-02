@@ -4200,21 +4200,21 @@
    "line": 94,
    "text": "They cut away his protecting.",
    "stanza": 13,
-   "start": 363.99,
+   "start": 364.64,
    "end": 367.35,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "They",
-     "start": 363.99,
-     "end": 364.81,
+     "start": 364.64,
+     "end": 364.86,
      "matched": true,
      "backing": false
     },
     {
      "text": "cut",
-     "start": 364.81,
+     "start": 364.86,
      "end": 365.11,
      "matched": true,
      "backing": false
@@ -4246,21 +4246,21 @@
    "line": 95,
    "text": "They cut away his trusting.",
    "stanza": 13,
-   "start": 367.35,
+   "start": 367.2,
    "end": 370.75,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "They",
-     "start": 367.35,
-     "end": 368.15,
+     "start": 367.2,
+     "end": 368.03,
      "matched": true,
      "backing": false
     },
     {
      "text": "cut",
-     "start": 368.15,
+     "start": 368.03,
      "end": 368.49,
      "matched": true,
      "backing": false
@@ -4292,21 +4292,21 @@
    "line": 96,
    "text": "They cut away his believing.",
    "stanza": 13,
-   "start": 370.75,
+   "start": 370.6,
    "end": 374.05,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "They",
-     "start": 370.75,
-     "end": 371.55,
+     "start": 370.6,
+     "end": 371.4,
      "matched": true,
      "backing": false
     },
     {
      "text": "cut",
-     "start": 371.55,
+     "start": 371.4,
      "end": 371.91,
      "matched": true,
      "backing": false
@@ -4341,7 +4341,7 @@
    "start": 374.05,
    "end": 377.31,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "But",
@@ -4374,21 +4374,21 @@
     {
      "text": "gun\u2026",
      "start": 375.23,
-     "end": 375.65,
+     "end": 375.6,
      "matched": true,
      "backing": false
     },
     {
      "text": "and",
-     "start": 375.65,
-     "end": 376.71,
+     "start": 376.5,
+     "end": 376.78,
      "matched": true,
      "backing": false
     },
     {
      "text": "the",
-     "start": 376.71,
-     "end": 376.91,
+     "start": 376.78,
+     "end": 376.92,
      "matched": true,
      "backing": false
     },
@@ -4578,28 +4578,28 @@
    "line": 102,
    "text": "But left her the years (and years and years)...",
    "stanza": 14,
-   "start": 384.91,
+   "start": 385.35,
    "end": 388.43,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "But",
-     "start": 384.91,
-     "end": 385.53,
+     "start": 385.35,
+     "end": 385.8,
      "matched": true,
      "backing": false
     },
     {
      "text": "left",
-     "start": 385.53,
-     "end": 385.79,
+     "start": 385.8,
+     "end": 385.9,
      "matched": true,
      "backing": false
     },
     {
      "text": "her",
-     "start": 385.79,
+     "start": 385.9,
      "end": 385.97,
      "matched": true,
      "backing": false
@@ -4768,7 +4768,7 @@
    "start": 394.49,
    "end": 396.63,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Of",
@@ -4786,7 +4786,7 @@
     },
     {
      "text": "and",
-     "start": 395.27,
+     "start": 395.93,
      "end": 396.23,
      "matched": true,
      "backing": false

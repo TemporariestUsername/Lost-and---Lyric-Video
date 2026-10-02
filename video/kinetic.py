@@ -322,15 +322,17 @@ class Kinetic:
             ov = (overrides or {}).get(n, {})
             v = ov.get("voice", voice)
             placed, style = layout(T, n, ov.get("style"), ov.get("hero"), seed, v)
+            if ov.get("no_ghost"):                   # set by hand: no faint hero behind
+                placed = [o for o in placed if o["role"] != "ghost_hero"]
             if v != "him":
                 for o in placed:                    # alternate lines sit a little high / low
                     o["y"] += (55 if n % 2 else -55) + ov.get("dy", 0)
             if ov.get("backing_at"):                 # echoes placed on their own
-                bx, by, bs = ov["backing_at"]
+                bx, by, bs, *bg = ov["backing_at"]          # (x, y, size[, word gap in em])
                 for o in placed:
                     if o["role"] == "backing":
                         o.update(x=bx, y=by, size=bs, key=VOICES[v][0])
-                        bx += font(o["key"], bs).measureText(o["word"]["disp"]) + bs * 0.3
+                        bx += font(o["key"], bs).measureText(o["word"]["disp"]) + bs * (bg[0] if bg else 0.3)
             if v == "coats":                        # no punch, no stretch: clinical
                 for o in placed:
                     o["pop"] = o["stretch"] = False
@@ -530,6 +532,12 @@ class Kinetic:
                     lift = min(0.0, ty - ts * 0.8 - 50 - low)
                     for o in rest:
                         o["y"] += lift
+            if ov.get("word_flags"):                 # per-word flags by index ('hidden': drawn
+                lw = T.lines[n]["words"]             # by the scene; 'taken': cut out after it
+                for k, fl in ov["word_flags"].items():   # is sung, leaving its gap)
+                    for o in placed:
+                        if o["word"]["start"] == lw[k]["start"] and o["word"]["text"] == lw[k]["text"]:
+                            o.update(fl)
             for o in placed:
                 if o["role"] == "hero" and ov.get("ghost_second") and o.get("pop"):
                     o["pop"], o["ghost"] = False, True
@@ -647,6 +655,8 @@ class Kinetic:
             cur = None                               # the coats' cursor: after the last typed letter
             for pi, o in enumerate(p["placed"]):
                 w = o["word"]
+                if o.get("hidden"):
+                    continue
                 v = o.get("voice", p["voice"])         # a word may speak in another voice
                 push = 1.0 if v == "coats" else push_line
                 kind = o.get("kind") or {"her": "lit" if self.light else "ink",
@@ -770,6 +780,12 @@ class Kinetic:
                         sig = 0.8 + (3 if o["role"] == "ghost_hero" else 0)
                     else:
                         sig = (1 - u) * 4 + ex * 6
+                    if o.get("taken") is not None and t >= w["end"] + o["taken"]:
+                        tk = t - w["end"] - o["taken"]      # cut out: gone at once, a cold
+                        ga = a * 0.6 * math.exp(-tk / 0.3)  # afterimage of it fading in the gap
+                        if ga > 0.004:
+                            put("cold", 4 + 8 * min(tk, 1.0), (ch, sx, sy, f, sc, ga))
+                        continue
                     if a > 0.004:
                         put(kind, sig, (ch, sx, sy, f, sc, a))
                         if opts.get("cursor") and v == "coats" and (cur is None or cs >= cur[0]):

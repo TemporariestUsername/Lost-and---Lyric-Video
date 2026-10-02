@@ -210,18 +210,25 @@ SECTIONS = {
              "“find”; her tally surfaces on “with time”."),
     "The Cutting": dict(
         world="memory",
-        visual="Style frame C. Dark. The three shafts from Spoken I return, "
-               "and each “cut” drops a blade through one and it "
-               "gutters out. The warmth behind her drains with each cut "
-               "until she is a silhouette against nothing. The glint "
-               "stays sharp. Then her exposures are taken one by one. For "
-               "“eyes” the focus goes. For “ears” the "
-               "image stops reacting to the music. The years stay: the "
-               "tally marks remain.",
-        type="Her voice, white-hot with halation, cooling as the light "
-             "goes.",
-        sync="Blades on the “cut” onsets; beat-reactivity "
-             "switches off on “ears”."),
+        visual="Out of the coats' white, his three shafts return with "
+               "PROTECTING, TRUSTING, BELIEVING still lit inside them where he "
+               "set them in Spoken I. Each “cut” slices a shaft at its word: "
+               "below, the light falls away at once (the frame jolts, as on the "
+               "stabs); above, it withdraws into its source, and the word flares "
+               "as she sings it and goes out to ash. GUN and BULLET in the coats' "
+               "type, and the bullet falls again at the speed it fell before, "
+               "out of frame on “But left her the years”. What they take "
+               "from her is cut out of her lines, leaving the gaps; taking her "
+               "eyes takes the focus, taking her ears stills the world. The "
+               "years stay: her tally, the one sharp thing, brighter on each "
+               "“years”.",
+        type="Her voice as light; his virtues in his type; GUN / BULLET and "
+             "“with time... with time...” in the coats' type (overstruck, "
+             "their phrase now her condition); OF HIM in his light on the right, "
+             "and her... on the left.",
+        sync="The slices on the “cut” vowels; each virtue goes out as it "
+             "is sung; the taken words vanish just after they are sung; her "
+             "agains begin to double into Refrain II."),
     "Refrain II: Stay lost now girl": dict(
         world="her",
         visual="The refrain again, but nothing reacts to the beat any more "
@@ -255,6 +262,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("the_cutting", "The Cutting",
+     "What they did to each of them, in her words. Out of the coats' white his three shafts pour back, with PROTECTING, TRUSTING and BELIEVING still lit where he set them in Spoken I (a memory of his offer). Each 'cut' slices a shaft at its word: below the slice the light falls away at once and the frame jolts, as on the stabs; above it the light withdraws into its source, and the word flares as she sings it and goes out to ash. He is left the GUN and the BULLET in the coats' type, and the bullet falls again, top-centre to bottom-centre at the same speed as before, which carries it out of frame exactly on 'But left HER the years'. What they take from her is cut out of her lines, leaving the gaps: 'They took her ___ to hug / ___ to run / Her ___ to see and ___ to hear'. Taking her eyes takes the focus; taking her ears stills the world (the drift, the fog, the grain). What they leave her is the years: her tally, sharp through the blur, brightening on each 'years'. 'Alone' in her serif with 'with time... with time...' overstruck in the coats' type: their phrase is now her condition. Her agains begin to double (the deaf ghosts of Refrain II). Then OF HIM... in his light on his side, and her... on hers. The clip starts 3.6 s early, in White Coats III's white, to show the hand-off.",
+    ),
     ("white_coats_iii", "White Coats III",
      "They turn on him. It begins inside the coats' white that flooded 'But...' (no cut). Their typed, still voice: MAN / LOST; the stab chant slams in and is slashed; 'We'll have to CUT OUT his' and then 'something hard to find' in her own serif inside their line, struck through in pencil as it is sung; 'with time with time...' overstruck, trailing off as in the earlier White Coats, while her tally surfaces; how LOST this girl can be; ANYTHING in their darkest ink; then EXCEPT... alone, and 'something hard to find' again in her serif, untouched: the one thing they cannot make her find.",
     ),

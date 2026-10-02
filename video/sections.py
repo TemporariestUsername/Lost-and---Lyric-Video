@@ -18,7 +18,7 @@ import fx
 import kinetic
 import look
 import memories as mem
-from engine import H, W, clamp01, ease_out, font, ramp, smooth
+from engine import H, W, clamp01, display_text, ease_out, font, ramp, smooth
 from look import C, hexc
 
 # ---------------------------------------------------------------- helpers
@@ -675,10 +675,10 @@ GUN_SHOTS = {                                      # the hunt as their report, t
 }                                                                                 # lost and found her...
 
 
-def falling_bullet(t, T, end):
+def falling_bullet(t, T, end, line=59):
     """From 'bullet' on, the bullet tumbles slowly down the centre of the frame,
     in from above the top edge and out below the bottom by `end`."""
-    t0 = word_at(T, 59, "bullet")
+    t0 = word_at(T, line, "bullet")
     if t0 is None or t < t0 or t > end:
         return None
     u = (t - t0) / (end - t0)
@@ -883,36 +883,215 @@ def but(t, T, lines):
     return img, p
 
 
-CUT_SHOTS = {94: dict(style="stack", hero=4), 95: dict(style="stack", hero=4),
-             96: dict(style="stack", hero=4), 97: dict(style="track", hero=7),
-             99: dict(style="depth", hero=3), 100: dict(style="depth", hero=3),
-             101: dict(style="track", hero=1), 102: dict(style="hero", hero=4),
-             103: dict(style="track", hero=0), 104: dict(style="depth", hero=3),
-             105: dict(style="hero", hero=1)}
+# ================================================================ The Cutting
+# What they did to each of them, in her words. His three shafts come back
+# out of the coats' white with the virtues he offered still lit inside them,
+# where he set them in Spoken I. Each 'cut' severs a shaft at its source at
+# once (the frame startles, as on the stabs) and the dark runs down it,
+# reaching his word as she sings it: the word flares and goes out to cold
+# ash. He is left the GUN and the BULLET in the coats' type, and the bullet
+# falls again, at the speed it fell before, out of frame exactly on 'But left
+# HER the years'. What they take from her is cut out of her lines, leaving
+# the gaps: her ____ to hug, her ____ to run. Taking her eyes takes the
+# focus; taking her ears stills the world (the drift, the dust, the grain).
+# What they leave her is the years: her tally, the one sharp thing she still
+# sees, and 'with time... with time...' is the coats' phrase in their type,
+# now her condition. Her agains start to double, as in the refrain to come.
+# 'Of him...' in his light on his side, 'and her...' on hers.
+CUT_OPEN = (362.3, 362.7, 363.1)       # his shafts pour back in the coats' white
+CUT_LEAD = (361.9, 363.6)              # White Coats III's white drains into his night
+VIRTUE_AT = [(beam_x(0, 530), 530), (beam_x(1, 680), 680), (beam_x(2, 860), 860)]   # as Spoken I
+VIRTUE_SIZE, VIRTUE_TRACK = 80, 0.16
+AGAIN_GHOSTS = ((1.0, -180, 0, -5, 0.12), (2.0, 170, -10, 4, 0.08), (3.2, -60, 12, 2, 0.05))
+
+
+def _after(txt, x=150, size=70, key="her"):
+    """x just past `txt` in her type (for a word in another voice on the same row)."""
+    return x + font(key, size).measureText(txt) + 0.6 * size
+
+
+_THEY_CUT = dict(no_separate=True, no_ghost=True, word_flags={4: {"hidden": True}},   # the virtue:
+                 rows_at=[([0, 1, 2, 3], 150, 700, 1.0, {"left": True})])            # his, in his shaft
+_COATS_WORD = {"left": True, "voice": "coats", "key": "coats_bold", "bare": True}
+_TAKEN = {"taken": 0.12}
+CUT_SHOTS = {
+    94: _THEY_CUT, 95: _THEY_CUT, 96: _THEY_CUT,
+    97: dict(rows_at=[([0, 1, 2, 3], 150, 830, 1.0, {"left": True}),                 # but left him the
+                      ([4], _after("But left him the"), 830, 1.9, dict(_COATS_WORD, bare=False)),   # GUN...
+                      ([5, 6], 150, 960, 1.0, {"left": True}),                       # and the
+                      ([7], _after("and the"), 960, 1.9, _COATS_WORD)]),             # BULLET
+    # her body, cut out of her lines; the lines stay, with their gaps
+    99: dict(exit_at=384.95, word_flags={3: _TAKEN},
+             rows_at=[([0, 1, 2, 3, 4, 5], 150, 680, 0.9, {"left": True})]),        # they took her arms
+    100: dict(exit_at=384.95, word_flags={3: _TAKEN},
+              rows_at=[([0, 1, 2, 3, 4, 5], 150, 780, 0.9, {"left": True})]),       # ...legs
+    101: dict(exit_at=384.95, word_flags={1: _TAKEN, 5: _TAKEN},
+              rows_at=[([0, 1, 2, 3], 150, 880, 0.9, {"left": True}),               # her eyes to see
+                       ([4, 5, 6, 7], 150, 980, 0.9, {"left": True})]),             # and ears to hear
+    # what they leave her, beside her count
+    102: dict(backing_at=(1090, 520, 58, 0.5),
+              rows_at=[([0, 1, 2, 3], 560, 330, 1.0, {"left": True}),                # but left her the
+                       ([4], 560, 520, 2.6, {"left": True, "key": "her_roman"})]),   # YEARS
+    103: dict(overstrike=[(1, 3), (2, 4)],
+              rows_at=[([0], 150, 800, 2.2, {"left": True, "key": "her_roman"}),     # ALONE
+                       ([1, 2], 150, 930, 1.0, {"left": True, "voice": "coats"}),    # with time... in
+                       ([3, 4], 150, 930, 1.0, {"left": True, "voice": "coats"})]),  # their type, overstruck
+    104: dict(rows_at=[([0, 1, 2], 560, 330, 1.0, {"left": True}),                   # and all her
+                       ([3, 4, 5, 6, 7], 560, 450, 1.0, {"left": True})]),           # agains and agains...
+    105: dict(rows_at=[([0, 1], 1500, 840, 1.6, {"voice": "him", "tracking": VIRTUE_TRACK}),
+                       ([2, 3], 150, 840, 1.0, {"left": True})]),                    # OF HIM... / and her...
+}
+for _n, _o in CUT_SHOTS.items():                         # every line here is placed by hand
+    CUT_SHOTS[_n] = dict(_o, style="stack", no_separate=True, no_ghost=True)
+
+
+def _shaft(k):
+    """Beam k's soft wedge of light (static), brighter toward the floor."""
+    def make():
+        tx = BEAM_TARGETS[k]
+
+        def draw(c):
+            p = skia.Path()
+            p.moveTo(BEAM_SRC[0] - 18, BEAM_SRC[1]); p.lineTo(BEAM_SRC[0] + 18, BEAM_SRC[1])
+            p.lineTo(tx + 70, H + 60); p.lineTo(tx - 70, H + 60); p.close()
+            c.drawPath(p, skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1)))
+        return fx.blur(fx.skia_alpha(draw), 9) * (0.55 + 0.45 * fx.vgrad(BEAM_SRC[1], H))
+    return cached(("shaft", k), make)
+
+
+def _along(y):
+    return (y - BEAM_SRC[1]) / (H - BEAM_SRC[1])
+
+
+def cut_shafts(img, t, cuts, sung, strength=0.95):
+    """'cut' slices shaft k at its word: below the slice the light falls away at
+    once; above it, the light withdraws up into its source by the time she
+    sings the word."""
+    g = np.clip(0.7 + 0.4 * fx.fog(t, seed=31, period=5.0), 0.1, 1.2)
+    along = fx.vgrad(BEAM_SRC[1], H)
+    cols = [C["amber"], C["rose"], C["amber_hot"]]
+    for k in range(3):
+        pour = ease_out(clamp01((t - CUT_OPEN[k]) / 0.9), 2)
+        if pour <= 0.001:
+            continue
+        m = _shaft(k)
+        if pour < 1:                                       # pours down from the source
+            m = m * np.clip((pour * 1.15 - along) / 0.1, 0, 1)
+        if cuts[k] is not None and t >= cuts[k]:
+            age = t - cuts[k]
+            aw, gap = _along(VIRTUE_AT[k][1] - 0.35 * VIRTUE_SIZE), 0.035
+            rec = (aw - gap) * smooth(clamp01(age / (sung[k] - cuts[k] + 0.3)))
+            if rec >= aw - gap - 0.01 and age > 0.8:
+                continue
+            fall = 0.9 * (age / 0.7) ** 2
+            upper = m * np.clip((aw - gap - rec - along) / 0.04, 0, 1)
+            lower = m * np.clip((along - aw - gap - fall) / 0.04, 0, 1) * (1 - smooth(clamp01(age / 0.7)))
+            feed = (1 - 0.35 * smooth(clamp01(age / 0.3))) * (0.85 + 0.15 * math.sin(t * 23 + 2 * k) ** 2)
+            m = upper * feed + lower
+        img = img + cols[k] * (m * 0.9 * g * strength)[..., None]
+    return img
+
+
+def _virtue_mask(k, txt):
+    def make():
+        f = font("him", VIRTUE_SIZE)
+        xs = kinetic._char_x(f, txt, VIRTUE_TRACK, VIRTUE_SIZE)
+        wd = f.measureText(txt) + VIRTUE_TRACK * VIRTUE_SIZE * len(txt)
+        x0, y = VIRTUE_AT[k][0] - wd / 2, VIRTUE_AT[k][1]
+
+        def draw(c):
+            for ch, x in zip(txt, xs):
+                c.drawString(ch, x0 + x, y, f, skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1)))
+        m = fx.skia_alpha(draw)
+        return m, cv2.GaussianBlur(m, (0, 0), 10), cv2.GaussianBlur(m, (0, 0), 1.6)
+    return cached(("virtue", k), make)
+
+
+def virtue_words(img, t, T, sung_words):
+    """His virtues, lit in their shafts; each flares as she sings it and goes out to ash."""
+    ash = hexc("#8A8F9C")
+    for k, w in enumerate(sung_words):
+        lit = 0.9 * smooth(ramp(t, CUT_OPEN[k] + 0.35, CUT_OPEN[k] + 1.2))
+        if lit <= 0.001:
+            continue
+        ts, te = w["start"], w["end"]
+        flare = 1 + 0.7 * math.exp(-(t - ts) / 0.12) if t >= ts else 1.0
+        out = smooth(ramp(t, ts + 0.15, ts + 0.7))
+        ember = 0.35 * out * (1 - smooth(ramp(t, ts + 0.7, ts + 2.8)))
+        m, bloom, soft = _virtue_mask(k, display_text(w["text"]).upper())
+        a = lit * flare * (1 - out)
+        if a > 0.004:
+            img = fx.add(img, kinetic.AMBER, bloom * 0.72 * a)
+            img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * a)
+        if ember > 0.004:
+            img = fx.add(img, ash, soft * ember)
+    return img
 
 
 def cutting(t, T, lines):
     name = "The Cutting"
+    s = sec_of(T, name)
     cuts = [word_at(T, n, "cut") for n in (94, 95, 96)]
-    live = sum(1 - smooth(clamp01((t - ct - 0.4) / 1.2)) if t >= ct else 1.0 for ct in cuts) / 3
-    eyes = word_at(T, 101, "eyes")
-    ears = word_at(T, 101, "ears")
-    deaf = ears is not None and t >= ears
-    img = base_night(t, T, lift=0.7)
-    img = look.beams(img, t, T, cuts, targets=(690, 860, 1030))
-    img = draw_mems(img, t, mems(T, name, ["doorway_figure", "car_window_night", "fog_lamps",
-                                           "curtain_window", "rain_window", "lake_overcast"],
-                                 every=2, life=10.0, seed=47, keep_left=1000), warm=0.5 * live)
-    img = fx.hotspot(img, t, 880, 640, 330, strength=0.3 * live)
-    # 'her eyes to see': focus goes and doesn't come back
-    if eyes is not None and t >= eyes:
+    virtues = [T.lines[n]["words"][4] for n in (94, 95, 96)]
+    sung = [w["start"] for w in virtues]
+    eyes_w = T.lines[101]["words"][1]
+    ears_w = T.lines[101]["words"][5]
+    eyes = eyes_w["end"] + 0.12                          # as each is taken out of her line
+    ears = ears_w["end"] + 0.12
+    still = min(t, ears)                                 # deaf: the world stops moving
+    bullet_end = T.lines[102]["start"]                   # out of frame on 'But left her the years'
+
+    img = base_night(still, T, tally=False, lift=0.7)
+    img = cut_shafts(img, t, cuts, sung)
+    # once his light is gone, what she sees of them drifts in the dark: these are
+    # what her eyes and ears are taken from
+    seen = cached(("mem", name), lambda: mem.schedule(
+        T, ["doorway_figure", "car_window_night", "fog_lamps", "rain_window", "curtain_window"],
+        virtues[2]["end"] - 1.0, s["end"], every=2, life=9.0, seed=47, keep_left=900))
+    seen = [m for m in seen if m.t0 >= virtues[2]["end"] - 1.0]
+    img = img + (draw_mems(img, t, seen, warm=0.15, freeze=ears) - img) * 0.55   # faint
+    if t >= eyes:                                        # her eyes: the focus goes, for good
         k = smooth(clamp01((t - eyes) / 1.5))
         img = img * (1 - 0.7 * k) + fx.blur(img, 9) * 0.7 * k
-    img = kin(T, name, lines, CUT_SHOTS, light=True).draw(
-        img, t, kick=0.0 if deaf else T.pulse_env(t, 7.0), react=0.0 if deaf else 1.0)
-    p = post("night", exposure=0.95)
-    p["bullet"] = (1470, 925, 1.9)
+    # what they leave her: the years, still sharp; brighter on each 'years'
+    yrs = [w["start"] for w in T.lines[102]["words"] if w["text"].lower().startswith("years")]
+    a_t = 0.35 + sum(0.09 * smooth(ramp(t, y, y + 0.5)) for y in yrs)
+    img = look.tally(img, t, T, color=hexc("#7A6D86"), alpha=a_t, blur=2.0)
+    img = virtue_words(img, t, T, virtues)
+    img = kin(T, name, lines, CUT_SHOTS, light=True, hold=1.2).draw(img, t)
+    # each 'cut' startles, like the stabs: a jolt, the exposure knocked down for an instant
+    jolt = 0.0
+    for k, c in enumerate(cuts):
+        if c is not None and 0 <= t - c < 0.35:
+            jolt = math.exp(-(t - c) / 0.06)
+            img = fx.shift(img, 8 * jolt * math.cos(1.1 + 2.1 * k), 6 * jolt * math.sin(1.1 + 2.1 * k))
+    p = post("night", exposure=0.95 - 0.1 * jolt)
+    agains = word_at(T, 104, "agains")                   # still words don't double; her agains do
+    g = smooth(ramp(t, agains, agains + 1.5)) if agains else 0.0
+    p["ghosts"] = tuple((dt, dx, dy, r, a * g) for dt, dx, dy, r, a in AGAIN_GHOSTS)
+    p["grain"] = POST["night"]["grain"] * (1 - 0.6 * smooth(ramp(t, ears, ears + 0.6)))
+    fb = falling_bullet(t, T, bullet_end, line=97)
+    if fb:
+        p["bullet"] = fb
     return img, p
+
+
+def lead_into(a, b, b_lines, span):
+    """Scene `a`, crossfading over `span` into scene `b` (which is already
+    running) before b's section begins."""
+    def scene(t, T, lines):
+        if t < span[0]:
+            return a(t, T, lines)
+        img_b, pb = b(t, T, b_lines)
+        u = smooth(ramp(t, *span))
+        if u >= 1:
+            return img_b, pb
+        img_a, pa = a(t, T, lines)
+        p = _mix_post(pa, pb, u)
+        if "bullet" in pb:
+            p["bullet"] = pb["bullet"]
+        return img_a * (1 - u) + img_b * u, p
+    return scene
 
 
 def reprise(t, T, lines):
