@@ -902,7 +902,7 @@ CUT_OPEN = (362.3, 362.7, 363.1)       # his shafts pour back in the coats' whit
 CUT_LEAD = (361.9, 363.6)              # White Coats III's white drains into his night
 VIRTUE_AT = [(beam_x(0, 530), 530), (beam_x(1, 680), 680), (beam_x(2, 860), 860)]   # as Spoken I
 VIRTUE_SIZE, VIRTUE_TRACK = 80, 0.16
-AGAIN_GHOSTS = ((1.0, -180, 0, -5, 0.12), (2.0, 170, -10, 4, 0.08), (3.2, -60, 12, 2, 0.05))
+AGAIN_GHOSTS = ((1.0, -180, 0, -5, 0.08), (2.0, 170, -10, 4, 0.05), (3.2, -60, 12, 2, 0.03))
 
 
 def _after(txt, x=150, size=70, key="her"):
@@ -910,12 +910,15 @@ def _after(txt, x=150, size=70, key="her"):
     return x + font(key, size).measureText(txt) + 0.6 * size
 
 
-_THEY_CUT = dict(no_separate=True, no_ghost=True, word_flags={4: {"hidden": True}},   # the virtue:
-                 rows_at=[([0, 1, 2, 3], 150, 700, 1.0, {"left": True})])            # his, in his shaft
+def _they_cut(y):
+    return dict(word_flags={4: {"hidden": True}},          # the virtue: his word, in his shaft
+                rows_at=[([0, 1, 2, 3], 150, y, 1.0, {"left": True})])
+
+
 _COATS_WORD = {"left": True, "voice": "coats", "key": "coats_bold", "bare": True}
 _TAKEN = {"taken": 0.12}
 CUT_SHOTS = {
-    94: _THEY_CUT, 95: _THEY_CUT, 96: _THEY_CUT,
+    94: _they_cut(650), 95: _they_cut(740), 96: _they_cut(650),   # each clear of the last leaving
     97: dict(rows_at=[([0, 1, 2, 3], 150, 830, 1.0, {"left": True}),                 # but left him the
                       ([4], _after("But left him the"), 830, 1.9, dict(_COATS_WORD, bare=False)),   # GUN...
                       ([5, 6], 150, 960, 1.0, {"left": True}),                       # and the
