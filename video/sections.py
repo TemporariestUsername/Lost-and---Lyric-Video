@@ -966,53 +966,7 @@ def _along(y):
     return (y - BEAM_SRC[1]) / (H - BEAM_SRC[1])
 
 
-CUT_ANGLE = (-9.0, -13.0, -7.0)        # each slash rises left to right, like the pencil's
-
-
-def _cut_line(k):
-    """Slash k: its centre (through the middle of his word), direction along
-    the blade (pointing downhill) and the signed distance of every pixel from it
-    (positive below)."""
-    def make():
-        cx, cy = VIRTUE_AT[k][0], VIRTUE_AT[k][1] - 0.35 * VIRTUE_SIZE
-        a = math.radians(CUT_ANGLE[k])
-        ux, uy = -math.cos(a), -math.sin(a)            # downhill: toward the lower end
-        nx, ny = -math.sin(a), math.cos(a)
-        yy, xx = fx._yy_xx()
-        return (cx, cy), (ux, uy), ((xx - cx) * nx + (yy - cy) * ny).astype(np.float32)
-    return cached(("cutline", k), make)
-
-
-def cut_shafts(img, t, cuts, sung, strength=0.95):
-    """'cut' slices shaft k through his word: a dark wound across the light,
-    which now flickers. When she sings the word, the light below the wound
-    falls away and the light above withdraws into its source."""
-    g = np.clip(0.7 + 0.4 * fx.fog(t, seed=31, period=5.0), 0.1, 1.2)
-    along = fx.vgrad(BEAM_SRC[1], H)
-    cols = [C["amber"], C["rose"], C["amber_hot"]]
-    for k in range(3):
-        pour = ease_out(clamp01((t - CUT_OPEN[k]) / 0.9), 2)
-        if pour <= 0.001:
-            continue
-        m = _shaft(k)
-        if pour < 1:                                       # pours down from the source
-            m = m * np.clip((pour * 1.15 - along) / 0.1, 0, 1)
-        if cuts[k] is not None and t >= cuts[k]:
-            _, _, d = _cut_line(k)
-            m = m * np.clip((np.abs(d) - 3) / 6, 0, 1)      # the wound
-            m = m * (0.8 + 0.2 * math.sin(t * 29 + 2 * k) ** 2)
-            tau = t - sung[k]
-            if tau >= 0:
-                aw = _along(VIRTUE_AT[k][1] - 0.35 * VIRTUE_SIZE)
-                rec = aw * smooth(clamp01(tau / 1.0))
-                if tau > 1.0:
-                    continue
-                fall = 0.9 * (tau / 0.6) ** 2
-                upper = m * (d < 0) * np.clip((aw - rec - along) / 0.04, 0, 1)
-                lower = m * np.clip((along - aw - fall) / 0.04, 0, 1) * (1 - smooth(clamp01(tau / 0.6)))
-                m = upper + lower * (d >= 0)
-        img = img + cols[k] * (m * 0.9 * g * strength)[..., None]
-    return img
+BLEED = np.array([1.0, 0.34, 0.14], np.float32)      # his light, opened: deeper, redder
 
 
 def _virtue_mask(k, txt):
@@ -1030,32 +984,87 @@ def _virtue_mask(k, txt):
     return cached(("virtue", k), make)
 
 
-def _slash(img, t, k, ct, ts, wd):
-    """The coats' blade: one cold stroke through his word and his light,
-    sweeping across in a few frames; it leaves a faint scar."""
-    (cx, cy), (ux, uy), _ = _cut_line(k)
-    a = 1.6 * math.exp(-(t - ct) / 0.22) + 0.3 * (1 - smooth(ramp(t, ts + 0.4, ts + 2.4)))
-    if a <= 0.004:
-        return img
-    L = wd + 300
-    p = ease_out(clamp01((t - ct) / 0.07), 2)
-    x0, y0 = cx - ux * L / 2, cy - uy * L / 2          # from the high end, down through the word
+def _incision(k, wd):
+    """The excision the coats cut round his word: a surgeon's ellipse, pointed at
+    both ends, traced by hand (slightly unsteady). Starts at the left point,
+    runs along the top, back along the bottom. Returns its path, the filled hole,
+    its centre and box, and where the drips hang from."""
+    def make():
+        cx, y = VIRTUE_AT[k]
+        cy = y - 0.37 * VIRTUE_SIZE
+        a, b = wd / 2 + 120, 64.0
+        rng = np.random.default_rng(300 + k)
+        ph = rng.uniform(0, 6.28, 4)
 
-    def draw(c):
-        c.drawLine(x0, y0, x0 + ux * L * p, y0 + uy * L * p,
-                   skia.Paint(AntiAlias=True, StrokeWidth=4.5, StrokeCap=skia.Paint.kRound_Cap,
-                              Color4f=skia.Color4f(1, 1, 1, 1)))
-    m = fx.skia_alpha(draw)
-    img = fx.add(img, kinetic.COLD, cv2.GaussianBlur(m, (0, 0), 7) * 0.7 * a)
-    return fx.add(img, kinetic.COLD, cv2.GaussianBlur(m, (0, 0), 0.8) * a)
+        def wob(s_):
+            return 1.6 * math.sin(9 * s_ + ph[0]) + 1.1 * math.sin(23 * s_ + ph[1])
+        ss = np.linspace(-1, 1, 90)
+        top = [(cx + a * q, cy - b * (1 - q * q) ** 0.85 - wob(q)) for q in ss]
+        bot = [(cx + a * q, cy + b * (1 - q * q) ** 0.85 + wob(q + 3)) for q in ss[::-1]]
+        path = skia.Path()
+        path.moveTo(*top[0])
+        for pt in top[1:] + bot[1:]:
+            path.lineTo(*pt)
+        path.close()
+        hole = cv2.GaussianBlur(fx.skia_alpha(lambda c: c.drawPath(
+            path, skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1)))), (0, 0), 1.4)
+        drips = []
+        for _ in range(11):
+            q = float(rng.uniform(-0.75, 0.75))
+            drips.append(dict(x=cx + a * q, y=cy + b * (1 - q * q) ** 0.85 + wob(q + 3),
+                              delay=0.28 * (0.5 + 0.5 * (1 - q)) + float(rng.uniform(0.0, 0.5)),
+                              len=float(rng.uniform(25, 220)) * (1 - 0.6 * abs(q)),
+                              tau=float(rng.uniform(0.5, 1.6)), w=float(rng.uniform(2.0, 4.8))))
+        r = skia.Rect(cx - a, cy - b, cx + a, cy + b)
+        return dict(path=path, rect=r, hole=hole, c=(cx, cy), drips=drips)
+    return cached(("incision", k), make)
 
 
-def virtue_words(img, t, T, sung_words, cuts):
-    """His virtues, lit in their shafts. On 'cut' a blade goes through each and
-    its light leaks and flickers around the wound; when she sings it, it comes
-    apart: the lower half slides off down the blade into the dark, the upper
-    half gutters out to ash where it hung."""
-    ash = hexc("#8A8F9C")
+def _stroke_mask(path, width):
+    return fx.skia_alpha(lambda c: c.drawPath(path, skia.Paint(
+        AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=width,
+        StrokeCap=skia.Paint.kRound_Cap, StrokeJoin=skia.Paint.kRound_Join,
+        Color4f=skia.Color4f(1, 1, 1, 1))))
+
+
+def cut_shafts(img, t, cuts, sung, strength=0.95):
+    """His shafts. Once cut, the light flickers; when his word is taken out the
+    hole is cut out of the light too, the light below it drains away and the
+    light above withdraws into its source."""
+    g = np.clip(0.7 + 0.4 * fx.fog(t, seed=31, period=5.0), 0.1, 1.2)
+    along = fx.vgrad(BEAM_SRC[1], H)
+    cols = [C["amber"], C["rose"], C["amber_hot"]]
+    for k in range(3):
+        pour = ease_out(clamp01((t - CUT_OPEN[k]) / 0.9), 2)
+        if pour <= 0.001:
+            continue
+        m = _shaft(k)
+        if pour < 1:                                       # pours down from the source
+            m = m * np.clip((pour * 1.15 - along) / 0.1, 0, 1)
+        if cuts[k] is not None and t >= cuts[k]:
+            m = m * (0.8 + 0.2 * math.sin(t * 29 + 2 * k) ** 2)
+            tau = t - sung[k]
+            if tau >= 0:
+                if tau > 1.3:
+                    continue
+                inc = _incision(k, _virtue_mask(k, VIRTUE_WORDS[k].upper())[3])
+                top, bot = _along(inc["rect"].top()), _along(inc["rect"].bottom())
+                rec = top * smooth(clamp01(tau / 1.3))
+                fall = 0.9 * (tau / 0.7) ** 2
+                upper = np.clip((top - rec - along) / 0.04, 0, 1)
+                lower = np.clip((along - bot - fall) / 0.04, 0, 1) * (1 - smooth(clamp01(tau / 0.7)))
+                m = m * (upper + lower) * (1 - inc["hole"])
+        img = img + cols[k] * (m * 0.9 * g * strength)[..., None]
+    return img
+
+
+def virtue_words(img, t, T, sung_words, cuts, scar_end):
+    """His virtues, lit in their shafts, cut out of him. On 'cut' a scalpel
+    traces round the word and the incision opens: his light wells out of it,
+    redder, and runs. The word trembles while it is worked on. When she sings
+    it, it is pulled out up the shaft (threads of light stretch from the wound
+    and snap), leaving a hole darker than the night, with a cooling rim."""
+    hv = 1 - smooth(ramp(t, scar_end, scar_end + 1.0))          # the wounds stay till the gun
     for k, w in enumerate(sung_words):
         lit = 0.9 * smooth(ramp(t, CUT_OPEN[k] + 0.35, CUT_OPEN[k] + 1.2))
         if lit <= 0.001:
@@ -1066,35 +1075,71 @@ def virtue_words(img, t, T, sung_words, cuts):
             img = fx.add(img, kinetic.AMBER, bloom * 0.72 * lit)
             img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * lit)
             continue
-        (cx, cy), (ux, uy), d = _cut_line(k)
-        wound = np.clip((np.abs(d) - 1.5) / 2.5, 0, 1)
-        bleed = 0.8 + 0.2 * math.sin(t * 31 + 3 * k) ** 2
-        up, lo = (d < 0) * wound, (d >= 0) * wound
-        tau = t - ts
-        # upper half: hangs where it was, then gutters out to ash
-        a_up = lit * bleed * ((1 + 0.5 * math.exp(-tau / 0.1)) * (1 - smooth(ramp(tau, 0.15, 0.75)))
-                              if tau >= 0 else 1.0)
-        if a_up > 0.004:
-            img = fx.add(img, kinetic.AMBER, bloom * up * 0.72 * a_up)
-            img = fx.add(img, kinetic.AMBER_HOT, m * up * 1.5 * a_up)
-        ember = 0.35 * smooth(ramp(tau, 0.15, 0.75)) * (1 - smooth(ramp(tau, 0.75, 2.8)))
-        if ember > 0.004:
-            img = fx.add(img, ash, soft * up * ember)
-        # lower half: slides off along the blade and falls, turning, out of frame
-        a_lo = lit * bleed * (1 - smooth(ramp(tau, 0.3, 0.8)) if tau >= 0 else 1.0)
-        if a_lo > 0.004:
-            if tau > 0:
-                sl, dy = 200 * tau + 500 * tau * tau, 250 * tau * tau
-                M = cv2.getRotationMatrix2D((cx, cy), -12 * tau * (1 if ux > 0 else -1), 1.0)
-                M[0, 2] += ux * sl
-                M[1, 2] += uy * sl + dy
-                warp = lambda a_: cv2.warpAffine(a_, M, (W, H), flags=cv2.INTER_LINEAR)
-                lm, lb = warp(m * lo), warp(bloom * lo)
-            else:
-                lm, lb = m * lo, bloom * lo
-            img = fx.add(img, kinetic.AMBER, lb * 0.72 * a_lo)
-            img = fx.add(img, kinetic.AMBER_HOT, lm * 1.5 * a_lo)
-        img = _slash(img, t, k, ct, ts, wd)
+        inc = _incision(k, wd)
+        age, tau = t - ct, t - ts
+        L = skia.PathMeasure(inc["path"], False).getLength()
+        trace = ease_out(clamp01(age / 0.28), 2)                 # the blade goes round in ~8 frames
+        well = smooth(ramp(age, 0.05, 0.6)) * (0.82 + 0.18 * math.sin(t * 17 + k) * math.sin(t * 7.3))
+        hot = 1.0 if tau < 0 else 0.45 + 0.55 * math.exp(-tau / 0.8)   # the wound stays raw
+        if tau >= 0:                                             # the hole: a pit in his light
+            img = img * (1 - 0.78 * hv * inc["hole"])[..., None]
+        # the incision: a fine cold line, the raw edge welling under it
+        seg = skia.Path()
+        skia.PathMeasure(inc["path"], False).getSegment(0, L * trace, seg, True)
+        cut = _stroke_mask(seg, 2.2)
+        img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 16) * 0.8 * well * hot * hv)
+        img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 4) * 1.5 * well * hot * hv)
+        img = fx.add(img, kinetic.COLD, cut * 1.3 * math.exp(-age / 0.3))
+        if trace < 1:                                            # the blade's point
+            pos = skia.PathMeasure(inc["path"], False).getPosTan(L * trace)[0]
+            tip = fx.skia_alpha(lambda c: c.drawCircle(pos.x(), pos.y(), 4.5, skia.Paint(
+                AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1))))
+            img = fx.add(img, kinetic.COLD, cv2.GaussianBlur(tip, (0, 0), 3) * 2.0)
+        # the drips: his light running from the bottom of the wound
+        da = hv * (1 - 0.6 * smooth(ramp(tau, 0.3, 2.5)) if tau >= 0 else 1.0)
+
+        def drips(c):
+            for d in inc["drips"]:
+                u = age - d["delay"]
+                if u <= 0:
+                    continue
+                ln = d["len"] * (1 - math.exp(-u / d["tau"]))
+                pnt = skia.Paint(AntiAlias=True, StrokeWidth=d["w"], StrokeCap=skia.Paint.kRound_Cap,
+                                 Color4f=skia.Color4f(1, 1, 1, 0.9))
+                c.drawLine(d["x"], d["y"] - 2, d["x"], d["y"] + ln, pnt)
+                c.drawCircle(d["x"], d["y"] + ln, d["w"] * 0.95, skia.Paint(
+                    AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1)))
+        dm = fx.skia_alpha(drips)
+        img = fx.add(img, BLEED, cv2.GaussianBlur(dm, (0, 0), 1.2) * 0.95 * da)
+        img = fx.add(img, BLEED, cv2.GaussianBlur(dm, (0, 0), 7) * 0.4 * da)
+        # the word itself
+        if tau < 0:                                              # trembling while it is worked on
+            jx = int(round((kinetic._hash01(k, int(t * 30), 1) - 0.5) * 3.5))
+            jy = int(round((kinetic._hash01(k, int(t * 30), 2) - 0.5) * 3.0))
+            wm, wb = np.roll(m, (jy, jx), (0, 1)), np.roll(bloom, (jy, jx), (0, 1))
+            a = lit * (0.85 + 0.15 * math.sin(t * 31 + 3 * k) ** 2)
+            img = fx.add(img, kinetic.AMBER, wb * 0.72 * a)
+            img = fx.add(img, kinetic.AMBER_HOT, wm * 1.5 * a)
+        elif tau < 0.75:                                         # pulled out, up toward the source
+            cx, cy = inc["c"]
+            dx, dy = BEAM_SRC[0] - cx, BEAM_SRC[1] - cy
+            n = math.hypot(dx, dy)
+            dist = 2400 * (tau / 0.7) ** 2
+            M = np.float32([[1, 0, dx / n * dist], [0, 1, dy / n * dist]])
+            piece = cv2.warpAffine(np.clip(m * 1.5 + inc["hole"] * 0.18, 0, 1.5), M, (W, H))
+            pb = cv2.warpAffine(bloom, M, (W, H))
+            img = fx.add(img, kinetic.AMBER, pb * 0.72 * lit)
+            img = fx.add(img, kinetic.AMBER_HOT, piece * lit)
+            if tau < 0.3:                                        # threads from the wound, then snap
+                pm = skia.PathMeasure(inc["path"], False)
+
+                def threads(c):
+                    for q in range(8):
+                        pp = pm.getPosTan(L * (q + 0.5) / 8)[0]
+                        c.drawLine(pp.x(), pp.y(), pp.x() + dx / n * dist, pp.y() + dy / n * dist,
+                                   skia.Paint(AntiAlias=True, StrokeWidth=1.6, Color4f=skia.Color4f(1, 1, 1, 1)))
+                th = fx.skia_alpha(threads)
+                img = fx.add(img, BLEED, cv2.GaussianBlur(th, (0, 0), 1.0) * 1.2 * (1 - tau / 0.3))
     return img
 
 
@@ -1127,14 +1172,15 @@ def cutting(t, T, lines):
     yrs = [w["start"] for w in T.lines[102]["words"] if w["text"].lower().startswith("years")]
     a_t = 0.35 + sum(0.09 * smooth(ramp(t, y, y + 0.5)) for y in yrs)
     img = look.tally(img, t, T, color=hexc("#7A6D86"), alpha=a_t, blur=2.0)
-    img = virtue_words(img, t, T, virtues, cuts)
+    img = virtue_words(img, t, T, virtues, cuts, T.lines[97]["start"] + 0.6)
     img = kin(T, name, lines, CUT_SHOTS, light=True, hold=1.2).draw(img, t)
-    # each 'cut' startles, like the stabs: a jolt, the exposure knocked down for an instant
+    # each 'cut' startles, like the stabs, and so does each pull: a jolt, the
+    # exposure knocked down for an instant
     jolt = 0.0
-    for k, c in enumerate(cuts):
+    for k, (c, amp) in enumerate([(c, 1.0) for c in cuts] + [(x, 0.7) for x in sung]):
         if c is not None and 0 <= t - c < 0.35:
-            jolt = math.exp(-(t - c) / 0.06)
-            img = fx.shift(img, 8 * jolt * math.cos(1.1 + 2.1 * k), 6 * jolt * math.sin(1.1 + 2.1 * k))
+            jolt = amp * math.exp(-(t - c) / 0.06)
+            img = fx.shift(img, 9 * jolt * math.cos(1.1 + 2.1 * k), 7 * jolt * math.sin(1.1 + 2.1 * k))
     p = post("night", exposure=0.95 - 0.1 * jolt)
     agains = word_at(T, 104, "agains")                   # still words don't double; her agains do
     g = smooth(ramp(t, agains, agains + 1.5)) if agains else 0.0
