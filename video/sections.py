@@ -966,10 +966,27 @@ def _along(y):
     return (y - BEAM_SRC[1]) / (H - BEAM_SRC[1])
 
 
+CUT_ANGLE = (-9.0, -13.0, -7.0)        # each slash rises left to right, like the pencil's
+
+
+def _cut_line(k):
+    """Slash k: its centre (through the middle of his word), direction along
+    the blade (pointing downhill) and the signed distance of every pixel from it
+    (positive below)."""
+    def make():
+        cx, cy = VIRTUE_AT[k][0], VIRTUE_AT[k][1] - 0.35 * VIRTUE_SIZE
+        a = math.radians(CUT_ANGLE[k])
+        ux, uy = -math.cos(a), -math.sin(a)            # downhill: toward the lower end
+        nx, ny = -math.sin(a), math.cos(a)
+        yy, xx = fx._yy_xx()
+        return (cx, cy), (ux, uy), ((xx - cx) * nx + (yy - cy) * ny).astype(np.float32)
+    return cached(("cutline", k), make)
+
+
 def cut_shafts(img, t, cuts, sung, strength=0.95):
-    """'cut' slices shaft k at its word: below the slice the light falls away at
-    once; above it, the light withdraws up into its source by the time she
-    sings the word."""
+    """'cut' slices shaft k through his word: a dark wound across the light,
+    which now flickers. When she sings the word, the light below the wound
+    falls away and the light above withdraws into its source."""
     g = np.clip(0.7 + 0.4 * fx.fog(t, seed=31, period=5.0), 0.1, 1.2)
     along = fx.vgrad(BEAM_SRC[1], H)
     cols = [C["amber"], C["rose"], C["amber_hot"]]
@@ -981,16 +998,19 @@ def cut_shafts(img, t, cuts, sung, strength=0.95):
         if pour < 1:                                       # pours down from the source
             m = m * np.clip((pour * 1.15 - along) / 0.1, 0, 1)
         if cuts[k] is not None and t >= cuts[k]:
-            age = t - cuts[k]
-            aw, gap = _along(VIRTUE_AT[k][1] - 0.35 * VIRTUE_SIZE), 0.035
-            rec = (aw - gap) * smooth(clamp01(age / (sung[k] - cuts[k] + 0.3)))
-            if rec >= aw - gap - 0.01 and age > 0.8:
-                continue
-            fall = 0.9 * (age / 0.7) ** 2
-            upper = m * np.clip((aw - gap - rec - along) / 0.04, 0, 1)
-            lower = m * np.clip((along - aw - gap - fall) / 0.04, 0, 1) * (1 - smooth(clamp01(age / 0.7)))
-            feed = (1 - 0.35 * smooth(clamp01(age / 0.3))) * (0.85 + 0.15 * math.sin(t * 23 + 2 * k) ** 2)
-            m = upper * feed + lower
+            _, _, d = _cut_line(k)
+            m = m * np.clip((np.abs(d) - 3) / 6, 0, 1)      # the wound
+            m = m * (0.8 + 0.2 * math.sin(t * 29 + 2 * k) ** 2)
+            tau = t - sung[k]
+            if tau >= 0:
+                aw = _along(VIRTUE_AT[k][1] - 0.35 * VIRTUE_SIZE)
+                rec = aw * smooth(clamp01(tau / 1.0))
+                if tau > 1.0:
+                    continue
+                fall = 0.9 * (tau / 0.6) ** 2
+                upper = m * (d < 0) * np.clip((aw - rec - along) / 0.04, 0, 1)
+                lower = m * np.clip((along - aw - fall) / 0.04, 0, 1) * (1 - smooth(clamp01(tau / 0.6)))
+                m = upper + lower * (d >= 0)
         img = img + cols[k] * (m * 0.9 * g * strength)[..., None]
     return img
 
@@ -1006,28 +1026,75 @@ def _virtue_mask(k, txt):
             for ch, x in zip(txt, xs):
                 c.drawString(ch, x0 + x, y, f, skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1)))
         m = fx.skia_alpha(draw)
-        return m, cv2.GaussianBlur(m, (0, 0), 10), cv2.GaussianBlur(m, (0, 0), 1.6)
+        return m, cv2.GaussianBlur(m, (0, 0), 10), cv2.GaussianBlur(m, (0, 0), 1.6), wd
     return cached(("virtue", k), make)
 
 
-def virtue_words(img, t, T, sung_words):
-    """His virtues, lit in their shafts; each flares as she sings it and goes out to ash."""
+def _slash(img, t, k, ct, ts, wd):
+    """The coats' blade: one cold stroke through his word and his light,
+    sweeping across in a few frames; it leaves a faint scar."""
+    (cx, cy), (ux, uy), _ = _cut_line(k)
+    a = 1.6 * math.exp(-(t - ct) / 0.22) + 0.3 * (1 - smooth(ramp(t, ts + 0.4, ts + 2.4)))
+    if a <= 0.004:
+        return img
+    L = wd + 300
+    p = ease_out(clamp01((t - ct) / 0.07), 2)
+    x0, y0 = cx - ux * L / 2, cy - uy * L / 2          # from the high end, down through the word
+
+    def draw(c):
+        c.drawLine(x0, y0, x0 + ux * L * p, y0 + uy * L * p,
+                   skia.Paint(AntiAlias=True, StrokeWidth=4.5, StrokeCap=skia.Paint.kRound_Cap,
+                              Color4f=skia.Color4f(1, 1, 1, 1)))
+    m = fx.skia_alpha(draw)
+    img = fx.add(img, kinetic.COLD, cv2.GaussianBlur(m, (0, 0), 7) * 0.7 * a)
+    return fx.add(img, kinetic.COLD, cv2.GaussianBlur(m, (0, 0), 0.8) * a)
+
+
+def virtue_words(img, t, T, sung_words, cuts):
+    """His virtues, lit in their shafts. On 'cut' a blade goes through each and
+    its light leaks and flickers around the wound; when she sings it, it comes
+    apart: the lower half slides off down the blade into the dark, the upper
+    half gutters out to ash where it hung."""
     ash = hexc("#8A8F9C")
     for k, w in enumerate(sung_words):
         lit = 0.9 * smooth(ramp(t, CUT_OPEN[k] + 0.35, CUT_OPEN[k] + 1.2))
         if lit <= 0.001:
             continue
-        ts, te = w["start"], w["end"]
-        flare = 1 + 0.7 * math.exp(-(t - ts) / 0.12) if t >= ts else 1.0
-        out = smooth(ramp(t, ts + 0.15, ts + 0.7))
-        ember = 0.35 * out * (1 - smooth(ramp(t, ts + 0.7, ts + 2.8)))
-        m, bloom, soft = _virtue_mask(k, display_text(w["text"]).upper())
-        a = lit * flare * (1 - out)
-        if a > 0.004:
-            img = fx.add(img, kinetic.AMBER, bloom * 0.72 * a)
-            img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * a)
+        ct, ts = cuts[k], w["start"]
+        m, bloom, soft, wd = _virtue_mask(k, display_text(w["text"]).upper())
+        if ct is None or t < ct:
+            img = fx.add(img, kinetic.AMBER, bloom * 0.72 * lit)
+            img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * lit)
+            continue
+        (cx, cy), (ux, uy), d = _cut_line(k)
+        wound = np.clip((np.abs(d) - 1.5) / 2.5, 0, 1)
+        bleed = 0.8 + 0.2 * math.sin(t * 31 + 3 * k) ** 2
+        up, lo = (d < 0) * wound, (d >= 0) * wound
+        tau = t - ts
+        # upper half: hangs where it was, then gutters out to ash
+        a_up = lit * bleed * ((1 + 0.5 * math.exp(-tau / 0.1)) * (1 - smooth(ramp(tau, 0.15, 0.75)))
+                              if tau >= 0 else 1.0)
+        if a_up > 0.004:
+            img = fx.add(img, kinetic.AMBER, bloom * up * 0.72 * a_up)
+            img = fx.add(img, kinetic.AMBER_HOT, m * up * 1.5 * a_up)
+        ember = 0.35 * smooth(ramp(tau, 0.15, 0.75)) * (1 - smooth(ramp(tau, 0.75, 2.8)))
         if ember > 0.004:
-            img = fx.add(img, ash, soft * ember)
+            img = fx.add(img, ash, soft * up * ember)
+        # lower half: slides off along the blade and falls, turning, out of frame
+        a_lo = lit * bleed * (1 - smooth(ramp(tau, 0.3, 0.8)) if tau >= 0 else 1.0)
+        if a_lo > 0.004:
+            if tau > 0:
+                sl, dy = 200 * tau + 500 * tau * tau, 250 * tau * tau
+                M = cv2.getRotationMatrix2D((cx, cy), -12 * tau * (1 if ux > 0 else -1), 1.0)
+                M[0, 2] += ux * sl
+                M[1, 2] += uy * sl + dy
+                warp = lambda a_: cv2.warpAffine(a_, M, (W, H), flags=cv2.INTER_LINEAR)
+                lm, lb = warp(m * lo), warp(bloom * lo)
+            else:
+                lm, lb = m * lo, bloom * lo
+            img = fx.add(img, kinetic.AMBER, lb * 0.72 * a_lo)
+            img = fx.add(img, kinetic.AMBER_HOT, lm * 1.5 * a_lo)
+        img = _slash(img, t, k, ct, ts, wd)
     return img
 
 
@@ -1060,7 +1127,7 @@ def cutting(t, T, lines):
     yrs = [w["start"] for w in T.lines[102]["words"] if w["text"].lower().startswith("years")]
     a_t = 0.35 + sum(0.09 * smooth(ramp(t, y, y + 0.5)) for y in yrs)
     img = look.tally(img, t, T, color=hexc("#7A6D86"), alpha=a_t, blur=2.0)
-    img = virtue_words(img, t, T, virtues)
+    img = virtue_words(img, t, T, virtues, cuts)
     img = kin(T, name, lines, CUT_SHOTS, light=True, hold=1.2).draw(img, t)
     # each 'cut' startles, like the stabs: a jolt, the exposure knocked down for an instant
     jolt = 0.0
