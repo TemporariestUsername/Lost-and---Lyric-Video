@@ -1253,6 +1253,96 @@ def lead_into(a, b, b_lines, span):
     return scene
 
 
+# ================================================================ Refrain II: the same words, after
+# Refrain I was prophecy; this is the same refrain sung after it has all
+# happened. Same room, same layout per line, so it is recognised; but she is
+# deaf now, so nothing answers the beat (no smear, no rewind, nothing flung)
+# and the room stays still. Each line is written over a faint exposure of how
+# it looked the first time (FIND lands on the old FOUND: 'everything he found'
+# is now 'everything he could find'). Nothing is fully unwritten any more:
+# every line leaves its trace, so her agains pile up. The visions that flashed
+# past in Refrain I as the future come back as settled exposures, because they
+# have happened. 'Never again...' is held and the frame bleaches to white: the
+# story starts over in the Verse A reprise.
+_ODD = lambda n: -110 if n % 2 else 110                   # sit where the first time sat
+REFRAIN_II_SHOTS = {
+    107: dict(style="stack", hero=1, foreknow=1.0, exit="dissolve", dy=_ODD(107),   # stay lost
+              backing_at=(560, 330, 64), backing_alpha=0.8),
+    108: dict(style="stack", hero=5, foreknow=1.0, dy=_ODD(108)),                     # ...could FIND
+    109: dict(style="stack", hero=2, foreknow=1.0, dy=_ODD(109),                      # NEVER, no rewind
+              backing_at=(620, 300, 92), backing_alpha=0.85),
+    110: dict(hero=[0, 1], foreknow=1.0, dy=_ODD(110)),                               # forever / again
+    111: dict(hero=[0, 1], ghost_second=True, foreknow=1.0, dy=_ODD(111)),            # never / again...
+}
+REFRAIN_PAIRS = {107: (20, 88.9), 108: (21, 92.3), 109: (22, 95.9), 110: (23, 104.4), 111: (24, 106.2)}
+SETTLED = {107: 400.9, 108: 405.4, 109: 410.2, 110: 415.4}          # each line as it stood
+REFRAIN_II_VISIONS = {107: "corridor", 108: "coats", 109: "shafts", 110: "run", 111: "cutting"}
+
+
+def _line_mask(name, n, shots, at, T):
+    """One line's ink as it stood at time `at`, as a mask (cached)."""
+    def make():
+        K = kinetic.Kinetic(T, [n], overrides=shots, hold=3.0)
+        blank = np.ones((H, W, 3), np.float32)
+        return np.clip(1 - K.draw(blank, at).mean(-1), 0, 1)
+    return cached(("linemask", name, n, at), make)
+
+
+def refrain_ii(t, T, lines):
+    name = "Refrain II: Stay lost now girl"
+    s = sec_of(T, name)
+    import visions as V
+    still = s["start"]                                         # deaf: the room doesn't move
+    img = base_her(still, T, tally=False)
+    img = look.tally(img, t, T, alpha=0.6)                     # the years, still counted
+    # the photographs: she throws away everything he could find, slowly, with no
+    # beat to throw them on; they fade over 'Throw away...'
+    photos = ["curtain_window", "rain_window", "doorway_figure", "car_window_night"]
+    ms = mems(T, name, photos, every=2, life=12.0, seed=19, keep_left=900)
+    let_go = smooth(ramp(t, T.lines[108]["start"], T.lines[108]["end"] + 1.0))
+    bg = img
+    img = draw_mems(img, still + 4.0, ms)
+    img = bg + (img - bg) * (1 - 0.85 * let_go)
+    # what she foresaw has happened: the visions settle in as still exposures
+    for n, vname in REFRAIN_II_VISIONS.items():
+        if n not in T.lines:
+            continue
+        u = smooth(ramp(t, T.lines[n]["start"] - 0.2, T.lines[n]["start"] + 1.6))
+        if u > 0.004:
+            a = 0.09 * u
+            img = img * (1 - a) + V.load(vname) * a
+    # her agains: every line written so far leaves its trace, and each is
+    # written over how it looked the first time
+    for n2, (n1, at1) in REFRAIN_PAIRS.items():
+        L2 = T.lines[n2]
+        on = smooth(ramp(t, L2["start"] - 1.0, L2["start"] + 0.4))
+        if on <= 0.004:
+            continue
+        m1 = cv2.GaussianBlur(_line_mask("Refrain I", n1, REFRAIN_I_SHOTS, at1, T), (0, 0), 2.0)
+        first = 0.2 * on * (1 - 0.5 * smooth(ramp(t, L2["end"] + 0.5, L2["end"] + 2.5)))
+        img = fx.over(img, kinetic.INK, m1 * first)
+        if n2 in SETTLED and t > SETTLED[n2]:
+            m2 = cv2.GaussianBlur(_line_mask(name, n2, REFRAIN_II_SHOTS, SETTLED[n2], T), (0, 0), 1.6)
+            k = list(SETTLED).index(n2)
+            m2 = np.roll(m2, (6 * (k + 1), 9 * (k + 1)), (0, 1))
+            img = fx.over(img, kinetic.INK, m2 * 0.16 * smooth(ramp(t, SETTLED[n2], SETTLED[n2] + 1.2)))
+    img = kin(T, name, lines, REFRAIN_II_SHOTS, hold=3.2).draw(img, t, kick=0.0, react=0.0)
+    # out of the Cutting's night into her room
+    u = smooth(ramp(t, s["start"] - 0.1, s["start"] + 1.4))
+    g = post("her", exposure=0.92, sat=0.88)
+    g["ghosts"] = ((1.0, -180, 0, -5, 0.2), (2.0, 170, -10, 4, 0.14), (3.2, -60, 12, 2, 0.1))
+    if u < 1:
+        ref, rp = cutting(t, T, range(94, 106))
+        img = ref * (1 - u) + img * u
+        g = _mix_post(rp, g, u)
+    # 'Never again...' held; then everything, the agains included, goes to white
+    last = T.lines[111]
+    white = smooth(ramp(t, last["end"] + 0.2, s["end"]))
+    img = img * (1 - white) + np.float32(1.0) * white
+    g["exposure"] = g["exposure"] + 0.25 * white
+    return img, g
+
+
 def reprise(t, T, lines):
     """Verse A again, seen through years of accumulated exposure."""
     import compose

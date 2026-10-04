@@ -230,12 +230,20 @@ SECTIONS = {
              "they are sung; her agains begin to double into Refrain II."),
     "Refrain II: Stay lost now girl": dict(
         world="her",
-        visual="The refrain again, but nothing reacts to the beat any more "
-               "because she can't hear it. The echoes pile up instead: "
-               "her agains, in layers.",
-        type="Her voice at display size, with more ghosts than Refrain I.",
-        sync="Deliberately unsynced: only the word onsets drive "
-             "anything."),
+        visual="Refrain I remembered: the same refrain sung after it has all "
+               "happened. Same room and the same layout per line, so it is "
+               "recognised, but she is deaf now: nothing answers the beat and the "
+               "room stays still. Each line is written over a faint exposure of "
+               "how it looked the first time (FIND lands on the old FOUND). "
+               "Nothing is fully unwritten any more: every line leaves its trace "
+               "and her agains pile up. The visions that flashed past as the "
+               "future settle in as still exposures, because they have happened. "
+               "The photographs fade over 'Throw away everything he could find'.",
+        type="Her voice at display size, as Refrain I; the first time's words "
+             "beneath; earlier lines left behind as faint traces.",
+        sync="Only the word onsets drive anything; “Never again...” is "
+             "held, then everything goes to white and the story starts over "
+             "in the Verse A reprise."),
     "Verse A reprise": dict(
         world="her",
         visual="A shot-for-shot rhyme with Verse A, seen through years of "

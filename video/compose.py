@@ -168,8 +168,7 @@ SCENES = {
     "White Coats III": (S.lead_into(S.coats("White Coats III", ["cinderblock_hole", "stairwell_spiral", "stairwell_cage"], 71, hot=1.0),
                                     S.cutting, range(94, 106), S.CUT_LEAD), range(83, 93)),
     "The Cutting": (S.cutting, range(94, 106)),
-    "Refrain II: Stay lost now girl": (S.refrain("Refrain II: Stay lost now girl", False),
-                                       range(107, 112)),
+    "Refrain II: Stay lost now girl": (S.refrain_ii, range(107, 112)),
     "Verse A reprise": (S.reprise, range(113, 122)),
     "Outro": (S.outro, range(0)),
 }
