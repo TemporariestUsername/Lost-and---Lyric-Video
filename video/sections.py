@@ -1196,7 +1196,7 @@ def cutting(t, T, lines):
     # what her eyes and ears are taken from
     seen = cached(("mem", name), lambda: mem.schedule(
         T, ["doorway_figure", "car_window_night", "fog_lamps", "rain_window", "curtain_window"],
-        word_at(T, 97, "bullet") + 1.5, s["end"], every=2, life=9.0, seed=47, keep_left=900))
+        word_at(T, 97, "bullet") + 1.5, s["end"], every=1, life=9.0, seed=47, keep_left=900))
     seen = [m for m in seen if m.t0 >= word_at(T, 97, "bullet") + 1.5]   # after the bullet
     img = img + (draw_mems(img, t, seen, warm=0.15, freeze=ears) - img) * 0.55   # faint
     if t >= eyes:                                        # her eyes: the focus goes, for good
