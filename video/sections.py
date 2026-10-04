@@ -891,8 +891,8 @@ def but(t, T, lines):
 # wells out of the incision, redder, and drips; when she sings the word the
 # wound is sewn shut over it in thick red thread, a strikeout and sutures at
 # once, and his light chokes under it. He is left the GUN and the BULLET in
-# the coats' type; the bullet doesn't fall this time, it surfaces where his
-# light used to shine, catches the last of it, and is gone. What they take
+# the coats' type; the bullet doesn't fall this time and isn't metal: where his
+# light used to shine, the last of it condenses into a bullet and goes out. What they take
 # from her is cut out of her lines, leaving the gaps: her ____ to hug, her
 # ____ to run. Taking her eyes takes the
 # focus; taking her ears stills the world (the drift, the dust, the grain).
@@ -1178,6 +1178,26 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
     return img
 
 
+def _bullet_light(x, y, scale=2.3, rot=-8.0):
+    """The bullet's silhouette (as look.bullet draws it), as a mask of light."""
+    def make():
+        def draw(c):
+            c.translate(x, y)
+            c.rotate(rot)
+            c.scale(scale, scale)
+            pnt = skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1))
+            c.drawRRect(skia.RRect.MakeRectXY(skia.Rect(-26, -7, 18, 7), 2, 2), pnt)
+            tip = skia.Path()
+            tip.moveTo(18, -7); tip.cubicTo(30, -6, 36, -2, 38, 0); tip.cubicTo(36, 2, 30, 6, 18, 7)
+            tip.close()
+            c.drawPath(tip, pnt)
+            c.drawRect(skia.Rect(-2, -7, 0, 7), skia.Paint(Color4f=skia.Color4f(0, 0, 0, 1),
+                                                          BlendMode=skia.BlendMode.kDstOut))
+        m = cv2.GaussianBlur(fx.skia_alpha(draw), (0, 0), 1.2)
+        return m, cv2.GaussianBlur(m, (0, 0), 12)
+    return cached(("bullet_light", x, y), make)
+
+
 def cutting(t, T, lines):
     name = "The Cutting"
     s = sec_of(T, name)
@@ -1220,16 +1240,18 @@ def cutting(t, T, lines):
     g = smooth(ramp(t, agains, agains + 1.5)) if agains else 0.0
     p["ghosts"] = tuple((dt, dx, dy, r, a * g) for dt, dx, dy, r, a in AGAIN_GHOSTS)
     p["grain"] = POST["night"]["grain"] * (1 - 0.6 * smooth(ramp(t, ears, ears + 0.6)))
-    # the bullet: it doesn't fall this time. It surfaces where his light used to
-    # shine, catches the last of it for a moment, and is gone
+    # the bullet: it doesn't fall this time, and it isn't metal. Where his light
+    # used to shine, the last of it gathers and condenses into a bullet, holds,
+    # and goes out: what he is left with is made of what was taken
     tb = word_at(T, 97, "bullet")
-    ab = smooth(ramp(t, tb - 0.1, tb + 0.5)) * (1 - smooth(ramp(t, tb + 1.6, tb + 2.4)))
+    ab = smooth(ramp(t, tb - 0.2, tb + 0.4)) * (1 - smooth(ramp(t, tb + 1.8, tb + 2.6)))
     if ab > 0.004:
         bx, by = VIRTUE_AT[1][0], VIRTUE_AT[1][1] - 30
-        glow = ab * (0.6 + 0.4 * math.exp(-max(0.0, t - tb - 0.3) / 0.5))
-        img = fx.add(img, kinetic.AMBER, fx.radial(bx, by, 300) * 0.45 * glow)
-        img = fx.add(img, kinetic.AMBER_HOT, fx.radial(bx, by, 100) * 0.6 * glow)
-        p["bullet"] = (bx, by, 1.9, -8.0, ab)
+        cond = smooth(ramp(t, tb - 0.2, tb + 0.8))               # gathering in
+        m, bloom = _bullet_light(bx, by)
+        img = fx.add(img, kinetic.AMBER, fx.radial(bx, by, 340 - 220 * cond) * 0.4 * ab * (1 - 0.55 * cond))
+        img = fx.add(img, kinetic.AMBER, bloom * 0.85 * ab * cond)
+        img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * ab * cond)
     return img, p
 
 
