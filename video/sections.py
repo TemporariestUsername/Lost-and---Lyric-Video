@@ -967,6 +967,8 @@ def _along(y):
 
 
 BLEED = np.array([1.0, 0.34, 0.14], np.float32)      # his light, opened: deeper, redder
+SUTURE = hexc("#7A0E0A")                               # the thread, red as the wound
+SUTURE_GLOW = np.array([0.85, 0.08, 0.05], np.float32)
 
 
 def _virtue_mask(k, txt):
@@ -1071,12 +1073,12 @@ def _sutures(k, wd):
         strike = [(float(x), cy + 1.8 * math.sin(0.021 * x + k) + float(rng.normal(0, 0.5))) for x in xs]
         stitches, x = [], x0 + float(rng.uniform(8, 20))
         while x < x1 - 8:
-            h = float(rng.uniform(26, 50))
+            h = float(rng.uniform(34, 60))
             lean = math.radians(float(rng.uniform(-9, 9)))
             yc = cy + float(rng.normal(0, 3.5))
             dx, dy = math.sin(lean) * h / 2, math.cos(lean) * h / 2
-            stitches.append((x, (x - dx, yc - dy, x + dx, yc + dy), float(rng.uniform(1.7, 2.8))))
-            x += float(rng.uniform(22, 46))
+            stitches.append((x, (x - dx, yc - dy, x + dx, yc + dy), float(rng.uniform(5.0, 7.5))))
+            x += float(rng.uniform(26, 50))
         return dict(strike=strike, stitches=stitches, x0=x0, x1=x1)
     return cached(("sutures", k), make)
 
@@ -1158,7 +1160,7 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
                     for p_ in pts[1:]:
                         pth.lineTo(*p_)
                     c.drawPath(pth, skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style,
-                                               StrokeWidth=2.4, StrokeCap=skia.Paint.kRound_Cap,
+                                               StrokeWidth=6.5, StrokeCap=skia.Paint.kRound_Cap,
                                                Color4f=skia.Color4f(1, 1, 1, 1)))
                 for x, (xa, ya, xb, yb), sw in sut["stitches"]:
                     if x <= front:
@@ -1166,9 +1168,11 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
                         c.drawLine(xa, ya, xa + (xb - xa) * u, ya + (yb - ya) * u, skia.Paint(
                             AntiAlias=True, StrokeWidth=sw, StrokeCap=skia.Paint.kRound_Cap,
                             Color4f=skia.Color4f(1, 1, 1, 1)))
-            sm = fx.skia_alpha(sew)
-            img = fx.add(img, kinetic.COLD, cv2.GaussianBlur(sm, (0, 0), 5) * 0.35 * hv)
-            img = fx.add(img, kinetic.COLD, cv2.GaussianBlur(sm, (0, 0), 0.7) * 1.05 * hv)
+            sm = fx.skia_alpha(sew)                              # thread with mass: it sits on
+            img = fx.over(img, np.float32(0.02), np.roll(cv2.GaussianBlur(sm, (0, 0), 3), 4, 0) * 0.6 * hv)
+            img = fx.add(img, SUTURE_GLOW, cv2.GaussianBlur(sm, (0, 0), 8) * 0.4 * hv)   # top of the word,
+            img = fx.over(img, SUTURE, np.clip(cv2.GaussianBlur(sm, (0, 0), 0.8) * 1.1, 0, 1) * hv)
+            img = fx.add(img, SUTURE_GLOW, cv2.GaussianBlur(np.roll(sm, -1, 0) * 0.3, (0, 0), 1.0) * hv)  # wet
     return img
 
 
