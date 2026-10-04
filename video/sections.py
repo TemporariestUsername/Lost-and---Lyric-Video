@@ -1028,9 +1028,9 @@ def _stroke_mask(path, width):
 
 
 def cut_shafts(img, t, cuts, sung, strength=0.95):
-    """His shafts. Once cut, the light flickers; when his word is taken out the
-    hole is cut out of the light too, the light below it drains away and the
-    light above withdraws into its source."""
+    """His shafts. Once cut, the light flickers; when his word is sewn shut,
+    the light below it drains away and the light above withdraws into its
+    source."""
     g = np.clip(0.7 + 0.4 * fx.fog(t, seed=31, period=5.0), 0.1, 1.2)
     along = fx.vgrad(BEAM_SRC[1], H)
     cols = [C["amber"], C["rose"], C["amber_hot"]]
@@ -1053,17 +1053,41 @@ def cut_shafts(img, t, cuts, sung, strength=0.95):
                 fall = 0.9 * (tau / 0.7) ** 2
                 upper = np.clip((top - rec - along) / 0.04, 0, 1)
                 lower = np.clip((along - bot - fall) / 0.04, 0, 1) * (1 - smooth(clamp01(tau / 0.7)))
-                m = m * (upper + lower) * (1 - inc["hole"])
+                m = m * (upper + lower)
         img = img + cols[k] * (m * 0.9 * g * strength)[..., None]
     return img
 
 
+def _sutures(k, wd):
+    """The strike through his word and the stitches across it: a slightly
+    unsteady line at mid-height, and short vertical stitches at uneven
+    spacing, heights and tilts. Each item: (x position along the strike, line)."""
+    def make():
+        cx, y = VIRTUE_AT[k]
+        cy = y - 0.37 * VIRTUE_SIZE
+        rng = np.random.default_rng(500 + k)
+        x0, x1 = cx - wd / 2 - 34, cx + wd / 2 + 34
+        xs = np.linspace(x0, x1, 60)
+        strike = [(float(x), cy + 1.8 * math.sin(0.021 * x + k) + float(rng.normal(0, 0.5))) for x in xs]
+        stitches, x = [], x0 + float(rng.uniform(8, 20))
+        while x < x1 - 8:
+            h = float(rng.uniform(26, 50))
+            lean = math.radians(float(rng.uniform(-9, 9)))
+            yc = cy + float(rng.normal(0, 3.5))
+            dx, dy = math.sin(lean) * h / 2, math.cos(lean) * h / 2
+            stitches.append((x, (x - dx, yc - dy, x + dx, yc + dy), float(rng.uniform(1.7, 2.8))))
+            x += float(rng.uniform(22, 46))
+        return dict(strike=strike, stitches=stitches, x0=x0, x1=x1)
+    return cached(("sutures", k), make)
+
+
 def virtue_words(img, t, T, sung_words, cuts, scar_end):
-    """His virtues, lit in their shafts, cut out of him. On 'cut' a scalpel
+    """His virtues, lit in their shafts, cut and sewn shut. On 'cut' a scalpel
     traces round the word and the incision opens: his light wells out of it,
     redder, and runs. The word trembles while it is worked on. When she sings
-    it, it is pulled out up the shaft (threads of light stretch from the wound
-    and snap), leaving a hole darker than the night, with a cooling rim."""
+    it, the wound is sewn shut over it: a strike runs through the word and the
+    stitches cross it as the thread passes (a strikeout, and sutures); his
+    light chokes down under them and the welling stops."""
     hv = 1 - smooth(ramp(t, scar_end, scar_end + 1.0))          # the wounds stay till the gun
     for k, w in enumerate(sung_words):
         lit = 0.9 * smooth(ramp(t, CUT_OPEN[k] + 0.35, CUT_OPEN[k] + 1.2))
@@ -1075,32 +1099,33 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
             img = fx.add(img, kinetic.AMBER, bloom * 0.72 * lit)
             img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * lit)
             continue
-        inc = _incision(k, wd)
+        inc, sut = _incision(k, wd), _sutures(k, wd)
         age, tau = t - ct, t - ts
+        sew_dur = 0.7
+        sewn = smooth(ramp(tau, 0.0, sew_dur + 0.3))             # how closed the wound is
         L = skia.PathMeasure(inc["path"], False).getLength()
         trace = ease_out(clamp01(age / 0.28), 2)                 # the blade goes round in ~8 frames
         well = smooth(ramp(age, 0.05, 0.6)) * (0.82 + 0.18 * math.sin(t * 17 + k) * math.sin(t * 7.3))
-        hot = 1.0 if tau < 0 else 0.45 + 0.55 * math.exp(-tau / 0.8)   # the wound stays raw
-        if tau >= 0:                                             # the hole: a pit in his light
-            img = img * (1 - 0.78 * hv * inc["hole"])[..., None]
+        well *= (1 - 0.8 * sewn) * hv
         # the incision: a fine cold line, the raw edge welling under it
         seg = skia.Path()
         skia.PathMeasure(inc["path"], False).getSegment(0, L * trace, seg, True)
         cut = _stroke_mask(seg, 2.2)
-        img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 16) * 0.8 * well * hot * hv)
-        img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 4) * 1.5 * well * hot * hv)
-        img = fx.add(img, kinetic.COLD, cut * 1.3 * math.exp(-age / 0.3))
+        img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 16) * 0.8 * well)
+        img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 4) * 1.5 * well)
+        img = fx.add(img, kinetic.COLD, cut * (1.3 * math.exp(-age / 0.3) + 0.12 * sewn * hv))
         if trace < 1:                                            # the blade's point
             pos = skia.PathMeasure(inc["path"], False).getPosTan(L * trace)[0]
             tip = fx.skia_alpha(lambda c: c.drawCircle(pos.x(), pos.y(), 4.5, skia.Paint(
                 AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, 1))))
             img = fx.add(img, kinetic.COLD, cv2.GaussianBlur(tip, (0, 0), 3) * 2.0)
-        # the drips: his light running from the bottom of the wound
-        da = hv * (1 - 0.6 * smooth(ramp(tau, 0.3, 2.5)) if tau >= 0 else 1.0)
+        # the drips: his light running from the wound; they stop once it is closed
+        run_t = min(age, ts - ct + sew_dur)
+        da = hv * (1 - 0.45 * sewn)
 
         def drips(c):
             for d in inc["drips"]:
-                u = age - d["delay"]
+                u = run_t - d["delay"]
                 if u <= 0:
                     continue
                 ln = d["len"] * (1 - math.exp(-u / d["tau"]))
@@ -1112,34 +1137,38 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
         dm = fx.skia_alpha(drips)
         img = fx.add(img, BLEED, cv2.GaussianBlur(dm, (0, 0), 1.2) * 0.95 * da)
         img = fx.add(img, BLEED, cv2.GaussianBlur(dm, (0, 0), 7) * 0.4 * da)
-        # the word itself
-        if tau < 0:                                              # trembling while it is worked on
+        # the word: trembling while it is worked on, then choked down under the stitches
+        a = lit * (0.85 + 0.15 * math.sin(t * 31 + 3 * k) ** 2) * (1 - 0.72 * sewn) * (hv if tau >= 0 else 1)
+        wm, wb = m, bloom
+        if tau < sew_dur:
             jx = int(round((kinetic._hash01(k, int(t * 30), 1) - 0.5) * 3.5))
             jy = int(round((kinetic._hash01(k, int(t * 30), 2) - 0.5) * 3.0))
             wm, wb = np.roll(m, (jy, jx), (0, 1)), np.roll(bloom, (jy, jx), (0, 1))
-            a = lit * (0.85 + 0.15 * math.sin(t * 31 + 3 * k) ** 2)
-            img = fx.add(img, kinetic.AMBER, wb * 0.72 * a)
-            img = fx.add(img, kinetic.AMBER_HOT, wm * 1.5 * a)
-        elif tau < 0.75:                                         # pulled out, up toward the source
-            cx, cy = inc["c"]
-            dx, dy = BEAM_SRC[0] - cx, BEAM_SRC[1] - cy
-            n = math.hypot(dx, dy)
-            dist = 2400 * (tau / 0.7) ** 2
-            M = np.float32([[1, 0, dx / n * dist], [0, 1, dy / n * dist]])
-            piece = cv2.warpAffine(np.clip(m * 1.5 + inc["hole"] * 0.18, 0, 1.5), M, (W, H))
-            pb = cv2.warpAffine(bloom, M, (W, H))
-            img = fx.add(img, kinetic.AMBER, pb * 0.72 * lit)
-            img = fx.add(img, kinetic.AMBER_HOT, piece * lit)
-            if tau < 0.3:                                        # threads from the wound, then snap
-                pm = skia.PathMeasure(inc["path"], False)
+        img = fx.add(img, kinetic.AMBER, wb * 0.72 * a)
+        img = fx.add(img, kinetic.AMBER_HOT, wm * 1.5 * a)
+        # sewn shut: the strike runs through it, the stitches cross it behind the thread
+        if tau >= 0:
+            front = sut["x0"] + (sut["x1"] - sut["x0"]) * ease_out(clamp01(tau / sew_dur), 1.5)
 
-                def threads(c):
-                    for q in range(8):
-                        pp = pm.getPosTan(L * (q + 0.5) / 8)[0]
-                        c.drawLine(pp.x(), pp.y(), pp.x() + dx / n * dist, pp.y() + dy / n * dist,
-                                   skia.Paint(AntiAlias=True, StrokeWidth=1.6, Color4f=skia.Color4f(1, 1, 1, 1)))
-                th = fx.skia_alpha(threads)
-                img = fx.add(img, BLEED, cv2.GaussianBlur(th, (0, 0), 1.0) * 1.2 * (1 - tau / 0.3))
+            def sew(c):
+                pts = [p_ for p_ in sut["strike"] if p_[0] <= front]
+                if len(pts) >= 2:
+                    pth = skia.Path()
+                    pth.moveTo(*pts[0])
+                    for p_ in pts[1:]:
+                        pth.lineTo(*p_)
+                    c.drawPath(pth, skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style,
+                                               StrokeWidth=2.4, StrokeCap=skia.Paint.kRound_Cap,
+                                               Color4f=skia.Color4f(1, 1, 1, 1)))
+                for x, (xa, ya, xb, yb), sw in sut["stitches"]:
+                    if x <= front:
+                        u = clamp01((front - x) / 26)            # each stitch pulled through
+                        c.drawLine(xa, ya, xa + (xb - xa) * u, ya + (yb - ya) * u, skia.Paint(
+                            AntiAlias=True, StrokeWidth=sw, StrokeCap=skia.Paint.kRound_Cap,
+                            Color4f=skia.Color4f(1, 1, 1, 1)))
+            sm = fx.skia_alpha(sew)
+            img = fx.add(img, kinetic.COLD, cv2.GaussianBlur(sm, (0, 0), 5) * 0.35 * hv)
+            img = fx.add(img, kinetic.COLD, cv2.GaussianBlur(sm, (0, 0), 0.7) * 1.05 * hv)
     return img
 
 
