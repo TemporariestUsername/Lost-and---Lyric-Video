@@ -891,8 +891,8 @@ def but(t, T, lines):
 # wells out of the incision, redder, and drips; when she sings the word the
 # wound is sewn shut over it in thick red thread, a strikeout and sutures at
 # once, and his light chokes under it. He is left the GUN and the BULLET in
-# the coats' type; the bullet doesn't fall this time and isn't metal: his
-# shaft pours back once and the bullet is drawn in it in strokes of his light. What they take
+# the coats' type, and they land in his wounds: GUN... where PROTECTING was
+# sewn shut, BULLET where TRUSTING was; BELIEVING's stays empty. What they take
 # from her is cut out of her lines, leaving the gaps: her ____ to hug, her
 # ____ to run. Taking her eyes takes the
 # focus; taking her ears stills the world (the drift, the dust, the grain).
@@ -922,9 +922,10 @@ _TAKEN = {"taken": 0.12}
 CUT_SHOTS = {
     94: _they_cut(650), 95: _they_cut(740), 96: _they_cut(650),   # each clear of the last leaving
     97: dict(rows_at=[([0, 1, 2, 3], 150, 830, 1.0, {"left": True}),                 # but left him the
-                      ([4], _after("But left him the"), 830, 1.9, dict(_COATS_WORD, bare=False)),   # GUN...
+                      ([4], VIRTUE_AT[0][0], VIRTUE_AT[0][1], 1.9, dict(_COATS_WORD, left=False, bare=False)),
                       ([5, 6], 150, 960, 1.0, {"left": True}),                       # and the
-                      ([7], _after("and the"), 960, 1.9, _COATS_WORD)]),             # BULLET
+                      ([7], VIRTUE_AT[1][0], VIRTUE_AT[1][1], 1.9, dict(_COATS_WORD, left=False))]),
+    # (GUN... into PROTECTING's sewn wound, BULLET into TRUSTING's: what they left him)
     # her body, cut out of her lines; the lines stay, with their gaps
     99: dict(exit_at=384.95, word_flags={3: _TAKEN},
              rows_at=[([0, 1, 2, 3, 4, 5], 150, 680, 0.9, {"left": True})]),        # they took her arms
@@ -1085,13 +1086,15 @@ def _sutures(k, wd):
     return cached(("sutures", k), make)
 
 
-def virtue_words(img, t, T, sung_words, cuts, scar_end):
+def virtue_words(img, t, T, sung_words, cuts, scar_end, replaced=None):
     """His virtues, lit in their shafts, cut and sewn shut. On 'cut' a scalpel
     traces round the word and the incision opens: his light wells out of it,
     redder, and runs. The word trembles while it is worked on. When she sings
-    it, the wound is sewn shut over it: a strike runs through the word and the
-    stitches cross it as the thread passes (a strikeout, and sutures); his
-    light chokes down under them and the welling stops."""
+    it, the wound is sewn shut over it in thick red thread: a strike runs
+    through the word and the stitches cross it as the thread passes (a
+    strikeout, and sutures); his light chokes down under them and the welling
+    stops. `replaced`: {k: t} when the coats' word lands in wound k: the edge
+    flares and the sewn word under it fades."""
     hv = 1 - smooth(ramp(t, scar_end, scar_end + 1.0))          # the wounds stay till the gun
     for k, w in enumerate(sung_words):
         lit = 0.9 * smooth(ramp(t, CUT_OPEN[k] + 0.35, CUT_OPEN[k] + 1.2))
@@ -1104,6 +1107,9 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
             img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * lit)
             continue
         inc, sut = _incision(k, wd), _sutures(k, wd)
+        tr = (replaced or {}).get(k)
+        gone = smooth(ramp(t, tr, tr + 0.45)) if tr is not None else 0.0
+        flare = math.exp(-(t - tr) / 0.7) if tr is not None and t >= tr else 0.0
         age, tau = t - ct, t - ts
         sew_dur = 0.7
         sewn = smooth(ramp(tau, 0.0, sew_dur + 0.3))             # how closed the wound is
@@ -1118,6 +1124,10 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
         img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 16) * 0.8 * well)
         img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 4) * 1.5 * well)
         img = fx.add(img, kinetic.COLD, cut * (1.3 * math.exp(-age / 0.3) + 0.12 * sewn * hv))
+        if flare > 0.004:                                        # it lands in the wound: the edge flares
+            rim = _stroke_mask(inc["path"], 2.2)
+            img = fx.add(img, BLEED, cv2.GaussianBlur(rim, (0, 0), 12) * 0.9 * flare * hv)
+            img = fx.add(img, BLEED, cv2.GaussianBlur(rim, (0, 0), 3) * 1.4 * flare * hv)
         if trace < 1:                                            # the blade's point
             pos = skia.PathMeasure(inc["path"], False).getPosTan(L * trace)[0]
             tip = fx.skia_alpha(lambda c: c.drawCircle(pos.x(), pos.y(), 4.5, skia.Paint(
@@ -1143,6 +1153,7 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
         img = fx.add(img, BLEED, cv2.GaussianBlur(dm, (0, 0), 7) * 0.4 * da)
         # the word: trembling while it is worked on, then choked down under the stitches
         a = lit * (0.85 + 0.15 * math.sin(t * 31 + 3 * k) ** 2) * (1 - 0.72 * sewn) * (hv if tau >= 0 else 1)
+        a *= 1 - gone
         wm, wb = m, bloom
         if tau < sew_dur:
             jx = int(round((kinetic._hash01(k, int(t * 30), 1) - 0.5) * 3.5))
@@ -1170,54 +1181,12 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end):
                         c.drawLine(xa, ya, xa + (xb - xa) * u, ya + (yb - ya) * u, skia.Paint(
                             AntiAlias=True, StrokeWidth=sw, StrokeCap=skia.Paint.kRound_Cap,
                             Color4f=skia.Color4f(1, 1, 1, 1)))
-            sm = fx.skia_alpha(sew)                              # thread with mass: it sits on
+            sm = fx.skia_alpha(sew) * (1 - gone)                 # thread with mass: it sits on
             img = fx.over(img, np.float32(0.02), np.roll(cv2.GaussianBlur(sm, (0, 0), 3), 4, 0) * 0.6 * hv)
             img = fx.add(img, SUTURE_GLOW, cv2.GaussianBlur(sm, (0, 0), 8) * 0.4 * hv)   # top of the word,
             img = fx.over(img, SUTURE, np.clip(cv2.GaussianBlur(sm, (0, 0), 0.8) * 1.1, 0, 1) * hv)
             img = fx.add(img, SUTURE_GLOW, cv2.GaussianBlur(np.roll(sm, -1, 0) * 0.3, (0, 0), 1.0) * hv)  # wet
     return img
-
-
-def _bullet_path(x, y, scale=3.6, rot=-8.0):
-    """The bullet's outline (as look.bullet draws it): casing, nose, and the
-    seam where they meet."""
-    m = skia.Matrix()
-    m.setTranslate(x, y)
-    m.preRotate(rot)
-    m.preScale(scale, scale)
-    p = skia.Path()
-    p.moveTo(18, -7); p.lineTo(-24, -7); p.quadTo(-26, -7, -26, -5); p.lineTo(-26, 5)
-    p.quadTo(-26, 7, -24, 7); p.lineTo(18, 7)
-    p.cubicTo(30, 6, 36, 2, 38, 0); p.cubicTo(36, -2, 30, -6, 18, -7)
-    p.moveTo(18, -7); p.lineTo(18, 7)                      # the seam
-    p.moveTo(-20, -7); p.lineTo(-20, 7)                    # the rim
-    p.transform(m)
-    return p
-
-
-def _bullet_outline(x, y, trace):
-    """The outline traced in thin strokes of his light, `trace` of the way."""
-    q = round(trace, 2)
-
-    def make():
-        path = _bullet_path(x, y)
-        lens, pm = [], skia.PathMeasure(path, False)
-        while True:
-            lens.append(pm.getLength())
-            if not pm.nextContour():
-                break
-        seg, left = skia.Path(), sum(lens) * q
-        pm = skia.PathMeasure(path, False)
-        for ln in lens:
-            if left <= 0:
-                break
-            part = skia.Path()
-            pm.getSegment(0, min(ln, left), part, True)
-            seg.addPath(part)
-            left -= ln
-            pm.nextContour()
-        return cv2.GaussianBlur(_stroke_mask(seg, 2.8), (0, 0), 0.8)
-    return cached(("bullet_outline", x, y, q), make)
 
 
 def cutting(t, T, lines):
@@ -1248,7 +1217,8 @@ def cutting(t, T, lines):
     yrs = [w["start"] for w in T.lines[102]["words"] if w["text"].lower().startswith("years")]
     a_t = 0.35 + sum(0.09 * smooth(ramp(t, y, y + 0.5)) for y in yrs)
     img = look.tally(img, t, T, color=hexc("#7A6D86"), alpha=a_t, blur=2.0)
-    img = virtue_words(img, t, T, virtues, cuts, T.lines[97]["start"] + 0.6)
+    img = virtue_words(img, t, T, virtues, cuts, T.lines[99]["start"] + 0.3,   # till 'They took her'
+                       replaced={0: word_at(T, 97, "gun"), 1: word_at(T, 97, "bullet")})
     img = kin(T, name, lines, CUT_SHOTS, light=True, hold=1.2).draw(img, t)
     # each 'cut' startles, like the stabs, and so does each pull: a jolt, the
     # exposure knocked down for an instant
@@ -1262,27 +1232,6 @@ def cutting(t, T, lines):
     g = smooth(ramp(t, agains, agains + 1.5)) if agains else 0.0
     p["ghosts"] = tuple((dt, dx, dy, r, a * g) for dt, dx, dy, r, a in AGAIN_GHOSTS)
     p["grain"] = POST["night"]["grain"] * (1 - 0.6 * smooth(ramp(t, ears, ears + 0.6)))
-    # the bullet: it doesn't fall this time, and it isn't metal. His middle shaft
-    # pours back, dim, one last time, and in it the bullet is drawn the way his
-    # words are, in thin strokes of his light; then the shaft withdraws into its
-    # source and the bullet goes out with it. What he is left with is made of
-    # what was taken
-    tb = word_at(T, 97, "bullet")
-    if tb - 0.5 <= t <= tb + 3.0:
-        g = np.clip(0.7 + 0.4 * fx.fog(t, seed=31, period=5.0), 0.1, 1.2)
-        along = fx.vgrad(BEAM_SRC[1], H)
-        pour = ease_out(clamp01((t - tb + 0.5) / 0.8), 2)
-        rec = smooth(ramp(t, tb + 1.9, tb + 2.9))                # withdraws up into its source
-        sh = _shaft(1) * np.clip((min(pour, 1 - rec) * 1.15 - along) / 0.1, 0, 1)
-        img = img + C["rose"] * (sh * 0.42 * g)[..., None]
-        bx, by = VIRTUE_AT[1][0], VIRTUE_AT[1][1] - 30
-        out = smooth(clamp01((along[int(by), int(bx)] - (1 - rec) * 1.15 + 0.08) / 0.16))   # the light leaves it
-        trace = ease_out(clamp01((t - tb) / 0.55), 2)
-        ab = (1 - out) * (0.88 + 0.12 * math.sin(t * 13) * math.sin(t * 5.1))
-        if trace > 0 and ab > 0.004:
-            m = _bullet_outline(bx, by, trace)
-            img = fx.add(img, kinetic.AMBER, cv2.GaussianBlur(m, (0, 0), 10) * 0.9 * ab)
-            img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * ab)
     return img, p
 
 
