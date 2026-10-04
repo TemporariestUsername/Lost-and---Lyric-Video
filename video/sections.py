@@ -886,13 +886,15 @@ def but(t, T, lines):
 # ================================================================ The Cutting
 # What they did to each of them, in her words. His three shafts come back
 # out of the coats' white with the virtues he offered still lit inside them,
-# where he set them in Spoken I. Each 'cut' severs a shaft at its source at
-# once (the frame startles, as on the stabs) and the dark runs down it,
-# reaching his word as she sings it: the word flares and goes out to cold
-# ash. He is left the GUN and the BULLET in the coats' type, and the bullet
-# falls again, at the speed it fell before, out of frame exactly on 'But left
-# HER the years'. What they take from her is cut out of her lines, leaving
-# the gaps: her ____ to hug, her ____ to run. Taking her eyes takes the
+# where he set them in Spoken I. Each 'cut' is surgery: a scalpel traces an
+# excision round his word (the frame startles, as on the stabs), his light
+# wells out of the incision, redder, and drips; when she sings the word the
+# wound is sewn shut over it in thick red thread, a strikeout and sutures at
+# once, and his light chokes under it. He is left the GUN and the BULLET in
+# the coats' type; the bullet doesn't fall this time, it surfaces where his
+# light used to shine, catches the last of it, and is gone. What they take
+# from her is cut out of her lines, leaving the gaps: her ____ to hug, her
+# ____ to run. Taking her eyes takes the
 # focus; taking her ears stills the world (the drift, the dust, the grain).
 # What they leave her is the years: her tally, the one sharp thing she still
 # sees, and 'with time... with time...' is the coats' phrase in their type,
@@ -1187,16 +1189,15 @@ def cutting(t, T, lines):
     eyes = eyes_w["end"] + 0.12                          # as each is taken out of her line
     ears = ears_w["end"] + 0.12
     still = min(t, ears)                                 # deaf: the world stops moving
-    bullet_end = T.lines[102]["start"]                   # out of frame on 'But left her the years'
 
     img = base_night(still, T, tally=False, lift=0.7)
     img = cut_shafts(img, t, cuts, sung)
-    # once his light is gone, what she sees of them drifts in the dark: these are
+    # once the bullet is gone, what she sees of them drifts in the dark: these are
     # what her eyes and ears are taken from
     seen = cached(("mem", name), lambda: mem.schedule(
         T, ["doorway_figure", "car_window_night", "fog_lamps", "rain_window", "curtain_window"],
-        virtues[2]["end"] - 1.0, s["end"], every=2, life=9.0, seed=47, keep_left=900))
-    seen = [m for m in seen if m.t0 >= virtues[2]["end"] - 1.0]
+        word_at(T, 97, "bullet") + 1.5, s["end"], every=2, life=9.0, seed=47, keep_left=900))
+    seen = [m for m in seen if m.t0 >= word_at(T, 97, "bullet") + 1.5]   # after the bullet
     img = img + (draw_mems(img, t, seen, warm=0.15, freeze=ears) - img) * 0.55   # faint
     if t >= eyes:                                        # her eyes: the focus goes, for good
         k = smooth(clamp01((t - eyes) / 1.5))
@@ -1219,9 +1220,16 @@ def cutting(t, T, lines):
     g = smooth(ramp(t, agains, agains + 1.5)) if agains else 0.0
     p["ghosts"] = tuple((dt, dx, dy, r, a * g) for dt, dx, dy, r, a in AGAIN_GHOSTS)
     p["grain"] = POST["night"]["grain"] * (1 - 0.6 * smooth(ramp(t, ears, ears + 0.6)))
-    fb = falling_bullet(t, T, bullet_end, line=97)
-    if fb:
-        p["bullet"] = fb
+    # the bullet: it doesn't fall this time. It surfaces where his light used to
+    # shine, catches the last of it for a moment, and is gone
+    tb = word_at(T, 97, "bullet")
+    ab = smooth(ramp(t, tb - 0.1, tb + 0.5)) * (1 - smooth(ramp(t, tb + 1.6, tb + 2.4)))
+    if ab > 0.004:
+        bx, by = VIRTUE_AT[1][0], VIRTUE_AT[1][1] - 30
+        glow = ab * (0.6 + 0.4 * math.exp(-max(0.0, t - tb - 0.3) / 0.5))
+        img = fx.add(img, kinetic.AMBER, fx.radial(bx, by, 300) * 0.45 * glow)
+        img = fx.add(img, kinetic.AMBER_HOT, fx.radial(bx, by, 100) * 0.6 * glow)
+        p["bullet"] = (bx, by, 1.9, -8.0, ab)
     return img, p
 
 

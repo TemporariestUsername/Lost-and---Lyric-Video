@@ -800,8 +800,10 @@ def beams(img, t, T, cut_times, src=(1780, -160), targets=(600, 820, 1040), colo
     return img
 
 
-def bullet(img_u8, x, y, scale=1.0, rot=-8.0):
+def bullet(img_u8, x, y, scale=1.0, rot=-8.0, alpha=1.0):
     """The only hard-focus object in the film. Drawn after all softening."""
+    if alpha <= 0.004:
+        return img_u8
     s = skia.Surface(W, H)
     c = s.getCanvas()
     c.clear(skia.ColorTRANSPARENT)
@@ -823,7 +825,7 @@ def bullet(img_u8, x, y, scale=1.0, rot=-8.0):
     arr = s.makeImageSnapshot().toarray().astype(F32) / 255   # premultiplied
     a = arr[..., 3:4]
     base = img_u8.astype(F32) / 255
-    shadow = fx.shift(fx.blur(arr[..., 3], 5), 3, 9) * 0.35
+    shadow = fx.shift(fx.blur(arr[..., 3], 5), 3, 9) * 0.35 * alpha
     base = base * (1 - shadow[..., None])
-    out = base * (1 - a) + arr[..., :3]
+    out = base * (1 - a * alpha) + arr[..., :3] * alpha
     return np.clip(out * 255, 0, 255).astype(np.uint8)
