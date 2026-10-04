@@ -216,18 +216,17 @@ SECTIONS = {
                "an excision round his word, his light wells out of the incision, "
                "redder, and drips; when she sings the word the wound is sewn shut "
                "over it in thick red thread (a strikeout and sutures at once) and "
-               "the shaft drains. GUN and BULLET in the coats' type; the bullet "
-               "surfaces where his light used to shine, glows for a moment and "
-               "is gone. What they take from her is cut out of her lines, "
-               "leaving the gaps; taking her eyes takes the focus, taking her "
-               "ears stills the world. The years stay: her tally, the one sharp "
+               "the shaft drains. GUN and BULLET in the coats' type land in "
+               "his wounds where PROTECTING and TRUSTING were. What they take "
+               "from her is cut out of her lines, leaving the gaps; taking her "
+               "eyes takes the focus, taking her ears stills the world. The years stay: her tally, the one sharp "
                "thing, brighter on each “years”.",
         type="Her voice as light; his virtues in his type; GUN / BULLET and "
              "“with time... with time...” in the coats' type (overstruck, "
              "their phrase now her condition); OF HIM in his light on the right, "
              "and her... on the left.",
         sync="Incisions on the “cut” vowels; each virtue sewn shut as it is "
-             "sung; the bullet on “bullet”; the taken words vanish just after "
+             "sung; GUN and BULLET land in the wounds on their words; the taken words vanish just after "
              "they are sung; her agains begin to double into Refrain II."),
     "Refrain II: Stay lost now girl": dict(
         world="her",
@@ -262,11 +261,8 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
-    ("the_cutting_gun", "The Cutting",
-     "Revised: no drawn bullet here. GUN... lands in the coats' type inside PROTECTING's sewn wound, BULLET inside TRUSTING's; each wound's edge flares red as it lands and the sewn virtue under it fades: what was cut out of him replaced by what they left him. BELIEVING's wound stays sewn and empty. The wounds fade as 'They took her arms' begins. (The full Cutting below still has the earlier metal bullet; it will be re-rendered once this is settled.)",
-     (372.6, 379.6)),
     ("the_cutting", "The Cutting",
-     "What they did to each of them, in her words. Out of the coats' white his three shafts pour back, with PROTECTING, TRUSTING and BELIEVING still lit where he set them in Spoken I (a memory of his offer). Each 'cut' is surgery: a scalpel traces an excision round his word (the frame jolts, as on the stabs), and his light wells out of the incision, redder, and runs down in drips while the word trembles. When she sings the word the wound is sewn shut over it in thick red thread: a strike through it, short uneven stitches across it, a strikeout and sutures at once. His light chokes under them and the shaft drains; the three sewn-shut virtues stay until 'But left him the gun'. GUN and BULLET in the coats' type; the bullet doesn't fall this time: it surfaces where his light used to shine, catches the last of it, and is gone. What they take from her is cut out of her lines, leaving the gaps: 'They took her ___ to hug / ___ to run / Her ___ to see and ___ to hear'. Taking her eyes takes the focus; taking her ears stills the world (the drift, the fog, the grain). What they leave her is the years: her tally, sharp through the blur, brightening on each 'years'. 'Alone' in her serif with 'with time... with time...' overstruck in the coats' type: their phrase is now her condition. Her agains begin to double (the deaf ghosts of Refrain II). Then OF HIM... in his light on his side, and her... on hers. The clip starts 3.6 s early, in White Coats III's white, to show the hand-off.",
+     "What they did to each of them, in her words. Out of the coats' white his three shafts pour back, with PROTECTING, TRUSTING and BELIEVING still lit where he set them in Spoken I (a memory of his offer). Each 'cut' is surgery: a scalpel traces an excision round his word (the frame jolts, as on the stabs), and his light wells out of the incision, redder, and runs down in drips while the word trembles. When she sings the word the wound is sewn shut over it in thick red thread: a strike through it, short uneven stitches across it, a strikeout and sutures at once. His light chokes under them and the shaft drains; the sewn-shut wounds stay until 'They took her arms'. GUN and BULLET in the coats' type land in his wounds: GUN where PROTECTING was sewn shut, BULLET where TRUSTING was, each wound's edge flaring red as it lands while the sewn virtue under it fades; BELIEVING's stays empty. (No drawn bullet here; the falling bullet belongs to A gun and a bullet.) What they take from her is cut out of her lines, leaving the gaps: 'They took her ___ to hug / ___ to run / Her ___ to see and ___ to hear'. Taking her eyes takes the focus; taking her ears stills the world (the drift, the fog, the grain). What they leave her is the years: her tally, sharp through the blur, brightening on each 'years'. 'Alone' in her serif with 'with time... with time...' overstruck in the coats' type: their phrase is now her condition. Her agains begin to double (the deaf ghosts of Refrain II). Then OF HIM... in his light on his side, and her... on hers. The clip starts 3.6 s early, in White Coats III's white, to show the hand-off.",
     ),
     ("white_coats_iii", "White Coats III",
      "They turn on him. It begins inside the coats' white that flooded 'But...' (no cut). Their typed, still voice: MAN / LOST; the stab chant slams in and is slashed; 'We'll have to CUT OUT his' and then 'something hard to find' in her own serif inside their line, struck through in pencil as it is sung; 'with time with time...' overstruck, trailing off as in the earlier White Coats, while her tally surfaces; how LOST this girl can be; ANYTHING in their darkest ink; then EXCEPT... alone, and 'something hard to find' again in her serif, untouched: the one thing they cannot make her find.",

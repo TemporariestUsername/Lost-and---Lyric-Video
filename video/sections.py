@@ -891,7 +891,7 @@ def but(t, T, lines):
 # wells out of the incision, redder, and drips; when she sings the word the
 # wound is sewn shut over it in thick red thread, a strikeout and sutures at
 # once, and his light chokes under it. He is left the GUN and the BULLET in
-# the coats' type, and they land in his wounds: GUN... where PROTECTING was
+# the coats' type, and they land in his wounds: GUN where PROTECTING was
 # sewn shut, BULLET where TRUSTING was; BELIEVING's stays empty. What they take
 # from her is cut out of her lines, leaving the gaps: her ____ to hug, her
 # ____ to run. Taking her eyes takes the
@@ -922,10 +922,10 @@ _TAKEN = {"taken": 0.12}
 CUT_SHOTS = {
     94: _they_cut(650), 95: _they_cut(740), 96: _they_cut(650),   # each clear of the last leaving
     97: dict(rows_at=[([0, 1, 2, 3], 150, 830, 1.0, {"left": True}),                 # but left him the
-                      ([4], VIRTUE_AT[0][0], VIRTUE_AT[0][1], 1.9, dict(_COATS_WORD, left=False, bare=False)),
+                      ([4], VIRTUE_AT[0][0], VIRTUE_AT[0][1], 1.9, dict(_COATS_WORD, left=False)),   # GUN
                       ([5, 6], 150, 960, 1.0, {"left": True}),                       # and the
                       ([7], VIRTUE_AT[1][0], VIRTUE_AT[1][1], 1.9, dict(_COATS_WORD, left=False))]),
-    # (GUN... into PROTECTING's sewn wound, BULLET into TRUSTING's: what they left him)
+    # (GUN into PROTECTING's sewn wound, BULLET into TRUSTING's: what they left him)
     # her body, cut out of her lines; the lines stay, with their gaps
     99: dict(exit_at=384.95, word_flags={3: _TAKEN},
              rows_at=[([0, 1, 2, 3, 4, 5], 150, 680, 0.9, {"left": True})]),        # they took her arms
