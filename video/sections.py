@@ -1336,8 +1336,7 @@ def refrain_ii(t, T, lines):
         img = ref * (1 - u) + img * u
         g = _mix_post(rp, g, u)
     # 'Never again...' held; then everything, the agains included, goes to white
-    last = T.lines[111]
-    white = smooth(ramp(t, last["end"] + 0.2, s["end"]))
+    white = smooth(ramp(t, s["end"] - 1.1, s["end"]))         # as the note ends
     img = img * (1 - white) + np.float32(1.0) * white
     g["exposure"] = g["exposure"] + 0.25 * white
     return img, g
