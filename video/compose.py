@@ -82,9 +82,9 @@ def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, ye
              diffusion=0.14, grain=0.045, trail=0.62,
              ghosts=((1.2, -160, 0, -5, 0.16), (2.4, 150, -10, 4, 0.10)))
     if years:
-        p.update(exposure=1.02, lift=0.12, sat=0.7, trail=0.7,
-                 ghosts=((1.0, -180, 0, -5, 0.22), (2.0, 170, -10, 4, 0.16),
-                         (3.4, -70, 14, 2, 0.12), (4.6, 90, -16, -3, 0.08)))
+        p.update(exposure=0.95, lift=0.1, sat=0.75, trail=0.66,              # brighter than the
+                 ghosts=((1.0, -180, 0, -5, 0.15), (2.0, 170, -10, 4, 0.11),  # first time, her
+                         (3.4, -70, 14, 2, 0.08), (4.6, 90, -16, -3, 0.05)))   # words still legible
     return img, p
 
 
