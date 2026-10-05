@@ -246,12 +246,17 @@ SECTIONS = {
              "in the Verse A reprise."),
     "Verse A reprise": dict(
         world="her",
-        visual="A shot-for-shot rhyme with Verse A, seen through years of "
-               "accumulated exposure: overexposed, the wall covered in "
-               "tallies, many more ghosts. The warmth returns faintly "
-               "behind her shoulder. Memory or return? It stays open.",
-        type="Her voice, as Verse A.",
-        sync="Same bar offsets as Verse A."),
+        visual="The story starts over: her eternal recurrence. A shot-for-shot "
+               "rhyme with Verse A (the same room, the same layout per line, the "
+               "same memories surfacing), each line written over a faint exposure "
+               "of how it looked the first time, as in Refrain II. Years have "
+               "accumulated: overexposed, many more of her ghosts, the tally "
+               "across the wall. His warmth still creeps in on 'a voice came to "
+               "her' and 'lost inside him', fainter: memory or return? It stays "
+               "open. It comes up out of Refrain II's white.",
+        type="Her voice, as Verse A; the first time's words beneath.",
+        sync="Nothing answers the beat (she can't hear it); only the word "
+             "onsets drive anything."),
     "Outro": dict(
         world="void",
         visual="The fog thins toward white. The glint is the last sharp "
