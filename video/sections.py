@@ -1336,17 +1336,45 @@ def refrain_ii(t, T, lines):
         img = ref * (1 - u) + img * u
         g = _mix_post(rp, g, u)
     # 'Never again...' held; then everything, the agains included, goes to white
-    white = smooth(ramp(t, s["end"] - 1.1, s["end"]))         # as the note ends
+    note = T.lines[111]["end"]
+    white = smooth(ramp(t, note - 1.1, note))                  # as the note ends, and held
     img = img * (1 - white) + np.float32(1.0) * white
     g["exposure"] = g["exposure"] + 0.25 * white
     return img, g
 
 
+# ================================================================ Verse A reprise: again
+# The story starts over (her eternal recurrence). It rhymes Verse A shot for
+# shot: the same room, the same layout per line, the same memories surfacing;
+# and, as in Refrain II, each line is written over a faint exposure of how it
+# looked the first time. Years have accumulated: overexposed, many more of her
+# ghosts, the tally across the wall. His warmth still creeps in on 'a voice
+# came to her' and 'lost inside him', fainter: memory or return, left open.
+# Nothing answers the beat. It comes up out of Refrain II's white.
 def reprise(t, T, lines):
-    """Verse A again, seen through years of accumulated exposure."""
     import compose
+    s = sec_of(T, "Verse A reprise")
+    shots = dict(compose.VERSE_A_SHOTS)
+
+    def first_time(img, tt):
+        for n in range(1, 10):
+            n2 = n + 112
+            if n2 not in T.lines:
+                continue
+            L2 = T.lines[n2]
+            on = smooth(ramp(tt, L2["start"] - 0.8, L2["start"] + 0.4)) * \
+                (1 - smooth(ramp(tt, L2["end"] + 0.6, L2["end"] + 2.2)))
+            if on <= 0.004:
+                continue
+            m = _line_mask("Verse A", n, shots, T.lines[n]["end"] - 0.1, T)
+            img = fx.over(img, kinetic.INK, cv2.GaussianBlur(m, (0, 0), 2.0) * 0.2 * on)
+        return img
     img, p = compose.verse_a_like(t, T, lines, name="Verse A reprise", offset=112, seed=5,
-                                  years=True)
+                                  years=True, under=first_time)
+    white = 1 - smooth(ramp(t, s["start"], s["start"] + 1.3))   # out of Refrain II's white
+    if white > 0:
+        img = img * (1 - white) + np.float32(1.0) * white
+        p = dict(p, exposure=p["exposure"] + 0.25 * white)
     return img, p
 
 

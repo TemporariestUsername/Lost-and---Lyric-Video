@@ -46,10 +46,13 @@ def memories_for(T, name, scenes, **kw):
     return _MEM[name]
 
 
-def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, years=False):
+def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, years=False,
+                 under=None):
     """Her room, but she is never shown: memories surface and drift through
     the haze, and his warmth creeps in until it colours them. The reprise
-    (years=True) replays it overexposed, with many more of her agains."""
+    (years=True) replays it overexposed, with many more of her agains; she is
+    deaf by then, so nothing answers the beat. `under(img, t)` draws beneath
+    the type (the reprise: the first time's words)."""
     sec = next(x for x in T.sections if x["name"] == name)
     voice, flood = T.lines[5 + offset]["start"], T.lines[7 + offset]["start"]
     warm = 0.25 * smooth(ramp(t, voice, voice + 6)) + 0.9 * smooth(ramp(t, flood, flood + 2.6))
@@ -60,7 +63,7 @@ def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, ye
     zoom = 1.02 + 0.04 * smooth(u) + 0.04 * smooth(ramp(t, flood, flood + 6))
 
     img = look.padded_room(t, base=C["haze"] * 0.95)
-    img = look.tally(img, t, T)
+    img = look.tally(img, t, T, alpha=0.7 if years else 0.55)
     img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, zoom)            # far wall, slow
     # before -> the room -> his voice arriving -> lost inside him
     scenes = ["curtain_bedroom", "lake_overcast", "curtain_window", "rain_window",
@@ -69,9 +72,12 @@ def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, ye
     for m in memories_for(T, name, scenes, every=2, life=11.0, seed=seed, keep_left=900):
         img = m.draw(img, t, warm=warm, offset=(dx, dy))
     img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.3)
+    if under is not None:
+        img = under(img, t)
     shots = {n + offset: v for n, v in VERSE_A_SHOTS.items()}
     img = kinetic_for(T, name, lines, shots).draw(
-        img, t, cam=(dx * 0.35, dy * 0.35), kick=T.pulse_env(t, 7.0))
+        img, t, cam=(dx * 0.35, dy * 0.35), kick=0.0 if years else T.pulse_env(t, 7.0),
+        react=0.0 if years else 1.0)
     p = dict(exposure=0.9, lift=0.08, sat=0.85, bloom=0.5, hal=0.55, thresh=1.0,
              diffusion=0.14, grain=0.045, trail=0.62,
              ghosts=((1.2, -160, 0, -5, 0.16), (2.4, 150, -10, 4, 0.10)))

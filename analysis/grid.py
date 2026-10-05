@@ -79,6 +79,11 @@ def main():
             nxt = next((t[3] for t in spans[i + 1:] if t[3] is not None),
                        a["duration"])
             s[4] = nxt if i < len(spans) - 1 else a["duration"]
+    # a section may start before its first sung word (a silence that belongs to it)
+    starts = json.loads((ROOT / "analysis" / "overrides.json").read_text()).get("section_start", {})
+    for s in spans:
+        if s[0] in starts:
+            s[3] = starts[s[0]]
     for i in range(len(spans) - 1):  # lyric sections end where next begins
         spans[i][4] = spans[i + 1][3]
     spans[-1][4] = a["duration"]

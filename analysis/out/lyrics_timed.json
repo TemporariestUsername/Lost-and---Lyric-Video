@@ -5048,21 +5048,21 @@
    "line": 113,
    "text": "Through eyes that were hers and weren't",
    "stanza": 16,
-   "start": 417.57,
+   "start": 418.78,
    "end": 421.11,
    "support": 0.86,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Through",
-     "start": 417.57,
-     "end": 419.07,
+     "start": 418.78,
+     "end": 419.32,
      "matched": true,
      "backing": false
     },
     {
      "text": "eyes",
-     "start": 419.07,
+     "start": 419.34,
      "end": 419.67,
      "matched": true,
      "backing": false
@@ -5108,21 +5108,21 @@
    "line": 114,
    "text": "Through years that weren't hers and were",
    "stanza": 16,
-   "start": 421.33,
+   "start": 422.22,
    "end": 425.07,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Through",
-     "start": 421.33,
-     "end": 422.53,
+     "start": 422.22,
+     "end": 422.58,
      "matched": true,
      "backing": false
     },
     {
      "text": "years",
-     "start": 422.53,
+     "start": 422.62,
      "end": 423.09,
      "matched": true,
      "backing": false
@@ -5168,21 +5168,21 @@
    "line": 115,
    "text": "Left in rooms she couldn't leave",
    "stanza": 16,
-   "start": 425.07,
+   "start": 425.53,
    "end": 428.27,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Left",
-     "start": 425.07,
-     "end": 425.77,
+     "start": 425.53,
+     "end": 425.92,
      "matched": true,
      "backing": false
     },
     {
      "text": "in",
-     "start": 425.77,
+     "start": 425.95,
      "end": 426.21,
      "matched": true,
      "backing": false
@@ -5436,21 +5436,21 @@
    "line": 119,
    "text": "She got lost inside him",
    "stanza": 16,
-   "start": 441.01,
+   "start": 441.5,
    "end": 444.47,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "She",
-     "start": 441.01,
-     "end": 441.75,
+     "start": 441.5,
+     "end": 441.8,
      "matched": true,
      "backing": false
     },
     {
      "text": "got",
-     "start": 441.75,
+     "start": 441.85,
      "end": 442.15,
      "matched": true,
      "backing": false
@@ -5528,15 +5528,15 @@
    "line": 121,
    "text": "Like she swore she never would.",
    "stanza": 16,
-   "start": 448.05,
+   "start": 448.42,
    "end": 452.07,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Like",
-     "start": 448.05,
-     "end": 448.59,
+     "start": 448.42,
+     "end": 448.6,
      "matched": true,
      "backing": false
     },
@@ -5556,15 +5556,15 @@
     },
     {
      "text": "she",
-     "start": 449.45,
-     "end": 450.83,
+     "start": 449.1,
+     "end": 449.42,
      "matched": true,
      "backing": false
     },
     {
      "text": "never",
-     "start": 450.83,
-     "end": 451.37,
+     "start": 450.46,
+     "end": 450.8,
      "matched": true,
      "backing": false
     },
