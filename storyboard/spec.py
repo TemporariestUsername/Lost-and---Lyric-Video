@@ -259,11 +259,18 @@ SECTIONS = {
              "onsets drive anything."),
     "Outro": dict(
         world="void",
-        visual="The fog thins toward white. The glint is the last sharp "
-               "thing on screen. The final tally mark lands on the last "
-               "downbeat, then white.",
-        type="Title returns, ghosted, with the empty space after it.",
-        sync="Last tally on the last downbeat."),
+        visual="The loop closes. Her last sound is a wordless held note: in "
+               "Break II her hum was the gold dust in his shafts; his light is "
+               "gone, so the dust drifts through her room on its own, warm only "
+               "while she sings. The fog thins toward white and the Intro's first "
+               "memories go. Then the title, all film long an unreadable echo "
+               "where 'found...' landed, surfaces plainly in that place, with the "
+               "empty space after it: nothing completes it this time.",
+        type="'lost and', in her roman, still, where 'found' landed; nothing "
+             "after it.",
+        sync="The dust warms with her note (7:38.8-7:54.5); the last tally "
+             "mark lands on the last downbeat; the last frame is nearly the "
+             "Intro's first."),
 }
 
 STYLE_FRAMES = [
