@@ -132,7 +132,7 @@ def draw_mems(img, t, ms, warm=0.0, offset=(0.0, 0.0), freeze=None):
 
 
 # ---------------------------------------------------------------- title
-def title(img, t, t_in, t_out, x=150, y=600, size=210, color=None, dark=False, still=False):
+def title(img, t, t_in, t_out, x=150, y=600, size=210, color=None, dark=False, still=False, alpha=1.0):
     """'lost and' surfacing letter by letter, with the empty space after it.
     `still`: it neither drifts nor opens (the outro: it stays where 'found' landed)."""
     color = C["plum_deep"] if color is None else color
@@ -161,6 +161,7 @@ def title(img, t, t_in, t_out, x=150, y=600, size=210, color=None, dark=False, s
         m = fx.skia_alpha(draw)
         if sig > 0.5:
             m = cv2.GaussianBlur(m, (0, 0), sig)
+        m = m * alpha
         img = fx.add(img, np.array([1, 0.95, 0.9], np.float32), m * 1.2) if dark else fx.over(img, color, m)
     return img
 
@@ -1381,15 +1382,14 @@ def reprise(t, T, lines):
 
 # ================================================================ Outro: the loop closes
 # Her last sound is a wordless held note (vocal stem: 458.8-474.5). In Break II
-# her hum was the gold dust lit inside his shafts. His light is gone, and in
-# this pale room light can't glow, so his shafts return as their absence: three
-# faint cool shadows at their exact angles, where his light used to fall. The
-# dust drifts through her room and warms only while she sings, and only inside
-# those bands. After her note, where PROTECTING, TRUSTING and BELIEVING were
-# sewn shut, three healed scars surface: thin grey seams with the ghosts of
-# their stitches, no words, no red. The fog thins toward white, the Intro's
-# first memories go, the shadows go, the scars last; the last tally mark lands
-# on the last downbeat.
+# her hum was the gold dust lit inside his shafts; his light is gone, so the
+# dust drifts through her room on its own and warms only while she sings. The
+# fog thins toward white and the Intro's first memories go. The title, all film
+# long only an unreadable echo where 'found...' landed, surfaces there plainly
+# but faint, with the empty space after it. Near the end his shafts return as
+# their absence: in this pale room light can't glow, so three faint cool
+# shadows at their exact angles, where his light used to fall, held to the
+# last frame. The last tally mark lands on the last downbeat.
 OUTRO_NOTE = (458.8, 474.5)
 
 
@@ -1418,28 +1418,6 @@ def room_motes(img, t, strength, warmth, warm_mask=None, seed=93, n=90):
     return fx.add(img, hexc("#FFC266"), fx.blur(m, 6) * 0.65 * strength * w)
 
 
-def _healed_scar(k):
-    """Where his virtue k was sewn shut: the seam and the ghosts of its stitches."""
-    def make():
-        wd = _virtue_mask(k, VIRTUE_WORDS[k].upper())[3]
-        sut = _sutures(k, wd)
-
-        def draw(c):
-            pth = skia.Path()
-            pth.moveTo(*sut["strike"][0])
-            for p_ in sut["strike"][1:]:
-                pth.lineTo(*p_)
-            c.drawPath(pth, skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=2.2,
-                                       Color4f=skia.Color4f(1, 1, 1, 1)))
-            for x, (xa, ya, xb, yb), sw in sut["stitches"]:
-                cx_, cy_ = (xa + xb) / 2, (ya + yb) / 2       # shorter now: healed
-                c.drawLine(cx_ + (xa - cx_) * 0.5, cy_ + (ya - cy_) * 0.5, cx_ + (xb - cx_) * 0.5,
-                           cy_ + (yb - cy_) * 0.5, skia.Paint(AntiAlias=True, StrokeWidth=1.9,
-                                                              Color4f=skia.Color4f(1, 1, 1, 0.85)))
-        return cv2.GaussianBlur(fx.skia_alpha(draw), (0, 0), 1.1)
-    return cached(("healed", k), make)
-
-
 def outro(t, T, lines):
     s = sec_of(T, "Outro")
     thin = smooth(ramp(t, s["start"] + 2.0, s["end"] - 1.0))          # the fog thins toward white
@@ -1452,22 +1430,19 @@ def outro(t, T, lines):
     img = bg + (img - bg) * (1 - smooth(ramp(t, 472.0, 486.0)))     # the first memories go
     # his shafts, as the shadows of where his light fell
     bands = np.clip(_shaft(0) + _shaft(1) + _shaft(2), 0, 1)
-    shade = smooth(ramp(t, 454.0, 459.0)) * (1 - smooth(ramp(t, 478.0, 488.0)))
-    if shade > 0.004:
-        img = img * (1 - 0.15 * shade * bands)[..., None] + hexc("#8C96A6") * (0.05 * shade * bands)[..., None]
     white = 0.86 * thin
     img = img * (1 - white) + np.float32(1.0) * white
+    shade = smooth(ramp(t, 486.0, 490.5))                       # near the end, and held, over the white
+    if shade > 0.004:
+        img = img * (1 - 0.1 * shade * bands)[..., None] + hexc("#8C96A6") * (0.04 * shade * bands)[..., None]
     # her note: the dust warms only where his light used to be
     note = smooth(ramp(t, OUTRO_NOTE[0] - 0.3, OUTRO_NOTE[0] + 0.9)) * \
         (1 - smooth(ramp(t, OUTRO_NOTE[1] - 0.6, OUTRO_NOTE[1] + 0.8)))
     dust = (0.2 + 0.8 * note) * (1 - 0.8 * smooth(ramp(t, OUTRO_NOTE[1], 486.0)))
     img = room_motes(img, t, dust, note, warm_mask=bands)
-    # the virtues, healed over: thin grey seams where they were sewn shut
-    scar = smooth(ramp(t, OUTRO_NOTE[1] + 0.5, OUTRO_NOTE[1] + 5.0)) * \
-        (1 - smooth(ramp(t, s["end"] - 2.5, s["end"] - 0.1)))
-    for k in range(3):
-        if scar > 0.004:
-            img = fx.over(img, hexc("#7E7782"), np.clip(_healed_scar(k) * 0.75 * scar, 0, 1))
+    # 'lost and', where 'found' landed, a little faint, and nothing after it
+    tx, ty, ts = kinetic.TITLE_AT
+    img = title(img, t, 476.4, s["end"] + 20.0, x=tx, y=ty, size=ts, still=True, alpha=0.7)
     # the count, kept to the end; its last mark lands on the last downbeat
     last = T.bars[-1]
     if t < last - 1.4:
