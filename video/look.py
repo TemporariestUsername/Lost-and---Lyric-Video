@@ -450,7 +450,7 @@ def padded_room(t, base=None, corner_x=1330, floor_y=760, seam=0.06):
 
 
 def tally(img, t, T, x0=64, y0=84, color=None, alpha=0.55, blur=1.3, count=None,
-          cols=5, dx=86, dy=112, fade=0.5):
+          cols=5, dx=86, dy=112, fade=0.5, last_prog=None):
     """One scratched mark per elapsed bar, grouped in fives: time made visible.
     Upper left, behind the lyric column and faded (`fade`) so it never
     competes with the words. The newest mark scratches itself in slowly
@@ -465,6 +465,8 @@ def tally(img, t, T, x0=64, y0=84, color=None, alpha=0.55, blur=1.3, count=None,
         b1 = T.bars[n] if n < len(T.bars) else b0 + 3.4
         prog = clamp01((t - b0) / (0.5 * (b1 - b0)))
         prog = prog * prog * (3 - 2 * prog)
+    if last_prog is not None:                  # the newest mark drawn this far (timed by the caller)
+        prog = last_prog
 
     def draw(c):
         r = np.random.default_rng(77)
