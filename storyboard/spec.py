@@ -274,6 +274,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("verse_a_reprise", "Verse A reprise",
+     "The story starts over: her eternal recurrence. Out of Refrain II's white (held through the silence before the first 'Through'), Verse A again, shot for shot: the same room, the same layout per line, the same memories surfacing. As in Refrain II, each line is written over a faint exposure of how it looked the first time, so she already knows the words. Years have accumulated: brighter, more of her ghosts, the tally across the wall. His warmth still creeps in on 'a voice came to her' and 'lost inside him', fainter: memory or return? It stays open. Nothing answers the beat. Words re-timed to the vocal ('Through' twice out of silence, 'Left', 'She', 'Like', and 'never' after the pause). Starts a second early, at the end of Refrain II.",
+    ),
     ("refrain_ii", "Refrain II: Stay lost now girl",
      "Refrain I remembered: the same refrain, sung after it has all happened. Same room and the same layout per line as Refrain I, so it is recognised, but she is deaf now: nothing answers the beat (no smear, no rewind, nothing flung) and the room stays still. Each line is written over a faint exposure of how it looked the first time, so FIND lands on the old FOUND ('everything he found' is now 'everything he could find'). Nothing is fully unwritten any more: every line leaves its trace and her agains pile up, thickest under 'Never again...'. The visions that flashed past in Refrain I as the future settle in as still exposures, because they have happened. The photographs fade over 'Throw away everything he could find'. As the last note ends it all goes to white, for the story to start over in the Verse A reprise. Starts a second early, in The Cutting's 'Of him... and her...', to show the hand-off.",
     ),
