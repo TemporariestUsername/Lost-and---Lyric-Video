@@ -1381,20 +1381,21 @@ def reprise(t, T, lines):
 
 # ================================================================ Outro: the loop closes
 # Her last sound is a wordless held note (vocal stem: 458.8-474.5). In Break II
-# her hum was the gold dust in his shafts; his light is gone now, so the dust
-# drifts through her room on its own, warm only while she sings, and fades as
-# her voice does. Then the title, which all film long was only an unreadable
-# echo where 'found...' landed, surfaces plainly in that same place, with the
-# empty space after it: nothing completes it this time. The fog thins toward
-# white, the Intro's first memories go, and the last tally mark lands on the
-# last downbeat. The final frame is nearly the Intro's first: white, 'lost and'
-# and its empty space, with the count of everything in between.
+# her hum was the gold dust lit inside his shafts. His light is gone, and in
+# this pale room light can't glow, so his shafts return as their absence: three
+# faint cool shadows at their exact angles, where his light used to fall. The
+# dust drifts through her room and warms only while she sings, and only inside
+# those bands. After her note, where PROTECTING, TRUSTING and BELIEVING were
+# sewn shut, three healed scars surface: thin grey seams with the ghosts of
+# their stitches, no words, no red. The fog thins toward white, the Intro's
+# first memories go, the shadows go, the scars last; the last tally mark lands
+# on the last downbeat.
 OUTRO_NOTE = (458.8, 474.5)
 
 
-def room_motes(img, t, strength, warmth, seed=93, n=90):
+def room_motes(img, t, strength, warmth, warm_mask=None, seed=93, n=90):
     """Dust drifting down through her room (steady, no rise), dark specks on the
-    pale haze, warm while she sings."""
+    pale haze; while she sings they warm, only inside `warm_mask`."""
     if strength <= 0.01:
         return img
     r = np.random.default_rng(seed)
@@ -1408,9 +1409,35 @@ def room_motes(img, t, strength, warmth, seed=93, n=90):
             a = 0.45 + 0.55 * math.sin(t * 0.8 + ph[i]) ** 2
             c.drawCircle(x, y, rad[i], skia.Paint(AntiAlias=True, Color4f=skia.Color4f(1, 1, 1, a)))
     m = fx.blur(fx.skia_alpha(draw), 1.8)
-    img = fx.over(img, hexc("#6B5844") * (1 - 0.35 * warmth) + hexc("#C8862E") * 0.35 * warmth,
-                  np.clip(m * 0.8 * strength, 0, 1))
-    return fx.add(img, hexc("#FFC266"), fx.blur(m, 6) * 0.6 * strength * warmth)
+    w = warmth * (warm_mask if warm_mask is not None else 1.0)
+    grey, amber = hexc("#6B5844"), hexc("#C8862E")
+    w3 = np.asarray(w, np.float32)[..., None] if np.ndim(w) else np.float32(w)
+    col = grey * (1 - 0.5 * w3) + amber * 0.5 * w3
+    a = np.clip(m * 0.8 * strength, 0, 1)[..., None]
+    img = img * (1 - a) + col * a
+    return fx.add(img, hexc("#FFC266"), fx.blur(m, 6) * 0.65 * strength * w)
+
+
+def _healed_scar(k):
+    """Where his virtue k was sewn shut: the seam and the ghosts of its stitches."""
+    def make():
+        wd = _virtue_mask(k, VIRTUE_WORDS[k].upper())[3]
+        sut = _sutures(k, wd)
+
+        def draw(c):
+            pth = skia.Path()
+            pth.moveTo(*sut["strike"][0])
+            for p_ in sut["strike"][1:]:
+                pth.lineTo(*p_)
+            c.drawPath(pth, skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=2.2,
+                                       Color4f=skia.Color4f(1, 1, 1, 1)))
+            for x, (xa, ya, xb, yb), sw in sut["stitches"]:
+                cx_, cy_ = (xa + xb) / 2, (ya + yb) / 2       # shorter now: healed
+                c.drawLine(cx_ + (xa - cx_) * 0.5, cy_ + (ya - cy_) * 0.5, cx_ + (xb - cx_) * 0.5,
+                           cy_ + (yb - cy_) * 0.5, skia.Paint(AntiAlias=True, StrokeWidth=1.9,
+                                                              Color4f=skia.Color4f(1, 1, 1, 0.85)))
+        return cv2.GaussianBlur(fx.skia_alpha(draw), (0, 0), 1.1)
+    return cached(("healed", k), make)
 
 
 def outro(t, T, lines):
@@ -1423,12 +1450,24 @@ def outro(t, T, lines):
     img = draw_mems(img, t, mems(T, "Outro", ["curtain_bedroom", "lake_overcast"], every=2, life=12.0,
                                  seed=53, keep_left=900), offset=(dx, dy))
     img = bg + (img - bg) * (1 - smooth(ramp(t, 472.0, 486.0)))     # the first memories go
+    # his shafts, as the shadows of where his light fell
+    bands = np.clip(_shaft(0) + _shaft(1) + _shaft(2), 0, 1)
+    shade = smooth(ramp(t, 454.0, 459.0)) * (1 - smooth(ramp(t, 478.0, 488.0)))
+    if shade > 0.004:
+        img = img * (1 - 0.15 * shade * bands)[..., None] + hexc("#8C96A6") * (0.05 * shade * bands)[..., None]
+    white = 0.86 * thin
+    img = img * (1 - white) + np.float32(1.0) * white
+    # her note: the dust warms only where his light used to be
     note = smooth(ramp(t, OUTRO_NOTE[0] - 0.3, OUTRO_NOTE[0] + 0.9)) * \
         (1 - smooth(ramp(t, OUTRO_NOTE[1] - 0.6, OUTRO_NOTE[1] + 0.8)))
     dust = (0.2 + 0.8 * note) * (1 - 0.8 * smooth(ramp(t, OUTRO_NOTE[1], 486.0)))
-    white = 0.86 * thin
-    img = img * (1 - white) + np.float32(1.0) * white
-    img = room_motes(img, t, dust, note)
+    img = room_motes(img, t, dust, note, warm_mask=bands)
+    # the virtues, healed over: thin grey seams where they were sewn shut
+    scar = smooth(ramp(t, OUTRO_NOTE[1] + 0.5, OUTRO_NOTE[1] + 5.0)) * \
+        (1 - smooth(ramp(t, s["end"] - 2.5, s["end"] - 0.1)))
+    for k in range(3):
+        if scar > 0.004:
+            img = fx.over(img, hexc("#7E7782"), np.clip(_healed_scar(k) * 0.75 * scar, 0, 1))
     # the count, kept to the end; its last mark lands on the last downbeat
     last = T.bars[-1]
     if t < last - 1.4:
@@ -1437,9 +1476,6 @@ def outro(t, T, lines):
         n = T.since(T.bars, last - 1.5)[0] + 2
         img = look.tally(img, t, T, alpha=0.6, count=n,
                          last_prog=smooth(ramp(t, last - 1.4, last - 0.05)))
-    # 'lost and', plainly this time, where 'found' landed, and nothing after it
-    tx, ty, ts = kinetic.TITLE_AT
-    img = title(img, t, 476.4, s["end"] + 20.0, x=tx, y=ty, size=ts, still=True)
     p = post("bleach", exposure=0.95 + 0.05 * thin)
     # out of the reprise
     u = smooth(ramp(t, s["start"], s["start"] + 1.6))
