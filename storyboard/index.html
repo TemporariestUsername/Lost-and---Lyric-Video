@@ -144,170 +144,138 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   <section aria-labelledby="h-built">
     <div class="col"><span class="eyebrow">Built so far</span><h2 id="h-built">The film</h2></div>
     <div class="frames">
+<figure class="render" id="render-film">
+  <video id="film" controls playsinline preload="none" poster="renders/film_poster.jpg" width="1280" height="720"
+         data-src="renders/film/index.m3u8"></video>
+  <figcaption><b>The full film</b>
+    <span class="tc">0:00 → 8:13.6 · all 19 sections</span>
+    <span class="note">Streamed at 720p for the page. The 1080p master (H.264, 1920x1080, 30 fps, AAC 48 kHz)
+      was rendered as one continuous timeline and verified with ffprobe: 14,808 frames, 8:13.6.
+      Below it, each section's notes, with its poster frame linking to its contact sheet.
+      <a href="renders/film_contact.jpg">Contact sheet, one frame per bar</a></span></figcaption>
+</figure>
 <figure class="render" id="render-outro">
-  <video controls playsinline preload="metadata" poster="renders/outro_poster.jpg" width="1280" height="720">
-    <source src="renders/outro.mp4" type="video/mp4">
-  </video>
+  <a href="renders/outro_contact.jpg"><img src="renders/outro_poster.jpg" alt="Outro: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Outro</b>
     <span class="tc">7:32.1 → 8:13.6 · bars 133–145</span>
     <span class="note">Revised again: no scars; &#x27;lost and&#x27; back, fainter; the shadows of his shafts only at the end. The loop closes in the pale room. Her last sound is a wordless held note (7:38.8-7:54.5): in Break II her hum was the gold dust lit inside his shafts; his light is gone, so the dust drifts through the room on its own and warms only while she sings. The fog thins toward white and the Intro&#x27;s first memories go. The title, which all film long was only an unreadable echo where &#x27;found...&#x27; landed, surfaces there plainly but faint, with the empty space after it. Over the last bars his shafts return as their absence, three faint cool shadows at their exact angles where his light used to fall, held to the last frame. The final tally mark lands on the last downbeat. Starts a second early, at the end of the Verse A reprise. <a href="renders/outro_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-verse_a_reprise">
-  <video controls playsinline preload="metadata" poster="renders/verse_a_reprise_poster.jpg" width="1280" height="720">
-    <source src="renders/verse_a_reprise.mp4" type="video/mp4">
-  </video>
+  <a href="renders/verse_a_reprise_contact.jpg"><img src="renders/verse_a_reprise_poster.jpg" alt="Verse A reprise: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Verse A reprise</b>
     <span class="tc">6:57.6 → 7:32.1 · bars 122–132</span>
     <span class="note">The story starts over: her eternal recurrence. Out of Refrain II&#x27;s white (held through the silence before the first &#x27;Through&#x27;), Verse A again, shot for shot: the same room, the same layout per line, the same memories surfacing. As in Refrain II, each line is written over a faint exposure of how it looked the first time, so she already knows the words. Years have accumulated: brighter, more of her ghosts, the tally across the wall. His warmth still creeps in on &#x27;a voice came to her&#x27; and &#x27;lost inside him&#x27;, fainter: memory or return? It stays open. Nothing answers the beat. Words re-timed to the vocal (&#x27;Through&#x27; twice out of silence, &#x27;Left&#x27;, &#x27;She&#x27;, &#x27;Like&#x27;, and &#x27;never&#x27; after the pause). Starts a second early, at the end of Refrain II. <a href="renders/verse_a_reprise_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-refrain_ii">
-  <video controls playsinline preload="metadata" poster="renders/refrain_ii_poster.jpg" width="1280" height="720">
-    <source src="renders/refrain_ii.mp4" type="video/mp4">
-  </video>
+  <a href="renders/refrain_ii_contact.jpg"><img src="renders/refrain_ii_poster.jpg" alt="Refrain II: Stay lost now girl: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Refrain II: Stay lost now girl</b>
     <span class="tc">6:36.6 → 6:57.6 · bars 116–121</span>
     <span class="note">Refrain I remembered: the same refrain, sung after it has all happened. Same room and the same layout per line as Refrain I, so it is recognised, but she is deaf now: nothing answers the beat (no smear, no rewind, nothing flung) and the room stays still. Each line is written over a faint exposure of how it looked the first time, so FIND lands on the old FOUND (&#x27;everything he found&#x27; is now &#x27;everything he could find&#x27;). Nothing is fully unwritten any more: every line leaves its trace and her agains pile up, thickest under &#x27;Never again...&#x27;. The visions that flashed past in Refrain I as the future settle in as still exposures, because they have happened. The photographs fade over &#x27;Throw away everything he could find&#x27;. As the last note ends it all goes to white, for the story to start over in the Verse A reprise. Starts a second early, in The Cutting&#x27;s &#x27;Of him... and her...&#x27;, to show the hand-off. <a href="renders/refrain_ii_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-the_cutting">
-  <video controls playsinline preload="metadata" poster="renders/the_cutting_poster.jpg" width="1280" height="720">
-    <source src="renders/the_cutting.mp4" type="video/mp4">
-  </video>
+  <a href="renders/the_cutting_contact.jpg"><img src="renders/the_cutting_poster.jpg" alt="The Cutting: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>The Cutting</b>
     <span class="tc">6:04.6 → 6:36.6 · bars 106–115</span>
     <span class="note">What they did to each of them, in her words. Out of the coats&#x27; white his three shafts pour back, with PROTECTING, TRUSTING and BELIEVING still lit where he set them in Spoken I (a memory of his offer). Each &#x27;cut&#x27; is surgery: a scalpel traces an excision round his word (the frame jolts, as on the stabs), and his light wells out of the incision, redder, and runs down in drips while the word trembles. When she sings the word the wound is sewn shut over it in thick red thread: a strike through it, short uneven stitches across it, a strikeout and sutures at once. His light chokes under them and the shaft drains; the sewn-shut wounds stay until &#x27;They took her arms&#x27;. GUN and BULLET in the coats&#x27; type land in his wounds: GUN where PROTECTING was sewn shut, BULLET where TRUSTING was, each wound&#x27;s edge flaring red as it lands while the sewn virtue under it fades; BELIEVING&#x27;s stays empty. (No drawn bullet here; the falling bullet belongs to A gun and a bullet.) What they take from her is cut out of her lines, leaving the gaps: &#x27;They took her ___ to hug / ___ to run / Her ___ to see and ___ to hear&#x27;. Taking her eyes takes the focus; taking her ears stills the world (the drift, the fog, the grain). What they leave her is the years: her tally, sharp through the blur, brightening on each &#x27;years&#x27;. &#x27;Alone&#x27; in her serif with &#x27;with time... with time...&#x27; overstruck in the coats&#x27; type: their phrase is now her condition. Her agains begin to double (the deaf ghosts of Refrain II). Then OF HIM... in his light on his side, and her... on hers. The clip starts 3.6 s early, in White Coats III&#x27;s white, to show the hand-off. <a href="renders/the_cutting_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-white_coats_iii">
-  <video controls playsinline preload="metadata" poster="renders/white_coats_iii_poster.jpg" width="1280" height="720">
-    <source src="renders/white_coats_iii.mp4" type="video/mp4">
-  </video>
+  <a href="renders/white_coats_iii_contact.jpg"><img src="renders/white_coats_iii_poster.jpg" alt="White Coats III: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>White Coats III</b>
     <span class="tc">5:32.9 → 6:04.6 · bars 97–105</span>
     <span class="note">They turn on him. It begins inside the coats&#x27; white that flooded &#x27;But...&#x27; (no cut). Their typed, still voice: MAN / LOST; the stab chant slams in and is slashed; &#x27;We&#x27;ll have to CUT OUT his&#x27; and then &#x27;something hard to find&#x27; in her own serif inside their line, struck through in pencil as it is sung; &#x27;with time with time...&#x27; overstruck, trailing off as in the earlier White Coats, while her tally surfaces; how LOST this girl can be; ANYTHING in their darkest ink; then EXCEPT... alone, and &#x27;something hard to find&#x27; again in her serif, untouched: the one thing they cannot make her find. <a href="renders/white_coats_iii_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-but">
-  <video controls playsinline preload="metadata" poster="renders/but_poster.jpg" width="1280" height="720">
-    <source src="renders/but.mp4" type="video/mp4">
-  </video>
+  <a href="renders/but_contact.jpg"><img src="renders/but_poster.jpg" alt="But...: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>But...</b>
     <span class="tc">5:17.6 → 5:32.9 · bars 92–96</span>
     <span class="note">Rebuilt: the one moment her prophecy comes true. The band never stops, so neither does the run; time comes back instead. On &#x27;But...&#x27; her tally faintly returns and the bars the run didn&#x27;t count scratch back in, one per eighth note. On the sparse hits of &#x27;forever always comes to an end&#x27; the run&#x27;s warm lights go out one by one, leaving the darkest frame in the film; FOREVER and the rest let go and only the coats&#x27; END stays. In the dark the coats arrive as cold light swinging in from the right, round a bend (one flicker of the &#x27;coats&#x27; vision she saw in Refrain I as it turns toward us), and it swells with the band into their white, so White Coats III begins inside it, her count standing in it. <a href="renders/but_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-the_run">
-  <video controls playsinline preload="metadata" poster="renders/the_run_poster.jpg" width="1280" height="720">
-    <source src="renders/the_run.mp4" type="video/mp4">
-  </video>
+  <a href="renders/the_run_contact.jpg"><img src="renders/the_run_poster.jpg" alt="The Run: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>The Run</b>
     <span class="tc">4:44.8 → 5:17.6 · bars 83–91</span>
     <span class="note">The one time they are free. Warm and fast, but nothing pulses and nothing comes at the viewer: speed is sideways (long-exposure streaks, motel and diner photographs rushing past, light trails behind her words). No tally marks: time isn&#x27;t counted here. four &#x27;ran&#x27;s (no ellipses) scattered across the frame; FOREVER / EVER; TUNNEL / MOTEL; &#x27;lost&#x27; turns good (LOST / LOST, lost in each OTHER); FOUND with its echo. Then the title is sung outright: &#x27;lost and found&#x27; set plainly in the title&#x27;s place, and its words slide past each other into &#x27;found and lost...&#x27;. &#x27;Forever and ever and ever&#x27; steps down and lets go before &#x27;But...&#x27;. <a href="renders/the_run_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-spoken_ii">
-  <video controls playsinline preload="metadata" poster="renders/spoken_ii_poster.jpg" width="1280" height="720">
-    <source src="renders/spoken_ii.mp4" type="video/mp4">
-  </video>
+  <a href="renders/spoken_ii_contact.jpg"><img src="renders/spoken_ii_poster.jpg" alt="Spoken II: I won&#x27;t lose you: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Spoken II: I won&#x27;t lose you</b>
     <span class="tc">4:34.5 → 4:44.8 · bars 80–82</span>
     <span class="note">His answer to the coats&#x27; verdict. The &#x27;found her...&#x27; from the hunt finishes leaving; near-dark. I WON&#x27;T LOSE YOU in his still light; on &#x27;together&#x27; all three shafts pour open at once (not one per word as in Spoken I), and &#x27;we&#x27;ll find you the&#x27; TIME sits in them: his time answering their &#x27;not worth the time&#x27;. Words re-timed to when he says them. <a href="renders/spoken_ii_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-gun_and_bullet">
-  <video controls playsinline preload="metadata" poster="renders/gun_and_bullet_poster.jpg" width="1280" height="720">
-    <source src="renders/gun_and_bullet.mp4" type="video/mp4">
-  </video>
+  <a href="renders/gun_and_bullet_contact.jpg"><img src="renders/gun_and_bullet_poster.jpg" alt="A gun and a bullet: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>A gun and a bullet</b>
     <span class="tc">4:13.2 → 4:34.5 · bars 73–79</span>
     <span class="note">Revised for suspense: until the final &#x27;he found her...&#x27;, every line is the coats&#x27; cold typed monospace, their report of the hunt, typed as it is sung, with a cursor that waits and blinks through each silence. The night darkens as he closes in. On &#x27;bullet&#x27; the bullet itself tumbles slowly end over end down the centre of the frame and is gone after &#x27;he did...&#x27;, right before &#x27;He found her&#x27;. The last &#x27;found her...&#x27; returns to her voice in the title&#x27;s space behind the unreadable smudge. <a href="renders/gun_and_bullet_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-white_coats_ii">
-  <video controls playsinline preload="metadata" poster="renders/white_coats_ii_poster.jpg" width="1280" height="720">
-    <source src="renders/white_coats_ii.mp4" type="video/mp4">
-  </video>
+  <a href="renders/white_coats_ii_contact.jpg"><img src="renders/white_coats_ii_poster.jpg" alt="White Coats II: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>White Coats II</b>
     <span class="tc">3:28.4 → 4:13.2 · bars 60–72</span>
     <span class="note">Escalation. A hard cut from his gold shafts back to the white on &#x27;But&#x27;: BUT held alone, then &#x27;with time with time&#x27; overstruck. Colder, brighter and more scratched than White Coats I. LOST (&#x27;this girl is too lost&#x27;); the stab chant slams in and is slashed as before (re-timed to the sung attacks); HARD (&#x27;too hard to find&#x27;); the verdict FOUND / WORTH (the title&#x27;s word in their mouths), and once &#x27;we found she isn&#x27;t worth the time&#x27; has been read, the frame swells to near-white on &#x27;time&#x27;. Ends on FIND, rhyming with White Coats I. <a href="renders/white_coats_ii_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-break_ii">
-  <video controls playsinline preload="metadata" poster="renders/break_ii_poster.jpg" width="1280" height="720">
-    <source src="renders/break_ii.mp4" type="video/mp4">
-  </video>
+  <a href="renders/break_ii_contact.jpg"><img src="renders/break_ii_poster.jpg" alt="Break II: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Break II</b>
     <span class="tc">3:15.6 → 3:28.4 · bars 56–59</span>
     <span class="note">His three shafts stay after his words and breathe slowly (over two bars, not on the beat). Dust drifts down inside them, one steady drift throughout: her, visible only in his light. When she answers with a wordless held note (3:24.4) it turns gold. Just before the coats return on &#x27;But&#x27;, one flicker of the future: the shafts being cut. <a href="renders/break_ii_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-spoken_i">
-  <video controls playsinline preload="metadata" poster="renders/spoken_i_poster.jpg" width="1280" height="720">
-    <source src="renders/spoken_i.mp4" type="video/mp4">
-  </video>
+  <a href="renders/spoken_i_contact.jpg"><img src="renders/spoken_i_poster.jpg" alt="Spoken I: I can help you find: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Spoken I: I can help you find</b>
     <span class="tc">3:04.0 → 3:15.6 · bars 53–55</span>
     <span class="note">Near-dark, only his light. Three shafts pour down as he names protecting, trusting and believing, and each virtue sits in its own shaft, lit by it (the same shafts are cut in The Cutting). His words are light and perfectly still: no drift, no ghost copies. &#x27;Even if they&#x27;re very hard to find&#x27; sits apart, small. The spoken words are re-timed to when he actually says them (&#x27;I&#x27; at 3:04.0, &#x27;trusting&#x27; 3:07.45, &#x27;even&#x27; 3:11.05). <a href="renders/spoken_i_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-brought_a_man">
-  <video controls playsinline preload="metadata" poster="renders/brought_a_man_poster.jpg" width="1280" height="720">
-    <source src="renders/brought_a_man.mp4" type="video/mp4">
-  </video>
+  <a href="renders/brought_a_man_contact.jpg"><img src="renders/brought_a_man_poster.jpg" alt="They brought a man: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>They brought a man</b>
     <span class="tc">2:31.8 → 3:04.0 · bars 44–52</span>
     <span class="note">Latest: &#x27;in her&#x27; diffuses away after it is sung; in &#x27;Her forever And ever in him&#x27; everything but EVER lets go (blurs, lifts and fades) as EVER lands, and EVER stays: no ellipsis, in the coats&#x27; dark grey ink on a faint patch of their cold light. Also: COULD FIND against HARD TO FIND; HE FOUND / SHE FOUND apart from &#x27;in the end&#x27;; the &#x27;lost and&#x27; before each completing &#x27;found...&#x27; only a blurred smudge; FOREVER reaching in her warm light. <a href="renders/brought_a_man_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-white_coats_i">
-  <video controls playsinline preload="metadata" poster="renders/white_coats_i_poster.jpg" width="1280" height="720">
-    <source src="renders/white_coats_i.mp4" type="video/mp4">
-  </video>
+  <a href="renders/white_coats_i_contact.jpg"><img src="renders/white_coats_i_poster.jpg" alt="White Coats I: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>White Coats I</b>
     <span class="tc">1:57.1 → 2:31.8 · bars 34–43</span>
     <span class="note">Latest: no punctuation on screen except ellipses (film-wide from now on). Each &#x27;stab&#x27; slams in whole on its attack, big and out of line with the orderly &#x27;scribble scribble&#x27;, and startles: the frame jolts and the exposure hits down for an instant, with a straight pencil slash struck beneath. &#x27;We&#x27;ve&#x27; waits for its real entry (2:00.2); LOST is the held word in &#x27;We&#x27;ll find out how lost she really is&#x27;; &#x27;with time with time...&#x27; is typed over itself. The coats never move: typed on, still, blinked out. FOUND / LOST and SAFE / NICE pairs; ANYTHING, FIND; her tally surfaces during &#x27;with time&#x27;. <a href="renders/white_coats_i_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-break_i">
-  <video controls playsinline preload="metadata" poster="renders/break_i_poster.jpg" width="1280" height="720">
-    <source src="renders/break_i.mp4" type="video/mp4">
-  </video>
+  <a href="renders/break_i_contact.jpg"><img src="renders/break_i_poster.jpg" alt="Break I: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Break I (chunk)</b>
     <span class="tc">1:45.5 → 1:57.8 · bars 30–33</span>
     <span class="note">What she foresaw arrives: &#x27;Never again...&#x27; lets go and the corridor from her vision becomes the room, with white coats far down it. As the music&#x27;s top end closes (1:53-1:55) the picture goes soft, dim and quiet with it; the fluorescent tubes strike back on in a stutter on the hits and hold into White Coats I. Includes a second either side for the handoffs. The corridor vision in Refrain I is re-shot from this frame at 1:50.5, so it will update when Refrain I is next rendered. <a href="renders/break_i_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-refrain_again">
-  <video controls playsinline preload="metadata" poster="renders/refrain_again_poster.jpg" width="1280" height="720">
-    <source src="renders/refrain_again.mp4" type="video/mp4">
-  </video>
+  <a href="renders/refrain_again_contact.jpg"><img src="renders/refrain_again_poster.jpg" alt="Refrain I: Stay lost now girl: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Refrain I: Stay lost now girl (chunk)</b>
     <span class="tc">1:33.5 → 1:46.3 · bars 26–30</span>
     <span class="note">Timing check: the backing &#x27;again, again&#x27; now land on the kicks (96.4 / 97.3), so the rewind snaps and the future flashes fire on the sung words (the second one had been 0.5 s early). The second &#x27;forever&#x27; in &#x27;Forever again&#x27; now arrives as the voice returns at 103.1 instead of 0.6 s into the silence. <a href="renders/refrain_again_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-refrain_forever">
-  <video controls playsinline preload="metadata" poster="renders/refrain_forever_poster.jpg" width="1280" height="720">
-    <source src="renders/refrain_forever.mp4" type="video/mp4">
-  </video>
+  <a href="renders/refrain_forever_contact.jpg"><img src="renders/refrain_forever_poster.jpg" alt="Refrain I: Stay lost now girl: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Refrain I: Stay lost now girl (chunk)</b>
     <span class="tc">1:24.2 → 1:32.5 · bars 23–26</span>
     <span class="note">Revised: the second &#x27;forever&#x27; peels off the first as a copy, drifts slowly, outlasts the rest of the line, and is the last thing unwritten, letter by letter, as &#x27;Throw away everything&#x27; arrives. Timing corrected: the second &#x27;forever&#x27; is sung at 88.1 s and held ~1.1 s (it had been placed 0.65 s late). The full Refrain I clip below has the old version of this moment. <a href="renders/refrain_forever_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-refrain_i">
-  <video controls playsinline preload="metadata" poster="renders/refrain_i_poster.jpg" width="1280" height="720">
-    <source src="renders/refrain_i.mp4" type="video/mp4">
-  </video>
+  <a href="renders/refrain_i_contact.jpg"><img src="renders/refrain_i_poster.jpg" alt="Refrain I: Stay lost now girl: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Refrain I: Stay lost now girl</b>
     <span class="tc">1:24.2 → 1:46.3 · bars 24–30</span>
     <span class="note">Rebuilt as prophecy: she sees the future and tries to unmake it. Words appear faintly before they are sung; &#x27;stay lost&#x27; is unwritten letter by letter; the memories are thrown out; the line rewinds and snaps forward on each &#x27;again&#x27; with flashes of the future; &#x27;forever again&#x27; recedes in a beat-stepped tunnel; a cold stop on &#x27;Never&#x27;. Revised: calmer motion (lines drift and are unwritten, never float toward the viewer), a slow continuous tunnel, tally marks moved left. Web copy at 720p; the 1080p master passed QA and ffprobe. <a href="renders/refrain_i_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-verse_a_line6">
-  <video controls playsinline preload="metadata" poster="renders/verse_a_line6_poster.jpg" width="1280" height="720">
-    <source src="renders/verse_a_line6.mp4" type="video/mp4">
-  </video>
+  <a href="renders/verse_a_line6_contact.jpg"><img src="renders/verse_a_line6_poster.jpg" alt="Verse A: Through eyes: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Verse A: Through eyes (chunk)</b>
     <span class="tc">0:34.5 → 0:44.5 · bars 9–11</span>
     <span class="note">Revised line: &#x27;A hand, as ever as it was once&#x27;. &#x27;ever&#x27; and &#x27;once&#x27; set against each other on a diagonal; &#x27;ever&#x27; keeps opening, &#x27;once&#x27; lands. The Verse A clip below still has the old version of this line. <a href="renders/verse_a_line6_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-verse_a">
-  <video controls playsinline preload="metadata" poster="renders/verse_a_poster.jpg" width="1280" height="720">
-    <source src="renders/verse_a.mp4" type="video/mp4">
-  </video>
+  <a href="renders/verse_a_contact.jpg"><img src="renders/verse_a_poster.jpg" alt="Verse A: Through eyes: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>Verse A: Through eyes</b>
     <span class="tc">0:16.9 → 0:56.0 · bars 5–15</span>
     <span class="note">Kinetic typography (a designed shot per line, hero words, per-letter timing, camera through the type) over drifting memory photographs. Web copy at 720p; the 1080p master passed QA and ffprobe. <a href="renders/verse_a_contact.jpg">Contact sheet</a></span></figcaption>
 </figure>
 <figure class="render" id="render-there_comes_a_once">
-  <video controls playsinline preload="metadata" poster="renders/there_comes_a_once_poster.jpg" width="1280" height="720">
-    <source src="renders/there_comes_a_once.mp4" type="video/mp4">
-  </video>
+  <a href="renders/there_comes_a_once_contact.jpg"><img src="renders/there_comes_a_once_poster.jpg" alt="There comes a once: poster frame" width="1280" height="720" loading="lazy"></a>
   <figcaption><b>There comes a once</b>
     <span class="tc">0:56.0 → 1:24.2 · bars 16–23</span>
     <span class="note">Two timelines: the &#x27;no&#x27; drifts left, the &#x27;yes&#x27; drifts right; each &#x27;once&#x27; flashes toward white; &#x27;lost to the world&#x27; pulls focus until nothing is sharp. Web copy at 720p; the 1080p master passed QA and ffprobe. <a href="renders/there_comes_a_once_contact.jpg">Contact sheet</a></span></figcaption>
@@ -749,10 +717,11 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   const v = document.getElementById('film');
   if (!v) return;
   const src = v.dataset.src;
-  if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = src; return; }
-  if (window.Hls && Hls.isSupported()) {
+  if (window.Hls && Hls.isSupported()) {          // hls.js first: the playlist is served as text
     const h = new Hls({ maxBufferLength: 30 });
     h.loadSource(src); h.attachMedia(v);
+  } else if (v.canPlayType('application/vnd.apple.mpegurl')) {
+    v.src = src;
   } else {
     v.insertAdjacentHTML('afterend', '<p class="note">This browser can’t stream the film. Try a recent Chrome, Firefox or Safari.</p>');
   }

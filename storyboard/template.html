@@ -240,10 +240,11 @@ ol.steps li::marker { font: 600 0.85rem var(--mono); color: var(--ink-2); }
   const v = document.getElementById('film');
   if (!v) return;
   const src = v.dataset.src;
-  if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = src; return; }
-  if (window.Hls && Hls.isSupported()) {
+  if (window.Hls && Hls.isSupported()) {          // hls.js first: the playlist is served as text
     const h = new Hls({ maxBufferLength: 30 });
     h.loadSource(src); h.attachMedia(v);
+  } else if (v.canPlayType('application/vnd.apple.mpegurl')) {
+    v.src = src;
   } else {
     v.insertAdjacentHTML('afterend', '<p class="note">This browser can’t stream the film. Try a recent Chrome, Firefox or Safari.</p>');
   }

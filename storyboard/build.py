@@ -116,15 +116,18 @@ def main():
 </figure>""" for f in frame_meta)
 
     renders_html = ""
-    if (HERE / "renders" / "film" / "index.m3u8").exists():
+    film = (HERE / "renders" / "film" / "index.m3u8").exists()
+    if film:
         renders_html += f"""
 <figure class="render" id="render-film">
   <video id="film" controls playsinline preload="none" poster="renders/film_poster.jpg" width="1280" height="720"
          data-src="renders/film/index.m3u8"></video>
   <figcaption><b>The full film</b>
     <span class="tc">0:00 → {tc(a['duration'])} · all 19 sections</span>
-    <span class="note">Streamed at 720p for the page. The 1080p master was rendered in one continuous pass
-      and verified with ffprobe. <a href="renders/film_contact.jpg">Contact sheet</a></span></figcaption>
+    <span class="note">Streamed at 720p for the page. The 1080p master (H.264, 1920x1080, 30 fps, AAC 48 kHz)
+      was rendered as one continuous timeline and verified with ffprobe: 14,808 frames, 8:13.6.
+      Below it, each section's notes, with its poster frame linking to its contact sheet.
+      <a href="renders/film_contact.jpg">Contact sheet, one frame per bar</a></span></figcaption>
 </figure>"""
     for slug, name, note, *span in RENDERS:
         sec = dict(next(x for x in secs if x["name"] == name))
@@ -132,11 +135,16 @@ def main():
             sec.update(start=span[0][0], end=span[0][1])
             sec["bar"] = int(np.searchsorted(g["downbeats"], sec["start"] + 1e-3, side="right")) - 1
             sec["bar_end"] = int(np.searchsorted(g["downbeats"], sec["end"] - 1e-3, side="right")) - 1
+        # once the full film is up, the section clips live in it: each entry keeps
+        # its poster (linking to its contact sheet) and its notes
+        media = (f"""<a href="renders/{slug}_contact.jpg"><img src="renders/{slug}_poster.jpg" alt="{esc(name)}: poster frame" width="1280" height="720" loading="lazy"></a>"""
+                 if film else
+                 f"""<video controls playsinline preload="metadata" poster="renders/{slug}_poster.jpg" width="1280" height="720">
+    <source src="renders/{slug}.mp4" type="video/mp4">
+  </video>""")
         renders_html += f"""
 <figure class="render" id="render-{slug}">
-  <video controls playsinline preload="metadata" poster="renders/{slug}_poster.jpg" width="1280" height="720">
-    <source src="renders/{slug}.mp4" type="video/mp4">
-  </video>
+  {media}
   <figcaption><b>{esc(name)}{' (chunk)' if span else ''}</b>
     <span class="tc">{tc(sec['start'])} \u2192 {tc(sec['end'])} \u00b7 bars {sec['bar']}\u2013{sec['bar_end']}</span>
     <span class="note">{esc(note)} <a href="renders/{slug}_contact.jpg">Contact sheet</a></span></figcaption>
