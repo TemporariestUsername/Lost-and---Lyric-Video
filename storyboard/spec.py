@@ -261,17 +261,16 @@ SECTIONS = {
         world="void",
         visual="The loop closes, in the pale room. Her last sound is a wordless "
                "held note; in Break II her hum was the gold dust lit inside his "
-               "shafts. His light is gone and light can't glow here, so his shafts "
+               "shafts; his light is gone, so the dust drifts through the room on "
+               "its own and warms only while she sings. The fog thins toward white "
+               "and the Intro's first memories go. The title, all film long an "
+               "unreadable echo where 'found...' landed, surfaces there plainly but "
+               "faint, with the empty space after it. Near the end his shafts "
                "return as their absence: three faint cool shadows at their exact "
-               "angles, where his light used to fall. The dust drifts through the "
-               "room and warms only while she sings, and only inside those bands. "
-               "After her note, where PROTECTING, TRUSTING and BELIEVING were sewn "
-               "shut, three healed scars surface: thin grey seams with the ghosts "
-               "of their stitches, no words, no red. The fog thins toward white "
-               "and the Intro's first memories go.",
-        type="No words.",
-        sync="The dust warms with her note (7:38.8-7:54.5); the scars surface "
-             "as it ends; the last tally mark lands on the last downbeat."),
+               "angles, where his light used to fall, held to the last frame.",
+        type="'lost and', faint, still, where 'found' landed; nothing after it.",
+        sync="The dust warms with her note (7:38.8-7:54.5); the shadows come in "
+             "over the last bars; the last tally mark lands on the last downbeat."),
 }
 
 STYLE_FRAMES = [
@@ -283,7 +282,7 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("outro", "Outro",
-     "Revised: no title. The loop closes in the pale room. Her last sound is a wordless held note (7:38.8-7:54.5). In Break II her hum was the gold dust lit inside his shafts; his light is gone and light can't glow here, so his shafts return as their absence, three faint cool shadows at their exact angles where his light used to fall, and the drifting dust warms only while she sings and only inside those bands. As her note ends, three healed scars surface where PROTECTING, TRUSTING and BELIEVING were sewn shut: thin grey seams with the ghosts of their stitches, no words, no red. The fog thins toward white and the Intro's first memories go; the shadows go first, the scars last. The final tally mark lands on the last downbeat. Starts a second early, at the end of the Verse A reprise.",
+     "Revised again: no scars; 'lost and' back, fainter; the shadows of his shafts only at the end. The loop closes in the pale room. Her last sound is a wordless held note (7:38.8-7:54.5): in Break II her hum was the gold dust lit inside his shafts; his light is gone, so the dust drifts through the room on its own and warms only while she sings. The fog thins toward white and the Intro's first memories go. The title, which all film long was only an unreadable echo where 'found...' landed, surfaces there plainly but faint, with the empty space after it. Over the last bars his shafts return as their absence, three faint cool shadows at their exact angles where his light used to fall, held to the last frame. The final tally mark lands on the last downbeat. Starts a second early, at the end of the Verse A reprise.",
     ),
     ("verse_a_reprise", "Verse A reprise",
      "The story starts over: her eternal recurrence. Out of Refrain II's white (held through the silence before the first 'Through'), Verse A again, shot for shot: the same room, the same layout per line, the same memories surfacing. As in Refrain II, each line is written over a faint exposure of how it looked the first time, so she already knows the words. Years have accumulated: brighter, more of her ghosts, the tally across the wall. His warmth still creeps in on 'a voice came to her' and 'lost inside him', fainter: memory or return? It stays open. Nothing answers the beat. Words re-timed to the vocal ('Through' twice out of silence, 'Left', 'She', 'Like', and 'never' after the pause). Starts a second early, at the end of Refrain II.",
