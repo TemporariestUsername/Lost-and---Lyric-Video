@@ -1,5 +1,5 @@
 {
-  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR. Line 20 words 4-5 ('forever, forever'): Whisper stretched the first to 2.2 s and squeezed the second into 0.5 s before 'Throw'. Pitch tracking (voiced 86.62-87.54 and 88.19-89.25) and two tight Whisper re-runs (86.4-87.6 / 88.0-89.2) agree; pinned to the consensus. Word pins from the vocal-stem timing check (analysis/out/timing_check.md): line 11 'But' starts after dead silence at 56.0; line 18 'and' ends ~81.6 and 'ever' enters at 82.6; line 22 backing 'again, again' land on the kicks at 96.4 / 97.3; line 23 second 'forever' enters out of silence at 103.1 with 'again' at 103.5; line 26 'The' starts at 117.1. Lines 28/30 'stab stab the': Whisper had the stabs 0.2-0.35 s late (the burns key off them); pinned to the 'st' attacks on the vocal stem (124.97/125.42, 131.97/132.46). Line 26 'said' is held on B3 until 119.5; line 27 'We've found' comes after the silence at 120.2 / 120.45 (Whisper had 'We've' at 118.69, inside 'said'). Spoken I (lines 44/45) is spoken, unpitched: 'I' starts at 184.0 after silence, 'trusting' at 187.45 and 'Even' at 191.05 (Whisper stretched each back into the silence). phase_continue: sections whose lines are pickups keep the previous section's bar phase. Lines 50/52 (White Coats II chant): scribble/stab/the pinned to their attacks on the vocal stem. A gun and a bullet (58-64): every phrase starts after a clear silence that Whisper stretched the first word back into; pinned to the onsets on the vocal stem. Spoken II (66/67) is spoken: 'I won't lose you' starts at 274.5 after silence; 'Together' at 277.05. The Run: 'And they' starts on the strong onset at 284.78 (before it, a quiet breath); 'and' / 'ever' in line 70 separated (Whisper gave 'Forever' and 'and' the same start); the backing '(And found...)' is the higher voice at 302.06 / 302.6. phase_at: keeps a section's bars on a known downbeat (The Run: its bars land on the 'But...' freeze). Line 69 has four 'ran's on the vocal stem (re-attacks at 286.3 / 287.35 / 287.8 / 288.65; lyrics.txt updated to match); 'Forever' at 289.1. Line 69 re-checked (fine onsets + high-band energy): 'they' is the fricative at 285.02; the four 'ran' nuclei are 285.5 / 286.7 / 287.36 / 287.79 (the low stretches between are their 'n's); 'Forever' starts at 288.66 (B3), not 289.1. 'But...' (78) re-checked: the scoop starts at 317.65 and the note is held to 319.8; the second 'But' is 319.86, 'forever...' starts on its 'f' at 320.28; 'when' 324.65. White Coats III: 'And' starts after the silence at 332.9; 'his' / 'something' split (Whisper gave both 341.39); 'something' after 'Except...' starts at 358.73. The Cutting: each 'They' starts out of silence (364.64 / 367.2 / 370.6) and each 'cut' on its vowel (364.86 / 368.03 / 371.4); 'gun' ends 375.6 and 'and the' come at 376.5 / 376.78 just before 'bullet' 376.92; 'But' (102) at 385.35 with 'left' 385.8; 'and her...' (105) at 395.93 / 396.23. Verse A reprise: each 'Through' starts out of silence (418.78 after the held 'again...', 422.22) with 'eyes' / 'years' after a dip; 'Left' 425.53 after silence; 'She' 441.5; 'Like' 448.42; the second 'she' 449.1 then silence until 'never' 450.46. section_start: the reprise still begins at 417.57 (the silence before its first 'Through' is its own), so its bars and Refrain II's end are unchanged. Grid tidy: the pulse parity ignores flips shorter than 24 eighths (a misread kick in 262-272 had made 1.6-2.9 s bars); Spoken II is anchored to The Run's phase (276.93) instead of continuing the gun section's, and A gun and a bullet starts at 253.2 so the downbeat at 253.28 isn't lost between sections.",
+  "_why": "Line-level timing pins where Whisper cannot resolve the audio even with a lyric prompt. Words inside a pinned line are spread by character length. Line 1 was merged into line 2 by Whisper ('3 years that ... were', with 'that' stretched 18.7-22.2s); lines here run ~3.4s (two bars), so the split is placed at the bar boundary. CHECK BY EAR. Line 78 ('But...') is a lone word Whisper attaches to line 80; pinned to the vocal-band energy bump at 318.0s. CHECK BY EAR. Line 20 words 4-5 ('forever, forever'): Whisper stretched the first to 2.2 s and squeezed the second into 0.5 s before 'Throw'. Pitch tracking (voiced 86.62-87.54 and 88.19-89.25) and two tight Whisper re-runs (86.4-87.6 / 88.0-89.2) agree; pinned to the consensus. Word pins from the vocal-stem timing check (analysis/out/timing_check.md): line 11 'But' starts after dead silence at 56.0; line 18 'and' ends ~81.6 and 'ever' enters at 82.6; line 22 backing 'again, again' land on the kicks at 96.4 / 97.3; line 23 second 'forever' enters out of silence at 103.1 with 'again' at 103.5; line 26 'The' starts at 117.1. Lines 28/30 'stab stab the': Whisper had the stabs 0.2-0.35 s late (the burns key off them); pinned to the 'st' attacks on the vocal stem (124.97/125.42, 131.97/132.46). Line 26 'said' is held on B3 until 119.5; line 27 'We've found' comes after the silence at 120.2 / 120.45 (Whisper had 'We've' at 118.69, inside 'said'). Spoken I (lines 44/45) is spoken, unpitched: 'I' starts at 184.0 after silence, 'trusting' at 187.45 and 'Even' at 191.05 (Whisper stretched each back into the silence). phase_continue: sections whose lines are pickups keep the previous section's bar phase. Lines 50/52 (White Coats II chant): scribble/stab/the pinned to their attacks on the vocal stem. A gun and a bullet (58-64): every phrase starts after a clear silence that Whisper stretched the first word back into; pinned to the onsets on the vocal stem. Spoken II (66/67) is spoken: 'I won't lose you' starts at 274.5 after silence; 'Together' at 277.05. The Run: 'And they' starts on the strong onset at 284.78 (before it, a quiet breath); 'and' / 'ever' in line 70 separated (Whisper gave 'Forever' and 'and' the same start); the backing '(And found...)' is the higher voice at 302.06 / 302.6. phase_at: keeps a section's bars on a known downbeat (The Run: its bars land on the 'But...' freeze). Line 69 has four 'ran's on the vocal stem (re-attacks at 286.3 / 287.35 / 287.8 / 288.65; lyrics.txt updated to match); 'Forever' at 289.1. Line 69 re-checked (fine onsets + high-band energy): 'they' is the fricative at 285.02; the four 'ran' nuclei are 285.5 / 286.7 / 287.36 / 287.79 (the low stretches between are their 'n's); 'Forever' starts at 288.66 (B3), not 289.1. 'But...' (78) re-checked: the scoop starts at 317.65 and the note is held to 319.8; the second 'But' is 319.86, 'forever...' starts on its 'f' at 320.28; 'when' 324.65. White Coats III: 'And' starts after the silence at 332.9; 'his' / 'something' split (Whisper gave both 341.39); 'something' after 'Except...' starts at 358.73. The Cutting: each 'They' starts out of silence (364.64 / 367.2 / 370.6) and each 'cut' on its vowel (364.86 / 368.03 / 371.4); 'gun' ends 375.6 and 'and the' come at 376.5 / 376.78 just before 'bullet' 376.92; 'But' (102) at 385.35 with 'left' 385.8; 'and her...' (105) at 395.93 / 396.23. Verse A reprise: each 'Through' starts out of silence (418.78 after the held 'again...', 422.22) with 'eyes' / 'years' after a dip; 'Left' 425.53 after silence; 'She' 441.5; 'Like' 448.42; the second 'she' 449.1 then silence until 'never' 450.46. section_start: the reprise still begins at 417.57 (the silence before its first 'Through' is its own), so its bars and Refrain II's end are unchanged. Grid tidy: the pulse parity ignores flips shorter than 24 eighths (a misread kick in 262-272 had made 1.6-2.9 s bars); Spoken II is anchored to The Run's phase (276.93) instead of continuing the gun section's, and A gun and a bullet starts at 253.2 so the downbeat at 253.28 isn't lost between sections. Full-film timing pass (MMS forced alignment and Whisper on the vocal stem, each shift confirmed on the stem's level): line-initial words that Whisper had stretched back into the breath before them now start on the voice (e.g. 'Through' 292.4 and 'They' 378.16 out of silence; 'ANYTHING' 356.85; 'Except...' 358.73 with 'something' 359.55). Refrain I keeps its section start (84.15) so the grid is unchanged. They brought a man and The Cutting keep their bar phase (phase_at) after the line-start fixes.",
   "lines": {
     "1": [
       16.92,
@@ -23,6 +23,10 @@
       "5": [
         88.1,
         89.2
+      ],
+      "0": [
+        84.63,
+        84.91
       ]
     },
     "11": {
@@ -49,6 +53,10 @@
       "8": [
         97.3,
         97.75
+      ],
+      "0": [
+        93.28,
+        93.57
       ]
     },
     "23": {
@@ -83,6 +91,10 @@
       "4": [
         125.97,
         126.13
+      ],
+      "0": [
+        123.37,
+        124.11
       ]
     },
     "30": {
@@ -97,6 +109,10 @@
       "4": [
         133.03,
         133.2
+      ],
+      "0": [
+        130.6,
+        131.09
       ]
     },
     "27": {
@@ -371,8 +387,12 @@
     },
     "92": {
       "1": [
+        359.55,
+        359.85
+      ],
+      "0": [
         358.73,
-        359.4
+        359.15
       ]
     },
     "94": {
@@ -496,6 +516,132 @@
         450.46,
         450.8
       ]
+    },
+    "8": {
+      "0": [
+        47.33,
+        47.68
+      ]
+    },
+    "9": {
+      "0": [
+        50.88,
+        51.1
+      ]
+    },
+    "12": {
+      "0": [
+        58.9,
+        59.18
+      ]
+    },
+    "13": {
+      "4": [
+        66.6,
+        67.28
+      ]
+    },
+    "14": {
+      "0": [
+        67.78,
+        67.96
+      ],
+      "3": [
+        69.42,
+        70.0
+      ],
+      "4": [
+        70.5,
+        70.64
+      ]
+    },
+    "29": {
+      "0": [
+        127.5,
+        127.67
+      ]
+    },
+    "31": {
+      "0": [
+        134.3,
+        134.55
+      ]
+    },
+    "35": {
+      "0": [
+        148.22,
+        148.57
+      ]
+    },
+    "39": {
+      "0": [
+        159.1,
+        159.29
+      ]
+    },
+    "40": {
+      "0": [
+        164.29,
+        165.01
+      ]
+    },
+    "41": {
+      "6": [
+        174.75,
+        174.99
+      ]
+    },
+    "47": {
+      "3": [
+        211.18,
+        211.42
+      ]
+    },
+    "54": {
+      "0": [
+        240.77,
+        240.85
+      ]
+    },
+    "56": {
+      "0": [
+        247.76,
+        248.05
+      ]
+    },
+    "71": {
+      "0": [
+        292.4,
+        292.61
+      ]
+    },
+    "72": {
+      "0": [
+        295.45,
+        295.73
+      ]
+    },
+    "73": {
+      "0": [
+        298.85,
+        299.09
+      ]
+    },
+    "91": {
+      "8": [
+        356.85,
+        357.73
+      ]
+    },
+    "99": {
+      "0": [
+        378.16,
+        378.31
+      ],
+      "1": [
+        378.4,
+        378.55
+      ]
     }
   },
   "phase_continue": [
@@ -504,10 +650,13 @@
   ],
   "phase_at": {
     "The Run": 287.168,
-    "Spoken II: I won't lose you": 276.93
+    "Spoken II: I won't lose you": 276.93,
+    "They brought a man": 155.0014,
+    "The Cutting": 367.0132
   },
   "section_start": {
     "Verse A reprise": 417.57,
-    "A gun and a bullet": 253.2
+    "A gun and a bullet": 253.2,
+    "Refrain I: Stay lost now girl": 84.15
   }
 }

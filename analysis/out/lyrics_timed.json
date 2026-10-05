@@ -443,14 +443,14 @@
    "line": 8,
    "text": "Lost and lost inside him",
    "stanza": 0,
-   "start": 46.96,
+   "start": 47.33,
    "end": 50.52,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Lost",
-     "start": 46.96,
+     "start": 47.33,
      "end": 47.68,
      "matched": true,
      "backing": false
@@ -489,14 +489,14 @@
    "line": 9,
    "text": "Like she swore she never would.",
    "stanza": 0,
-   "start": 50.52,
+   "start": 50.88,
    "end": 54.04,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Like",
-     "start": 50.52,
+     "start": 50.88,
      "end": 51.1,
      "matched": true,
      "backing": false
@@ -595,14 +595,14 @@
    "line": 12,
    "text": "She said \"no\" (once...). And she lost him for a lifetime.",
    "stanza": 1,
-   "start": 58.68,
+   "start": 58.9,
    "end": 64.7,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "She",
-     "start": 58.68,
+     "start": 58.9,
      "end": 59.18,
      "matched": true,
      "backing": false
@@ -686,7 +686,7 @@
    "start": 64.7,
    "end": 67.28,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "There",
@@ -718,7 +718,7 @@
     },
     {
      "text": "once...",
-     "start": 66.4,
+     "start": 66.6,
      "end": 67.28,
      "matched": true,
      "backing": false
@@ -729,14 +729,14 @@
    "line": 14,
    "text": "She said \"yes\" (once...).  And she lost him forever.",
    "stanza": 1,
-   "start": 67.28,
+   "start": 67.78,
    "end": 73.28,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "She",
-     "start": 67.28,
+     "start": 67.78,
      "end": 67.96,
      "matched": true,
      "backing": false
@@ -757,14 +757,14 @@
     },
     {
      "text": "once...",
-     "start": 69.12,
+     "start": 69.42,
      "end": 70.0,
      "matched": true,
      "backing": true
     },
     {
      "text": "And",
-     "start": 70.0,
+     "start": 70.5,
      "end": 70.64,
      "matched": true,
      "backing": false
@@ -938,14 +938,14 @@
    "line": 20,
    "text": "Stay lost now girl (forever, forever)",
    "stanza": 2,
-   "start": 84.15,
+   "start": 84.63,
    "end": 89.2,
    "support": 1.0,
    "pinned": true,
    "words": [
     {
      "text": "Stay",
-     "start": 84.15,
+     "start": 84.63,
      "end": 84.91,
      "matched": true,
      "backing": false
@@ -1037,14 +1037,14 @@
    "line": 22,
    "text": "So he never got lost inside you. (again, again)",
    "stanza": 2,
-   "start": 92.49,
+   "start": 93.28,
    "end": 97.75,
    "support": 1.0,
    "pinned": true,
    "words": [
     {
      "text": "So",
-     "start": 92.49,
+     "start": 93.28,
      "end": 93.57,
      "matched": true,
      "backing": false
@@ -1281,14 +1281,14 @@
    "line": 28,
    "text": "Scribble scribble, stab stab the charts.",
    "stanza": 3,
-   "start": 123.05,
+   "start": 123.37,
    "end": 126.91,
    "support": 1.0,
    "pinned": true,
    "words": [
     {
      "text": "Scribble",
-     "start": 123.05,
+     "start": 123.37,
      "end": 124.11,
      "matched": true,
      "backing": false
@@ -1334,14 +1334,14 @@
    "line": 29,
    "text": "Keep her safe in a nice white room.",
    "stanza": 3,
-   "start": 126.91,
+   "start": 127.5,
    "end": 130.23,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Keep",
-     "start": 126.91,
+     "start": 127.5,
      "end": 127.67,
      "matched": true,
      "backing": false
@@ -1401,14 +1401,14 @@
    "line": 30,
    "text": "Scribble scribble, stab stab the charts.",
    "stanza": 3,
-   "start": 130.23,
+   "start": 130.6,
    "end": 133.95,
    "support": 1.0,
    "pinned": true,
    "words": [
     {
      "text": "Scribble",
-     "start": 130.23,
+     "start": 130.6,
      "end": 131.09,
      "matched": true,
      "backing": false
@@ -1454,14 +1454,14 @@
    "line": 31,
    "text": "We\u2019ll find out HOW lost she really is.",
    "stanza": 3,
-   "start": 133.95,
+   "start": 134.3,
    "end": 137.79,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "We\u2019ll",
-     "start": 133.95,
+     "start": 134.3,
      "end": 134.55,
      "matched": true,
      "backing": false
@@ -1652,14 +1652,14 @@
    "line": 35,
    "text": "Even a girl who is very hard to find.",
    "stanza": 3,
-   "start": 147.87,
+   "start": 148.22,
    "end": 151.81,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Even",
-     "start": 147.87,
+     "start": 148.22,
      "end": 148.57,
      "matched": true,
      "backing": false
@@ -1839,14 +1839,14 @@
    "line": 39,
    "text": "And in the end, he found, oh he found...",
    "stanza": 4,
-   "start": 158.85,
+   "start": 159.1,
    "end": 164.09,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "And",
-     "start": 158.85,
+     "start": 159.1,
      "end": 159.29,
      "matched": true,
      "backing": false
@@ -1913,14 +1913,14 @@
    "line": 40,
    "text": "...something VERY hard to find (in her).",
    "stanza": 4,
-   "start": 164.09,
+   "start": 164.29,
    "end": 168.99,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "...something",
-     "start": 164.09,
+     "start": 164.29,
      "end": 165.01,
      "matched": true,
      "backing": false
@@ -1976,7 +1976,7 @@
    "start": 170.65,
    "end": 176.19,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "And",
@@ -2022,7 +2022,7 @@
     },
     {
      "text": "oh",
-     "start": 174.57,
+     "start": 174.75,
      "end": 174.99,
      "matched": true,
      "backing": false
@@ -2237,7 +2237,7 @@
    "start": 208.42,
    "end": 212.26,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "But",
@@ -2262,7 +2262,7 @@
     },
     {
      "text": "with",
-     "start": 210.96,
+     "start": 211.18,
      "end": 211.42,
      "matched": true,
      "backing": false
@@ -2577,14 +2577,14 @@
    "line": 54,
    "text": "We found she isn't worth the time.",
    "stanza": 6,
-   "start": 240.37,
+   "start": 240.77,
    "end": 244.23,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "We",
-     "start": 240.37,
+     "start": 240.77,
      "end": 240.85,
      "matched": true,
      "backing": false
@@ -2676,14 +2676,14 @@
    "line": 56,
    "text": "This girl who is very hard to find.",
    "stanza": 6,
-   "start": 247.19,
+   "start": 247.76,
    "end": 251.25,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "This",
-     "start": 247.19,
+     "start": 247.76,
      "end": 248.05,
      "matched": true,
      "backing": false
@@ -3242,14 +3242,14 @@
    "line": 71,
    "text": "Through every tunnel, every motel.",
    "stanza": 9,
-   "start": 291.25,
+   "start": 292.4,
    "end": 295.11,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Through",
-     "start": 291.25,
+     "start": 292.4,
      "end": 292.61,
      "matched": true,
      "backing": false
@@ -3288,14 +3288,14 @@
    "line": 72,
    "text": "Lost in diners, lost in alleys...",
    "stanza": 9,
-   "start": 295.11,
+   "start": 295.45,
    "end": 298.65,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Lost",
-     "start": 295.11,
+     "start": 295.45,
      "end": 295.73,
      "matched": true,
      "backing": false
@@ -3341,14 +3341,14 @@
    "line": 73,
    "text": "Lost in each other.",
    "stanza": 9,
-   "start": 298.65,
+   "start": 298.85,
    "end": 300.51,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "Lost",
-     "start": 298.65,
+     "start": 298.85,
      "end": 299.09,
      "matched": true,
      "backing": false
@@ -4083,7 +4083,7 @@
    "start": 353.65,
    "end": 357.73,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "We'll",
@@ -4143,7 +4143,7 @@
     },
     {
      "text": "ANYTHING.",
-     "start": 356.39,
+     "start": 356.85,
      "end": 357.73,
      "matched": true,
      "backing": false
@@ -4154,22 +4154,22 @@
    "line": 92,
    "text": "Except... something hard to find.",
    "stanza": 12,
-   "start": 357.73,
+   "start": 358.73,
    "end": 361.49,
    "support": 1.0,
    "pinned": true,
    "words": [
     {
      "text": "Except...",
-     "start": 357.73,
+     "start": 358.73,
      "end": 359.15,
      "matched": true,
      "backing": false
     },
     {
      "text": "something",
-     "start": 358.73,
-     "end": 359.4,
+     "start": 359.55,
+     "end": 359.85,
      "matched": true,
      "backing": false
     },
@@ -4405,21 +4405,21 @@
    "line": 99,
    "text": "They took her arms to hug,",
    "stanza": 14,
-   "start": 377.31,
+   "start": 378.16,
    "end": 379.67,
    "support": 1.0,
-   "pinned": false,
+   "pinned": true,
    "words": [
     {
      "text": "They",
-     "start": 377.31,
+     "start": 378.16,
      "end": 378.31,
      "matched": true,
      "backing": false
     },
     {
      "text": "took",
-     "start": 378.31,
+     "start": 378.4,
      "end": 378.55,
      "matched": true,
      "backing": false
