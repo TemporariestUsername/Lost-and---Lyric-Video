@@ -281,6 +281,9 @@ STYLE_FRAMES = [
 
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
+    ("outro", "Outro",
+     "The loop closes. Her last sound is a wordless held note (7:38.8-7:54.5): in Break II her hum was the gold dust in his shafts; his light is gone now, so the dust drifts through her room on its own (a steady drift, no rise), warm only while she sings, and fades with her voice. The fog thins toward white and the Intro's first memories (the curtained bedroom, the overcast lake) go. Then the title, which all film long was only an unreadable echo where 'found...' landed, surfaces plainly in that same place, letter by letter, still, with the empty space after it: nothing completes it this time. The last tally mark scratches in to land on the last downbeat; the final frame is nearly the Intro's first, white, 'lost and' and its empty space, with the count of everything in between. No bullet. Starts a second early, at the end of the Verse A reprise.",
+    ),
     ("verse_a_reprise", "Verse A reprise",
      "The story starts over: her eternal recurrence. Out of Refrain II's white (held through the silence before the first 'Through'), Verse A again, shot for shot: the same room, the same layout per line, the same memories surfacing. As in Refrain II, each line is written over a faint exposure of how it looked the first time, so she already knows the words. Years have accumulated: brighter, more of her ghosts, the tally across the wall. His warmth still creeps in on 'a voice came to her' and 'lost inside him', fainter: memory or return? It stays open. Nothing answers the beat. Words re-timed to the vocal ('Through' twice out of silence, 'Left', 'She', 'Like', and 'never' after the pause). Starts a second early, at the end of Refrain II.",
     ),
