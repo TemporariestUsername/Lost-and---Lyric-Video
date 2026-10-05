@@ -206,8 +206,7 @@ def there_comes_a_once(t, T, lines):
     pull = smooth(ramp(t, T.lines[17]["start"], T.lines[18]["start"] + 1))
     if pull > 0.01:
         img = img * (1 - pull * 0.6) + fx.blur(img, 10) * pull * 0.6
-    img = kin(T, name, lines, ONCE_SHOTS).draw(img, t, cam=(dx * 0.35, dy * 0.35),
-                                              kick=T.pulse_env(t, 7.0))
+    img = kin(T, name, lines, ONCE_SHOTS).draw(img, t, cam=(dx * 0.35, dy * 0.35))   # no beat pulse
     img = img * (1 - 0.4 * fl) + np.float32(0.93) * 0.4 * fl   # each 'once' flashes toward white
     return img, post("her")
 
@@ -1484,7 +1483,7 @@ def refrain_i(t, T, lines):
     s = sec_of(T, name)
     import visions as V
     L = {n: T.lines[n] for n in lines}
-    kick = T.pulse_env(t, 6.0)
+    kick = 0.0                                                 # her words don't pulse on the beat
     pulses = [p for p in T.pulses if L[21]["start"] <= p < L[21]["end"]]
     stop = L[24]["start"]                                      # the hard stop
 

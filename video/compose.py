@@ -76,7 +76,7 @@ def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, ye
         img = under(img, t)
     shots = {n + offset: v for n, v in VERSE_A_SHOTS.items()}
     img = kinetic_for(T, name, lines, shots).draw(
-        img, t, cam=(dx * 0.35, dy * 0.35), kick=0.0 if years else T.pulse_env(t, 7.0),
+        img, t, cam=(dx * 0.35, dy * 0.35), kick=0.0,          # her words don't pulse on the beat
         react=0.0 if years else 1.0)
     p = dict(exposure=0.9, lift=0.08, sat=0.85, bloom=0.5, hal=0.55, thresh=1.0,
              diffusion=0.14, grain=0.045, trail=0.62,

@@ -63,6 +63,24 @@ def main():
         lo, hi = max(0, i - 12), min(len(beats), i + 13)
         idx = np.arange(lo, hi)
         parity[i] = int(k[idx[idx % 2 == 1]].sum() > k[idx[idx % 2 == 0]].sum())
+    # a parity flip shorter than ~3 bars is a misread kick, not a change of phase:
+    # merge such short runs into the run before them
+    runs, i = [], 0
+    while i < len(parity):
+        j = i
+        while j < len(parity) and parity[j] == parity[i]:
+            j += 1
+        runs.append([i, j, parity[i]])
+        i = j
+    for r in runs[1:]:
+        if r[1] - r[0] < 24:
+            r[2] = None
+    last = runs[0][2]
+    for r in runs:
+        if r[2] is None:
+            r[2] = last
+        last = r[2]
+        parity[r[0]:r[1]] = r[2]
     pulses = [float(beats[i]) for i in range(len(beats)) if i % 2 == parity[i]]
     pulses = np.array(pulses)
 

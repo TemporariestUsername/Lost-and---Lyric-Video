@@ -91,6 +91,8 @@ def main():
     video = tmp / "video.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0",
                     "-i", str(lst), "-c", "copy", str(video)], check=True)
+    for j in jobs:                                   # free the disk as we go (long renders)
+        pathlib.Path(j[2]).unlink(missing_ok=True)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(video),
                     "-ss", f"{k0 / FPS:.6f}", "-t", f"{n / FPS:.6f}", "-i", str(AUDIO),
                     "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "320k",
@@ -102,6 +104,7 @@ def main():
         qa["text"] += d["text"]
     qa.update(start=k0 / FPS, end=k1 / FPS, section=a.section)
     (out.with_suffix(".qa.json")).write_text(json.dumps(qa))
+    video.unlink(missing_ok=True)
     print(f"wrote {out} in {time.time() - t0:.0f}s", flush=True)
 
 
