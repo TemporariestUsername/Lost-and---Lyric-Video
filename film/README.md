@@ -1,6 +1,6 @@
 # lost and: the film
 
-The finished lyric video (8:14, 30 fps, stereo AAC), rendered from this branch after the timing pass.
+The finished lyric video (8:14, 30 fps, stereo AAC), rendered from this branch after the review pass (italic rule, the swap, But, the bend, one surgical language).
 
 - [`lost_and_1080p.mp4`](lost_and_1080p.mp4): 1920x1080, about 600 MB. The one to keep.
 - [`lost_and_720p.mp4`](lost_and_720p.mp4): 1280x720, about 180 MB. For phones or sharing.
