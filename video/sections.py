@@ -377,8 +377,8 @@ COATS_SHOTS = {
     91: dict(set=[([0, 1, 2, 3, 4], 1.0, 0), ([5, 6, 7], 1.0, 0),
                   ([8], 3.0, 0, {"key": "coats_bold", "kind": "coatdark"})]),     # ANYTHING
     92: dict(set=[([0], 2.4, 0, {"key": "coats_bold"}),                            # EXCEPT...
-                  ([1, 2, 3, 4], 1.6, 60, {"voice": "her"})],                      # something hard to
-             suture=dict(words=[1, 4], mode="sewn")),                              # find, already sewn
+                  ([1, 2, 3, 4], 1.6, 60, {"voice": "her"})]),                     # something hard to
+                                                                                   # find, untouched
 }
 
 
@@ -397,8 +397,8 @@ def _word_box(K, w):
 def phrase_surgery(img, t, n, mode, t0, t1, b0, b1, cam):
     """Her 'something hard to find' in the coats' mouths, given the surgery
     his virtues get later (the same incision, the same red thread), but with
-    nothing under it yet. 'operate': the blade goes round the phrase while it
-    is sung and it is sewn shut on 'find'. 'sewn': it is written already sewn."""
+    nothing under it yet: the blade goes round the phrase while it is sung and
+    it is sewn shut on 'find'."""
     e0 = b0[5]
     if t < t0 or t > e0 + 0.7:
         return img
@@ -413,10 +413,7 @@ def phrase_surgery(img, t, n, mode, t0, t1, b0, b1, cam):
         img = trace(img, inc, frac, 0.9 * fade, ground="light")
         front = sut["x0"] + (sut["x1"] - sut["x0"]) * ease_out(clamp01((t - t1) / 0.6), 1.5)
         return sew(img, sut, front, fade, ground="light") if t >= t1 else img
-    a = smooth(ramp(t, t0, t0 + 0.4)) * fade         # a healed line, and the thread in it,
-    img = trace(img, inc, 1.0, 0.45 * a, ground="light", tip=False)   # there as each word is
-    front = sut["x0"] + (sut["x1"] - sut["x0"]) * clamp01((t - t0 + 0.2) / (t1 - t0 + 0.6))   # written
-    return sew(img, sut, front, a, ground="light")
+    return img
 
 
 def coats(name, photos, seed, hot=0.0):
@@ -711,15 +708,15 @@ GUN_SHOTS = {                                      # the hunt as their report, t
 }                                                                                 # lost and found her...
 
 
-def falling_bullet(t, T, end, line=59):
-    """From 'bullet' on, the bullet tumbles slowly down the centre of the frame,
-    in from above the top edge and out below the bottom by `end`."""
+def falling_bullet(t, T, end, line=59, x0=W / 2):
+    """From 'bullet' on, the bullet tumbles slowly down the frame at `x0`, in
+    from above the top edge and out below the bottom by `end`."""
     t0 = word_at(T, line, "bullet")
     if t0 is None or t < t0 or t > end:
         return None
     u = (t - t0) / (end - t0)
     y = -70 + (H + 140) * u
-    x = W / 2 + 10 * math.sin((t - t0) * 0.7)
+    x = x0 + 10 * math.sin((t - t0) * 0.7)
     rot = -8 + 62 * (t - t0)                      # a slow turn, end over end
     return (x, y, 1.9, rot)
 
@@ -766,9 +763,10 @@ def gun_and_bullet(t, T, lines):
 # The one time they are free: warm and fast, but nothing pulses and nothing
 # comes at the viewer. Speed is sideways: streaks, rushing photos, and the
 # exposure echo trailing her words behind them. 'Lost' turns good, and the
-# title is sung outright: 'lost and found' plain in the title's place, then
-# 'and' holds still as the hinge while 'found' lifts over it and 'lost' sinks
-# under it, into 'found and lost'. Here they run, so 'ran' leans: lost, freely.
+# title is sung outright: 'lost and found' glows in plainly in the title's
+# place; 'lost' and 'found' fade out around 'and', which stays, and glow back
+# in each other's places: 'found and lost'. Here they run, so 'ran' leans:
+# lost, freely.
 RUN_SHOTS = {
     69: dict(rows_at=[([0, 1], 150, 300, 1.0, {"left": True}),                        # and they
                       ([2], 190, 520, 1.8, {"left": True, "key": "her_roman", "bare": True}),   # ran
@@ -781,7 +779,7 @@ RUN_SHOTS = {
     73: dict(style="stack", hero=3),                                                # each OTHER
     74: dict(style="stack", hero=1, backing_at=(760, 300, 64)),                     # FOUND (and found...)
     75: dict(swap=dict(first=[0, 1, 2], second=[3, 4, 5],                              # lost and found ->
-                       at=(150, 830), size=190, dur=1.3, lower=True)),                  # found and lost
+                       at=(150, 830), size=190, fade=0.45, lower=True)),                # found and lost
     76: dict(set=[([0], 2.4, 0, {"stretch": True}), ([1, 2], 1.6, 160),
                   ([3, 4], 1.6, 330)]),                                             # forever, stepping on
 }
@@ -800,12 +798,7 @@ def the_run(t, T, lines):
     img = streaks(img, 0.8 + 0.15 * math.sin(t * 0.9))         # long exposure, not on the beat
     img = fx.light_leak(img, t, "right", color="#FFB35A", strength=0.32)
     img = kin(T, name, lines, RUN_SHOTS, light=True).draw(img, t, cam=(dx * 0.4, dy * 0.4))
-    p = post("run")
-    t_sw = T.lines[75]["words"][3]["start"]                     # the swap: no echo trails, so
-    q = smooth(ramp(t, t_sw - 0.6, t_sw - 0.2)) * (1 - smooth(ramp(t, t_sw + 1.6, t_sw + 2.4)))
-    p["trail"] *= 1 - 0.7 * q                                    # 'found' and 'lost' stay clear
-    p["ghosts"] = tuple((dt, gx, gy, r, a * (1 - q)) for dt, gx, gy, r, a in p["ghosts"])
-    return img, p
+    return img, post("run")
 
 
 # ================================================================ But...
@@ -937,9 +930,10 @@ def but(t, T, lines):
 # excision round his word (the frame startles, as on the stabs), his light
 # wells out of the incision, redder, and drips; when she sings the word the
 # wound is sewn shut over it in thick red thread, a strikeout and sutures at
-# once, and his light chokes under it. He is left the GUN and the BULLET in
-# the coats' type, and they land in his wounds: GUN where PROTECTING was
-# sewn shut, BULLET where TRUSTING was; BELIEVING's stays empty. What they take
+# once, and his light chokes under it. The incisions are gone before 'But left
+# him', then the sewn words; he is left the GUN and the BULLET in the coats'
+# type, side by side where his virtues were, and the bullet falls between them
+# as it fell when they gave it to him. What they take
 # from her is cut out of her lines, leaving the gaps: her ____ to hug, her
 # ____ to run. Taking her eyes takes the
 # focus; taking her ears stills the world (the drift, the dust, the grain).
@@ -951,6 +945,8 @@ CUT_OPEN = (362.3, 362.7, 363.1)       # his shafts pour back in the coats' whit
 CUT_LEAD = (361.9, 363.6)              # White Coats III's white drains into his night
 VIRTUE_AT = [(beam_x(0, 530), 530), (beam_x(1, 680), 680), (beam_x(2, 860), 860)]   # as Spoken I
 VIRTUE_SIZE, VIRTUE_TRACK = 80, 0.16
+DROP_X = 1160                          # the bullet falls here, between GUN and BULLET
+GUN_AT, BULLET_AT = (DROP_X - 280, VIRTUE_AT[1][1]), (DROP_X + 380, VIRTUE_AT[1][1])
 AGAIN_GHOSTS = ((1.0, -180, 0, -5, 0.08), (2.0, 170, -10, 4, 0.05), (3.2, -60, 12, 2, 0.03))
 
 
@@ -969,10 +965,10 @@ _TAKEN = {"taken": 0.12}
 CUT_SHOTS = {
     94: _they_cut(650), 95: _they_cut(740), 96: _they_cut(650),   # each clear of the last leaving
     97: dict(rows_at=[([0, 1, 2, 3], 150, 830, 1.0, {"left": True}),                 # but left him the
-                      ([4], VIRTUE_AT[0][0], VIRTUE_AT[0][1], 1.9, dict(_COATS_WORD, left=False)),   # GUN
+                      ([4], GUN_AT[0], GUN_AT[1], 1.9, dict(_COATS_WORD, left=False)),   # GUN
                       ([5, 6], 150, 960, 1.0, {"left": True}),                       # and the
-                      ([7], VIRTUE_AT[1][0], VIRTUE_AT[1][1], 1.9, dict(_COATS_WORD, left=False))]),
-    # (GUN into PROTECTING's sewn wound, BULLET into TRUSTING's: what they left him)
+                      ([7], BULLET_AT[0], BULLET_AT[1], 1.9, dict(_COATS_WORD, left=False))]),
+    # (GUN and BULLET side by side where his virtues were, the bullet falling between)
     # her body, cut out of her lines; the lines stay, with their gaps
     99: dict(exit_at=384.95, word_flags={3: _TAKEN},
              rows_at=[([0, 1, 2, 3, 4, 5], 150, 680, 0.9, {"left": True})]),        # they took her arms
@@ -1193,7 +1189,7 @@ def trace(img, inc, frac, alpha, ground="dark", tip=True):
     return img
 
 
-def virtue_words(img, t, T, sung_words, cuts, scar_end, replaced=None):
+def virtue_words(img, t, T, sung_words, cuts, scar_end, oval_end):
     """His virtues, lit in their shafts, cut and sewn shut. On 'cut' a scalpel
     traces a tight incision round the word and a thin line of his light wells
     along it, redder, with a few beads on the lower lip. The word trembles
@@ -1201,9 +1197,10 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end, replaced=None):
     it, the wound is sewn shut over it in thick red thread: a strike runs
     through the word and the stitches cross it as the thread passes (a
     strikeout, and sutures); his light chokes down under them and the welling
-    stops. `replaced`: {k: t} when the coats' word lands in wound k: the edge
-    flares and the sewn word under it fades."""
-    hv = 1 - smooth(ramp(t, scar_end, scar_end + 1.0))          # the wounds stay till the gun
+    stops. The incisions are gone by `oval_end`; the sewn words and their
+    thread go from `scar_end`, before the coats' GUN and BULLET."""
+    hv = 1 - smooth(ramp(t, scar_end, scar_end + 0.9))
+    ov = 1 - smooth(ramp(t, oval_end - 0.6, oval_end))
     for k, w in enumerate(sung_words):
         lit = 0.9 * smooth(ramp(t, CUT_OPEN[k] + 0.35, CUT_OPEN[k] + 1.2))
         if lit <= 0.001:
@@ -1215,26 +1212,23 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end, replaced=None):
             img = fx.add(img, kinetic.AMBER_HOT, m * 1.5 * lit)
             continue
         inc, sut = _incision(k, wd), _sutures(k, wd)
-        tr = (replaced or {}).get(k)
-        gone = smooth(ramp(t, tr, tr + 0.45)) if tr is not None else 0.0
-        flare = math.exp(-(t - tr) / 0.7) if tr is not None and t >= tr else 0.0
         age, tau = t - ct, t - ts
         sew_dur = 0.7
         sewn = smooth(ramp(tau, 0.0, sew_dur + 0.3))             # how closed the wound is
         frac = ease_out(clamp01(age / 0.28), 2)                  # the blade goes round in ~8 frames
         well = smooth(ramp(age, 0.05, 0.6)) * (0.82 + 0.18 * math.sin(t * 17 + k) * math.sin(t * 7.3))
-        well *= (1 - 0.8 * sewn) * hv
+        well *= (1 - 0.8 * sewn) * ov
         # the incision: a fine cold line, and only a thin welling along it
-        img = trace(img, inc, frac, 1.3 * math.exp(-age / 0.3) + 0.1 * sewn * hv)
-        if well > 0.004 or flare > 0.004:
+        img = trace(img, inc, frac, (1.3 * math.exp(-age / 0.3) + 0.1 * sewn) * ov)
+        if well > 0.004:
             L = skia.PathMeasure(inc["path"], False).getLength()
             seg = skia.Path()
             skia.PathMeasure(inc["path"], False).getSegment(0, L * frac, seg, True)
             cut = _stroke_mask(seg, 2.0)
-            img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 2.5) * (0.9 * well + 0.7 * flare * hv))
+            img = fx.add(img, BLEED, cv2.GaussianBlur(cut, (0, 0), 2.5) * 0.9 * well)
         # a few beads gather on the lower lip; they stop once it is closed
         run_t = min(age, ts - ct + sew_dur)
-        da = hv * (1 - 0.45 * sewn)
+        da = ov * (1 - 0.45 * sewn)
 
         def beads(c):
             for d in inc["drips"]:
@@ -1252,7 +1246,6 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end, replaced=None):
             img = fx.add(img, BLEED, cv2.GaussianBlur(dm, (0, 0), 1.0) * 0.85 * da)
         # the word: trembling while it is worked on, then choked down under the stitches
         a = lit * (0.85 + 0.15 * math.sin(t * 31 + 3 * k) ** 2) * (1 - 0.72 * sewn) * (hv if tau >= 0 else 1)
-        a *= 1 - gone
         wm, wb = m, bloom
         if tau < sew_dur:
             jx = int(round((kinetic._hash01(k, int(t * 30), 1) - 0.5) * 3.5))
@@ -1263,7 +1256,7 @@ def virtue_words(img, t, T, sung_words, cuts, scar_end, replaced=None):
         # sewn shut: the strike runs through it, the stitches cross it behind the thread
         if tau >= 0:
             front = sut["x0"] + (sut["x1"] - sut["x0"]) * ease_out(clamp01(tau / sew_dur), 1.5)
-            img = sew(img, sut, front, (1 - gone) * hv)
+            img = sew(img, sut, front, hv)
     return img
 
 
@@ -1295,8 +1288,8 @@ def cutting(t, T, lines):
     yrs = [w["start"] for w in T.lines[102]["words"] if w["text"].lower().startswith("years")]
     a_t = 0.35 + sum(0.09 * smooth(ramp(t, y, y + 0.5)) for y in yrs)
     img = look.tally(img, t, T, color=hexc("#7A6D86"), alpha=a_t, blur=2.0)
-    img = virtue_words(img, t, T, virtues, cuts, T.lines[99]["start"] + 0.3,   # till 'They took her'
-                       replaced={0: word_at(T, 97, "gun"), 1: word_at(T, 97, "bullet")})
+    left = T.lines[97]["start"]                          # 'But left him...': the incisions are
+    img = virtue_words(img, t, T, virtues, cuts, left, left - 0.1)   # gone, then what they sewed
     img = kin(T, name, lines, CUT_SHOTS, light=True, hold=1.2).draw(img, t)
     # each 'cut' startles, like the stabs, and so does each pull: a jolt, the
     # exposure knocked down for an instant
@@ -1306,6 +1299,10 @@ def cutting(t, T, lines):
             jolt = amp * math.exp(-(t - c) / 0.06)
             img = fx.shift(img, 9 * jolt * math.cos(1.1 + 2.1 * k), 7 * jolt * math.sin(1.1 + 2.1 * k))
     p = post("night", exposure=0.95 - 0.1 * jolt)
+    t_b = word_at(T, 97, "bullet")                       # the bullet falls again, as it did when
+    fb = falling_bullet(t, T, t_b + 9.0, line=97, x0=DROP_X)   # they gave it him, between the words
+    if fb:
+        p["bullet"] = fb
     agains = word_at(T, 104, "agains")                   # still words don't double; her agains do
     g = smooth(ramp(t, agains, agains + 1.5)) if agains else 0.0
     p["ghosts"] = tuple((dt, dx, dy, r, a * g) for dt, dx, dy, r, a in AGAIN_GHOSTS)
@@ -1354,8 +1351,6 @@ REFRAIN_II_SHOTS = {
 }
 REFRAIN_PAIRS = {107: (20, 88.9), 108: (21, 92.3), 109: (22, 95.9), 110: (23, 104.4), 111: (24, 106.2)}
 SETTLED = {107: 400.9, 108: 405.4, 109: 410.2, 110: 415.4}          # each line as it stood
-REFRAIN_II_VISIONS = {107: "corridor", 108: "coats", 109: "shafts", 110: "run", 111: "cutting"}
-GUTTER = 2.6                                                          # how long each memory flickers
 
 
 def _line_mask(name, n, shots, at, T):
@@ -1370,7 +1365,6 @@ def _line_mask(name, n, shots, at, T):
 def refrain_ii(t, T, lines):
     name = "Refrain II: Stay lost now girl"
     s = sec_of(T, name)
-    import visions as V
     still = s["start"]                                         # deaf: the room doesn't move
     img = base_her(still, T, tally=False)
     img = look.tally(img, t, T, alpha=0.6)                     # the years, still counted
@@ -1382,24 +1376,11 @@ def refrain_ii(t, T, lines):
     bg = img
     img = draw_mems(img, still + 4.0, ms)
     img = bg + (img - bg) * (1 - 0.85 * let_go)
-    # what she foresaw has happened. In Refrain I the visions flashed in from the
-    # future on the beat; here the same images flicker as memory, on the coats'
-    # fluorescent stutter (she can't hear the beat), guttering out like a failing
-    # tube until only a faint still exposure is left
-    for n, vname in REFRAIN_II_VISIONS.items():
-        if n not in T.lines:
-            continue
-        t0 = T.lines[n]["start"]
-        u = smooth(ramp(t, t0 - 0.2, t0 + 1.6))
-        a = 0.09 * u
-        age = t - t0 + 0.15
-        if 0 <= age < GUTTER:
-            fi = int(t * 15)                                # two frames per stutter
-            left = 1 - age / GUTTER
-            if kinetic._hash01(n, fi, 41) < 0.2 + 0.6 * left:
-                a += 0.3 * left ** 0.6 * (0.55 + 0.45 * kinetic._hash01(n, fi, 42))
-        if a > 0.004:
-            img = img * (1 - a) + V.load(vname) * a
+    # what she foresaw has happened, and comes back exactly as she foresaw it:
+    # the same flashes as Refrain I, an inescapable memory (foresight and
+    # memory are the same thing for her)
+    agains = [w["start"] for w in T.lines[109]["words"] if w["backing"]]
+    img = flashes_of(img, t, T, (107, 108, 110), agains[:2], T.lines[111]["start"])
     # her agains: every line written so far leaves its trace, and each is
     # written over how it looked the first time
     for n2, (n1, at1) in REFRAIN_PAIRS.items():
@@ -1566,6 +1547,33 @@ REFRAIN_I_SHOTS = {
 }
 
 
+def flashes_of(img, t, T, ln, snaps, stop):
+    """The refrain's flashes: the corridor as 'Stay lost' begins, the visions
+    thrown out among the photos on each pulse of 'Throw away...', one on each
+    'again' (`snaps`), and the 'Forever again' tunnel up to `stop`. In Refrain
+    I they are her foresight; in Refrain II the same flashes are memory, which
+    she can't escape. `ln`: the (stay, throw, forever) lines."""
+    import visions as V
+    stay, throw, forever = (T.lines[n] for n in ln)
+    pulses = [p for p in T.pulses if throw["start"] <= p < throw["end"]]
+    img = V.glimpse(img, t, "corridor", stay["start"] + 0.2, strength=0.16, hold=1.6, decay=1.5)
+    for k, p0 in enumerate(pulses):                            # thrown out among the photos
+        img = V.glimpse(img, t, ["coats", "bullet", "run", "shafts"][k % 4], p0, strength=0.42,
+                        hold=0.12, decay=0.45)
+    for k, s0 in enumerate(snaps):                             # each 'again' flashes it back
+        img = V.glimpse(img, t, ["cutting", "bullet"][k % 2], s0, strength=0.5, hold=0.1, decay=0.5)
+    # 'Forever again': a feedback tunnel, the past receding as the future approaches
+    t0, t1 = forever["start"], stop
+    if t0 <= t < t1:
+        bars = [b for b in T.bars if t0 - 0.5 <= b < t1]
+        bi = max([i for i, b in enumerate(bars) if b <= t], default=0)
+        b0 = bars[bi] if bars else t0
+        b1 = bars[bi + 1] if bi + 1 < len(bars) else t1
+        img = V.approach(img, ["shafts", "run", "cutting", "bullet"][bi % 4],
+                         clamp01((t - b0) / max(0.1, b1 - b0)), strength=0.24)
+    return img
+
+
 def refrain_i(t, T, lines):
     name = "Refrain I: Stay lost now girl"
     s = sec_of(T, name)
@@ -1599,23 +1607,8 @@ def refrain_i(t, T, lines):
         img = m.draw(img, tt, warm=warm, offset=(dx + fling, dy - 0.25 * fling))
     img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.3)
 
-    # glimpses of the future
-    img = V.glimpse(img, t, "corridor", L[20]["start"] + 0.2, strength=0.16, hold=1.6, decay=1.5)
-    for k, p0 in enumerate(pulses):                            # thrown out among the photos
-        img = V.glimpse(img, t, ["coats", "bullet", "run", "shafts"][k % 4], p0, strength=0.42,
-                        hold=0.12, decay=0.45)
-    for k, s0 in enumerate(rw["snaps"]):                       # each 'again' flashes it back
-        img = V.glimpse(img, t, ["cutting", "bullet"][k], s0, strength=0.5, hold=0.1, decay=0.5)
-
-    # 'Forever again': a feedback tunnel, the past receding as the future approaches
-    t0, t1 = L[23]["start"], stop
-    if t0 <= t < t1:
-        bars = [b for b in T.bars if t0 - 0.5 <= b < t1]
-        bi = max([i for i, b in enumerate(bars) if b <= t], default=0)
-        b0 = bars[bi] if bars else t0
-        b1 = bars[bi + 1] if bi + 1 < len(bars) else t1
-        img = V.approach(img, ["shafts", "run", "cutting", "bullet"][bi % 4],
-                         clamp01((t - b0) / max(0.1, b1 - b0)), strength=0.24)
+    img = flashes_of(img, t, T, (20, 21, 23), rw["snaps"], stop)
+    t0, t1 = L[23]["start"], stop                              # 'Forever again'
     img = kin(T, name, lines, REFRAIN_I_SHOTS).draw(img, t, cam=(dx * 0.35, dy * 0.35),
                                                     kick=0.0 if frozen else kick)
     if t0 <= t < t1:
