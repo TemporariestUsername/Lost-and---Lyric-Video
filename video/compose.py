@@ -69,7 +69,10 @@ def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, ye
     scenes = ["curtain_bedroom", "lake_overcast", "curtain_window", "rain_window",
               "fog_lamps", "doorway_figure", "car_window_night", "rain_glass_lights",
               "dusk_drive"]
-    for m in memories_for(T, name, scenes, every=2, life=11.0, seed=seed, keep_left=900):
+    ms = memories_for(T, name, scenes, every=2, life=11.0, seed=seed, keep_left=900)
+    if not years:          # one take with the intro: its prints drift on across the cut,
+        ms = S.intro_mems(T) + [m for m in ms if m.t0 >= sec["start"] - 0.05]   # and only
+    for m in ms:                                                  # new ones surface here
         img = m.draw(img, t, warm=warm, offset=(dx, dy))
     img = fx.light_leak(img, t, "right", strength=0.05 + warm * 0.3)
     if under is not None:

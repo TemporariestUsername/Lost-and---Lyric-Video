@@ -32,6 +32,14 @@ HERO_WORDS = ["lost", "found", "forever", "never", "once", "him", "her", "time",
               "arms", "legs", "eyes", "ears", "alone", "tunnel", "motel", "diners", "alleys"]
 STYLES = ["stack", "hero", "depth", "track"]
 
+# Her italic is her telling: it leans, the way she is lost. A word of hers
+# stands upright (roman) only when it can't be taken back: the choice (no,
+# yes), the outcome (lost, found), the fate (once, never, forever, ever,
+# again, lifetime, end) and the turn ('But...'). One roman word per line, at
+# its hero size; a juxtaposed pair may keep both. The title is always roman.
+IRREVOCABLE = {"no", "yes", "lost", "found", "once", "never", "forever", "ever", "again",
+               "lifetime", "end", "but"}
+
 BOX = (150, 170, 1000, 900)  # x0, y0, x1, y1: where a composition may live
 TRACK_MAX = 0.14             # widest letter-spacing a 'track' line opens to (em)
 TITLE_AT = (150, 830, 210)   # where 'lost and' is set when a word completes the title
@@ -265,6 +273,32 @@ def layout(T, n, style=None, hero=None, seed=0, voice="her"):
     return out, style
 
 
+def _width(o, key):
+    f = font(key, o["size"])
+    return f.measureText(o["word"]["disp"]) + o["tracking"] * o["size"] * len(o["word"]["disp"])
+
+
+def _roman_rule(placed, style, voice):
+    """Set her words italic unless they are the line's irrevocable word (see
+    IRREVOCABLE); words after a demoted one on its row close up to match."""
+    hers = [o for o in placed if o.get("voice", voice) == "her" and o["key"] == "her_roman"
+            and not o.get("title")]
+    ok = [o for o in hers if _norm(o["word"]["disp"]) in IRREVOCABLE
+          and o["role"] in ("hero", "ghost_hero")]
+    if any(o.get("title") for o in placed):              # the title word is the line's one
+        ok = []
+    elif style != "pair" and len(ok) > 1:                # one per line: the largest
+        ok = [max(ok, key=lambda o: (o["size"], -o["word"]["start"]))]
+    for o in hers:
+        if o in ok:
+            continue
+        delta = _width(o, "her") - _width(o, "her_roman")
+        o["key"] = "her"
+        for q in placed:
+            if q is not o and abs(q["y"] - o["y"]) < 1 and q["x"] > o["x"] and q["role"] != "ghost_hero":
+                q["x"] += delta
+
+
 # ---------------------------------------------------------------- motion
 def _lifetime(T, n, lines, hold=2.2):
     """(appear, exit_start) for line n: it leaves as the next line arrives."""
@@ -470,11 +504,11 @@ class Kinetic:
             if ov.get("nopop"):
                 for o in placed:
                     o["pop"] = False
-            if ov.get("swap"):                       # 'lost and found, found and lost': the
-                sw = ov["swap"]                      # first words slide into the second's
-                lw = T.lines[n]["words"]             # places as the second are sung
-                style = "set"
-                placed = [o for o in placed if o["role"] != "ghost_hero"]
+            if ov.get("swap"):                       # 'lost and found, found and lost': 'and'
+                sw = ov["swap"]                      # holds still as the pivot; 'found' lifts
+                lw = T.lines[n]["words"]             # over it and 'lost' sinks under it, and
+                style = "set"                        # they settle in each other's places,
+                placed = [o for o in placed if o["role"] != "ghost_hero"]   # never touching
                 for o in placed:
                     if sw.get("lower"):
                         o["word"]["disp"] = o["word"]["disp"].lower()
@@ -486,20 +520,25 @@ class Kinetic:
                     for k, wk in enumerate(lw):
                         if wk["start"] == o["word"]["start"] and wk["text"] == o["word"]["text"]:
                             byk[k] = o
-
-                def lay(idxs):
-                    xs_, x_ = {}, sw["at"][0]
-                    for k in idxs:
-                        xs_[k] = x_
-                        x_ += fsw.measureText(byk[k]["word"]["disp"]) + size * 0.28
-                    return xs_
-                xa, xb = lay(sw["first"]), lay(sw["second"])
-                for k, x_ in list(xa.items()) + list(xb.items()):
+                wl, wa, wf = sw["first"]                      # lost, and, found
+                gap = size * 0.28
+                width = {k: fsw.measureText(byk[k]["word"]["disp"].rstrip(".,\u2026")) for k in (wl, wa, wf)}
+                x_a = sw["at"][0] + width[wf] + gap          # so 'found and lost' starts at the
+                x_l = x_a - gap - width[wl]                   # margin, and 'and' never moves
+                x_f = x_a + width[wa] + gap
+                for k, x_ in ((wl, x_l), (wa, x_a), (wf, x_f)):
+                    byk[k]["word"]["disp"] = byk[k]["word"]["disp"].rstrip(".,\u2026")
                     byk[k].update(x=x_, y=sw["at"][1], size=size, key=key, role="hero", z=1.0,
                                   tracking=0.0, pop=False, stretch=False)
-                t_sw = lw[sw["second"][0]]["start"] - 0.25
-                for kf, kt in sw["pairs"]:
-                    byk[kf]["slide"] = (xb[kt] - xa[kf], t_sw, sw.get("dur", 1.0))
+                for k in sw["second"]:                        # sung by the words already there
+                    byk[k]["hidden"] = True
+                t_f = lw[sw["second"][0]]["start"] - 0.2      # 'found' goes as it is sung again
+                t_l = t_f + 0.3                               # 'lost' a beat behind it
+                dur = sw.get("dur", 1.0)
+                byk[wf]["arc"] = ((x_a - gap - width[wf]) - x_f, t_f, dur, -1.05 * size)
+                byk[wl]["arc"] = ((x_a + width[wa] + gap) - x_l, t_l, dur, 0.95 * size)
+                byk[wl]["word"]["disp"] += "..."              # its ellipsis once it has arrived
+                byk[wl]["late_tail"] = (len(byk[wl]["word"]["disp"]) - 3, t_l + dur)
             if ov.get("stretch_both"):               # both heroes open slowly; nothing punches
                 for o in placed:
                     if o["role"] == "hero":
@@ -546,6 +585,8 @@ class Kinetic:
                 if len(back) >= 2:
                     back[1].update(x=back[0]["x"], y=back[0]["y"], size=back[0]["size"],
                                    key=back[0]["key"], split=True)
+            if not ov.get("swap"):                    # (the title sung outright stays roman)
+                _roman_rule(placed, style, v)
             plan = dict(placed=placed, style=style, voice=v, opts=ov,
                         life=_lifetime(T, n, self.lines, hold))
             if ov.get("exit_at") is not None:        # held (or cut) to a set moment
@@ -652,7 +693,6 @@ class Kinetic:
                 cx, cy = W / 2, 830
                 push, fly = 1.0, 1.0
             push_line = push
-            cur = None                               # the coats' cursor: after the last typed letter
             for pi, o in enumerate(p["placed"]):
                 w = o["word"]
                 if o.get("hidden"):
@@ -740,19 +780,21 @@ class Kinetic:
                     if i == 0:
                         word_alpha = a / max(base_a, 1e-3) if v in ("coats", "her") else u * (1 - ex)
                     px = o["x"] + xs[i] + drift_x
-                    if o.get("slide"):                      # sliding into its twin's place,
-                        sdx, st0, sdur = o["slide"]          # fading as it arrives
-                        mv = smooth(clamp01((t - st0) / sdur))
-                        px += sdx * mv
-                        a *= (1 - 0.5 * math.sin(math.pi * mv)) * \
-                            (1 - smooth(clamp01((t - st0 - sdur * 0.55) / (sdur * 0.5))))
+                    py_arc = 0.0
+                    if o.get("arc"):                        # over or under the pivot, sideways
+                        adx, at0, adur, lift = o["arc"]      # only: never toward the viewer
+                        mv = clamp01((t - at0) / adur)
+                        px += adx * smooth(clamp01((mv - 0.15) / 0.7))   # clear of 'and' first,
+                        py_arc = lift * math.sin(math.pi * mv) ** 0.5     # then across
+                    if o.get("late_tail") and i >= o["late_tail"][0]:
+                        a *= smooth(ramp(t, o["late_tail"][1], o["late_tail"][1] + 0.6))
                     if o.get("split"):                      # peels away and drifts, slowly
                         g = t - w["start"]
                         px += 95 * ease_out(clamp01(g / 3.5), 2)
                         py_split = -30 * ease_out(clamp01(g / 3.5), 2)
                     else:
                         py_split = 0.0
-                    py = o["y"] + ((1 - u) * o["size"] * 0.35 if v == "her" else 0.0) + py_split
+                    py = o["y"] + ((1 - u) * o["size"] * 0.35 if v == "her" else 0.0) + py_split + py_arc
                     if v == "coats":                            # hand-set, slightly off
                         px += (_hash01(n, i, 1) - 0.5) * 3.0
                         py += (_hash01(n, i, 2) - 0.5) * 4.0
@@ -788,14 +830,13 @@ class Kinetic:
                         continue
                     if a > 0.004:
                         put(kind, sig, (ch, sx, sy, f, sc, a))
-                        if opts.get("cursor") and v == "coats" and (cur is None or cs >= cur[0]):
-                            cur = (cs, sx + f.measureText(ch) * sc + 0.08 * o["size"], sy, f, sc, a, kind)
                         if kind == "coat" and self.light:        # coats' ink in the dark: a cold
                             put("coldhalo", 24, (ch, sx, sy, f, sc, a))   # patch of their light behind
                         if o["role"] in ("word", "hero") and ex < 0.5 and v == "her":
                             halo.append((ch, sx, sy, f, sc, a * 0.9))
                         g_age = t - cs
-                        if v == "her" and o["role"] in ("word", "hero") and g_age > 0.1 and ex < 0.05:
+                        if v == "her" and o["role"] in ("word", "hero") and g_age > 0.1 and ex < 0.05 \
+                                and not o.get("arc"):                  # (a moving word leaves no double)
                             for k, sgn in ((1, 1), (2, -1)):
                                 d = 38 * k * sgn * ease_out(clamp01(g_age / 3))
                                 ga = a * (0.26 / k) * (1 - 0.5 * clamp01(g_age / 5))
@@ -811,12 +852,6 @@ class Kinetic:
                     wpx = (f.measureText(txt) + track * o["size"] * len(txt)) * push
                     TEXT_LOG.append((t, _clean(w["text"]), w["start"], x0, y0 - o["size"] * 0.8 * push,
                                      x0 + wpx, y0 + o["size"] * 0.25 * push))
-            later = [self.T.lines[m]["start"] for m in self.lines if m > n]
-            if cur is not None and t < e0 and not (later and t >= min(later)):   # one cursor: the
-                c_t, ux, uy, uf, usc, ua, uk = cur           # line being typed; solid while
-                idle = t - c_t                              # typing, then it blinks, waiting
-                if idle < 0.3 or int((idle - 0.3) / 0.42) % 2 == 1:
-                    put(uk, 1.2, ("_", ux, uy, uf, usc, ua * 0.9))
 
         def mask(ops):
             def draw(c):

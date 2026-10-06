@@ -37,9 +37,13 @@ SECTIONS = {
                "depths: an overcast shore, a curtain, rain on glass, fog "
                "lamps. From \u201ca voice came to her\u201d the memories turn "
                "to night: a figure in a doorway, a car window, streetlights. "
-               "On \u201clost inside him\u201d his warmth colours them.",
-        type="Her voice, dark ink in the haze. Each word focus-pulls in and "
-             "sheds two ghost exposures that drift apart and linger.",
+               "On \u201clost inside him\u201d his warmth colours them. One take "
+               "with the Intro: its prints drift on across the cut.",
+        type="Her voice, dark ink in the haze. Her italic is her telling; a "
+             "word stands upright only when it can't be taken back (no, yes, "
+             "lost, found, once, never, forever, ever, again), one per line. "
+             "Each word focus-pulls in and sheds two ghost exposures that "
+             "drift apart and linger.",
         sync="Ghost exposures swell on kicks; the warm light rises across "
              "the verse and peaks on “inside him”."),
     "There comes a once": dict(
@@ -153,8 +157,8 @@ SECTIONS = {
                "title's space again, behind the same unreadable smudge, with "
                "“her...” after it.",
         type="Until the last line, everything is the coats' cold typed "
-             "monospace: their report of the hunt, typed as it is sung, a "
-             "cursor waiting after each phrase through the silences. GUN, "
+             "monospace: their report of the hunt, typed as it is sung, stark "
+             "white on his purple night. GUN, "
              "BULLET, FIND, DID, then HE DID... seeping in; FOUND. The last "
              "\u201cfound her...\u201d returns to her voice, in the title's space.",
         sync="Every phrase re-timed to its sung onset after the silences; the "
@@ -177,9 +181,10 @@ SECTIONS = {
                "never on the beat. The tally marks stop: time isn't counted "
                "here. 'Lost' turns good (lost in each other), and the title is "
                "sung outright: “lost and found” set plainly in the title's "
-               "place, then its words slide past each other into “found and "
-               "lost...”.",
-        type="Her voice as warm light. Four RANs, no ellipses, scattered "
+               "place, then “and” holds still as the hinge while “found” lifts "
+               "over it and “lost” sinks under it, into “found and lost...”, "
+               "legible at every frame.",
+        type="Her voice as warm light. Four leaning “ran”s, no ellipses, scattered "
              "across the frame; FOREVER / EVER; TUNNEL / MOTEL; LOST / LOST; each OTHER; "
              "FOUND with its echo; the title, then its reversal; forever and "
              "ever and ever stepping down.",
@@ -189,10 +194,12 @@ SECTIONS = {
         world="void",
         visual="Her prophecy comes true. The run keeps moving (the band never "
                "stops) but time comes back: the uncounted bars scratch in. The "
-               "warm lights go out one by one; in the dark the coats arrive as "
-               "cold light round a bend and swell into their white.",
-        type="BUT... in her light; FOREVER... lets go and only the coats' END "
-             "stays; “when the” COATS “come round the bend”.",
+               "warm lights go out one by one; their gray spreads in from the "
+               "right, round a bend, and swells into their white.",
+        type="BUT... in her light, on the “But” of “But forever” (the held "
+             "scoop before it is the run stopping); FOREVER... lets go and only "
+             "the coats' END stays; WHEN THE COATS COME ROUND THE BEND all in "
+             "their type, dark inside their spreading gray.",
         sync="A mark per eighth note from “But”; a light out on each "
              "sparse hit; the flood swells from “bend” with the band."),
     "White Coats III": dict(
@@ -202,19 +209,20 @@ SECTIONS = {
                "they turn on him.",
         type="Their typed, still voice. MAN / LOST; the stabs slam in and are "
              "slashed; CUT OUT his “something hard to find”, her words in "
-             "her own serif inside their line, struck through in pencil once "
-             "said; LOST; ANYTHING at their darkest; EXCEPT... alone, then "
-             "“something hard to find” again in her serif, untouched: the "
-             "one thing they cannot make her find.",
-        sync="Words re-timed after the pauses; the strike lands on "
-             "“find”; her tally surfaces on “with time”."),
+             "her own italic inside their line; as it is sung a blade traces "
+             "the same tight incision his virtues will get and it is sewn "
+             "shut in the same red thread on “find”; LOST; ANYTHING at their "
+             "darkest; EXCEPT... alone, then “something hard to find” "
+             "written already sewn shut: the one thing they cannot make her find.",
+        sync="Words re-timed after the pauses; the blade goes round as the "
+             "phrase is sung and the thread closes it on “find”; her tally surfaces on “with time”."),
     "The Cutting": dict(
         world="memory",
         visual="Out of the coats' white, his three shafts return with "
                "PROTECTING, TRUSTING, BELIEVING still lit inside them where he "
                "set them in Spoken I. Each “cut” is surgery: a scalpel traces "
-               "an excision round his word, his light wells out of the incision, "
-               "redder, and drips; when she sings the word the wound is sewn shut "
+               "a tight incision round his word, a thin line of his light wells "
+               "along it, redder, and a few beads gather; when she sings the word the wound is sewn shut "
                "over it in thick red thread (a strikeout and sutures at once) and "
                "the shaft drains. GUN and BULLET in the coats' type land in "
                "his wounds where PROTECTING and TRUSTING were. What they take "
@@ -236,8 +244,9 @@ SECTIONS = {
                "room stays still. Each line is written over a faint exposure of "
                "how it looked the first time (FIND lands on the old FOUND). "
                "Nothing is fully unwritten any more: every line leaves its trace "
-               "and her agains pile up. The visions that flashed past as the "
-               "future settle in as still exposures, because they have happened. "
+               "and her agains pile up. The visions that flashed in on the beat as "
+               "the future flicker again as memory, on the coats' fluorescent "
+               "stutter, guttering out like a failing tube to faint stills. "
                "The photographs fade over 'Throw away everything he could find'.",
         type="Her voice at display size, as Refrain I; the first time's words "
              "beneath; earlier lines left behind as faint traces.",
@@ -266,7 +275,7 @@ SECTIONS = {
                "and the Intro's first memories go. The title, all film long an "
                "unreadable echo where 'found...' landed, surfaces there plainly but "
                "faint, with the empty space after it. Near the end his shafts "
-               "return as their absence: three faint cool shadows at their exact "
+               "return as their absence: three quiet cool shadows at their exact "
                "angles, where his light used to fall, held to the last frame.",
         type="'lost and', faint, still, where 'found' landed; nothing after it.",
         sync="The dust warms with her note (7:38.8-7:54.5); the shadows come in "
@@ -282,31 +291,31 @@ STYLE_FRAMES = [
 # Sections built so far: (slug, section name, note shown under the player)
 RENDERS = [
     ("outro", "Outro",
-     "Revised again: no scars; 'lost and' back, fainter; the shadows of his shafts only at the end. The loop closes in the pale room. Her last sound is a wordless held note (7:38.8-7:54.5): in Break II her hum was the gold dust lit inside his shafts; his light is gone, so the dust drifts through the room on its own and warms only while she sings. The fog thins toward white and the Intro's first memories go. The title, which all film long was only an unreadable echo where 'found...' landed, surfaces there plainly but faint, with the empty space after it. Over the last bars his shafts return as their absence, three faint cool shadows at their exact angles where his light used to fall, held to the last frame. The final tally mark lands on the last downbeat. Starts a second early, at the end of the Verse A reprise.",
+     "Latest: his three shadows a little stronger, same late entrance. Revised again: no scars; 'lost and' back, fainter; the shadows of his shafts only at the end. The loop closes in the pale room. Her last sound is a wordless held note (7:38.8-7:54.5): in Break II her hum was the gold dust lit inside his shafts; his light is gone, so the dust drifts through the room on its own and warms only while she sings. The fog thins toward white and the Intro's first memories go. The title, which all film long was only an unreadable echo where 'found...' landed, surfaces there plainly but faint, with the empty space after it. Over the last bars his shafts return as their absence, three faint cool shadows at their exact angles where his light used to fall, held to the last frame. The final tally mark lands on the last downbeat. Starts a second early, at the end of the Verse A reprise.",
     ),
     ("verse_a_reprise", "Verse A reprise",
      "The story starts over: her eternal recurrence. Out of Refrain II's white (held through the silence before the first 'Through'), Verse A again, shot for shot: the same room, the same layout per line, the same memories surfacing. As in Refrain II, each line is written over a faint exposure of how it looked the first time, so she already knows the words. Years have accumulated: brighter, more of her ghosts, the tally across the wall. His warmth still creeps in on 'a voice came to her' and 'lost inside him', fainter: memory or return? It stays open. Nothing answers the beat. Words re-timed to the vocal ('Through' twice out of silence, 'Left', 'She', 'Like', and 'never' after the pause). Starts a second early, at the end of Refrain II.",
     ),
     ("refrain_ii", "Refrain II: Stay lost now girl",
-     "Refrain I remembered: the same refrain, sung after it has all happened. Same room and the same layout per line as Refrain I, so it is recognised, but she is deaf now: nothing answers the beat (no smear, no rewind, nothing flung) and the room stays still. Each line is written over a faint exposure of how it looked the first time, so FIND lands on the old FOUND ('everything he found' is now 'everything he could find'). Nothing is fully unwritten any more: every line leaves its trace and her agains pile up, thickest under 'Never again...'. The visions that flashed past in Refrain I as the future settle in as still exposures, because they have happened. The photographs fade over 'Throw away everything he could find'. As the last note ends it all goes to white, for the story to start over in the Verse A reprise. Starts a second early, in The Cutting's 'Of him... and her...', to show the hand-off.",
+     "Latest: the visions flicker again, as in Refrain I, but as memory: on the coats' fluorescent stutter rather than the beat, guttering out to faint stills. Refrain I remembered: the same refrain, sung after it has all happened. Same room and the same layout per line as Refrain I, so it is recognised, but she is deaf now: nothing answers the beat (no smear, no rewind, nothing flung) and the room stays still. Each line is written over a faint exposure of how it looked the first time, so FIND lands on the old FOUND ('everything he found' is now 'everything he could find'). Nothing is fully unwritten any more: every line leaves its trace and her agains pile up, thickest under 'Never again...'. The visions that flashed past in Refrain I as the future settle in as still exposures, because they have happened. The photographs fade over 'Throw away everything he could find'. As the last note ends it all goes to white, for the story to start over in the Verse A reprise. Starts a second early, in The Cutting's 'Of him... and her...', to show the hand-off.",
     ),
     ("the_cutting", "The Cutting",
-     "What they did to each of them, in her words. Out of the coats' white his three shafts pour back, with PROTECTING, TRUSTING and BELIEVING still lit where he set them in Spoken I (a memory of his offer). Each 'cut' is surgery: a scalpel traces an excision round his word (the frame jolts, as on the stabs), and his light wells out of the incision, redder, and runs down in drips while the word trembles. When she sings the word the wound is sewn shut over it in thick red thread: a strike through it, short uneven stitches across it, a strikeout and sutures at once. His light chokes under them and the shaft drains; the sewn-shut wounds stay until 'They took her arms'. GUN and BULLET in the coats' type land in his wounds: GUN where PROTECTING was sewn shut, BULLET where TRUSTING was, each wound's edge flaring red as it lands while the sewn virtue under it fades; BELIEVING's stays empty. (No drawn bullet here; the falling bullet belongs to A gun and a bullet.) What they take from her is cut out of her lines, leaving the gaps: 'They took her ___ to hug / ___ to run / Her ___ to see and ___ to hear'. Taking her eyes takes the focus; taking her ears stills the world (the drift, the fog, the grain). What they leave her is the years: her tally, sharp through the blur, brightening on each 'years'. 'Alone' in her serif with 'with time... with time...' overstruck in the coats' type: their phrase is now her condition. Her agains begin to double (the deaf ghosts of Refrain II). Then OF HIM... in his light on his side, and her... on hers. The clip starts 3.6 s early, in White Coats III's white, to show the hand-off.",
+     "Latest: subtler wounds: a tight incision hugging each word with a thin line of light welling along it and a few short beads, no glowing ovals or long drips; the red sutures as before. What they did to each of them, in her words. Out of the coats' white his three shafts pour back, with PROTECTING, TRUSTING and BELIEVING still lit where he set them in Spoken I (a memory of his offer). Each 'cut' is surgery: a scalpel traces an excision round his word (the frame jolts, as on the stabs), and his light wells out of the incision, redder, and runs down in drips while the word trembles. When she sings the word the wound is sewn shut over it in thick red thread: a strike through it, short uneven stitches across it, a strikeout and sutures at once. His light chokes under them and the shaft drains; the sewn-shut wounds stay until 'They took her arms'. GUN and BULLET in the coats' type land in his wounds: GUN where PROTECTING was sewn shut, BULLET where TRUSTING was, each wound's edge flaring red as it lands while the sewn virtue under it fades; BELIEVING's stays empty. (No drawn bullet here; the falling bullet belongs to A gun and a bullet.) What they take from her is cut out of her lines, leaving the gaps: 'They took her ___ to hug / ___ to run / Her ___ to see and ___ to hear'. Taking her eyes takes the focus; taking her ears stills the world (the drift, the fog, the grain). What they leave her is the years: her tally, sharp through the blur, brightening on each 'years'. 'Alone' in her serif with 'with time... with time...' overstruck in the coats' type: their phrase is now her condition. Her agains begin to double (the deaf ghosts of Refrain II). Then OF HIM... in his light on his side, and her... on hers. The clip starts 3.6 s early, in White Coats III's white, to show the hand-off.",
     ),
     ("white_coats_iii", "White Coats III",
-     "They turn on him. It begins inside the coats' white that flooded 'But...' (no cut). Their typed, still voice: MAN / LOST; the stab chant slams in and is slashed; 'We'll have to CUT OUT his' and then 'something hard to find' in her own serif inside their line, struck through in pencil as it is sung; 'with time with time...' overstruck, trailing off as in the earlier White Coats, while her tally surfaces; how LOST this girl can be; ANYTHING in their darkest ink; then EXCEPT... alone, and 'something hard to find' again in her serif, untouched: the one thing they cannot make her find.",
+     "Latest: 'something hard to find' gets the Cutting's surgery: the same tight incision traced round it as it is sung, sewn shut in the same red thread on 'find'; after 'Except...' it is written already sewn. They turn on him. It begins inside the coats' white that flooded 'But...' (no cut). Their typed, still voice: MAN / LOST; the stab chant slams in and is slashed; 'We'll have to CUT OUT his' and then 'something hard to find' in her own serif inside their line, struck through in pencil as it is sung; 'with time with time...' overstruck, trailing off as in the earlier White Coats, while her tally surfaces; how LOST this girl can be; ANYTHING in their darkest ink; then EXCEPT... alone, and 'something hard to find' again in her serif, untouched: the one thing they cannot make her find.",
     ),
     ("but", "But...",
-     "Rebuilt: the one moment her prophecy comes true. The band never stops, so neither does the run; time comes back instead. On 'But...' her tally faintly returns and the bars the run didn't count scratch back in, one per eighth note. On the sparse hits of 'forever always comes to an end' the run's warm lights go out one by one, leaving the darkest frame in the film; FOREVER and the rest let go and only the coats' END stays. In the dark the coats arrive as cold light swinging in from the right, round a bend (one flicker of the 'coats' vision she saw in Refrain I as it turns toward us), and it swells with the band into their white, so White Coats III begins inside it, her count standing in it.",
+     "Latest: BUT... lands on the sung 'But' of 'But forever' (the held scoop before it is the run stopping) and the small 'But' is gone; WHEN THE COATS COME ROUND THE BEND all in their type, dark, inside their gray spreading in from the right. Rebuilt: the one moment her prophecy comes true. The band never stops, so neither does the run; time comes back instead. On 'But...' her tally faintly returns and the bars the run didn't count scratch back in, one per eighth note. On the sparse hits of 'forever always comes to an end' the run's warm lights go out one by one, leaving the darkest frame in the film; FOREVER and the rest let go and only the coats' END stays. In the dark the coats arrive as cold light swinging in from the right, round a bend (one flicker of the 'coats' vision she saw in Refrain I as it turns toward us), and it swells with the band into their white, so White Coats III begins inside it, her count standing in it.",
     ),
     ("the_run", "The Run",
-     "The one time they are free. Warm and fast, but nothing pulses and nothing comes at the viewer: speed is sideways (long-exposure streaks, motel and diner photographs rushing past, light trails behind her words). No tally marks: time isn't counted here. four 'ran's (no ellipses) scattered across the frame; FOREVER / EVER; TUNNEL / MOTEL; 'lost' turns good (LOST / LOST, lost in each OTHER); FOUND with its echo. Then the title is sung outright: 'lost and found' set plainly in the title's place, and its words slide past each other into 'found and lost...'. 'Forever and ever and ever' steps down and lets go before 'But...'.",
+     "Latest: the swap rebuilt: 'and' holds still while 'found' lifts over it and 'lost' sinks under it, never touching, the echo trails held back for it; the four 'ran's lean in her italic. The one time they are free. Warm and fast, but nothing pulses and nothing comes at the viewer: speed is sideways (long-exposure streaks, motel and diner photographs rushing past, light trails behind her words). No tally marks: time isn't counted here. four 'ran's (no ellipses) scattered across the frame; FOREVER / EVER; TUNNEL / MOTEL; 'lost' turns good (LOST / LOST, lost in each OTHER); FOUND with its echo. Then the title is sung outright: 'lost and found' set plainly in the title's place, and its words slide past each other into 'found and lost...'. 'Forever and ever and ever' steps down and lets go before 'But...'.",
     ),
     ("spoken_ii", "Spoken II: I won't lose you",
      "His answer to the coats' verdict. The 'found her...' from the hunt finishes leaving; near-dark. I WON'T LOSE YOU in his still light; on 'together' all three shafts pour open at once (not one per word as in Spoken I), and 'we'll find you the' TIME sits in them: his time answering their 'not worth the time'. Words re-timed to when he says them.",
     ),
     ("gun_and_bullet", "A gun and a bullet",
-     "Revised for suspense: until the final 'he found her...', every line is the coats' cold typed monospace, their report of the hunt, typed as it is sung, with a cursor that waits and blinks through each silence. The night darkens as he closes in. On 'bullet' the bullet itself tumbles slowly end over end down the centre of the frame and is gone after 'he did...', right before 'He found her'. The last 'found her...' returns to her voice in the title's space behind the unreadable smudge.",
+     "Latest: no cursor; the coats' lines type on as in their other sections. Revised for suspense: until the final 'he found her...', every line is the coats' cold typed monospace, their report of the hunt, typed as it is sung, with a cursor that waits and blinks through each silence. The night darkens as he closes in. On 'bullet' the bullet itself tumbles slowly end over end down the centre of the frame and is gone after 'he did...', right before 'He found her'. The last 'found her...' returns to her voice in the title's space behind the unreadable smudge.",
     ),
     ("white_coats_ii", "White Coats II",
      "Escalation. A hard cut from his gold shafts back to the white on 'But': BUT held alone, then 'with time with time' overstruck. Colder, brighter and more scratched than White Coats I. LOST ('this girl is too lost'); the stab chant slams in and is slashed as before (re-timed to the sung attacks); HARD ('too hard to find'); the verdict FOUND / WORTH (the title's word in their mouths), and once 'we found she isn't worth the time' has been read, the frame swells to near-white on 'time'. Ends on FIND, rhyming with White Coats I.",
@@ -338,7 +347,7 @@ RENDERS = [
      "Revised line: 'A hand, as ever as it was once'. 'ever' and 'once' set against each other on a diagonal; 'ever' keeps opening, 'once' lands. The Verse A clip below still has the old version of this line.",
      (34.5, 44.5)),
     ("verse_a", "Verse A: Through eyes",
-     "Kinetic typography (a designed shot per line, hero words, per-letter timing, camera through the type) over drifting memory photographs. Web copy at 720p; the 1080p master passed QA and ffprobe."),
+     "Latest: one take with the Intro, so the print on screen at 0:15-0:17 drifts on across the cut instead of jumping. Kinetic typography (a designed shot per line, hero words, per-letter timing, camera through the type) over drifting memory photographs. Web copy at 720p; the 1080p master passed QA and ffprobe."),
     ("there_comes_a_once", "There comes a once",
      "Two timelines: the 'no' drifts left, the 'yes' drifts right; each 'once' flashes toward white; 'lost to the world' pulls focus until nothing is sharp. Web copy at 720p; the 1080p master passed QA and ffprobe."),
 ]
