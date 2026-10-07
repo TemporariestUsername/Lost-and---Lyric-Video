@@ -63,7 +63,7 @@ def verse_a_like(t, T, lines, name="Verse A: Through eyes", offset=0, seed=3, ye
     zoom = 1.02 + 0.04 * smooth(u) + 0.04 * smooth(ramp(t, flood, flood + 6))
 
     img = look.padded_room(t, base=C["haze"] * 0.95)
-    img = look.tally(img, t, T, alpha=0.7 if years else 0.55)
+    img = S.tally_layer(img, t, T)
     img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, zoom)            # far wall, slow
     # before -> the room -> his voice arriving -> lost inside him
     scenes = ["curtain_bedroom", "lake_overcast", "curtain_window", "rain_window",

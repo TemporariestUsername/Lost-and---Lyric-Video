@@ -52,25 +52,67 @@ def flashes(t, times, decay=9.0, attack=0.07):
 
 
 # ---------------------------------------------------------------- worlds
+TALLY_INK, TALLY_PALE = hexc("#2E2838"), hexc("#D8CFE4")
+TALLY_CONTRAST = (0.1, 0.3)       # on dark, on light (the bright grades compress the light)
+
+
+def tally_layer(img, t, T):
+    """Her count: one mark scratched in slowly on every bar, the same faint
+    presence everywhere (dark ink on light, pale on dark, at a constant
+    contrast against what is behind it). It goes only while they run; on
+    'But...' the bars the run didn't count scratch back in, one per eighth
+    note; its last mark lands on the last downbeat."""
+    run0 = sec_of(T, "The Run")["start"]
+    t_but = T.lines[78]["start"]
+    a = 1.0
+    count, last_prog = None, None
+    if run0 <= t < t_but:                                # the one time it isn't counted
+        a = 1 - smooth(ramp(t, run0, run0 + 0.6))
+    elif t >= t_but:
+        n_now = T.since(T.bars, t)[0] + 1
+        n_run = T.since(T.bars, run0)[0] + 1
+        k = int((t - t_but) / (60 / 70.2 / 2)) + 1       # one per eighth note
+        if n_run + k < n_now:
+            count = n_run + k
+        a = smooth(ramp(t, t_but, t_but + 0.9))
+    last = T.bars[-1]
+    if t >= last - 1.4:                                  # the last mark, on the last downbeat
+        count = T.since(T.bars, last - 1.5)[0] + 2
+        last_prog = smooth(ramp(t, last - 1.4, last - 0.05))
+    if a <= 0.004:
+        return img
+    bg = float(img[80:760:16, 40:540:16].mean())
+    w = smooth(clamp01((bg - 0.3) / 0.3))                # pale on the dark, ink on the light
+    col = TALLY_PALE * (1 - w) + TALLY_INK * w
+    target = TALLY_CONTRAST[0] + (TALLY_CONTRAST[1] - TALLY_CONTRAST[0]) * w
+    alpha = min(0.95, target / max(1e-3, abs(float(col.mean()) - bg)))
+    return look.tally(img, t, T, color=col, alpha=alpha * a, blur=1.6, fade=1.0, count=count,
+                      last_prog=last_prog)
+
+
 def base_her(t, T, dark=0.0, tally=True):
+    """`tally`: draw her count (at time `tally` if it is a number: the scene's
+    own clock may be frozen or running backwards; her count never is)."""
     img = look.padded_room(t, base=C["haze"] * (0.95 - 0.35 * dark))
-    if tally:
-        img = look.tally(img, t, T, alpha=0.55 * (1 - 0.4 * dark))
-    return img
+    return _with_tally(img, t, T, tally)
+
+
+def _with_tally(img, t, T, tally):
+    if tally is False:
+        return img
+    return tally_layer(img, t if tally is True else tally, T)
 
 
 def base_night(t, T, tally=True, lift=1.0):
     img = np.empty((H, W, 3), np.float32)
     img[:] = hexc("#2A2233") * lift
     img = img + (fx.fog(t, seed=12) * 0.035)[..., None]
-    if tally:
-        img = look.tally(img, t, T, color=hexc("#7A6D86"), alpha=0.35, blur=2.0)
-    return img
+    return _with_tally(img, t, T, tally)
 
 
-def base_institute(t, T, tally=0.35):
+def base_institute(t, T, tally=True):
     img = look.padded_room(t, base=C["clinic"], seam=0.03)
-    return look.tally(img, t, T, alpha=tally, blur=2.5)
+    return _with_tally(img, t, T, tally)
 
 
 def fluorescent(img, t, amount=1.0):
@@ -180,8 +222,7 @@ def intro(t, T, lines):
     fade_in = smooth(ramp(t, 0, 4))
     img = base_her(t, T, tally=False)
     img = img * fade_in + (1 - fade_in) * np.float32(0.97)
-    if T.bars[0] <= t:
-        img = look.tally(img, t, T, alpha=0.5)
+    img = tally_layer(img, t, T)                                      # from the first downbeat
     img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, 1.02)          # Verse A's camera
     img = draw_mems(img, t, intro_mems(T), offset=(dx, dy))
     img = title(img, t, T.bars[1], s["end"] - 2.0)
@@ -420,11 +461,7 @@ def coats(name, photos, seed, hot=0.0):
     """`hot`: White Coats II and on run colder, brighter, more scratched."""
     def scene(t, T, lines):
         K = kin(T, name, lines, COATS_SHOTS, voice="coats", hold=0.2)   # last line blinks out at the cut
-        # 'with time': their time is her tally; the marks surface while they say it
-        timed = [T.lines[n] for n in lines if "with time" in T.lines[n]["text"].lower()]
-        tl = max([smooth(ramp(t, L["start"], L["start"] + 0.8)) *
-                  (1 - smooth(ramp(t, L["end"] + 0.4, L["end"] + 1.6))) for L in timed] or [0.0])
-        img = base_institute(t, T, tally=0.35 + 0.3 * tl)
+        img = base_institute(t, T)
         dx, dy, dr = mem.drift(t, seed=seed, amp=(18, 10))
         img = fx.shift(img, dx * 0.4, dy * 0.4, 0, 1.02)
         img = draw_mems(img, t, mems(T, name, photos, every=2, life=9.0, seed=seed, keep_left=1000),
@@ -592,7 +629,8 @@ SPOKEN_II_SHOTS = {                    # his answer to 'not worth the time'
     66: dict(voice="him", rows_at=[([0, 1, 2, 3], beam_x(0, 400), 400, 1.2)]),               # I won't lose you
     67: dict(voice="him", rows_at=[([0], beam_x(1, 600), 600, 2.2, {"tracking": 0.16}),       # TOGETHER
                                    ([1, 2, 3, 4], beam_x(2, 730), 730, 1.0),                  # we'll find you the
-                                   ([5], beam_x(2, 850), 850, 2.0, {"tracking": 0.16})]),     # TIME
+                                   ([5], 150, 850, 2.0, {"tracking": 0.16, "left": True})]),  # TIME, on the
+                                                                                               # left, clear of the light
 }
 
 
@@ -721,6 +759,18 @@ def falling_bullet(t, T, end, line=59, x0=W / 2):
     return (x, y, 1.9, rot)
 
 
+def bullet_through(t, t0, t_pass, y_pass, x0):
+    """The same tumbling fall, at a steady pace from above the frame at `t0`
+    so that it is at height `y_pass` at `t_pass`, and on out below the frame."""
+    if t < t0:
+        return None
+    v = (y_pass + 70) / (t_pass - t0)
+    y = -70 + v * (t - t0)
+    if y > H + 70:
+        return None
+    return (x0 + 10 * math.sin((t - t0) * 0.7), y, 1.9, -8 + 62 * (t - t0))
+
+
 def gun_and_bullet(t, T, lines):
     name = "A gun and a bullet"
     s = sec_of(T, name)
@@ -788,7 +838,7 @@ RUN_SHOTS = {
 def the_run(t, T, lines):
     name = "The Run"
     dx, dy, dr = mem.drift(t, seed=13, amp=(60, 26))
-    img = base_night(t, T, tally=False, lift=0.9)               # time isn't counted here
+    img = base_night(t, T, lift=0.9)                            # (time isn't counted here: it goes)
     img = img + hexc("#3A2210") * 0.3
     img = fx.shift(img, dx, dy, dr, 1.04)                       # no beat zoom
     photos = ["tunnel_lights", "light_trails", "no_vacancy", "highway_trails", "open_sign",
@@ -852,14 +902,12 @@ def _lights_out_hits(T):
 def but(t, T, lines):
     name = "But..."
     s = sec_of(T, name)
-    t_but = T.lines[78]["start"]
     hits = _lights_out_hits(T)
     # warmth: 1 through 'But...', then one step down per hit (each light gutters out)
     warmth = 1.0
     for k, h in enumerate(hits):
         step = 1.0 / len(hits)
         warmth -= step * smooth(clamp01((t - h) / 0.35))
-    end_t = word_at(T, 80, "end")
     when_t = T.lines[81]["start"]
     bend = word_at(T, 81, "bend")
     flood = smooth(ramp(t, bend, s["end"] - 0.1))                       # their white, with the band
@@ -905,17 +953,7 @@ def but(t, T, lines):
         img = img * (1 - flood) + white * flood
 
     # time comes back: the run's uncounted bars scratch in, one per eighth note
-    n_now = T.since(T.bars, t)[0] + 1
-    n_run = T.since(T.bars, sec_of(T, "The Run")["start"])[0] + 1
-    eighth = 60 / 70.2 / 2
-    if t >= t_but:
-        k = int((t - t_but) / eighth) + 1
-        cnt = min(n_now, n_run + k)
-        catching = cnt < n_now
-        a_t = 0.42 * smooth(ramp(t, t_but, t_but + 0.9))                # the old count returns, faint
-        col = hexc("#6E6478") * (1 - flood) + hexc("#2A2D33") * flood   # a shade off the dark; ink on white
-        img = look.tally(img, t, T, count=cnt if catching else None, alpha=a_t, color=col,
-                         blur=2.0, fade=0.8)
+    img = tally_layer(img, t, T)
     p = post("run")
     p = _mix_post(p, post("night"), 1 - warmth)
     p = _mix_post(p, post("institute", exposure=1.02), flood)
@@ -932,8 +970,9 @@ def but(t, T, lines):
 # wound is sewn shut over it in thick red thread, a strikeout and sutures at
 # once, and his light chokes under it. The incisions are gone before 'But left
 # him', then the sewn words; he is left the GUN and the BULLET in the coats'
-# type, side by side where his virtues were, and the bullet falls between them
-# as it fell when they gave it to him. What they take
+# type, side by side where his virtues were. The bullet has been falling since
+# the cutting began, as it fell when they gave it to him, and passes between
+# them as 'bullet' is sung. What they take
 # from her is cut out of her lines, leaving the gaps: her ____ to hug, her
 # ____ to run. Taking her eyes takes the
 # focus; taking her ears stills the world (the drift, the dust, the grain).
@@ -1285,9 +1324,7 @@ def cutting(t, T, lines):
         k = smooth(clamp01((t - eyes) / 1.5))
         img = img * (1 - 0.7 * k) + fx.blur(img, 9) * 0.7 * k
     # what they leave her: the years, still sharp; brighter on each 'years'
-    yrs = [w["start"] for w in T.lines[102]["words"] if w["text"].lower().startswith("years")]
-    a_t = 0.35 + sum(0.09 * smooth(ramp(t, y, y + 0.5)) for y in yrs)
-    img = look.tally(img, t, T, color=hexc("#7A6D86"), alpha=a_t, blur=2.0)
+    img = tally_layer(img, t, T)
     left = T.lines[97]["start"]                          # 'But left him...': the incisions are
     img = virtue_words(img, t, T, virtues, cuts, left, left - 0.1)   # gone, then what they sewed
     img = kin(T, name, lines, CUT_SHOTS, light=True, hold=1.2).draw(img, t)
@@ -1299,8 +1336,11 @@ def cutting(t, T, lines):
             jolt = amp * math.exp(-(t - c) / 0.06)
             img = fx.shift(img, 9 * jolt * math.cos(1.1 + 2.1 * k), 7 * jolt * math.sin(1.1 + 2.1 * k))
     p = post("night", exposure=0.95 - 0.1 * jolt)
-    t_b = word_at(T, 97, "bullet")                       # the bullet falls again, as it did when
-    fb = falling_bullet(t, T, t_b + 9.0, line=97, x0=DROP_X)   # they gave it him, between the words
+    # the bullet falls again, as it did when they gave it him: from while his
+    # virtues are being cut out, slowly, so that it passes between GUN and
+    # BULLET as 'bullet' is sung
+    fb = bullet_through(t, word_at(T, 94, "protecting"), word_at(T, 97, "bullet") + 0.2,
+                        GUN_AT[1] - 0.35 * 1.9 * 56, DROP_X)
     if fb:
         p["bullet"] = fb
     agains = word_at(T, 104, "agains")                   # still words don't double; her agains do
@@ -1366,8 +1406,7 @@ def refrain_ii(t, T, lines):
     name = "Refrain II: Stay lost now girl"
     s = sec_of(T, name)
     still = s["start"]                                         # deaf: the room doesn't move
-    img = base_her(still, T, tally=False)
-    img = look.tally(img, t, T, alpha=0.6)                     # the years, still counted
+    img = base_her(still, T, tally=t)                          # the years, still counted
     # the photographs: she throws away everything he could find, slowly, with no
     # beat to throw them on; they fade over 'Throw away...'
     photos = ["curtain_window", "rain_window", "doorway_figure", "car_window_night"]
@@ -1512,13 +1551,7 @@ def outro(t, T, lines):
     tx, ty, ts = kinetic.TITLE_AT
     img = title(img, t, 476.4, s["end"] + 20.0, x=tx, y=ty, size=ts, still=True, alpha=0.7)
     # the count, kept to the end; its last mark lands on the last downbeat
-    last = T.bars[-1]
-    if t < last - 1.4:
-        img = look.tally(img, t, T, alpha=0.6)
-    else:
-        n = T.since(T.bars, last - 1.5)[0] + 2
-        img = look.tally(img, t, T, alpha=0.6, count=n,
-                         last_prog=smooth(ramp(t, last - 1.4, last - 0.05)))
+    img = tally_layer(img, t, T)
     p = post("bleach", exposure=0.95 + 0.05 * thin)
     # out of the reprise
     u = smooth(ramp(t, s["start"], s["start"] + 1.6))
@@ -1593,7 +1626,7 @@ def refrain_i(t, T, lines):
     tt = stop if frozen else bg_t
 
     dx, dy, dr = mem.drift(tt, seed=5)
-    img = base_her(tt, T)
+    img = base_her(tt, T, tally=t)
     img = fx.shift(img, dx * 0.5, dy * 0.5, dr * 0.5, 1.03)                  # no beat zoom
     warm = 0.35 * (1 - smooth(ramp(t, L[21]["start"], L[21]["end"])))  # his warmth thrown out
     photos = ["curtain_window", "rain_window", "doorway_figure", "car_window_night"]
